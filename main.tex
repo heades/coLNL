@@ -111,13 +111,13 @@
 }
 
 %% Ott
-\input{BiLNL-inc}
+\input{DualLNL-inc}
 
 \urldef{\mailsa}\path|{heades}@augusta.edu|
 
 \begin{document}
 
-\title{Comonadic Matter Meets Monadic Anti-Matter: An Adjoint Model of Bi-Intuitionistic Logic}
+\title{A Cointuitionistic Adjoint Logic}
 \author{Harley Eades III}
 \email{heades@augusta.edu}
 \address{Computer and Information Sciences, Augusta University, Augusta, GA}
@@ -126,39 +126,7 @@
 
 \begin{abstract}
 
-  Bi-intuitionistic logic (BINT) is a conservative extension of
-  intuitionistic logic with perfect duality.  That is, BINT contains
-  the usual intuitionistic logical connectives such as true,
-  conjunction, and implication, but also their duals false,
-  disjunction, and coimplication. One leading question with respect
-  to BINT is, what does BINT look like across the three arcs -- logic,
-  typed $\lambda$-calculi, and category theory -- of the
-  Curry-Howard-Lambek correspondence?  A non-trivial (does not
-  degenerate to a poset) categorical model of BINT is currently an
-  open problem.  It is this open problem that this paper contributes
-  to by providing the first fully developed categorical model of BINT.
-  It is well-known that the linear counterpart, linear BINT, of BINT
-  can be modeled in a symmetric monoidal closed category equipped with
-  an additional monoidal structure that models par and a specified
-  left adjoint to par called linear coimplication.  We call this
-  model a symmetric bi-monoidal bi-closed category. In addition, it is
-  well-known that intuitionistic logic has a categorical model of
-  cartesian closed categories, and their dual cocartesian coclosed
-  categories model cointuitionistic logic.  In this paper we exploit
-  Benton's beautiful LNL models of linear logic to show that these
-  three models can be mixed by requiring a symmetric monoidal
-  adjunction between a cartesian closed category and the symmetric
-  bi-monoidal bi-closed category, in addition to a symmetric monoidal
-  adjunction between a cocartesian coclosed category and the
-  symmetric bi-monoidal bi-closed category.  As a result of this
-  mixture we obtain two modalities the usual comonadic of-course
-  modality of linear logic, but also a monadic modality allowing for
-  the embedding of cointuitionistic logic inside of linear BINT.
-  Finally, using these modalities we show that BINT intuitionistic
-  logic can be soundly modeled in this new categorical model. As a
-  bi-product of this model we define BiLNL logic which can be seen as
-  the mixture of intuitionistic logic with cointuitionistic logic
-  inside of linear BINT.
+  TODO
 
 \end{abstract}
 
@@ -167,85 +135,43 @@
 TODO \cite{?}
 % section introduction (end)
 
-\section{Mixed Linear/Non-Linear Models of Bi-intuitionistic Logic: The Categorical Model}
-\label{sec:the_categorical_model}
+\section{The Adjoint Model}
+\label{sec:adjoint_model}
 
-In this section we embark on the definition of a categorical model of
-bi-intuitionistic logic via a categorical model of bi-intuitionistic
-linear logic.  First, we summarize our main results.  Suppose
-$(\cat{I}, 1, \times, \to)$ is a cartesian closed category, and
-$(\cat{L}, \top, \otimes, \limp)$ is a symmetric monoidal closed
+Suppose $(\cat{I}, 1, \times, \to)$ is a cartesian closed category,
+and $(\cat{L}, \top, \otimes, \limp)$ is a symmetric monoidal closed
 category.  Then relate these two categories with a symmetric monoidal
 adjunction $\cat{I} : \func{F} \dashv \func{G} : \cat{L}$
 (Definition~\ref{?}), where $\func{F}$ and $\func{G}$ are symmetric
 monoidal functors.  The later point implies that there are natural
-transformations $\m{X,Y} : \func{F}X \otimes \func{F}Y \mto
-\func{F}(X \times Y)$ and $\n{A,B} : \func{G}A \times \func{G}B \mto
-\func{G}(A \otimes B)$, and maps $\m\top : \top \mto \func{F}1$ and
-$\n1 : 1 \mto \func{G}\top$ subject to several coherence conditions;
-see Definition~\ref{?}.  Furthermore, the functor $\func{F}$ is strong
+transformations $\m{X,Y} : \func{F}X \otimes \func{F}Y \mto \func{F}(X
+\times Y)$ and $\n{A,B} : \func{G}A \times \func{G}B \mto \func{G}(A
+\otimes B)$, and maps $\m\top : \top \mto \func{F}1$ and $\n1 : 1 \mto
+\func{G}\top$ subject to several coherence conditions; see
+Definition~\ref{?}.  Furthermore, the functor $\func{F}$ is strong
 which means that $\m{X,Y}$ and $\m{\top}$ are isomorphisms.  This
 setup turns out to be one of the most beautiful models of
-intuitionistic linear logic called an LNL model due to Benton
-\cite{Benton:1994}.  In fact, the linear modality of-course can be
-defined by $!A = \func{F}(\func{G}(A))$ which defines a symmetric
+intuitionistic linear logic called an formally a LNL model due to
+Benton \cite{Benton:1994}.  In fact, the linear modality of-course can
+be defined by $!A = \func{F}(\func{G}(A))$ which defines a symmetric
 monoidal comonad using the adjunction; see Section~2.2 of
 \cite{Benton:1994}.  This model is much simpler than other known
 models, and resulted in a logic called LNL logic which supports mixing
 intuitionistic logic with linear logic.
 
 Taking the dual of the previous model results in what we call dual LNL
-models. They consist of a cocartesian coclosed category, $(\cat{C},
-0, +, -)$, a symmetric monoidal coclosed category, $(\cat{L}', \perp,
+models. They consist of a cocartesian coclosed category, $(\cat{C}, 0,
++, -)$, a symmetric monoidal coclosed category, $(\cat{L}', \perp,
 \oplus, \colimp)$, where $\colimp : \cat{L}' \times \cat{L}' \mto
 \cat{L}'$ is left adjoint to parr, and a symmetric monoidal adjunction
-$\cat{L'} : H \dashv \perp : \cat{C}$.  We will show that dual LNL models
-are a simplification of dual linear categories as defined by Bellin
-\cite{Bellin:2012} in much of the same way that LNL models are a
-simplification of linear categories.  In fact, we will define Girard's
-exponential why-not by $? A = J(H(A))$, and hence, is the monad
-induced by the adjunction.
+$\cat{L'} : H \dashv \perp : \cat{C}$.  We will show that dual LNL
+models are a simplification of dual linear categories as defined by
+Bellin \cite{Bellin:2012} in much of the same way that adjoint models
+are a simplification of linear categories.  In fact, we will define
+Girard's exponential why-not by $? A = J(H(A))$, and hence, is the
+monad induced by the adjunction.
 
-Now we combine the two previous models into one model of
-bi-intuitionistic linear logic.  Extend $\cat{L}$ with a second
-symmetric monoidal structure, $(\perp, \oplus, \colimp)$, such that
-$\otimes$ distributes over $\oplus$ and $\colimp : \cat{L} \times
-\cat{L} \mto \cat{L}$ is left adjoint to $\oplus$, resulting in the
-category $(\cat{L}, \top, \otimes, \limp, \perp, \oplus, \colimp)$,
-called a symmetric monoidal bi-closed category.  We extend LNL models
-into a new model of bi-intuitionistic logic called a mixed
-linear/non-linear bi-intuitionistic model or a BiLNL model.  It
-consists of a cartesian closed category, $(\cat{I}, 1, \times, \to)$,
-a symmetric monoidal bi-closed category, $(\cat{L}, \top,\otimes,
-\limp, \perp, \oplus, \colimp)$, a cocartesian coclosed category,
-$(\cat{C}, 0,+, -)$, and a pair of symmetric monoidal adjoint
-functors:
-$$\bfig
-\morphism(0,0)|a|/{@{>}@/^1em/}/<500,0>[\cat{I}`\cat{L};\func{F}]
-\morphism(0,0)|b|/{@{<-}@/_1em/}/<500,0>[\cat{I}`\cat{L};\mathsf{G}]
-\morphism(500,0)|a|/{@{>}@/^1em/}/<500,0>[\cat{L}`\func{C};\func{H}]
-\morphism(500,0)|b|/{@{<-}@/_1em/}/<500,0>[\cat{L}`\func{C};\func{J}]
-\place(250,0)[\dashv] \place(750,0)[\vdash] \efig$$ It is well known
-that $\cat{I}$ is a model of intuitionistic logic and $\cat{C}$ is a
-model of cointuitionistic logic, and so, the adjoint situation $F
-\dashv G$ can be seen as a translation of intuitionistic logic into
-the intuitionistic fragment, $(\top, \otimes, \limp)$, of $\cat{L}$,
-and the adjoint situation $H \dashv J$ can be seen as a translation of
-cointuitionistic logic into the cointuitionistic fragment, $(\perp,
-\oplus, \colimp)$, of $\cat{L}$.  This we will show turns out to be a
-model of bi-intuitionistic linear logic with modalities, but also as
-one of the first categorical models of bi-intuitionistic logic by
-exploiting the modalities of linear logic to embedded
-bi-intuitionistic logic inside of bi-intuitionistic linear logic.
-
-The previous model also induces an adjunction:
-$$\bfig
-\morphism(0,0)|a|/{@{>}@/^1em/}/<500,0>[\cat{I}`\cat{C};\func{F};\func{H}]
-\morphism(0,0)|b|/{@{<-}@/_1em/}/<500,0>[\cat{I}`\cat{C};\func{J};\func{G}]
-\place(250,0)[\dashv]\efig$$
-\todo[inline]{Does this give us the double-negation monad/comonad?}
-
-\subsection{Symmetric Monoidal Categories}
+\subsection{Symmetric (co)Monoidal Categories}
 \label{subsec:symmetric_monoidal_categories}
 We now introduce the necessary definitions related to symmetric
 monoidal categories that our model will depend on.  Most of these
@@ -394,42 +320,6 @@ definition describes when a symmetric monoidal category is coclosed.
   We call the functor $\colimp : \cat{M} \times \cat{M} \mto \cat{M}$
   the internal cohom of $\cat{M}$.
 \end{definition}
-
-We combine the previous definitions into a single category.  First, we
-define the notion of a distributive category due to Cockett and Seely
-\cite{Cockett:1997}.
-\begin{definition}
-  \label{def:dist-cat}
-  We call a symmetric monoidal category, $(\cat{M}, \top, \otimes,
-  \perp, \oplus)$, a \textbf{distributive category} if there are
-  natural transformations:
-  \[
-  \begin{array}{lll}
-    \delta^L_{A,B,C} : A \otimes (B \oplus C) \mto (A \otimes B) \oplus C\\
-    \delta^R_{A,B,C} : (B \oplus C) \otimes A \mto B \oplus (C \otimes A)
-  \end{array}
-  \]
-  subject to several coherence diagrams.  Due to the large number of
-  coherence diagrams we do not list them here, but they all can be
-  found in Cockett and Seely's paper \cite{Cockett:1997}.
-\end{definition}
-\noindent
-Requiring that the tensor and cotensor products have the corresponding
-right and left adjoints results in the following definition.
-\begin{definition}
-  \label{def:bilinear-cat}
-  A \textbf{bilinear category} is a distributive category $(\cat{M},
-  \top, \otimes, \perp, \oplus)$ such that $(\cat{M}, \top, \otimes)$
-  is closed, and $(\cat{M}, \perp, \oplus)$ is coclosed.  We will
-  denote bi-linear categories by $(\cat{M}, \top, \otimes, \limp, \perp,
-  \oplus, \colimp)$.
-\end{definition}
-Originally, Lambek defined bilinear categories to be similar to the
-previous definition, but the tensor and cotensor were non-commutative
-\cite{Cockett:1997a}, however, the bilinear categories given here
-are. We retain the name in homage to his original work.  As we will
-see below bilinear categories form the core of the work given here,
-and are of crucial importance.
 
 A symmetric monoidal category is a category with additional structure
 subject to several coherence diagrams.  Thus, an ordinary functor is
@@ -798,99 +688,11 @@ natural transformations, and adjunctions.
     \efig
   \end{mathpar}  
 \end{definition}
-We will be defining, and making use of the of-course and why-not
-exponentials from linear logic, but these correspond to a symmetric
-monoidal comonad and a symmetric comonoidal monad respectively, and so
-we define these concepts next.  In addition, whenever we have a
-symmetric monoidal adjunction, we immediately obtain a symmetric
-monoidal comonad on the left, and a symmetric monoidal monad on the
-right; similarly for symmetric comonad adjunctions.
-\begin{definition}
-  \label{def:symm-monoidal-monad}
-  A \textbf{symmetric monoidal monad} on a symmetric monoidal
-  category $\cat{C}$ is a triple $(T,\eta, \mu)$, where
-  $(T,\n{})$ is a symmetric monoidal endofunctor on $\cat{C}$,
-  $\eta_A : A \mto TA$ and $\mu_A : T^2A \to TA$ are
-  symmetric monoidal natural transformations, which make the following
-  diagrams commute:
-  \begin{mathpar}
-    \bfig
-    \square|ammb|<600,600>[
-      T^3 A`
-      T^2A`
-      T^2A`
-      TA;
-      \mu_{TA}`
-      T\mu_A`
-      \mu_A`
-      \mu_A]
-    \efig
-    \and
-    \bfig
-    \Atrianglepair/=`<-`=`->`<-/<600,600>[
-      TA`
-      TA`
-      T^2 A`
-      TA;`
-      \mu_A``
-      \eta_{TA}`
-      T\eta_A]
-    \efig
-  \end{mathpar}
-  The assumption that $\eta$ and $\mu$ are symmetric
-  monoidal natural transformations amount to the following diagrams
-  commuting:
-  \begin{mathpar}
-    \bfig
-    \dtriangle|mmb|<1000,600>[
-      A \otimes B`
-      TA \otimes TB`
-      T(A \otimes B);
-      \eta_A \otimes \eta_B`
-      \eta_A`
-      \n{A,B}]    
-    \efig
-    \and
-    \bfig
-    \Vtriangle/->`=`<-/<600,600>[
-      \top`
-      T\top`
-      \top;
-      \eta_\top``
-      \n{\top}]
-    \efig
-  \end{mathpar}
-  \begin{mathpar}
-    \bfig
-    \square|ammm|/->`->``/<1050,600>[
-      T^2 A \otimes T^2 B`
-      T(TA \otimes TB)`
-      TA \otimes TB`;
-      \n{TA,TB}`
-      \mu_A \otimes \mu_B``]
-
-    \square(850,0)|ammm|/->``->`/<1050,600>[
-      T(TA \otimes TB)`
-      T^2(A \otimes B)``
-      T(A \otimes B);
-      T\n{A,B}``
-      \mu_{A \otimes B}`]
-    \morphism(-200,0)<2100,0>[TA \otimes TB`T(A \otimes B);\n{A,B}]
-    \efig
-    \and
-    \bfig
-    \square|ammb|/->`->`->`<-/<600,600>[
-      \top`
-      T\top`
-      T\top`
-      T^2\top;
-      \n{\top}`
-      \n{\top}`
-      T\n{\top}`
-      \mu_\top]
-    \efig
-  \end{mathpar}
-\end{definition}
+We will be defining, and making use of the why-not exponentials from
+linear logic, but these correspond to a symmetric comonoidal monad.
+In addition, whenever we have a symmetric comonoidal adjunction, we
+immediately obtain a symmetric comonoidal monad on the left, and a
+symmetric comonoidal monad on the right.
 \begin{definition}
   \label{def:symm-comonoidal-monad}
   A \textbf{symmetric comonoidal monad} on a symmetric monoidal
@@ -978,92 +780,7 @@ right; similarly for symmetric comonad adjunctions.
   \end{mathpar}
 \end{definition}
 \noindent
-Finally the dual concept, of a symmetric monoidal comonad.
-\begin{definition}
-  \label{def:symm-monoidal-comonad}
-  A \textbf{symmetric monoidal comonad} on a symmetric monoidal
-  category $\cat{C}$ is a triple $(T,\varepsilon, \delta)$, where
-  $(T,\m{})$ is a symmetric monoidal endofunctor on $\cat{C}$,
-  $\varepsilon_A : TA \mto A$ and $\delta_A : TA \to T^2 A$ are
-  symmetric monoidal natural transformations, which make the following
-  diagrams commute:
-  \begin{mathpar}
-    \bfig
-    \square|amma|<600,600>[
-      TA`
-      T^2A`
-      T^2A`
-      T^3A;
-      \delta_A`
-      \delta_A`
-      T\delta_A`
-      \delta_{TA}]
-    \efig
-    \and
-    \bfig
-    \Atrianglepair/=`->`=`<-`->/<600,600>[
-      TA`
-      TA`
-      T^2 A`
-      TA;`
-      \delta_A``
-      \varepsilon_{TA}`
-      T\varepsilon_A]
-    \efig
-  \end{mathpar}
-  The assumption that $\varepsilon$ and $\delta$ are symmetric
-  monoidal natural transformations amount to the following diagrams
-  commuting:
-  \begin{mathpar}
-    \bfig
-    \qtriangle|amm|/->`->`->/<1000,600>[
-      TA \otimes TB`
-      T(A \otimes B)`
-      A \otimes B;
-      \m{A,B}`
-      \varepsilon_A \otimes \varepsilon_B`
-    \varepsilon_{A \otimes B}]
-    \efig
-    \and
-    \bfig
-    \Vtriangle|amm|/->`<-`=/<600,600>[
-      T\top`
-      \top`
-      \top;
-      \m{\top}`
-      \varepsilon_\top`]
-    \efig    
-  \end{mathpar}
-  \begin{mathpar}
-    \bfig
-    \square|amab|/`->``->/<1050,600>[
-      TA \otimes TB``
-      T^2A \otimes T^2B`
-      T(TA \otimes TB);`
-      \delta_A \otimes \delta_B``
-      \m{TA,TB}]
-    \square(1050,0)|mmmb|/``->`->/<1050,600>[`
-      T(A \otimes B)`
-      T(TA \otimes TB)`
-      T^2(A \otimes B);``
-      \delta_{A \otimes B}`
-      T\m{A,B}]
-    \morphism(0,600)<2100,0>[TA \otimes TB`T(A \otimes B);\m{A,B}]
-    \efig
-    \and
-    \bfig
-    \square<600,600>[
-      \top`
-      T\top`
-      T\top`
-      T^2\top;
-      \m{\top}`
-      \m{\top}`
-      \delta_\top`
-      T\m{\top}]
-    \efig
-  \end{mathpar}
-\end{definition}
+Finally, the dual concept of a symmetric comonoidal comonad.
 \begin{definition}
   \label{def:symm-comonoidal-comonad}
   A \textbf{symmetric comonoidal comonad} on a symmetric monoidal
@@ -1230,12 +947,12 @@ coimplication \cite{Crolard:2001,Bellin:2012}. \todo[inline]{Put more
   examples in here.}
 
 We might now ask if we can a category can be both cartesian closed and
-cocartesian coclosed just as bi-linear categories, but this turns out
-to be where the matter meets antimatter in such away that the category
-degenerates to a preorder.  That is, every homspace contains at most
-one morphism.  We recall this proof here, which is due to Crolard
-\cite{Crolard:2001}. We need a couple basic facts about cartesian
-closed categories with initial objects.
+cocartesian coclosed, but this turns out to be where the matter meets
+antimatter in such away that the category degenerates to a preorder.
+That is, every homspace contains at most one morphism.  We recall this
+proof here, which is due to Crolard \cite{Crolard:2001}. We need a
+couple basic facts about cartesian closed categories with initial
+objects.
 \begin{lemma}
   \label{lemma:iso-prod-initial}
   In any cartesian category $\cat{C}$, if $0$ is an initial object in
@@ -1260,8 +977,8 @@ closed categories with initial objects.
     hence, there is only one arrow between $0 \times A$ and $B$.
 \end{proof}
 \noindent
-The following lemma is due to Joyal \cite{?}, and is key to the next
-theorem.
+The following lemma is due to Joyal \cite{Crolard:2001}, and is key to
+the next theorem.
 \begin{lemma}[Joyal's]
   \label{lemma:joyals}
   In any cartesian closed category $\cat{C}$, if $0$ is an initial
@@ -1301,9 +1018,9 @@ not initial nor terminal.
 The repercussions of this result are that if we do not want to work
 with preorders, but do want to work with all of the structure, then we
 must separate the two worlds.  Thus, this result can be seen as the
-motivation for the current work.  We enforce the separation using
-linear logic, but through the power of linear logic we show that
-separation is not far.
+motivation for the current work.  Our ultimate goal is to enforce the
+separation using linear logic, but through the power of linear logic
+will be able to show that the separation is not far.
 % subsection cartesian_closed_and_cocartesian_coclosed_categories (end)
 
 \subsection{A Mixed Linear/Non-Linear Model for Co-Intuitionistic Logic}
@@ -1507,402 +1224,131 @@ contraction, to be defined.
 % subsection a_mixed_bi-linear_non-linear_model (end)
 % section the_categorical_model (end)
 
-\section{Mixed Linear/Non-Linear Bi-intuitionistic Logic: BiLNL Logic}
-\label{sec:bilnl_logic}
+\section{Mixed Linear/Non-Linear Cointuitionistic Logic: Dual LNL Logic}
+\label{sec:dual_lnl_logic}
 
 Following Benton's \cite{Benton:1994} lead we can define a mixed
-linear/non-linear bi-intuitionistic logic, called BiLNL logic, based
-on the categorical model given in the previous section.  BiLNL logic
-consists of three fragments: an intuitionistic fragment, a
-cointuitionistic fragment, and a linear bi-intuitionistic core
-fragment.  This formalization allows us to have more control on the
-mixture of the intuitionistic and cointuitionistic fragments so as to
-allow for a proper categorical model.  Each of the fragments are
-related through a syntactic formalization of the adjoint functors from
-the BiLNL model.  First, we define the syntax of BiLNL logic, and then
-discuss the inference rules for each fragment.
+linear/non-linear cointuitionistic logic, called dual LNL logic, based
+on the categorical model given in the previous section.  Dual LNL
+logic consists of two fragments: an cointuitionistic fragment and a
+linear cointuitionistic fragment.  Each of the fragments are related
+through a syntactic formalization of the adjoint functors from the
+dual LNL model.  First, we define the syntax of dual LNL logic, and
+then discuss the inference rules for each fragment.
 \begin{definition}
-  \label{def:BiLNL-syntax}
-  The syntax for BiLNL logic is defined as follows:
+  \label{def:DualLNL-syntax}
+  The syntax for dual LNL logic is defined as follows:
   \begin{center}
     \begin{math}
-      \begin{array}{rlllllllllll}
-        \text{(Worlds)} & W ::= [[w1]] \mid \cdots \mid [[wi]]\\
-        \text{(Graphs)} & [[Gr]] ::= [[w1 <= w2]] \mid [[Gr1 , Gr2]]\\
-        \text{(Intuitionistic Formulas)} & [[X]], [[Y]], [[Z]] ::= 1
-          \mid [[X x Y]] \mid [[X -> Y]] \mid [[Gf A]]\\
+      \begin{array}{rlllllllllll}        
         \text{(Cointuitionistic Formulas)} &  [[R]], [[S]], [[T]] ::= 0 \mid [[S + T]] \mid [[S - T]] \mid [[H A]]\\
-        \text{(Linear Bi-intuitionistic Formulas)} &
-             [[A]],[[B]],[[C]] ::= [[True]] \mid [[False]] \mid
-             [[A (x) B]] \mid [[A (+) B]] \mid
-             [[A -o B]] \mid [[A *- B]] \mid [[F X]] \mid [[J S]]\\
-             \text{(Intuitionistic Contexts)}  & [[H]] ::= [[.]] \mid
-                  [[X @ w]] \mid [[H1 , H2]]\\
+        \text{(Linear Cointuitionistic Formulas)} &
+             [[A]],[[B]],[[C]] ::= [[False]] \mid [[A (+) B]] \mid [[A *- B]] \mid [[J S]]\\        
         \text{(Cointuitionistic Contexts)}  & [[I]] ::= [[.]] \mid
-             [[R @ w]] \mid [[I1 , I2]]\\
-        \text{(Linear Bi-intuitionistic Contexts)}  &
-             [[G]],[[D]] ::= [[.]] \mid [[A @ w]] \mid [[G1,G2]]\\        
+             [[R]] \mid [[I1 , I2]]\\
+        \text{(Linear Cointuitionistic Contexts)}  &
+             [[G]],[[D]] ::= [[.]] \mid [[A]] \mid [[G1,G2]]\\        
       \end{array}
     \end{math}
   \end{center}
-  Worlds may also be denoted by (potentially subscripted) $[[n]]$,
-  $[[m]]$, and $[[o]]$.
-
   \ \\
   \noindent
   Sequents have the following syntax:
   \begin{center}
     \begin{math}
       \begin{array}{rll}
-        \text{(Intuitionistic Sequents)}   & [[Gr;H |-I X@w]]\\
-        \text{(Cointuitionistic Sequents)} & [[Gr;R@w |-C I]]\\
-        \text{(LNL Bi-intuitionistic Sequents)} & [[Gr;H | G |-L D | I]]\\
+        \text{(Cointuitionistic Sequents)} & [[R |-C I]]\\
+        \text{(Dual LNL Sequents)} & [[A |-L D | I]]\\
       \end{array}
     \end{math}
   \end{center}
 \end{definition}
 
-The syntax of intuitionistic and cointuitionistic formulas are
-typical.  I denote coimplication by $[[S - T]]$, but all the other
-connectives are the usual ones. Linear bi-intuitionistic formulas are
-denoted in somewhat of a non-traditional style. I denote the unit of
-tensor by $[[True]]$ instead of the usual $[[1]]$, which is the unit
-of intuitionistic conjunction, in addition, I denote par by $[[A (+)
-    B]]$, instead of $[[A]] \parr [[B]]$.  Lastly, I denote linear
-coimplication by $[[A *- B]]$ to emphasize its duality with linear
-implication $[[A -o B]]$.  Each syntactic category of formulas
-contains the respective functor from the BiLNL model, and thus, we
-should view $F$ and $H$ as the left adjoints to $G$ and $J$
-respectively.
+The syntax of cointuitionistic formulas are typical.  We denote
+coimplication by $[[S - T]]$, but all the other connectives are the
+usual ones. Linear cointuitionistic formulas are denoted in somewhat
+of a non-traditional style. We denote par by $[[A (+) B]]$, instead of
+$[[A]] \parr [[B]]$.  Lastly, we denote linear coimplication by $[[A
+    *- B]]$ to emphasize its duality with linear implication $[[A]]
+\limp [[B]]$.  Each syntactic category of formulas contains the
+respective functor from the dual LNL model, and thus, we should view
+$H$ as the left adjoint to $J$.
 
-Formulas in each type of context are annotated with a world, and each
-sequent is annotated with a graph.  These graphs are syntactic
-representations of Kripke models and are used to enforce intuitionism.
-They were first used in bi-intuitionistic logic by Pinto and Uustalu
-\cite{Pinto:2009} to enforce intuitionism in their logic L.  In fact,
-we can see the linear core of BiLNL logic as the linear version of L.
-The beauty of this type of formalization and the reason why this style
-of logic was used by Pinto and Uustalu is that the logic L, and as
-well as BiLNL logic, are complete for cut-free bi-intuitionistic
-proofs.  This was a new result of Pinto and Uustalu, because earlier
-formalizations of bi-intuitionistic logic \cite{Crolard:2001} used the
-Dragalin restriction \cite{Dragalin:1988} to enforce intuitionism, but
-this results in a failure of cut-elimination
-\cite{Schellinx:1991,Pinto:2009}.
-
-The expert reader will notice that it is not necessary to annotate the
-sequents of intuitionistic and cointuitionistic logic with graphs and
-worlds to enforce intuitionism and cointuitionism respectively. It is
-well known that restricting the right and left contexts two a single
-formula enforces intuitionism and cointuitionism respectively.
-However, when mixing these two fragments with the linear core, which
-requires the graphs to be intuitionistic, it is easier if they are
-annotated.  If they were not, then a seemingly complex world inference
-system would need to be designed to add the world constraints before
-mixing with the linear core, and it is currently an open problem
-whether this can be done.  Thus, with respect to intuitionistic and
-cointuitionistic logic the graph and world annotations can be seen as
-book keeping.
-
-A second fact an expert reader will notice is that Kripke models are a
-relational model of intuitionistic logic, but not intuitionistic
-linear logic.  This is okay, because Kripke models enforce
-intuitionism and not linearity, but it is well known how to enforce
-linearity syntactically in the definition of the inference rules.  It
-is also well-known that even in linear logic if sequents have multiple
-hypothesis and multiple conclusions the logic becomes classical.
-Thus, in BiLNL logic we combine both of these tools to enforce both
-intuitionism and linearity.  We can simply view the graphs as an over
-approximation of the relational constraints necessary to enforce both
-intuitionism and linearity.  This also makes it easier to embed Pinto
-and Uustalu's logic in BiLNL logic as we will do in
-Section~\ref{sec:embedding_l_in_bilnl_logic}.
-
-Sequents for the linear core have the form $[[Gr;H | G |-L D | I]]$.
+Sequents for the linear fragment have the form $[[A |-L D | I]]$.
 Similarly to the sequents of Benton's LNL logic \cite{Benton:1994},
 each context is separated for readability, but should actually be
-understood as being able to be mixed, that is, the contexts $[[H]]$
-and $[[G]]$ could be a single context, and so could $[[D]]$ and
-$[[I]]$.  The sequent:
-\[
-[[Gr]];[[X1@w1]],\ldots,[[Xi@wi]] \mid [[A1@n1]],\ldots,[[Aj@nj]]
-\vdash_{\mathsf{L}} [[B1@m1]],\ldots,[[Bk@mk]] \mid [[R1@o1]],\ldots,[[Rl@ol]]
-\]
-will be interpreted in a BiLNL model by a morphism of the following
-form:
-\[
-[[F X1]] \otimes \cdots \otimes [[F Xi]] \otimes [[A1]] \otimes \cdots
-\otimes [[Aj]] \mto^{f} [[B1]] \oplus \cdots \oplus [[Bk]] \oplus [[J R1]]
-\oplus \cdots \oplus [[J Rl]]
-\]
-Thus, intuitionistic formulas in the linear core can be viewed as
-being under the left adjoint $[[F]]$, and cointuitionistic formulas
-as being under the right adjoint $[[J]]$.  This implies that even in
-the model all types of formulas can be freely mixed.
+understood as being able to be mixed, that is, the contexts $[[D]]$
+and $[[I]]$ could be a single context.
 
-As said above, BiLNL logic consists of three fragments: an
-intuitionistic fragment, a cointuitionistic fragment, and a linear
-bi-intuitionistic fragment.  Their relationships are captured by the
-following diagram:
-$$\bfig
-\morphism(0,0)|a|/{@{>}@/^1em/}/<500,0>[\mathsf{INT}`\mathsf{BiL};\mathsf{F}]
-\morphism(0,0)|b|/{@{<-}@/_1em/}/<500,0>[\mathsf{INT}`\mathsf{BiL};\mathsf{G}]
-\morphism(500,0)|a|/{@{>}@/^1em/}/<500,0>[\mathsf{BiL}`\mathsf{coINT};\mathsf{H}]
-\morphism(500,0)|b|/{@{<-}@/_1em/}/<500,0>[\mathsf{BiL}`\mathsf{coINT};\mathsf{J}]
-\efig$$
-\noindent
-The inference rules for the intuitionistic fragment are defined in
-Figure~\ref{fig:ifr-IL}, and the inference rules for the
-cointuitionistic fragment can be found in Figure~\ref{fig:ifr-CL}.
-Since the functor $[[Gf]]$ translates the linear fragment over to
-intuitionistic logic, then the intuitionistic fragment must contain an
-inference rule ($\BiLNLdrulename{I\_gR}$) for this functor, and the
-same goes for the cointuitionistic fragment and the functor $[[Hf]]$
-($\BiLNLdrulename{C\_hL}$).  Thus, these are the only interesting
-rules of those two fragments. Each fragment contains rules for working
-with the world constraints on sequents. For example, the rules
-$\BiLNLdrulename{I\_rl}$ and $\BiLNLdrulename{I\_ts}$ make the
-relation on worlds, $[[w1 <= w2]]$, a preorder, and the rules
-$\BiLNLdrulename{I\_mL}$ and $\BiLNLdrulename{I\_mR}$ correspond to
-monotonicity on formulas.  Similar rules exist for the other two
-fragments as well.
+The inference rules for the cointuitionistic fragment can be found in
+Figure~\ref{fig:ifr-CL}.  
 \begin{figure}
   \begin{mdframed}
     \begin{mathpar}
-      \BiLNLdruleIXXrl{} \and
-      \BiLNLdruleIXXts{} \and
-      \BiLNLdruleIXXmL{} \and
-      \BiLNLdruleIXXmR{} \and      
-      \BiLNLdruleIXXid{} \and
-      \BiLNLdruleIXXcut{} \and
-      \BiLNLdruleIXXwk{} \and
-      \BiLNLdruleIXXcr{} \and
-      \BiLNLdruleIXXex{} \and                  
-      \BiLNLdruleIXXtL{} \and
-      \BiLNLdruleIXXtR{} \and
-      \BiLNLdruleIXXpL{} \and
-      \BiLNLdruleIXXpR{} \and
-      \BiLNLdruleIXXIL{} \and
-      \BiLNLdruleIXXIR{} \and
-      \BiLNLdruleIXXgR{}
+      \DualLNLdruleCXXid{} \and
+      \DualLNLdruleCXXcut{} \and
+      \DualLNLdruleCXXwk{} \and
+      \DualLNLdruleCXXcr{} \and
+      \DualLNLdruleCXXex{} \and                  
+      \DualLNLdruleCXXfL{} \and
+      \DualLNLdruleCXXfR{} \and
+      \DualLNLdruleCXXdL{} \and
+      \DualLNLdruleCXXdR{} \and
+      \DualLNLdruleCXXsL{} \and
+      \DualLNLdruleCXXsR{} \and
+      \DualLNLdruleCXXhL{}
     \end{mathpar}
   \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Intuitionistic Fragment}
-  \label{fig:ifr-IL}
-\end{figure}
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdruleCXXrl{} \and
-      \BiLNLdruleCXXts{} \and
-      \BiLNLdruleCXXmL{} \and
-      \BiLNLdruleCXXmR{} \and      
-      \BiLNLdruleCXXid{} \and
-      \BiLNLdruleCXXcut{} \and
-      \BiLNLdruleCXXwk{} \and
-      \BiLNLdruleCXXcr{} \and
-      \BiLNLdruleCXXex{} \and                  
-      \BiLNLdruleCXXfL{} \and
-      \BiLNLdruleCXXfR{} \and
-      \BiLNLdruleCXXdL{} \and
-      \BiLNLdruleCXXdR{} \and
-      \BiLNLdruleCXXsL{} \and
-      \BiLNLdruleCXXsR{} \and
-      \BiLNLdruleCXXhL{}
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Cointuitionistic Fragment}
+  \caption{Inference Rules for Dual LNL Logic: Cointuitionistic Fragment}
   \label{fig:ifr-CL}
 \end{figure}
 
-The linear core of BiLNL logic consists of a large number of rules,
-and for this reason they have been broken up into multiple figures.
-The inference rules for reflexivity, transitivity, and monotonicity
-are defined in Figure~\ref{fig:ifr-biLNL-graph}.
 \begin{figure}
   \begin{mdframed}
     \begin{mathpar}
-      \BiLNLdruleLXXrl{} \and
-      \BiLNLdruleLXXts{} \and
-      \BiLNLdruleLXXmL{} \and
-      \BiLNLdruleLXXmR{} \and
-      \BiLNLdruleLXXImL{} \and
-      \BiLNLdruleLXXCmR{}
+      \DualLNLdruleLXXwk{} \and
+      \DualLNLdruleLXXctr{} \and
+      \DualLNLdruleLXXex{} \and
+      \DualLNLdruleLXXCex{} \and
+      \DualLNLdruleLXXid{} \and
+      \DualLNLdruleLXXcut{} \and
+      \DualLNLdruleLXXCcut{} 
     \end{mathpar}
   \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Abstract Kripke Graph Rules}
-  \label{fig:ifr-biLNL-graph}
-\end{figure}
-Since the linear core is a mixed LNL logic there are monotonicity
-rules for intuitionistic hypothesis, and cointuitionistic
-conclusions.  The structural rules are defined in
-Figure~\ref{fig:ifr-biLNL-structural}.
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdruleLXXwkL{} \and
-      \BiLNLdruleLXXwkR{} \and
-      \BiLNLdruleLXXctrL{} \and
-      \BiLNLdruleLXXctrR{} \and
-      \BiLNLdruleLXXexL{} \and
-      \BiLNLdruleLXXexR{} \and
-      \BiLNLdruleLXXIexL{} \and
-      \BiLNLdruleLXXCexL{}
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Structural Rules}
+  \caption{Inference Rules for Dual LNL Logic: Structural Rules, Identity, and Cut Rules}
   \label{fig:ifr-biLNL-structural}
 \end{figure}
-The most interesting rules are weakening and contraction for both
-intuitionistic hypothesis and cointuitionistic conclusions.  The
-identity and cut inference rules can be found in
-Figure~\ref{fig:ifr-biLNL-id-cut}.
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdruleLXXid{} \and
-      \BiLNLdruleLXXcut{} \and
-      \BiLNLdruleLXXIcut{} \and
-      \BiLNLdruleLXXCcut{} 
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Identity and Cut Rules}
-  \label{fig:ifr-biLNL-id-cut}
-\end{figure}
-Similarly to Benton's LNL logic \cite{Benton:1994}, we also have cut
-rules involving the different fragments:
-\begin{mathpar}
-  \small
-  \BiLNLdruleLXXIcut{} \and \BiLNLdruleLXXCcut{} 
-\end{mathpar}
-The first rule is the same rule in LNL logic, but the second is new
-and cuts a cointuitionistic conclusion in the linear core against the
-hypothesis proven in the cointuitionistic fragment.
 
-The rules for conjunction and tensor, and disjunction and par can be
-found in Figure~\ref{fig:ifr-biLNL-conunction-tensor} and
-Figure~\ref{fig:ifr-biLNL-disjunction-par} respectively.
 \begin{figure}
   \begin{mdframed}
     \begin{mathpar}
-      \BiLNLdruleLXXIL{} \and
-      \BiLNLdruleLXXIR{} \and
-      \BiLNLdruleLXXcL{} \and
-      \BiLNLdruleLXXtL{} \and
-      \BiLNLdruleLXXtR{} 
+      \DualLNLdruleLXXflL{} \and
+      \DualLNLdruleLXXflR{} \and
+      \DualLNLdruleLXXdR{} \and
+      \DualLNLdruleLXXpL{} \and
+      \DualLNLdruleLXXpR{} \and
+      \DualLNLdruleLXXsL{} \and
+      \DualLNLdruleLXXsR{} \and
+      \DualLNLdruleLXXCsR{} \and
+      \DualLNLdruleLXXjL{} \and
+      \DualLNLdruleLXXjR{} \and
+      \DualLNLdruleLXXhR{}
     \end{mathpar}
   \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Conjunction and Tensor Rules}
-  \label{fig:ifr-biLNL-conunction-tensor}
-\end{figure}
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdruleLXXflL{} \and
-      \BiLNLdruleLXXflR{} \and
-      \BiLNLdruleLXXdR{} \and
-      \BiLNLdruleLXXpL{} \and
-      \BiLNLdruleLXXpR{} 
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Disjunction and Par Rules}
-  \label{fig:ifr-biLNL-disjunction-par}
-\end{figure}
-Just as we have said above, the new rules are the inference rules for
-disjunction in the cointuitionistic context.  The inference rules for
-intuitionistic implication and linear implication, and
-cointuitionistic coimplication and linear coimplication are defined
-in Figure~\ref{fig:ifr-biLNL-implication} and
-Figure~\ref{fig:ifr-biLNL-coimplication}.  The most interesting rules
-between these are the rules for coimplication.  
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdruleLXXImpL{} \and
-      \BiLNLdruleLXXImpR{} \and
-      \BiLNLdruleLXXIImpL{} 
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Implication Rules}
-  \label{fig:ifr-biLNL-implication}
-\end{figure}
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdruleLXXsL{} \and
-      \BiLNLdruleLXXsR{} \and
-      \BiLNLdruleLXXCsR{} 
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Coimplication Rules}
-  \label{fig:ifr-biLNL-coimplication}
+  \caption{Inference Rules for Dual LNL Logic: Cotensor, Coimplication, and Functor Rules}
+  \label{fig:ifr-dualLNL-coten-coimp-funct}
 \end{figure}
 
-Lastly, the inference rules for each of the functors are defined in
-Figure~\ref{fig:ifr-biLNL-adjoint-functors}.  
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdruleLXXfL{} \and
-      \BiLNLdruleLXXfR{} \and
-      \BiLNLdruleLXXjL{} \and
-      \BiLNLdruleLXXjR{} \and
-      \BiLNLdruleLXXgL{} \and
-      \BiLNLdruleLXXhR{} 
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for BiLNL Logic: Adjoint Functors Rules}
-  \label{fig:ifr-biLNL-adjoint-functors}
-\end{figure}
-Using these rules it is possible to move between the fragments.  The
-most restrictive rules are when coming from the intuitionistic or
-cointuitionistic fragment into the linear core, or vice versa,
-because the sequents must only contain data that is movable or
-consistency could fail.
-% section bilnl_logic (end)
 
-\section{Embedding Bi-Intuitionistic Logic in BiLNL Logic}
-\label{sec:embedding_l_in_bilnl_logic}
+\section{Embedding Cointuitionistic Logic in Dual LNL Logic}
+\label{sec:embedding_coILL_dual_lnl_logic}
 
-TODO
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \BiLNLdrulerl{} \and
-      \BiLNLdrulets{} \and
-      \BiLNLdrulemL{} \and
-      \BiLNLdrulemR{} \and            
-      \BiLNLdrulewkL{} \and
-      \BiLNLdrulewkR{} \and
-      \BiLNLdrulectrL{} \and
-      \BiLNLdrulectrR{} \and
-      \BiLNLdruleexL{} \and
-      \BiLNLdruleexR{} \and
-      \BiLNLdruleid{} \and      
-      \BiLNLdrulecut{} \and
-      \BiLNLdruleIL{} \and
-      \BiLNLdruleIR{} \and
-      \BiLNLdruleflL{} \and
-      \BiLNLdruleflR{} \and
-      \BiLNLdrulecL{} \and
-      \BiLNLdrulecR{} \and
-      \BiLNLdruledL{} \and
-      \BiLNLdruledR{} \and
-      \BiLNLdruleImpR{} \and
-      \BiLNLdruleImpL{} \and
-      \BiLNLdrulesL{} \and
-      \BiLNLdrulesR{} 
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for L}
-  \label{fig:ifr-L}
-\end{figure}
 % section embedding_l_in_bilnl_logic (end)
 
-\section{BiLNL Term Assignment}
-\label{sec:bilnl_term_assignment}
+\section{Dual LNL Term Assignment}
+\label{sec:dual_lnl_term_assignment}
 TODO
-% section bilnl_term_assignment (end)
+% section dual_lnl_term_assignment (end)
 
 
 \section{Related Work}

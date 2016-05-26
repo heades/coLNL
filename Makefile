@@ -25,9 +25,9 @@ ifeq ($(SKIM), skim_revert.sh)
 	$(SKIM) $(CURDIR)/main.pdf
 endif
 
-main-output.tex : BiLNL.ott main.tex
+main-output.tex : DualLNL.ott main.tex
 	@echo "\n\n***OTT: Preprocessing dtt.ott in main.tex.***"
-	@$(OTT) $(OTT_FLAGS) -i BiLNL.ott  -o BiLNL-inc.tex -tex_name_prefix BiLNL \
+	@$(OTT) $(OTT_FLAGS) -i DualLNL.ott  -o DualLNL-inc.tex -tex_name_prefix DualLNL \
 		-tex_filter main.tex main-output.tex
 
 # Now this takes the full LaTex translation and compiles it using
