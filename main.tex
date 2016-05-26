@@ -1,0 +1,1929 @@
+\documentclass{lmcs}
+\usepackage{amssymb,amsmath}
+\usepackage{cmll}
+\usepackage{txfonts}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{todonotes}
+\usepackage{mathpartir}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage[barr]{xy}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+
+%% This renames Barr's \to to \mto.  This allows us to use \to for imp
+%% and \mto for a inline morphism.
+\let\mto\to
+\let\to\relax
+\newcommand{\to}{\rightarrow}
+\newcommand{\ndto}[1]{\to_{#1}}
+\newcommand{\ndwedge}[1]{\wedge_{#1}}
+
+% Commands that are useful for writing about type theory and programming language design.
+%% \newcommand{\case}[4]{\text{case}\ #1\ \text{of}\ #2\text{.}#3\text{,}#2\text{.}#4}
+\newcommand{\interp}[1]{\llbracket #1 \rrbracket}
+\newcommand{\normto}[0]{\rightsquigarrow^{!}}
+\newcommand{\join}[0]{\downarrow}
+\newcommand{\redto}[0]{\rightsquigarrow}
+\newcommand{\nat}[0]{\mathbb{N}}
+\newcommand{\fun}[2]{\lambda #1.#2}
+\newcommand{\CRI}[0]{\text{CR-Norm}}
+\newcommand{\CRII}[0]{\text{CR-Pres}}
+\newcommand{\CRIII}[0]{\text{CR-Prog}}
+\newcommand{\subexp}[0]{\sqsubseteq}
+%% Must include \usepackage{mathrsfs} for this to work.
+
+\date{}
+
+\let\b\relax
+\let\d\relax
+\let\t\relax
+\let\r\relax
+\let\c\relax
+\let\j\relax
+\let\wn\relax
+\let\H\relax
+
+% Cat commands.
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\func}[1]{\mathsf{#1}}
+\newcommand{\iso}[0]{\mathsf{iso}}
+\newcommand{\H}[0]{\func{H}}
+\newcommand{\J}[0]{\func{J}}
+\newcommand{\catop}[1]{\cat{#1}^{\mathsf{op}}}
+\newcommand{\Hom}[3]{\mathsf{Hom}_{\cat{#1}}(#2,#3)}
+\newcommand{\limp}[0]{\multimap}
+\newcommand{\colimp}[0]{\multimapdotinv}
+\newcommand{\dial}[1]{\mathsf{Dial_{#1}}(\mathsf{Sets^{op}})}
+\newcommand{\dialSets}[1]{\mathsf{Dial_{#1}}(\mathsf{Sets})}
+\newcommand{\dcSets}[1]{\mathsf{DC_{#1}}(\mathsf{Sets})}
+\newcommand{\sets}[0]{\mathsf{Sets}}
+\newcommand{\obj}[1]{\mathsf{Obj}(#1)}
+\newcommand{\mor}[1]{\mathsf{Mor(#1)}}
+\newcommand{\id}[0]{\mathsf{id}}
+\newcommand{\lett}[0]{\mathsf{let}\,}
+\newcommand{\inn}[0]{\,\mathsf{in}\,}
+\newcommand{\cur}[1]{\mathsf{cur}(#1)}
+\newcommand{\curi}[1]{\mathsf{cur}^{-1}(#1)}
+\newcommand{\m}[1]{\mathsf{m}_{#1}}
+\newcommand{\n}[1]{\mathsf{n}_{#1}}
+\newcommand{\b}[1]{\mathsf{b}_{#1}}
+\newcommand{\d}[1]{\mathsf{d}_{#1}}
+\newcommand{\h}[1]{\mathsf{h}_{#1}}
+\newcommand{\p}[1]{\mathsf{p}_{#1}}
+\newcommand{\q}[1]{\mathsf{q}_{#1}}
+\newcommand{\t}[0]{\mathsf{t}}
+\newcommand{\r}[1]{\mathsf{r}_{#1}}
+\newcommand{\s}[1]{\mathsf{s}_{#1}}
+\newcommand{\w}[1]{\mathsf{w}_{#1}}
+\newcommand{\c}[1]{\mathsf{c}_{#1}}
+\newcommand{\j}[1]{\mathsf{j}_{#1}}
+\newcommand{\jinv}[1]{\mathsf{j}^{-1}_{#1}}
+\newcommand{\wn}[0]{\mathop{?}}
+\newcommand{\codiag}[1]{\bigtriangledown_{#1}}
+
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+\newenvironment{diagram}{
+  \begin{center}
+    \begin{math}
+      \bfig
+}{
+      \efig
+    \end{math}
+  \end{center}
+}
+
+%% Ott
+\input{BiLNL-inc}
+
+\urldef{\mailsa}\path|{heades}@augusta.edu|
+
+\begin{document}
+
+\title{Comonadic Matter Meets Monadic Anti-Matter: An Adjoint Model of Bi-Intuitionistic Logic}
+\author{Harley Eades III}
+\email{heades@augusta.edu}
+\address{Computer and Information Sciences, Augusta University, Augusta, GA}
+
+\maketitle 
+
+\begin{abstract}
+
+  Bi-intuitionistic logic (BINT) is a conservative extension of
+  intuitionistic logic with perfect duality.  That is, BINT contains
+  the usual intuitionistic logical connectives such as true,
+  conjunction, and implication, but also their duals false,
+  disjunction, and coimplication. One leading question with respect
+  to BINT is, what does BINT look like across the three arcs -- logic,
+  typed $\lambda$-calculi, and category theory -- of the
+  Curry-Howard-Lambek correspondence?  A non-trivial (does not
+  degenerate to a poset) categorical model of BINT is currently an
+  open problem.  It is this open problem that this paper contributes
+  to by providing the first fully developed categorical model of BINT.
+  It is well-known that the linear counterpart, linear BINT, of BINT
+  can be modeled in a symmetric monoidal closed category equipped with
+  an additional monoidal structure that models par and a specified
+  left adjoint to par called linear coimplication.  We call this
+  model a symmetric bi-monoidal bi-closed category. In addition, it is
+  well-known that intuitionistic logic has a categorical model of
+  cartesian closed categories, and their dual cocartesian coclosed
+  categories model cointuitionistic logic.  In this paper we exploit
+  Benton's beautiful LNL models of linear logic to show that these
+  three models can be mixed by requiring a symmetric monoidal
+  adjunction between a cartesian closed category and the symmetric
+  bi-monoidal bi-closed category, in addition to a symmetric monoidal
+  adjunction between a cocartesian coclosed category and the
+  symmetric bi-monoidal bi-closed category.  As a result of this
+  mixture we obtain two modalities the usual comonadic of-course
+  modality of linear logic, but also a monadic modality allowing for
+  the embedding of cointuitionistic logic inside of linear BINT.
+  Finally, using these modalities we show that BINT intuitionistic
+  logic can be soundly modeled in this new categorical model. As a
+  bi-product of this model we define BiLNL logic which can be seen as
+  the mixture of intuitionistic logic with cointuitionistic logic
+  inside of linear BINT.
+
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+TODO \cite{?}
+% section introduction (end)
+
+\section{Mixed Linear/Non-Linear Models of Bi-intuitionistic Logic: The Categorical Model}
+\label{sec:the_categorical_model}
+
+In this section we embark on the definition of a categorical model of
+bi-intuitionistic logic via a categorical model of bi-intuitionistic
+linear logic.  First, we summarize our main results.  Suppose
+$(\cat{I}, 1, \times, \to)$ is a cartesian closed category, and
+$(\cat{L}, \top, \otimes, \limp)$ is a symmetric monoidal closed
+category.  Then relate these two categories with a symmetric monoidal
+adjunction $\cat{I} : \func{F} \dashv \func{G} : \cat{L}$
+(Definition~\ref{?}), where $\func{F}$ and $\func{G}$ are symmetric
+monoidal functors.  The later point implies that there are natural
+transformations $\m{X,Y} : \func{F}X \otimes \func{F}Y \mto
+\func{F}(X \times Y)$ and $\n{A,B} : \func{G}A \times \func{G}B \mto
+\func{G}(A \otimes B)$, and maps $\m\top : \top \mto \func{F}1$ and
+$\n1 : 1 \mto \func{G}\top$ subject to several coherence conditions;
+see Definition~\ref{?}.  Furthermore, the functor $\func{F}$ is strong
+which means that $\m{X,Y}$ and $\m{\top}$ are isomorphisms.  This
+setup turns out to be one of the most beautiful models of
+intuitionistic linear logic called an LNL model due to Benton
+\cite{Benton:1994}.  In fact, the linear modality of-course can be
+defined by $!A = \func{F}(\func{G}(A))$ which defines a symmetric
+monoidal comonad using the adjunction; see Section~2.2 of
+\cite{Benton:1994}.  This model is much simpler than other known
+models, and resulted in a logic called LNL logic which supports mixing
+intuitionistic logic with linear logic.
+
+Taking the dual of the previous model results in what we call dual LNL
+models. They consist of a cocartesian coclosed category, $(\cat{C},
+0, +, -)$, a symmetric monoidal coclosed category, $(\cat{L}', \perp,
+\oplus, \colimp)$, where $\colimp : \cat{L}' \times \cat{L}' \mto
+\cat{L}'$ is left adjoint to parr, and a symmetric monoidal adjunction
+$\cat{L'} : H \dashv \perp : \cat{C}$.  We will show that dual LNL models
+are a simplification of dual linear categories as defined by Bellin
+\cite{Bellin:2012} in much of the same way that LNL models are a
+simplification of linear categories.  In fact, we will define Girard's
+exponential why-not by $? A = J(H(A))$, and hence, is the monad
+induced by the adjunction.
+
+Now we combine the two previous models into one model of
+bi-intuitionistic linear logic.  Extend $\cat{L}$ with a second
+symmetric monoidal structure, $(\perp, \oplus, \colimp)$, such that
+$\otimes$ distributes over $\oplus$ and $\colimp : \cat{L} \times
+\cat{L} \mto \cat{L}$ is left adjoint to $\oplus$, resulting in the
+category $(\cat{L}, \top, \otimes, \limp, \perp, \oplus, \colimp)$,
+called a symmetric monoidal bi-closed category.  We extend LNL models
+into a new model of bi-intuitionistic logic called a mixed
+linear/non-linear bi-intuitionistic model or a BiLNL model.  It
+consists of a cartesian closed category, $(\cat{I}, 1, \times, \to)$,
+a symmetric monoidal bi-closed category, $(\cat{L}, \top,\otimes,
+\limp, \perp, \oplus, \colimp)$, a cocartesian coclosed category,
+$(\cat{C}, 0,+, -)$, and a pair of symmetric monoidal adjoint
+functors:
+$$\bfig
+\morphism(0,0)|a|/{@{>}@/^1em/}/<500,0>[\cat{I}`\cat{L};\func{F}]
+\morphism(0,0)|b|/{@{<-}@/_1em/}/<500,0>[\cat{I}`\cat{L};\mathsf{G}]
+\morphism(500,0)|a|/{@{>}@/^1em/}/<500,0>[\cat{L}`\func{C};\func{H}]
+\morphism(500,0)|b|/{@{<-}@/_1em/}/<500,0>[\cat{L}`\func{C};\func{J}]
+\place(250,0)[\dashv] \place(750,0)[\vdash] \efig$$ It is well known
+that $\cat{I}$ is a model of intuitionistic logic and $\cat{C}$ is a
+model of cointuitionistic logic, and so, the adjoint situation $F
+\dashv G$ can be seen as a translation of intuitionistic logic into
+the intuitionistic fragment, $(\top, \otimes, \limp)$, of $\cat{L}$,
+and the adjoint situation $H \dashv J$ can be seen as a translation of
+cointuitionistic logic into the cointuitionistic fragment, $(\perp,
+\oplus, \colimp)$, of $\cat{L}$.  This we will show turns out to be a
+model of bi-intuitionistic linear logic with modalities, but also as
+one of the first categorical models of bi-intuitionistic logic by
+exploiting the modalities of linear logic to embedded
+bi-intuitionistic logic inside of bi-intuitionistic linear logic.
+
+The previous model also induces an adjunction:
+$$\bfig
+\morphism(0,0)|a|/{@{>}@/^1em/}/<500,0>[\cat{I}`\cat{C};\func{F};\func{H}]
+\morphism(0,0)|b|/{@{<-}@/_1em/}/<500,0>[\cat{I}`\cat{C};\func{J};\func{G}]
+\place(250,0)[\dashv]\efig$$
+\todo[inline]{Does this give us the double-negation monad/comonad?}
+
+\subsection{Symmetric Monoidal Categories}
+\label{subsec:symmetric_monoidal_categories}
+We now introduce the necessary definitions related to symmetric
+monoidal categories that our model will depend on.  Most of these
+definitions are equivalent to the ones given by Benton
+\cite{Benton:1994}, but we give a lesser well-known definition for
+symmetric co-monoidal functors due to Bellin \cite{Bellin:2012}.  In
+this section we also introduce distributive categories, the notion of
+cocloser, and finally, the definition of bilinear categories.  The
+reader may wish to simply skim this section, but refer back to it when
+they encounter a definition or result they do not know.
+
+\begin{definition}
+  \label{def:monoidal-category}
+  A \textbf{symmetric monoidal category (SMC)} is a category, $\cat{M}$,
+  with the following data:
+  \begin{itemize}
+  \item An object $\top$ of $\cat{M}$,
+  \item A bi-functor $\otimes : \cat{M} \times \cat{M} \mto \cat{M}$,
+  \item The following natural isomorphisms:
+    \[
+    \begin{array}{lll}
+      \lambda_A : \top \otimes A \mto A\\
+      \rho_A : A \otimes \top \mto A\\      
+      \alpha_{A,B,C} : (A \otimes B) \otimes C \mto A \otimes (B \otimes C)\\
+    \end{array}
+    \]
+  \item A symmetry natural transformation:
+    \[
+    \beta_{A,B} : A \otimes B \mto B \otimes A
+    \]
+  \item Subject to the following coherence diagrams:
+    \begin{mathpar}
+      \bfig
+      \vSquares|ammmmma|/->`->```->``<-/[
+        ((A \otimes B) \otimes C) \otimes D`
+        (A \otimes (B \otimes C)) \otimes D`
+        (A \otimes B) \otimes (C \otimes D)``
+        A \otimes (B \otimes (C \otimes D))`
+        A \otimes ((B \otimes C) \otimes D);
+        \alpha_{A,B,C} \otimes \id_D`
+        \alpha_{A \otimes B,C,D}```
+        \alpha_{A,B,C \otimes D}``
+        \id_A \otimes \alpha_{B,C,D}]      
+      
+      \morphism(1206,1000)|m|<0,-1000>[
+        (A \otimes (B \otimes C)) \otimes D`
+        A \otimes ((B \otimes C) \otimes D);
+        \alpha_{A,B \otimes C,D}]
+      \efig
+      \and
+      \bfig
+      \hSquares|aammmaa|/->`->`->``->`->`->/[
+        (A \otimes B) \otimes C`
+        A \otimes (B \otimes C)`
+        (B \otimes C) \otimes A`
+        (B \otimes A) \otimes C`
+        B \otimes (A \otimes C)`
+        B \otimes (C \otimes A);
+        \alpha_{A,B,C}`
+        \beta_{A,B \otimes C}`
+        \beta_{A,B} \otimes \id_C``
+        \alpha_{B,C,A}`
+        \alpha_{B,A,C}`
+        \id_B \otimes \beta_{A,C}]
+      \efig      
+    \end{mathpar}
+    \begin{mathpar}
+      \bfig
+      \Vtriangle[
+        (A \otimes \top) \otimes B`
+        A \otimes (\top \otimes B)`
+        A \otimes B;
+        \alpha_{A,\top,B}`
+        \rho_{A}`
+        \lambda_{B}]
+      \efig
+      \and
+      \bfig
+      \btriangle[
+        A \otimes B`
+        B \otimes A`
+        A \otimes B;
+        \beta_{A,B}`
+        \id_{A \otimes B}`
+        \beta_{B,A}]
+      \efig
+      \and
+      \bfig
+      \Vtriangle[
+        \top \otimes A`
+        A \otimes \top`
+        A;
+        \beta_{\top,A}`
+        \lambda_A`
+        \rho_A]
+      \efig
+    \end{mathpar}    
+  \end{itemize}
+\end{definition}
+
+Categorical modeling implication requires that the model be closed;
+which can be seen as an internalization of the notion of a morphism.
+\begin{definition}
+  \label{def:SMCC}
+  A \textbf{symmetric monoidal closed category (SMCC)} is a symmetric
+  monoidal category, $(\cat{M},\top,\otimes)$, such that, for any object
+  $B$ of $\cat{M}$, the functor $- \otimes B : \cat{M} \mto \cat{M}$
+  has a specified right adjoint.  Hence, for any objects $A$ and $C$
+  of $\cat{M}$ there is an object $B \limp C$ of $\cat{M}$ and a
+  natural bijection:
+  \[
+  \Hom{\cat{M}}{A \otimes B}{C} \cong \Hom{\cat{M}}{A}{B \limp C}
+  \]
+  We call the functor $\limp : \cat{M} \times \cat{M} \mto \cat{M}$
+  the internal hom of $\cat{M}$.
+\end{definition}
+
+Symmetric monoidal closed categories can be seen as a model of
+intuitionistic linear logic with a tensor product and implication.
+What happens when we take the dual?  First, we have the following
+result:
+\begin{lemma}[Dual of Symmetric Monoidal Categories]
+  \label{lemma:dual_of_symmetric_monoidal_categories}
+  If $(\cat{M},\top,\otimes)$ is a symmetric monoidal category, then
+  $\catop{M}$ is also a symmetric monoidal category.
+\end{lemma}
+The previous result follows from the fact that the structures making
+up symmetric monoidal categories are isomorphisms, and so naturally
+taking their opposite will yield another symmetric monoidal category.
+To emphasize when we are thinking about a symmetric monoidal category
+in the opposite we use the notion $(\cat{M},\perp,\oplus)$ which gives
+the suggestion of $\oplus$ corresponding to a disjunctive tensor
+product which we call the \textit{cotensor} of $\cat{M}$. The next
+definition describes when a symmetric monoidal category is coclosed.
+\begin{definition}
+  \label{def:SMCC}
+  A \textbf{symmetric monoidal coclosed category (SMCCC)} is a symmetric
+  monoidal category, $(\cat{M},\perp,\oplus)$, such that, for any object
+  $B$ of $\cat{M}$, the functor $- \oplus B : \cat{M} \mto \cat{M}$
+  has a specified left adjoint.  Hence, for any objects $A$ and $C$
+  of $\cat{M}$ there is an object $B \colimp C$ of $\cat{M}$ and a
+  natural bijection:
+  \[
+  \Hom{\cat{M}}{C}{A \oplus B} \cong \Hom{\cat{M}}{B \colimp C}{A}
+  \]
+  We call the functor $\colimp : \cat{M} \times \cat{M} \mto \cat{M}$
+  the internal cohom of $\cat{M}$.
+\end{definition}
+
+We combine the previous definitions into a single category.  First, we
+define the notion of a distributive category due to Cockett and Seely
+\cite{Cockett:1997}.
+\begin{definition}
+  \label{def:dist-cat}
+  We call a symmetric monoidal category, $(\cat{M}, \top, \otimes,
+  \perp, \oplus)$, a \textbf{distributive category} if there are
+  natural transformations:
+  \[
+  \begin{array}{lll}
+    \delta^L_{A,B,C} : A \otimes (B \oplus C) \mto (A \otimes B) \oplus C\\
+    \delta^R_{A,B,C} : (B \oplus C) \otimes A \mto B \oplus (C \otimes A)
+  \end{array}
+  \]
+  subject to several coherence diagrams.  Due to the large number of
+  coherence diagrams we do not list them here, but they all can be
+  found in Cockett and Seely's paper \cite{Cockett:1997}.
+\end{definition}
+\noindent
+Requiring that the tensor and cotensor products have the corresponding
+right and left adjoints results in the following definition.
+\begin{definition}
+  \label{def:bilinear-cat}
+  A \textbf{bilinear category} is a distributive category $(\cat{M},
+  \top, \otimes, \perp, \oplus)$ such that $(\cat{M}, \top, \otimes)$
+  is closed, and $(\cat{M}, \perp, \oplus)$ is coclosed.  We will
+  denote bi-linear categories by $(\cat{M}, \top, \otimes, \limp, \perp,
+  \oplus, \colimp)$.
+\end{definition}
+Originally, Lambek defined bilinear categories to be similar to the
+previous definition, but the tensor and cotensor were non-commutative
+\cite{Cockett:1997a}, however, the bilinear categories given here
+are. We retain the name in homage to his original work.  As we will
+see below bilinear categories form the core of the work given here,
+and are of crucial importance.
+
+A symmetric monoidal category is a category with additional structure
+subject to several coherence diagrams.  Thus, an ordinary functor is
+not enough to capture this structure, and hence, the introduction of
+symmetric monoidal functors.
+\begin{definition}
+  \label{def:SMCFUN}
+  Suppose we are given two symmetric monoidal closed categories\\
+  $(\cat{M}_1,\top_1,\otimes_1,\alpha_1,\lambda_1,\rho_1,\beta_1)$ and
+  $(\cat{M}_2,\top_2,\otimes_2,\alpha_2,\lambda_2,\rho_2,\beta_2)$.  Then a
+  \textbf{symmetric monoidal functor} is a functor $F : \cat{M}_1 \mto
+  \cat{M}_2$, a map $m_{\top_1} : \top_2 \mto F\top_1$ and a natural transformation
+  $m_{A,B} : FA \otimes_2 FB \mto F(A \otimes_1 B)$ subject to the
+  following coherence conditions:
+  \begin{mathpar}
+    \bfig
+    \vSquares|ammmmma|/->`->`->``->`->`->/[
+      (FA \otimes_2 FB) \otimes_2 FC`
+      FA \otimes_2 (FB \otimes_2 FC)`
+      F(A \otimes_1 B) \otimes_2 FC`
+      FA \otimes_2 F(B \otimes_1 C)`
+      F((A \otimes_1 B) \otimes_1 C)`
+      F(A \otimes_1 (B \otimes_1 C));
+      {\alpha_2}_{FA,FB,FC}`
+      m_{A,B} \otimes \id_{FC}`
+      \id_{FA} \otimes m_{B,C}``
+      m_{A \otimes_1 B,C}`
+      m_{A,B \otimes_1 C}`
+      F{\alpha_1}_{A,B,C}]
+    \efig
+    \end{mathpar}
+%    \and
+\begin{mathpar}
+    \bfig
+    \square|amma|/->`->`<-`->/<1000,500>[
+      \top_2 \otimes_2 FA`
+      FA`
+      F\top_1 \otimes_2 FA`
+      F(\top_1 \otimes_1 A);
+      {\lambda_2}_{FA}`
+      m_{\top_1} \otimes \id_{FA}`
+      F{\lambda_1}_{A}`
+      m_{\top_1,A}]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`<-`->/<1000,500>[
+      FA \otimes_2 \top_2`
+      FA`
+      FA \otimes_2 F\top_1`
+      F(A \otimes_1 \top_1);
+      {\rho_2}_{FA}`
+      \id_{FA} \otimes m_{\top_1}`
+      F{\rho_1}_{A}`
+      m_{A,\top_1}]
+    \efig
+     \end{mathpar}
+     
+      \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      FA \otimes_2 FB`
+      FB \otimes_2 FA`
+      F(A \otimes_1 B)`
+      F(B \otimes_1 A);
+      {\beta_2}_{FA,FB}`
+      m_{A,B}`
+      m_{B,A}`
+      F{\beta_1}_{A,B}]
+    \efig
+  \end{mathpar}
+\end{definition}
+
+The following is dual to the previous definition.
+\begin{definition}
+  \label{def:coSMCFUN}
+  Suppose we are given two symmetric monoidal closed categories\\
+  $(\cat{M}_1,\perp_1,\oplus_1,\alpha_1,\lambda_1,\rho_1,\beta_1)$ and
+  $(\cat{M}_2,\perp_2,\oplus_2,\alpha_2,\lambda_2,\rho_2,\beta_2)$.  Then a
+  \textbf{symmetric comonoidal functor} is a functor $F : \cat{M}_1 \mto
+  \cat{M}_2$, a map $m_{\perp_1} : F\perp_1 \mto \perp_2$ and a natural transformation
+  $m_{A,B} : F(A \oplus_1 B) \mto FA \oplus_2 FB$ subject to the
+  following coherence conditions:
+  \begin{mathpar}
+    \bfig
+    \vSquares|ammmmma|/->`->`->``->`->`->/[
+      F((A \oplus_1 B) \oplus_1 C)`
+      F(A \oplus_1 B) \oplus_2 FC`
+      F(A \oplus_1 (B \oplus_1 C))`
+      (FA \oplus_2 FB) \oplus_2 FC`
+      FA \oplus_2 F(B \oplus_1 C))`
+      FA \oplus_2 (FB \oplus_2 FC);
+      m_{A \oplus_1 B,C}`
+      F\alpha_{A,B,C}`
+      m_{A,B} \oplus_2 \id_{FC}``
+      m_{A,B \oplus_1 C}`
+      \alpha_{FA,FB,FC}`
+      \id_{FA} \oplus_2 m_{B,C}]    
+    \efig
+  \end{mathpar}
+%    \and
+  \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      F(\perp_1 \oplus_1 A)`
+      F\perp_1 \oplus_2 FA`
+      FA`
+      \perp_2 \oplus_2 FA;
+      m_{\perp_1,A}`
+      F{\lambda_1}_{A}`
+      m_{\perp_1} \oplus \id_{FA}`
+      {\lambda^{-1}_2}_{FA}]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      F(A \oplus_1 \perp_1)`
+      FA \oplus_2 F\perp_1`
+      FA`
+      FA \oplus_2 \perp_2;
+      m_{A,\perp_1}`
+      F{\rho_1}_{A}`
+      \id_{FA} \oplus m_{\perp_1}`
+      {\rho^{-1}_2}_{FA}]
+    \efig
+  \end{mathpar}
+      
+  \begin{diagram}
+    \square|amma|/->`->`->`->/<1000,500>[
+      F(A \oplus_1 B)`
+      FA \oplus_2 FB`
+      F(B \oplus_1 A)`
+      FB \oplus_2 FA;
+      m_{A,B}`
+      F{\beta_1}_{A,B}`
+      {\beta_2}_{FA,FB}`
+      m_{B,A}]
+  \end{diagram}
+\end{definition}
+
+Naturally, since functors are enhanced to handle the additional
+structure found in a symmetric monoidal category we must also extend
+natural transformations, and adjunctions.
+\begin{definition}
+  \label{def:SMCNAT}
+  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
+  are SMCs, and $(F,m)$ and $(G,n)$ are a symmetric monoidal functors
+  between $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{symmetric
+    monoidal natural transformation} is a natural transformation,
+  $f : F \mto G$, subject to the following coherence diagrams:
+  \begin{mathpar}
+    \bfig
+    \square<1000,500>[
+      FA \otimes_2 FB`
+      F(A \otimes_1 B)`
+      GA \otimes_2 GB`
+      G(A \otimes_1 B);
+      m_{A,B}`
+      f_A \otimes_2 f_B`
+      f_{A \otimes_1 B}`
+      n_{A,B}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle/->`<-`<-/[
+      F\top_1`
+      G\top_1`
+      \top_2;
+      f_{\top_1}`
+      m_{\top_1}`
+      n_{\top_1}]
+    \efig
+  \end{mathpar}  
+\end{definition}
+\begin{definition}
+  \label{def:coSMCNAT}
+  Suppose $(\cat{M}_1,\perp_1,\oplus_1)$ and $(\cat{M}_2,\perp_2,\oplus_2)$
+  are SMCs, and $(F,m)$ and $(G,n)$ are a symmetric comonoidal functors
+  between $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{symmetric
+    comonoidal natural transformation} is a natural transformation,
+  $f : F \mto G$, subject to the following coherence diagrams:
+  \begin{mathpar}
+    \bfig
+    \square<1000,500>[
+      F(A \oplus_1 B)`
+      FA \oplus_2 FB`
+      G(A \oplus_1 B)`
+      GA \oplus_2 GB;
+      m_{A,B}`
+      f_{A \oplus_1 B}`
+      f_A \oplus_2 f_B`
+      n_{A,B}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle/<-`<-`<-/[
+      \perp_2`
+      G\perp_1`
+      F\perp_1;
+      n_{\perp_1}`
+      m_{\perp_1}`
+      f_{\perp_1}]
+    \efig
+  \end{mathpar}  
+\end{definition}  
+\begin{definition}
+  \label{def:SMCADJ}
+  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
+  are SMCs, and $(F,m)$ is a symmetric monoidal functor between
+  $\cat{M}_1$ and $\cat{M}_2$ and $(G,n)$ is a symmetric monoidal
+  functor between $\cat{M}_2$ and $\cat{M}_1$.  Then a
+  \textbf{symmetric monoidal adjunction} is an ordinary adjunction
+  $\cat{M}_1 : F \dashv G : \cat{M}_2$ such that the unit,
+  $\eta_A : A \to GFA$, and the counit, $\varepsilon_A : FGA \to A$, are
+  symmetric monoidal natural transformations.  Thus, the following
+  diagrams must commute:
+  \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`<-/<1000,500>[
+      FGA \otimes_2 FGB`
+      F(GA \otimes_1 GB)`
+      A \otimes_2 B`
+      FGA \otimes_2 FGB;
+      m_{GA,GB}`
+      \varepsilon_A \otimes_1 \varepsilon_B`
+      Fn_{A,B}`
+      \varepsilon_{A \otimes_1 B}]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`<-`=/[
+    %%   FG\top_1`
+    %%   \top_1`
+    %%   \top_1;
+    %%   \varepsilon_{\top_1}`
+    %%   \q{\top_1}`]
+    \square|amma|/->`<-`->`=/<1000,500>[
+      F\top_1`
+      FG\top_2`
+      \top_2`
+      \top_2;
+      Fn_{\top_2}`
+      m_{\top_1}`
+      \varepsilon_{\top_1}`]    
+    \efig
+    \and
+    \bfig
+    %% \dtriangle|mmb|<1000,500>[
+    %%   A \otimes_2 B`
+    %%   GFA \otimes_2 GFB`
+    %%   GF(A \otimes_2 B);
+    %%   \eta_A \otimes_2 \eta_B`
+    %%   \eta_{A \otimes_2 B}`
+    %%   \p{A,B}]
+    \square|amma|/<-`->`->`->/<1000,500>[
+      GFA \otimes_1 GFB`
+      A \otimes_1 B`
+      G(FA \otimes_2 FB)`
+      GF(A \otimes_1 B);
+      \eta_A \otimes_1 \eta_B`
+      n_{FA,FB}`
+      \eta_{A \otimes_1 B}`
+      m_{A,B}]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`=`<-/[
+    %%   \top_1`
+    %%   GF\top_1`
+    %%   \top_1;
+    %%   \eta_{\top_1}``
+    %%   p_{\top_1}]
+    \square|amma|/->`<-`<-`=/<1000,500>[
+      G\top_2`
+      GF\top_1`
+      \top_1`
+      \top_1;
+      Gm_{\top_1}`
+      n_{\top_2}`
+      \eta_{\top_1}`]      
+    \efig
+  \end{mathpar} 
+\end{definition}
+\begin{definition}
+  \label{def:coSMCADJ}
+  Suppose $(\cat{M}_1,\perp_1,\oplus_1)$ and $(\cat{M}_2,\perp_2,\oplus_2)$
+  are SMCs, and $(F,m)$ is a symmetric comonoidal functor between
+  $\cat{M}_1$ and $\cat{M}_2$ and $(G,n)$ is a symmetric comonoidal
+  functor between $\cat{M}_2$ and $\cat{M}_1$.  Then a
+  \textbf{symmetric comonoidal adjunction} is an ordinary adjunction
+  $\cat{M}_1 : F \dashv G : \cat{M}_2$ such that the unit,
+  $\eta_A : A \to GFA$, and the counit, $\varepsilon_A : FGA \to A$, are
+  symmetric comonoidal natural transformations.  Thus, the following
+  diagrams must commute:
+  \begin{mathpar}
+    \bfig
+    %% \ptriangle|amm|<1000,500>[
+    %%   A \oplus_1 B`
+    %%   GF(A \oplus_1 B)`
+    %%   GFA \oplus_1 GFB;
+    %%   \eta_{A \oplus_1 B}`
+    %%   \eta_A \oplus_1 \eta_B`
+    %%   \p{A,B}]
+    \square|amma|/->`->`->`<-/<1000,500>[
+      A \oplus_1 B`
+      GF(A \oplus_1 B)`
+      GFA \oplus_1 GFB`
+      G(FA \oplus_2 FB);
+      \eta_{A \oplus_1 B}`
+      \eta_A \oplus_1 \eta_B`
+      Gm_{A,B}`
+      m_{FA,FB}]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`<-`=/[
+    %%   GF\perp_1`
+    %%   \perp_1`
+    %%   \perp_1;
+    %%   \p{\perp_1}`
+    %%   \eta_{\perp_1}`]
+    \square|amma|/->`<-`->`=/<1000,500>[
+      GF \perp_1`
+      G \perp_2`
+      \perp_1`
+      \perp_1;
+      Gm_{\perp_1}`
+      \eta_{\perp_1}`
+      n_{\perp_2}`]
+    \efig
+    \and
+    \bfig
+    %% \qtriangle|mmb|<1000,500>[
+    %%   FG(A \oplus_2 B)`
+    %%   FGA \oplus_2 FGB`
+    %%   A \oplus_2 B;
+    %%   \q{A,B}`
+    %%   \varepsilon_{A \oplus_2 B}`
+    %%   \varepsilon_A \oplus_2 \varepsilon_B]
+    \square|amma|/->`->`->`<-/<1000,500>[
+      FG(A \oplus_2 B)`
+      F(GA \oplus_1 GB)`
+      A \oplus_2 B`
+      FGA \oplus_2 FGB;
+      Fn_{A,B}`
+      \varepsilon_{A \oplus_2 B}`
+      m_{GA,GB}`
+      \varepsilon_A \oplus_2 \varepsilon_B]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`=`<-/[
+    %%   FG\perp_2`
+    %%   \perp_2`
+    %%   FG\perp_2;
+    %%   \varepsilon_{\perp_2}``
+    %%   \q{\perp_2}]
+    \square|amma|/->`=`<-`->/<1000,500>[
+      FG\perp_2`
+      \perp_2`
+      FG\perp_2`
+      F\perp_1;
+      \varepsilon_{\perp_2}``
+      m_{\perp_1}`
+      Fn_{\perp_2}]
+    \efig
+  \end{mathpar}  
+\end{definition}
+We will be defining, and making use of the of-course and why-not
+exponentials from linear logic, but these correspond to a symmetric
+monoidal comonad and a symmetric comonoidal monad respectively, and so
+we define these concepts next.  In addition, whenever we have a
+symmetric monoidal adjunction, we immediately obtain a symmetric
+monoidal comonad on the left, and a symmetric monoidal monad on the
+right; similarly for symmetric comonad adjunctions.
+\begin{definition}
+  \label{def:symm-monoidal-monad}
+  A \textbf{symmetric monoidal monad} on a symmetric monoidal
+  category $\cat{C}$ is a triple $(T,\eta, \mu)$, where
+  $(T,\n{})$ is a symmetric monoidal endofunctor on $\cat{C}$,
+  $\eta_A : A \mto TA$ and $\mu_A : T^2A \to TA$ are
+  symmetric monoidal natural transformations, which make the following
+  diagrams commute:
+  \begin{mathpar}
+    \bfig
+    \square|ammb|<600,600>[
+      T^3 A`
+      T^2A`
+      T^2A`
+      TA;
+      \mu_{TA}`
+      T\mu_A`
+      \mu_A`
+      \mu_A]
+    \efig
+    \and
+    \bfig
+    \Atrianglepair/=`<-`=`->`<-/<600,600>[
+      TA`
+      TA`
+      T^2 A`
+      TA;`
+      \mu_A``
+      \eta_{TA}`
+      T\eta_A]
+    \efig
+  \end{mathpar}
+  The assumption that $\eta$ and $\mu$ are symmetric
+  monoidal natural transformations amount to the following diagrams
+  commuting:
+  \begin{mathpar}
+    \bfig
+    \dtriangle|mmb|<1000,600>[
+      A \otimes B`
+      TA \otimes TB`
+      T(A \otimes B);
+      \eta_A \otimes \eta_B`
+      \eta_A`
+      \n{A,B}]    
+    \efig
+    \and
+    \bfig
+    \Vtriangle/->`=`<-/<600,600>[
+      \top`
+      T\top`
+      \top;
+      \eta_\top``
+      \n{\top}]
+    \efig
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \square|ammm|/->`->``/<1050,600>[
+      T^2 A \otimes T^2 B`
+      T(TA \otimes TB)`
+      TA \otimes TB`;
+      \n{TA,TB}`
+      \mu_A \otimes \mu_B``]
+
+    \square(850,0)|ammm|/->``->`/<1050,600>[
+      T(TA \otimes TB)`
+      T^2(A \otimes B)``
+      T(A \otimes B);
+      T\n{A,B}``
+      \mu_{A \otimes B}`]
+    \morphism(-200,0)<2100,0>[TA \otimes TB`T(A \otimes B);\n{A,B}]
+    \efig
+    \and
+    \bfig
+    \square|ammb|/->`->`->`<-/<600,600>[
+      \top`
+      T\top`
+      T\top`
+      T^2\top;
+      \n{\top}`
+      \n{\top}`
+      T\n{\top}`
+      \mu_\top]
+    \efig
+  \end{mathpar}
+\end{definition}
+\begin{definition}
+  \label{def:symm-comonoidal-monad}
+  A \textbf{symmetric comonoidal monad} on a symmetric monoidal
+  category $\cat{C}$ is a triple $(T,\eta, \mu)$, where
+  $(T,\n{})$ is a symmetric comonoidal endofunctor on $\cat{C}$,
+  $\eta_A : A \mto TA$ and $\mu_A : T^2A \to TA$ are
+  symmetric comonoidal natural transformations, which make the following
+  diagrams commute:
+  \begin{mathpar}
+    \bfig
+    \square|ammb|<600,600>[
+      T^3 A`
+      T^2A`
+      T^2A`
+      TA;
+      \mu_{TA}`
+      T\mu_A`
+      \mu_A`
+      \mu_A]
+    \efig
+    \and
+    \bfig
+    \Atrianglepair/=`<-`=`->`<-/<600,600>[
+      TA`
+      TA`
+      T^2 A`
+      TA;`
+      \mu_A``
+      \eta_{TA}`
+      T\eta_A]
+    \efig
+  \end{mathpar}
+  The assumption that $\eta$ and $\mu$ are symmetric
+  comonoidal natural transformations amount to the following diagrams
+  commuting:
+  \begin{mathpar}
+    \bfig
+    \ptriangle|amm|/->`->`<-/<1000,600>[
+      A \oplus B`
+      TA \oplus TB`
+      T(A \oplus B);
+      \eta_A \oplus \eta_B`
+      \eta_A`
+      \n{A,B}]    
+    \efig
+    \and
+    \bfig
+    \Vtriangle/->`=`->/<600,600>[
+      \perp`
+      T\perp`
+      \perp;
+      \eta_\perp``
+      \n{\perp}]
+    \efig
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \square|ammm|/->`->``/<1050,600>[
+      T^2(A \oplus B)`
+      T(TA \oplus TB)`
+      T(A \oplus B)`;
+      T\n{A,B}`
+      \mu_{A \oplus B}``]
+
+    \square(850,0)|ammm|/->``->`/<1050,600>[
+      T(TA \oplus TB)`
+      T^2 A \oplus T^2 B``
+      TA \oplus TB;
+      \n{TA,TB}``
+      \mu_A \oplus \mu_B`]
+    \morphism(-200,0)<2100,0>[T(A \oplus B)`TA \oplus TB;\n{A,B}]
+    \efig
+    \and
+    \bfig
+    \square|ammb|/->`->`->`->/<600,600>[
+      T^2\perp`
+      T\perp`
+      T\perp`
+      \perp;
+      T\n{\perp}`
+      \mu_\perp`
+      \n{\perp}`
+      \n{\perp}]
+    \efig
+  \end{mathpar}
+\end{definition}
+\noindent
+Finally the dual concept, of a symmetric monoidal comonad.
+\begin{definition}
+  \label{def:symm-monoidal-comonad}
+  A \textbf{symmetric monoidal comonad} on a symmetric monoidal
+  category $\cat{C}$ is a triple $(T,\varepsilon, \delta)$, where
+  $(T,\m{})$ is a symmetric monoidal endofunctor on $\cat{C}$,
+  $\varepsilon_A : TA \mto A$ and $\delta_A : TA \to T^2 A$ are
+  symmetric monoidal natural transformations, which make the following
+  diagrams commute:
+  \begin{mathpar}
+    \bfig
+    \square|amma|<600,600>[
+      TA`
+      T^2A`
+      T^2A`
+      T^3A;
+      \delta_A`
+      \delta_A`
+      T\delta_A`
+      \delta_{TA}]
+    \efig
+    \and
+    \bfig
+    \Atrianglepair/=`->`=`<-`->/<600,600>[
+      TA`
+      TA`
+      T^2 A`
+      TA;`
+      \delta_A``
+      \varepsilon_{TA}`
+      T\varepsilon_A]
+    \efig
+  \end{mathpar}
+  The assumption that $\varepsilon$ and $\delta$ are symmetric
+  monoidal natural transformations amount to the following diagrams
+  commuting:
+  \begin{mathpar}
+    \bfig
+    \qtriangle|amm|/->`->`->/<1000,600>[
+      TA \otimes TB`
+      T(A \otimes B)`
+      A \otimes B;
+      \m{A,B}`
+      \varepsilon_A \otimes \varepsilon_B`
+    \varepsilon_{A \otimes B}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle|amm|/->`<-`=/<600,600>[
+      T\top`
+      \top`
+      \top;
+      \m{\top}`
+      \varepsilon_\top`]
+    \efig    
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \square|amab|/`->``->/<1050,600>[
+      TA \otimes TB``
+      T^2A \otimes T^2B`
+      T(TA \otimes TB);`
+      \delta_A \otimes \delta_B``
+      \m{TA,TB}]
+    \square(1050,0)|mmmb|/``->`->/<1050,600>[`
+      T(A \otimes B)`
+      T(TA \otimes TB)`
+      T^2(A \otimes B);``
+      \delta_{A \otimes B}`
+      T\m{A,B}]
+    \morphism(0,600)<2100,0>[TA \otimes TB`T(A \otimes B);\m{A,B}]
+    \efig
+    \and
+    \bfig
+    \square<600,600>[
+      \top`
+      T\top`
+      T\top`
+      T^2\top;
+      \m{\top}`
+      \m{\top}`
+      \delta_\top`
+      T\m{\top}]
+    \efig
+  \end{mathpar}
+\end{definition}
+\begin{definition}
+  \label{def:symm-comonoidal-comonad}
+  A \textbf{symmetric comonoidal comonad} on a symmetric monoidal
+  category $\cat{C}$ is a triple $(T,\varepsilon, \delta)$, where
+  $(T,\m{})$ is a symmetric comonoidal endofunctor on $\cat{C}$,
+  $\varepsilon_A : TA \mto A$ and $\delta_A : TA \to T^2 A$ are
+  symmetric comonoidal natural transformations, which make the
+  following diagrams commute:
+  \begin{mathpar}
+    \bfig
+    \square|amma|<600,600>[
+      TA`
+      T^2A`
+      T^2A`
+      T^3A;
+      \delta_A`
+      \delta_A`
+      T\delta_A`
+      \delta_{TA}]
+    \efig
+    \and
+    \bfig
+    \Atrianglepair/=`->`=`<-`->/<600,600>[
+      TA`
+      TA`
+      T^2 A`
+      TA;`
+      \delta_A``
+      \varepsilon_{TA}`
+      T\varepsilon_A]
+    \efig
+  \end{mathpar}
+  The assumption that $\varepsilon$ and $\delta$ are symmetric
+  monoidal natural transformations amount to the following diagrams
+  commuting:
+  \begin{mathpar}
+    \bfig
+    \qtriangle|mmb|<1000,500>[
+      T(A \oplus B)`
+      TA \oplus TB`
+      A \oplus B;
+      \m{A,B}`
+      \varepsilon_{A \oplus B}`
+      \varepsilon_A \oplus \varepsilon_B]
+    \efig
+    \and
+    \bfig
+    \Vtriangle|amm|/->`=`<-/[
+      T\perp`
+      \perp`
+      T\perp;
+      \varepsilon_{\perp}``
+      \m{\perp}]
+    \efig    
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \square|amab|/`->``->/<1050,600>[
+      T(A \oplus B)``
+      T^2(A \oplus B)`
+      T(TA \oplus TB);`
+      \delta_{A \oplus B}``
+      T\m{A,B}]
+    \square(1050,0)|mmmb|/``->`->/<1050,600>[`
+      TA \oplus TB`
+      T(TA \oplus TB)`
+      T^2A \oplus T^2B;``
+      \delta_A \oplus \delta_B`
+      \m{TA,TB}]
+    \morphism(0,600)<2100,0>[T(A \oplus B)`TA \oplus TB;\m{A,B}]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`<-`->/<600,600>[
+      T\perp`
+      \perp`
+      T^2 \perp`
+      T\perp;
+      \m{\perp}`
+      \delta_\perp`
+      \m{\perp}`
+      T\m{\perp}]
+    \efig
+  \end{mathpar}
+\end{definition}
+% subsection symmetric_monoidal_categories (end)
+
+\subsection{Cartesian Closed and Cocartesian Coclosed Categories}
+\label{subsec:cartesian_closed_and_cocartesian_coclosed_categories}
+The notion of a cartesian closed category is well-known, but for
+completeness we define them here.  However, their dual is lesser
+known, especially in computer science, and so we given their full
+definition.  We also review some know results concerning cocartesian
+coclosed categories and categories that are both cartesian closed and
+cocartesian coclosed.
+\begin{definition}
+  \label{def:CC}
+  A \textbf{cartesian category} is a category, $(\cat{C}, 1, \times)$,
+  with an object, $1$, and a bi-functor, $\times : \cat{C} \times
+  \cat{C} \mto \cat{C}$, such that for any object $A$ there is exactly
+  one morphism $\diamond : A \to 1$, and for any morphisms $f : C \mto
+  A$ and $g : C \mto B$ there is a morphism $\langle f , g \rangle : C
+  \to A \times B$ subject to the following diagram:
+  \[
+  \bfig
+  \Atrianglepair/->`->`->`<-`->/[C`A`A\times B`B;
+    f`
+    \langle f , g \rangle`
+    g`
+    \pi_1`
+    \pi_2]
+  \efig
+  \]
+\end{definition}
+A cartesian category models conjunction by the product functor,
+$\times : \cat{C} \times \cat{C} \mto \cat{C}$ , and the unit of
+conjunction by the terminal object.  As we mention above modeling
+implication requires closer, and since it is well-known that any
+cartesian category is also a symmetric monoidal category the
+definition of closer for a cartesian category is the same as the
+definition of closer for a symmetric monoidal category
+(Definition~\ref{def:SMCC}).  We denote the internal hom for cartesian
+closed categories by $A \to B$.
+
+The dual of a cartesian category is a cocartesian category.  They are
+a model of intuitionistic logic with disjunction and its unit.
+\begin{definition}
+  \label{def:CC}
+  A \textbf{cocartesian category} is a category, $(\cat{C}, 0, +)$,
+  with an object, $0$, and a bi-functor,
+  $+ : \cat{C} \times \cat{C} \mto \cat{C}$, such that for any object $A$ there is exactly
+  one morphism $\Box : 0 \to A$, and for any morphisms $f : A \mto C$ and $g : B \mto C$
+  there is a morphism $\lbrack f , g \rbrack : A + B \mto C$
+  subject to the following diagram:
+  \[
+  \bfig
+  \Atrianglepair/<-`<-`<-`->`<-/[C`A`A+B`B;
+    f`
+    \lbrack f, g \rbrack`
+    g`
+    \iota_1`
+    \iota_2]
+  \efig
+  \]  
+\end{definition}
+Cocloser, just like closer for cartesian categories, is defined in
+the same way that cocloser is defined for symmetric monoidal
+categories, because cocartesian categories are also symmetric
+monoidal categories.  Thus, a cocartesian category is coclosed if
+there is a specified left-adjoint, which we denote $S - T$, to the
+coproduct.
+
+There are many examples of cocartesian coclosed categories.
+Basically, any interesting cartesian category has an interesting dual,
+and hence, induces an interesting cocartesian coclosed category.
+The opposite of the category of sets and functions between them is
+isomorphic to the category of complete atomic boolean algebras, and
+both of which, are examples of cocartesian coclosed categories.  As
+we mentioned above bi-linear categories \cite{Cockett:1997a} are
+models of bi-linear logic where the left adjoint to the cotensor
+models coimplication.  Similarly, cocartesian coclosed categories
+model cointuitionistic logic with disjunction and intuitionistic
+coimplication \cite{Crolard:2001,Bellin:2012}. \todo[inline]{Put more
+  examples in here.}
+
+We might now ask if we can a category can be both cartesian closed and
+cocartesian coclosed just as bi-linear categories, but this turns out
+to be where the matter meets antimatter in such away that the category
+degenerates to a preorder.  That is, every homspace contains at most
+one morphism.  We recall this proof here, which is due to Crolard
+\cite{Crolard:2001}. We need a couple basic facts about cartesian
+closed categories with initial objects.
+\begin{lemma}
+  \label{lemma:iso-prod-initial}
+  In any cartesian category $\cat{C}$, if $0$ is an initial object in
+  $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A \cong A \times 0$.
+\end{lemma}
+\begin{proof}
+  This follows easily from the universial mapping property for products.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:products-of-initial-gives-initial}
+  In any cartesian closed category $C$, if $0$ is an initial
+  object in $\cat{C}$, then so is $0 \times A$ for any object $A$
+  of $\cat{C}$.
+\end{lemma}
+\begin{proof}
+    We know that the universal morphism for the initial object is
+    unique, and hence, the homspace $\Hom{C}{0}{A \Rightarrow B}$ for
+    any object $B$ of $\cat{C}$ contains exactly one morphism.  Then
+    using the right adjoint to the product functor we know that
+    $\Hom{C}{0}{A \Rightarrow B} \cong \Hom{C}{0 \times A}{B}$, and
+    hence, there is only one arrow between $0 \times A$ and $B$.
+\end{proof}
+\noindent
+The following lemma is due to Joyal \cite{?}, and is key to the next
+theorem.
+\begin{lemma}[Joyal's]
+  \label{lemma:joyals}
+  In any cartesian closed category $\cat{C}$, if $0$ is an initial
+  object in $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A$ is an
+  initial object in $\cat{C}$.
+\end{lemma}
+\begin{proof}
+  Suppose $\cat{C}$ is a cartesian closed category, such that, $0$ is
+  an initial object in $\cat{C}$, and $A$ is an arbitrary object in
+  $\cat{C}$.  Furthermore, suppose $\Hom{C}{A}{0}$ is non-empty.  By
+  the first basic lemma above we know that $A \cong A \times 0$, and
+  by the second $A \times 0$ is initial, thus $A$ is initial.
+\end{proof}
+Finally, the following theorem shows that any category that is both
+cartesian closed and cocartesian coclosed is a preorder.
+\begin{theorem}[(co)Cartesian (co)Closed Categories are Preorders (Crolard\cite{Crolard:2001})]
+  \label{thm:dengerate-to-preorder}
+  If $\cat{C}$ is both cartesian closed and cocartesian coclosed, then
+  for any two objects $A$ and $B$ of $\cat{C}$, $\Hom{C}{A}{B}$ has at
+  most one element.
+\end{theorem}
+\begin{proof}
+  Suppose $\cat{C}$ is both cartesian closed and cocartesian coclosed,
+  and $A$ and $B$ are objects of $\cat{C}$.  Then by using the basic
+  fact that the initial object is the unit to the coproduct, and the
+  coproducts left adjoint we know the following:
+  \[\Hom{C}{A}{B} \cong \Hom{C}{A}{0 + B} \cong \Hom{C}{B - A}{0}\]
+  Therefore, by Joyal's theorem above $\Hom{C}{A}{B}$ has at most one
+  element.
+\end{proof}
+\noindent
+Notice that the previous result hinges on the fact that there are
+initial and terminal objects, and thus, this result does not hold for
+bi-linear categories, because the units to the tensor and cotensor are
+not initial nor terminal.
+
+The repercussions of this result are that if we do not want to work
+with preorders, but do want to work with all of the structure, then we
+must separate the two worlds.  Thus, this result can be seen as the
+motivation for the current work.  We enforce the separation using
+linear logic, but through the power of linear logic we show that
+separation is not far.
+% subsection cartesian_closed_and_cocartesian_coclosed_categories (end)
+
+\subsection{A Mixed Linear/Non-Linear Model for Co-Intuitionistic Logic}
+\label{subsec:a_mixed_linear/non-linear_model_for_co-intuitionistic_logic}
+
+Benton \cite{Benton:1994} showed that from a LNL model it is possible
+to construct a linear category, and vice versa.  Bellin
+\cite{Bellin:2012} showed that the dual to linear categories are
+sufficient to model co-intuitionistic linear logic. We show that from
+the dual to a LNL model we can construct the dual to a linear
+category, and vice versa, thus, carrying out the same program for
+co-intuitionistic linear logic as Benton did for intuitionistic linear
+logic.
+
+Combining a symmetric monoidal coclosed category with a cocartesian
+coclosed category via a symmetric comonoidal adjunction defines a
+coLNL model.
+\begin{definition}
+  \label{def:coLNL-model}
+  A
+  \textbf{mixed linear/non-linear model for co-intuitionistic logic (coLNL model)},
+  $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$, consists of the following:
+  \begin{itemize}
+  \item[i.] a symmetric monoidal coclosed category $(\cat{L},\perp,\oplus,\colimp)$,
+  \item[ii.] a cocartesian coclosed category $(\cat{C},0,+,-)$, and
+  \item[iv.] a symmetric comonoidal adjunction $\cat{L} : \func{H}
+    \dashv \func{J} : \cat{C}$, where $\eta_A : A \mto
+    \func{JH}A$ and $\varepsilon_R : \func{HJ}R \mto R$
+    are the unit and counit of the adjunction respectively.
+  \end{itemize}
+\end{definition}
+It is well-known that an adjunction $\cat{L} : \func{H} \dashv
+\func{J} : \cat{C}$ induces a monad $\func{H};\func{J} : \cat{L} \mto
+\cat{L}$, but when the adjunction is symmetric comonoidal we obtain a
+symmetric comonoidal monad, in fact, $\func{H};\func{J}$ defines the
+linear exponential why-not denoted $?A = \func{J}\,(\func{H}\,A))$.
+By the definition of coLNL models we know that both $\func{H}$ and
+$\func{J}$ are symmetric comonoidal functors, and hence, are equipped
+with natural transformations $\h{A,B} : \func{H}(A \oplus B) \mto
+\func{H}A + \func{H}B$ and $\j{R,S} : \func{J}(R + S) \mto \func{J}R
+\oplus \func{J}S$, and maps $\h{\perp} : \func{H}\perp \mto 0$ and
+$\j{0} : \func{J}0 \mto \perp$.  We will make heavy use of these
+maps throughout the sequel.
+
+One useful property of Benton's LNL model is that the maps associated
+with the symmetric monoidal left adjoint in the model are
+isomorphisms.  Since coLNL models are dual we obtain similar
+isomorphisms with respect to the right adjoint.
+\begin{lemma}[Symmetric Comonoidal Isomorphisms]
+  \label{lemma:symmetric_comonoidal_isomorphisms}
+  Given any coLNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$, then there are the following isomorphisms:
+  \[
+  \begin{array}{lll}
+    \func{J}(R + S) \cong \func{J}R \oplus \func{J}S & \text{ and } & \func{J}0 \cong \perp\\
+  \end{array}
+  \]
+  Furthermore, the former is natural in $R$ and $S$.  
+\end{lemma}
+\begin{proof}
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a coLNL
+  model.  Then we can define the following family of maps:
+  \[
+  \begin{array}{lll}
+    \jinv{R,S} := \func{J}R \oplus \func{J}S \mto^{\eta} \func{JH}(\func{J}R \oplus \func{J}S) \mto^{\func{J}\h{A,B}} \func{J}(\func{HJ}R + \func{HJ}S) \mto^{\J(\varepsilon_R + \varepsilon_S)} \func{J}(R + S)\\
+  \\
+  \jinv{0} := \perp \mto^{\eta} \func{JH}\perp \mto^{\func{J}\h{\perp}} \func{J}0
+  \end{array}
+  \]
+  It is easy to see that $\jinv{R,S}$ is natural, because it is
+  defined in terms of a composition of natural transformations.  All
+  that is left to be shown is that $\jinv{R,s}$ and $\jinv{0}$ are
+  mutual inverses with $\j{R,S}$ and $\j{0}$; for the details see
+  Appendix~\ref{subsec:proof_of_lemma:symmetric_comonoidal_isomorphisms}.
+\end{proof}
+\noindent
+Just as Benton we also do not have similar isomorphisms with respect
+to the functor $\H$.  One fact that we can point out, that Benton did
+not make explicit -- because he did not use the notion of symmetric
+comonoidal functor -- is that $\jinv{}$ is $\J$ also a symmetric
+monoidal functor.
+
+\begin{corollary}
+  \label{corollary:J-SMMF}
+  Given any coLNL model $\cat{L} : \func{H} \dashv \func{J} :
+  \cat{C}$, the functor $(\J, \jinv{})$ is symmetric monoidal.
+\end{corollary}
+\begin{proof}
+  This holds by straightforwardly reducing the diagrams defining a
+  symmetric monoidal functor, Definition~\ref{def:SMCFUN}, to the
+  diagrams defining a symmetric comonoidal functor,
+  Definition~\ref{def:coSMCFUN}, using the fact that $\jinv{}$ is an
+  isomorphism.
+\end{proof}
+
+The next result shows that any coLNL model induces a symmetric
+comonoidal monad.
+\begin{lemma}[Symmetric Comonoidal Monad]
+  \label{lemma:symmetric_comonoidal_monad}
+  Given a coLNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
+  the functor, $\wn = H;J$, defines a symmetric comonoidal monad.
+\end{lemma}
+\begin{proof}
+  Suppose $(\func{H},\h{})$ and $(\func{J},\j{})$ are two symmetric
+  comonoidal functors, such that, $\cat{L} : \func{H} \dashv \func{J}
+  : \cat{C}$ is a coLNL model.  We can easily show that $\wn A = \J\H
+  A$ is symmetric monoidal by defining the following maps:
+  \[
+  \begin{array}{lll}
+    \r{\perp} := \wn \perp \mto/=/ \func{JH}\perp \mto^{\func{J}\h{\perp}} \func{J}0 \mto^{\j{\perp}} \perp\\
+    \r{A,B} := \wn (A \oplus B) \mto/=/ \func{JH}(A \oplus B) \mto^{\func{J}\h{A,B}} \func{J}(\func{H}A + \func{H}B) \mto^{\j{\func{H}A,\func{H}B}} \func{JH}A \oplus \func{JH}B \mto/=/ \wn A \oplus \wn B\\
+  \end{array}
+  \]
+  The fact that these maps satisfy the appropriate symmetric
+  comonoidal functor diagrams from Definition~\ref{def:coSMCFUN} is
+  obvious, because symmetric comonoidal functors are closed under
+  composition.  
+
+  We have a coLNL model, and hence, we have the symmetric comonoidal
+  natural transformations $\eta_A : A \mto \J\H A$ and $\varepsilon_R
+  : \H\J R \mto R$ which correspond to the unit and counit of the
+  adjunction respectfully.  Define $\mu_A := \J\varepsilon_{\H A} :
+  \J\H\J\H A \mto \J\H A$.  This implies that we have maps $\eta_A : A
+  \mto \wn A$ and $\mu_A : \wn\wn A \mto \wn A$, and thus, we can show
+  that $(\wn, \eta, \mu)$ is a symmetric comonoidal monad.  All
+  the diagrams defining a symmetric comonoidal monad hold by the
+  structure given by the adjunction.  For the complete proof see
+  Appendix~\ref{subsec:proof_of_lemma:symmetric_comonoidal_monad}.
+\end{proof}
+
+A $\wn\text{-algebra}$ is a pair $(\wn A, t_X : \wn^2 A \mto \wn A)$,
+and is called \textit{free} if it is an object of the full subcategory
+of all $\wn\text{-algebra's}$ that is in adjunction with the category
+$\cat{L}$, such that, the right adjoint is the forgetful functor.  The
+why-not monad must allow for the right structural rules, weakening and
+contraction, to be defined.
+
+\begin{lemma}[Right Weakening and Contraction]
+  \label{lemma:right_weakening_and_contraction}
+  Given a coLNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
+  then for any $\wn A$ there are distinguished symmetric comonoidal
+  natural transformations $\w{A} : \perp \mto \wn A$ and $\c{A} : \wn
+  A \oplus \wn A \mto \wn A$ that form a commutative monoid, and are
+  $\wn\text{-algebra}$ morphisms with respect to the canonical
+  definitions of the algebras $\wn A$, $\perp$, $\wn A \oplus \wn A$.
+\end{lemma}
+\begin{proof}
+  Suppose $(\func{H},\h{})$ and $(\func{J},\j{})$ are two symmetric
+  comonoidal functors, such that, $\cat{L} : \func{H} \dashv \func{J}
+  : \cat{C}$ is a coLNL model.  Again, we know $\wn A = H;J : \cat{L}
+  \mto \cat{L}$ is a symmetric comonoidal monad by
+  Lemma~\ref{lemma:symmetric_comonoidal_monad}.  
+  
+  We define the following morphisms:
+  \[
+  \begin{array}{lll}
+    \w{A} := \perp \mto^{\jinv{\perp}} \func{J} 0 \mto^{\func{J}\diamond_{\func{H} A}} \func{JH}A \mto/=/ \wn A\\
+    \c{A} := \wn A \oplus \wn A \mto/=/ \func{JH}A \oplus \func{JH}A \mto^{\jinv{\func{H}A,\func{H}A}} \func{J}(\func{H}A + \func{H}A) \mto^{\func{J}\codiag{\func{H}A}} \func{JHA} \mto/=/ \wn A
+  \end{array}
+  \]
+  The remainder of the proof is by carefully checking all of the
+  required diagrams.  Please see
+  Appendix~\ref{subsec:proof_of_lemma:right_weakening_and_contraction}
+  for the complete proof.
+\end{proof}
+
+\begin{lemma}[$\wn$-Monoid Morphisms]
+  \label{lemma:monoid-morphism}
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a coLNL
+  model.  Then if $f : (\wn A, \mu_A) \mto (\wn B, \mu_B)$ is a
+  morphism of free $\wn$-algebras, then it is a monoid morphism.
+\end{lemma}
+\begin{proof}
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a coLNL
+  model.  Then we know $\wn A = \J\H A$ is a symmetric comonoidal
+  monad by Lemma~\ref{lemma:symmetric_comonoidal_monad}.  Bellin
+  \cite{Bellin:2012} remarks that by Maietti, Maneggia de Paiva and
+  Ritter's Proposition~25 \cite{Maietti2005}, it suffices to show that
+  $\mu_A : \wn\wn A \mto \wn A$ is a monoid morphism.  For the details
+  see the complete proof in
+  Appendix~\ref{sec:proof_of_lemma:monoid-morphism}.
+\end{proof}
+
+% subsection a_mixed_linear/non-linear_model_for_co-intuitionistic_logic (end)
+
+\subsection{A Mixed Bi-Linear/Non-Linear Model}
+\label{subsec:a_mixed_bi-linear_non-linear_model}
+\begin{definition}
+  \label{def:biLNL-model}
+  A \textbf{mixed bi-linear/non-linear model} consists of the
+  following:
+  \begin{itemize}
+  \item[i.] a bi-linear category $(\cat{L},
+    \top,\otimes,\limp,\perp,\oplus,\colimp)$,
+  \item[ii.] a cartesian closed category $(\cat{I},1,\times,\to)$,
+  \item[iii.] a cocartesian coclosed category $(\cat{C},0,+,-)$, and
+  \item[iv.] two symmetric monoidal adjunctions $\cat{I} : F \dashv G
+    : \cat{L}$ and $\cat{L} : H \dashv J : \cat{C}$.
+  \end{itemize}
+\end{definition}
+
+% subsection a_mixed_bi-linear_non-linear_model (end)
+% section the_categorical_model (end)
+
+\section{Mixed Linear/Non-Linear Bi-intuitionistic Logic: BiLNL Logic}
+\label{sec:bilnl_logic}
+
+Following Benton's \cite{Benton:1994} lead we can define a mixed
+linear/non-linear bi-intuitionistic logic, called BiLNL logic, based
+on the categorical model given in the previous section.  BiLNL logic
+consists of three fragments: an intuitionistic fragment, a
+cointuitionistic fragment, and a linear bi-intuitionistic core
+fragment.  This formalization allows us to have more control on the
+mixture of the intuitionistic and cointuitionistic fragments so as to
+allow for a proper categorical model.  Each of the fragments are
+related through a syntactic formalization of the adjoint functors from
+the BiLNL model.  First, we define the syntax of BiLNL logic, and then
+discuss the inference rules for each fragment.
+\begin{definition}
+  \label{def:BiLNL-syntax}
+  The syntax for BiLNL logic is defined as follows:
+  \begin{center}
+    \begin{math}
+      \begin{array}{rlllllllllll}
+        \text{(Worlds)} & W ::= [[w1]] \mid \cdots \mid [[wi]]\\
+        \text{(Graphs)} & [[Gr]] ::= [[w1 <= w2]] \mid [[Gr1 , Gr2]]\\
+        \text{(Intuitionistic Formulas)} & [[X]], [[Y]], [[Z]] ::= 1
+          \mid [[X x Y]] \mid [[X -> Y]] \mid [[Gf A]]\\
+        \text{(Cointuitionistic Formulas)} &  [[R]], [[S]], [[T]] ::= 0 \mid [[S + T]] \mid [[S - T]] \mid [[H A]]\\
+        \text{(Linear Bi-intuitionistic Formulas)} &
+             [[A]],[[B]],[[C]] ::= [[True]] \mid [[False]] \mid
+             [[A (x) B]] \mid [[A (+) B]] \mid
+             [[A -o B]] \mid [[A *- B]] \mid [[F X]] \mid [[J S]]\\
+             \text{(Intuitionistic Contexts)}  & [[H]] ::= [[.]] \mid
+                  [[X @ w]] \mid [[H1 , H2]]\\
+        \text{(Cointuitionistic Contexts)}  & [[I]] ::= [[.]] \mid
+             [[R @ w]] \mid [[I1 , I2]]\\
+        \text{(Linear Bi-intuitionistic Contexts)}  &
+             [[G]],[[D]] ::= [[.]] \mid [[A @ w]] \mid [[G1,G2]]\\        
+      \end{array}
+    \end{math}
+  \end{center}
+  Worlds may also be denoted by (potentially subscripted) $[[n]]$,
+  $[[m]]$, and $[[o]]$.
+
+  \ \\
+  \noindent
+  Sequents have the following syntax:
+  \begin{center}
+    \begin{math}
+      \begin{array}{rll}
+        \text{(Intuitionistic Sequents)}   & [[Gr;H |-I X@w]]\\
+        \text{(Cointuitionistic Sequents)} & [[Gr;R@w |-C I]]\\
+        \text{(LNL Bi-intuitionistic Sequents)} & [[Gr;H | G |-L D | I]]\\
+      \end{array}
+    \end{math}
+  \end{center}
+\end{definition}
+
+The syntax of intuitionistic and cointuitionistic formulas are
+typical.  I denote coimplication by $[[S - T]]$, but all the other
+connectives are the usual ones. Linear bi-intuitionistic formulas are
+denoted in somewhat of a non-traditional style. I denote the unit of
+tensor by $[[True]]$ instead of the usual $[[1]]$, which is the unit
+of intuitionistic conjunction, in addition, I denote par by $[[A (+)
+    B]]$, instead of $[[A]] \parr [[B]]$.  Lastly, I denote linear
+coimplication by $[[A *- B]]$ to emphasize its duality with linear
+implication $[[A -o B]]$.  Each syntactic category of formulas
+contains the respective functor from the BiLNL model, and thus, we
+should view $F$ and $H$ as the left adjoints to $G$ and $J$
+respectively.
+
+Formulas in each type of context are annotated with a world, and each
+sequent is annotated with a graph.  These graphs are syntactic
+representations of Kripke models and are used to enforce intuitionism.
+They were first used in bi-intuitionistic logic by Pinto and Uustalu
+\cite{Pinto:2009} to enforce intuitionism in their logic L.  In fact,
+we can see the linear core of BiLNL logic as the linear version of L.
+The beauty of this type of formalization and the reason why this style
+of logic was used by Pinto and Uustalu is that the logic L, and as
+well as BiLNL logic, are complete for cut-free bi-intuitionistic
+proofs.  This was a new result of Pinto and Uustalu, because earlier
+formalizations of bi-intuitionistic logic \cite{Crolard:2001} used the
+Dragalin restriction \cite{Dragalin:1988} to enforce intuitionism, but
+this results in a failure of cut-elimination
+\cite{Schellinx:1991,Pinto:2009}.
+
+The expert reader will notice that it is not necessary to annotate the
+sequents of intuitionistic and cointuitionistic logic with graphs and
+worlds to enforce intuitionism and cointuitionism respectively. It is
+well known that restricting the right and left contexts two a single
+formula enforces intuitionism and cointuitionism respectively.
+However, when mixing these two fragments with the linear core, which
+requires the graphs to be intuitionistic, it is easier if they are
+annotated.  If they were not, then a seemingly complex world inference
+system would need to be designed to add the world constraints before
+mixing with the linear core, and it is currently an open problem
+whether this can be done.  Thus, with respect to intuitionistic and
+cointuitionistic logic the graph and world annotations can be seen as
+book keeping.
+
+A second fact an expert reader will notice is that Kripke models are a
+relational model of intuitionistic logic, but not intuitionistic
+linear logic.  This is okay, because Kripke models enforce
+intuitionism and not linearity, but it is well known how to enforce
+linearity syntactically in the definition of the inference rules.  It
+is also well-known that even in linear logic if sequents have multiple
+hypothesis and multiple conclusions the logic becomes classical.
+Thus, in BiLNL logic we combine both of these tools to enforce both
+intuitionism and linearity.  We can simply view the graphs as an over
+approximation of the relational constraints necessary to enforce both
+intuitionism and linearity.  This also makes it easier to embed Pinto
+and Uustalu's logic in BiLNL logic as we will do in
+Section~\ref{sec:embedding_l_in_bilnl_logic}.
+
+Sequents for the linear core have the form $[[Gr;H | G |-L D | I]]$.
+Similarly to the sequents of Benton's LNL logic \cite{Benton:1994},
+each context is separated for readability, but should actually be
+understood as being able to be mixed, that is, the contexts $[[H]]$
+and $[[G]]$ could be a single context, and so could $[[D]]$ and
+$[[I]]$.  The sequent:
+\[
+[[Gr]];[[X1@w1]],\ldots,[[Xi@wi]] \mid [[A1@n1]],\ldots,[[Aj@nj]]
+\vdash_{\mathsf{L}} [[B1@m1]],\ldots,[[Bk@mk]] \mid [[R1@o1]],\ldots,[[Rl@ol]]
+\]
+will be interpreted in a BiLNL model by a morphism of the following
+form:
+\[
+[[F X1]] \otimes \cdots \otimes [[F Xi]] \otimes [[A1]] \otimes \cdots
+\otimes [[Aj]] \mto^{f} [[B1]] \oplus \cdots \oplus [[Bk]] \oplus [[J R1]]
+\oplus \cdots \oplus [[J Rl]]
+\]
+Thus, intuitionistic formulas in the linear core can be viewed as
+being under the left adjoint $[[F]]$, and cointuitionistic formulas
+as being under the right adjoint $[[J]]$.  This implies that even in
+the model all types of formulas can be freely mixed.
+
+As said above, BiLNL logic consists of three fragments: an
+intuitionistic fragment, a cointuitionistic fragment, and a linear
+bi-intuitionistic fragment.  Their relationships are captured by the
+following diagram:
+$$\bfig
+\morphism(0,0)|a|/{@{>}@/^1em/}/<500,0>[\mathsf{INT}`\mathsf{BiL};\mathsf{F}]
+\morphism(0,0)|b|/{@{<-}@/_1em/}/<500,0>[\mathsf{INT}`\mathsf{BiL};\mathsf{G}]
+\morphism(500,0)|a|/{@{>}@/^1em/}/<500,0>[\mathsf{BiL}`\mathsf{coINT};\mathsf{H}]
+\morphism(500,0)|b|/{@{<-}@/_1em/}/<500,0>[\mathsf{BiL}`\mathsf{coINT};\mathsf{J}]
+\efig$$
+\noindent
+The inference rules for the intuitionistic fragment are defined in
+Figure~\ref{fig:ifr-IL}, and the inference rules for the
+cointuitionistic fragment can be found in Figure~\ref{fig:ifr-CL}.
+Since the functor $[[Gf]]$ translates the linear fragment over to
+intuitionistic logic, then the intuitionistic fragment must contain an
+inference rule ($\BiLNLdrulename{I\_gR}$) for this functor, and the
+same goes for the cointuitionistic fragment and the functor $[[Hf]]$
+($\BiLNLdrulename{C\_hL}$).  Thus, these are the only interesting
+rules of those two fragments. Each fragment contains rules for working
+with the world constraints on sequents. For example, the rules
+$\BiLNLdrulename{I\_rl}$ and $\BiLNLdrulename{I\_ts}$ make the
+relation on worlds, $[[w1 <= w2]]$, a preorder, and the rules
+$\BiLNLdrulename{I\_mL}$ and $\BiLNLdrulename{I\_mR}$ correspond to
+monotonicity on formulas.  Similar rules exist for the other two
+fragments as well.
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleIXXrl{} \and
+      \BiLNLdruleIXXts{} \and
+      \BiLNLdruleIXXmL{} \and
+      \BiLNLdruleIXXmR{} \and      
+      \BiLNLdruleIXXid{} \and
+      \BiLNLdruleIXXcut{} \and
+      \BiLNLdruleIXXwk{} \and
+      \BiLNLdruleIXXcr{} \and
+      \BiLNLdruleIXXex{} \and                  
+      \BiLNLdruleIXXtL{} \and
+      \BiLNLdruleIXXtR{} \and
+      \BiLNLdruleIXXpL{} \and
+      \BiLNLdruleIXXpR{} \and
+      \BiLNLdruleIXXIL{} \and
+      \BiLNLdruleIXXIR{} \and
+      \BiLNLdruleIXXgR{}
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Intuitionistic Fragment}
+  \label{fig:ifr-IL}
+\end{figure}
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleCXXrl{} \and
+      \BiLNLdruleCXXts{} \and
+      \BiLNLdruleCXXmL{} \and
+      \BiLNLdruleCXXmR{} \and      
+      \BiLNLdruleCXXid{} \and
+      \BiLNLdruleCXXcut{} \and
+      \BiLNLdruleCXXwk{} \and
+      \BiLNLdruleCXXcr{} \and
+      \BiLNLdruleCXXex{} \and                  
+      \BiLNLdruleCXXfL{} \and
+      \BiLNLdruleCXXfR{} \and
+      \BiLNLdruleCXXdL{} \and
+      \BiLNLdruleCXXdR{} \and
+      \BiLNLdruleCXXsL{} \and
+      \BiLNLdruleCXXsR{} \and
+      \BiLNLdruleCXXhL{}
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Cointuitionistic Fragment}
+  \label{fig:ifr-CL}
+\end{figure}
+
+The linear core of BiLNL logic consists of a large number of rules,
+and for this reason they have been broken up into multiple figures.
+The inference rules for reflexivity, transitivity, and monotonicity
+are defined in Figure~\ref{fig:ifr-biLNL-graph}.
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXrl{} \and
+      \BiLNLdruleLXXts{} \and
+      \BiLNLdruleLXXmL{} \and
+      \BiLNLdruleLXXmR{} \and
+      \BiLNLdruleLXXImL{} \and
+      \BiLNLdruleLXXCmR{}
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Abstract Kripke Graph Rules}
+  \label{fig:ifr-biLNL-graph}
+\end{figure}
+Since the linear core is a mixed LNL logic there are monotonicity
+rules for intuitionistic hypothesis, and cointuitionistic
+conclusions.  The structural rules are defined in
+Figure~\ref{fig:ifr-biLNL-structural}.
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXwkL{} \and
+      \BiLNLdruleLXXwkR{} \and
+      \BiLNLdruleLXXctrL{} \and
+      \BiLNLdruleLXXctrR{} \and
+      \BiLNLdruleLXXexL{} \and
+      \BiLNLdruleLXXexR{} \and
+      \BiLNLdruleLXXIexL{} \and
+      \BiLNLdruleLXXCexL{}
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Structural Rules}
+  \label{fig:ifr-biLNL-structural}
+\end{figure}
+The most interesting rules are weakening and contraction for both
+intuitionistic hypothesis and cointuitionistic conclusions.  The
+identity and cut inference rules can be found in
+Figure~\ref{fig:ifr-biLNL-id-cut}.
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXid{} \and
+      \BiLNLdruleLXXcut{} \and
+      \BiLNLdruleLXXIcut{} \and
+      \BiLNLdruleLXXCcut{} 
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Identity and Cut Rules}
+  \label{fig:ifr-biLNL-id-cut}
+\end{figure}
+Similarly to Benton's LNL logic \cite{Benton:1994}, we also have cut
+rules involving the different fragments:
+\begin{mathpar}
+  \small
+  \BiLNLdruleLXXIcut{} \and \BiLNLdruleLXXCcut{} 
+\end{mathpar}
+The first rule is the same rule in LNL logic, but the second is new
+and cuts a cointuitionistic conclusion in the linear core against the
+hypothesis proven in the cointuitionistic fragment.
+
+The rules for conjunction and tensor, and disjunction and par can be
+found in Figure~\ref{fig:ifr-biLNL-conunction-tensor} and
+Figure~\ref{fig:ifr-biLNL-disjunction-par} respectively.
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXIL{} \and
+      \BiLNLdruleLXXIR{} \and
+      \BiLNLdruleLXXcL{} \and
+      \BiLNLdruleLXXtL{} \and
+      \BiLNLdruleLXXtR{} 
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Conjunction and Tensor Rules}
+  \label{fig:ifr-biLNL-conunction-tensor}
+\end{figure}
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXflL{} \and
+      \BiLNLdruleLXXflR{} \and
+      \BiLNLdruleLXXdR{} \and
+      \BiLNLdruleLXXpL{} \and
+      \BiLNLdruleLXXpR{} 
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Disjunction and Par Rules}
+  \label{fig:ifr-biLNL-disjunction-par}
+\end{figure}
+Just as we have said above, the new rules are the inference rules for
+disjunction in the cointuitionistic context.  The inference rules for
+intuitionistic implication and linear implication, and
+cointuitionistic coimplication and linear coimplication are defined
+in Figure~\ref{fig:ifr-biLNL-implication} and
+Figure~\ref{fig:ifr-biLNL-coimplication}.  The most interesting rules
+between these are the rules for coimplication.  
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXImpL{} \and
+      \BiLNLdruleLXXImpR{} \and
+      \BiLNLdruleLXXIImpL{} 
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Implication Rules}
+  \label{fig:ifr-biLNL-implication}
+\end{figure}
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXsL{} \and
+      \BiLNLdruleLXXsR{} \and
+      \BiLNLdruleLXXCsR{} 
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Coimplication Rules}
+  \label{fig:ifr-biLNL-coimplication}
+\end{figure}
+
+Lastly, the inference rules for each of the functors are defined in
+Figure~\ref{fig:ifr-biLNL-adjoint-functors}.  
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdruleLXXfL{} \and
+      \BiLNLdruleLXXfR{} \and
+      \BiLNLdruleLXXjL{} \and
+      \BiLNLdruleLXXjR{} \and
+      \BiLNLdruleLXXgL{} \and
+      \BiLNLdruleLXXhR{} 
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for BiLNL Logic: Adjoint Functors Rules}
+  \label{fig:ifr-biLNL-adjoint-functors}
+\end{figure}
+Using these rules it is possible to move between the fragments.  The
+most restrictive rules are when coming from the intuitionistic or
+cointuitionistic fragment into the linear core, or vice versa,
+because the sequents must only contain data that is movable or
+consistency could fail.
+% section bilnl_logic (end)
+
+\section{Embedding Bi-Intuitionistic Logic in BiLNL Logic}
+\label{sec:embedding_l_in_bilnl_logic}
+
+TODO
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \BiLNLdrulerl{} \and
+      \BiLNLdrulets{} \and
+      \BiLNLdrulemL{} \and
+      \BiLNLdrulemR{} \and            
+      \BiLNLdrulewkL{} \and
+      \BiLNLdrulewkR{} \and
+      \BiLNLdrulectrL{} \and
+      \BiLNLdrulectrR{} \and
+      \BiLNLdruleexL{} \and
+      \BiLNLdruleexR{} \and
+      \BiLNLdruleid{} \and      
+      \BiLNLdrulecut{} \and
+      \BiLNLdruleIL{} \and
+      \BiLNLdruleIR{} \and
+      \BiLNLdruleflL{} \and
+      \BiLNLdruleflR{} \and
+      \BiLNLdrulecL{} \and
+      \BiLNLdrulecR{} \and
+      \BiLNLdruledL{} \and
+      \BiLNLdruledR{} \and
+      \BiLNLdruleImpR{} \and
+      \BiLNLdruleImpL{} \and
+      \BiLNLdrulesL{} \and
+      \BiLNLdrulesR{} 
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Inference Rules for L}
+  \label{fig:ifr-L}
+\end{figure}
+% section embedding_l_in_bilnl_logic (end)
+
+\section{BiLNL Term Assignment}
+\label{sec:bilnl_term_assignment}
+TODO
+% section bilnl_term_assignment (end)
+
+
+\section{Related Work}
+\label{sec:related_work}
+TODO
+% section related_work (end)
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+TODO
+% section conclusion (end)
+
+\bibliographystyle{plainurl} \bibliography{ref}
+
+\appendix
+\input{appendix}
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+

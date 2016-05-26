@@ -1,0 +1,1161 @@
+\section{Proofs}
+\label{sec:proofs}
+
+\subsection{Proof of Lemma~\ref{lemma:symmetric_comonoidal_isomorphisms}}
+\label{subsec:proof_of_lemma:symmetric_comonoidal_isomorphisms}
+We show that both of the  maps:
+\[
+\begin{array}{lll}
+  \jinv{R,S} := \func{J}R \oplus \func{J}S \mto^{\eta} \func{JH}(\func{J}R \oplus \func{J}S) \mto^{\func{J}\h{A,B}} \func{J}(\func{HJ}R + \func{HJ}S) \mto^{\J(\varepsilon_R + \varepsilon_S)} \func{J}(R + S)\\
+  \\
+  \jinv{0} := \perp \mto^{\eta} \func{JH}\perp \mto^{\func{J}\h{\perp}} \func{J}0
+\end{array}
+\]
+are mutual inverses with $\j{R,S} : \func{J}(R + S) \mto \func{J}R
+\oplus \func{J}S$ and $\j{0} : \perp \mto \func{J}0$ respectively.
+
+\begin{itemize}
+\item[Case.] The following diagram implies that $\jinv{R,S};\j{R,S} = \id$:
+  \begin{diagram}
+    \square|ammm|/->`->`->`<-/<950,500>[
+      \func{J}R \oplus \func{J}S`
+      \func{JH}(\func{J}R \oplus \func{J}S)`
+      \func{JHJ}R \oplus \func{JHJ}S`
+      \func{J}(\func{HJ}R + \func{HJ}S);
+      \eta`
+      \eta \oplus \eta`
+      \func{J}\h{}`
+      \j{}
+    ]
+    \dtriangle(-950,0)|amm|/=``<-/<950,500>[
+      \func{J}R \oplus \func{J}S`
+      \func{J}R \oplus \func{J}S`
+      \func{JHJ}R \oplus \func{JHJ}S;``
+      \func{J}\varepsilon \oplus \func{J}\varepsilon]
+
+    \qtriangle(-950,-500)/`<-`->/<1900,500>[
+      \func{J}R \oplus \func{J}S`
+      \func{J}(\func{HJ}R + \func{HJ}S)`
+      \func{J}(R + S);`
+      \j{}`
+      \func{J}(\varepsilon + \varepsilon)]        
+  \end{diagram}
+  The two top diagrams both commute because $\eta$ and $\varepsilon$
+  are the unit and counit of the adjunction respectively, and the
+  bottom diagram commutes by naturality of $\j{}$.
+  
+\item[Case.] The following diagram implies that $\j{R,S};\jinv{R,S} = \id$:
+  \begin{diagram}
+    \square|ammm|/->`->`->`->/<950,500>[
+      \func{J}(R + S)`
+      \func{J}R \oplus \func{J}S`
+      \func{JHJ}(R + S)`
+      \func{JH}(\func{J}R \oplus \func{J}S);
+      \j{}`
+      \eta`
+      \eta`
+      \func{JH}\j{}
+    ]
+    \dtriangle(-950,0)|amm|/=``<-/<950,500>[
+      \func{J}(R + S)`
+      \func{J}(R + S)`
+      \func{JHJ}(R + S);``
+      \func{J}\varepsilon]
+
+    \qtriangle(-950,-500)/`<-`->/<1900,500>[
+      \func{J}(R + S)`
+      \func{JH}(\func{J}R \oplus \func{J}S)`
+      \func{J}(\func{HJ}R + \func{HJ}S);`
+      \func{J}(\varepsilon + \varepsilon)`
+      \func{J}\h{}]
+  \end{diagram}
+  The top left and bottom diagrams both commute because $\eta$ and $\varepsilon$
+  are the unit and counit of the adjunction respectively, and the
+  top right diagram commutes by naturality of $\eta$.
+  
+\item[Case.] The following diagram implies that $\jinv{0};\j{0} = \id$:
+  \begin{diagram}
+    \square|amma|/->`=`->`<-/<950,500>[
+      \perp`
+      \func{JH}\perp`
+      \perp`
+      \func{J}0;
+      \eta``
+      \func{J}\h{\perp}`
+      \j{0}]
+  \end{diagram}
+  This diagram holds because $\eta$ is the unit of the adjunction.
+
+\item[Case.] The following diagram implies that $\j{0};\jinv{0} = \id$:        
+  \begin{diagram}
+    \Atriangle|aaa|/->`->`<-/<950,500>[
+      \func{JHJ}0`
+      \func{J}0`
+      \func{JH}\perp;
+      \func{J}\varepsilon`
+      \func{JH}\j{0}`
+      \func{J}\h{\perp}]
+
+    \Dtriangle|aaa|/=`->`/<950,500>[
+      \func{J}0`
+      \func{JHJ}0`
+      \func{J}0;`
+      \eta`]
+
+    \square/->``->`/<1900,1000>[
+      \func{J}0`
+      \perp`
+      \func{J}0`
+      \func{JH}\perp;
+      \j{0}``
+      \eta`]
+  \end{diagram}
+  The top-left and bottom diagrams commute because $\eta$ and
+  $\varepsilon$ are the unit and counit of the adjunction
+  respectively, and the top-right digram commutes by naturality of
+  $\eta$.
+\end{itemize}
+% subsection proof_of_lemma~\ref{lemma:symmetric_comonoidal_isomorphisms} (end)
+
+\subsection{Proof of Lemma~\ref{lemma:symmetric_comonoidal_monad}}
+\label{subsec:proof_of_lemma:symmetric_comonoidal_monad}
+Since $\wn$ is the composition of two symmetric comonoidal functors we know it is also symmetric comonoidal, and hence, the following diagrams all hold:
+\begin{mathpar}
+  \bfig
+  \vSquares|ammmmma|/->`->`->``->`->`->/[
+    \wn ((A \oplus B) \oplus C)`
+    \wn (A \oplus B) \oplus \wn C`
+    \wn (A \oplus (B \oplus C))`
+    (\wn A \oplus \wn B) \oplus \wn C`
+    \wn A \oplus \wn (B \oplus C))`
+    \wn A \oplus (\wn B \oplus \wn C);
+    \r{A \oplus B,C}`
+    \wn \alpha_{A,B,C}`
+    \r{A,B} \oplus \id_{\wn C}``
+    \r{A,B \oplus C}`
+    \alpha_{\wn A,\wn B,\wn C}`
+    \id_{\wn A} \oplus \r{B,C}]    
+  \efig
+\end{mathpar}
+%    \and
+\begin{mathpar}
+  \bfig
+  \square|amma|/->`->`->`->/<1000,500>[
+    \wn (\perp \oplus A)`
+    \wn \perp \oplus \wn A`
+    \wn A`
+    \perp \oplus \wn A;
+    \r{\perp,A}`
+    \wn {\lambda}_{A}`
+    \r{\perp} \oplus \id_{\wn A}`
+      {\lambda^{-1}}_{\wn A}]
+  \efig
+  \and
+  \bfig
+  \square|amma|/->`->`->`->/<1000,500>[
+    \wn (A \oplus \perp)`
+    \wn A \oplus \wn \perp`
+    \wn A`
+    \wn A \oplus \perp;
+    \r{A,\perp}`
+    \wn {\rho}_{A}`
+    \id_{\wn A} \oplus \r{\perp}`
+       {\rho^{-1}}_{\wn A}]
+  \efig
+\end{mathpar}
+
+\begin{diagram}
+  \square|amma|/->`->`->`->/<1000,500>[
+    \wn (A \oplus B)`
+    \wn A \oplus \wn B`
+    \wn (B \oplus A)`
+    \wn B \oplus \wn A;
+    \r{A,B}`
+    \wn {\beta}_{A,B}`
+        {\beta}_{\wn A,\wn B}`
+        \r{B,A}]
+\end{diagram}
+Next we show that $(\wn,\eta,\mu)$ defines a monad where
+$\eta_A : A \mto ?A$ is the unit of the adjunction, and
+$\mu_A = \func{J}\varepsilon_{\func{H}\,A} : \wn\wn A \mto \wn A$.  It
+suffices to show that every diagram of
+Definition~\ref{def:symm-comonoidal-monad} holds.
+\begin{itemize}
+\item[Case.]
+  $$\bfig
+  \square|ammb|<600,600>[
+    \wn^3 A`
+    \wn^2 A`
+    \wn^2 A`
+    \wn A;
+    \mu_{\wn A}`
+    \wn\mu_A`
+    \mu_A`
+    \mu_A]
+  \efig$$
+  It suffices to show that the following diagram commutes:
+  $$\bfig
+  \square|ammb|<600,600>[
+    \func{J}(\func{H}(\wn^2 A))`
+    \func{J}(\func{H}\,\wn A)`
+    \func{J}(\func{H}\,\wn A)`
+    \func{J}(\func{H}\,A);
+    \func{J}\varepsilon_{\func{H}\,\wn A}`
+    \func{J}(\func{H}\,\mu_A)`
+    \func{J}\varepsilon_{\func{H}\,A}`
+    \func{J}\varepsilon_{\func{H}\,A}]
+  \efig$$
+  But this diagram is equivalent to the following:
+  $$\bfig
+  \square|ammb|<600,600>[
+    \func{H}\func{JHJH} A`
+    \func{H}\,\func{JH} A`
+    \func{H}\,\func{JH} A`
+    \func{H}\,A;
+    \varepsilon_{\func{H}\,\func{JH} A}`
+    \func{H}\,\func{J}\varepsilon_{\func{H}\,A}`
+    \varepsilon_{\func{H}\,A}`
+    \varepsilon_{\func{H}\,A}]
+  \efig$$
+  The previous diagram commutes by naturality of $\varepsilon$.
+
+\item[Case.]
+  $$\bfig
+  \Atrianglepair/=`<-`=`->`<-/<600,600>[
+    \wn A`
+    \wn A`
+    \wn^2 A`
+    \wn A;`
+    \mu_A``
+    \eta_{\wn A}`
+    \wn \eta_A]
+  \efig$$
+  It suffices to show that the following diagrams commutes:
+  $$\bfig
+  \Atrianglepair/=`<-`=`->`<-/<600,600>[
+    JH A`
+    JH A`
+    JHJH A`
+    JH A;`
+    J\varepsilon_{HA}``
+    \eta_{JH A}`
+    JH \eta_A]
+  \efig$$
+  Both of these diagrams commute because $\eta$ and $\varepsilon$
+  are the unit and counit of an adjunction.
+\end{itemize}
+
+It remains to be shown that $\eta$ and $\mu$ are both
+symmetric comonoidal natural transformations, but this easily follows
+from the fact that we know $\eta$ is by assumption, and that $\mu$
+is because it is defined in terms of $\varepsilon$ which is a
+symmetric comonoidal natural transformation.  Thus, all of the
+following diagrams commute:
+\begin{mathpar}
+  \bfig
+  \ptriangle|amm|/->`->`<-/<1000,600>[
+    A \oplus B`
+    \wn A \oplus \wn B`
+    \wn (A \oplus B);
+    \eta_A \oplus \eta_B`
+    \eta_A`
+    \r{A,B}]    
+  \efig
+  \and
+  \bfig
+  \Vtriangle/->`=`->/<600,600>[
+    \perp`
+    \wn\perp`
+    \perp;
+    \eta_\perp``
+    \r{\perp}]
+  \efig
+\end{mathpar}
+\begin{mathpar}
+  \bfig
+  \square|ammm|/->`->``/<1050,600>[
+    \wn^2(A \oplus B)`
+    \wn (\wn A \oplus \wn B)`
+    \wn (A \oplus B)`;
+    \wn\r{A,B}`
+    \mu_{A \oplus B}``]
+
+  \square(850,0)|ammm|/->``->`/<1050,600>[
+    \wn (\wn A \oplus \wn B)`
+    \wn^2 A \oplus \wn^2 B``
+    \wn A \oplus \wn B;
+    \r{\wn A,\wn B}``
+    \mu_A \oplus \mu_B`]
+  \morphism(-200,0)<2100,0>[\wn(A \oplus B)`\wn A \oplus \wn B;\r{A,B}]
+  \efig
+  \and
+  \bfig
+  \square|ammb|/->`->`->`->/<600,600>[
+    \wn^2\perp`
+    \wn\perp`
+    \wn\perp`
+    \perp;
+    \wn\r{\perp}`
+    \mu_\perp`
+    \r{\perp}`
+    \r{\perp}]
+  \efig
+\end{mathpar}
+% subsection proof_of_lemma:symmetric_monoidal_monad (end)
+
+\subsection{Proof of Lemma~\ref{lemma:right_weakening_and_contraction}}
+\label{subsec:proof_of_lemma:right_weakening_and_contraction}
+Suppose $(\func{H},\h{})$ and $(\func{J},\j{})$ are two symmetric
+comonoidal functors, such that, $\cat{L} : \func{H} \dashv \func{J}
+: \cat{C}$ is a coLNL model.  Again, we know $\wn A = H;J : \cat{L}
+\mto \cat{L}$ is a symmetric comonoidal monad by
+Lemma~\ref{lemma:symmetric_comonoidal_monad}.  
+
+We define the following morphisms:
+\[
+\begin{array}{lll}
+  \w{A} := \perp \mto^{\jinv{0}} \func{J} 0 \mto^{\func{J}\diamond_{\func{H} A}} \func{JH}A \mto/=/ \wn A\\
+  \c{A} := \wn A \oplus \wn A \mto/=/ \func{JH}A \oplus \func{JH}A \mto^{\jinv{\func{H}A,\func{H}A}} \func{J}(\func{H}A + \func{H}A) \mto^{\func{J}\codiag{\func{H}A}} \func{JHA} \mto/=/ \wn A
+\end{array}
+\]
+
+Next we show that both of these are symmetric comonoidal natural
+transformations, but for which functors?  Define $\func{W}(A) =
+\perp$ and $\func{C}(A) = \wn A \oplus \wn A$ on objects of
+$\cat{L}$, and $\func{W}(f : A \mto B) = \id_\perp$ and $\func{C}(f
+: A \mto B) = \wn f \oplus \wn f$ on morphisms.  So we must show
+that $\w{} : \func{W} \mto \wn$ and $\c{} : \func{C} \mto \wn$ are
+symmetric comonoidal natural transformations.  We first show that
+$\w{}$ is and then we show that $\c{}$ is.  Throughout the proof we
+drop subscripts on natural transformations for readability.
+\begin{itemize}
+\item[Case.] To show $\w{}$ is a natural transformation we must show
+  the following diagram commutes for any morphism $f : A \mto B$:
+  \[
+  \bfig
+  \square[W(A)`\wn A`W(B)`\wn B;\w{A}`W(f)`\wn f`\w{B}]
+  \efig
+  \]
+  This diagram is equivalent to the following:
+  \[
+  \bfig
+  \square[\perp`\wn A`\perp`\wn B;\w{A}`\id_{\perp}`\wn f`\w{B}]
+  \efig
+  \]
+  It further expands to the following:
+  \[
+  \bfig
+  \hSquares/->`->`->``->`->`->/[\perp`\func{J}0`\func{JH}A`\perp`\func{J}0`\func{JH}B;\jinv{0}`\func{J}(\diamond_{\func{H}A})`\id_\perp``\func{JH}f`\jinv{0}`\func{J}(\diamond_{\func{H}B})]
+  \efig
+  \]
+  This diagram commutes, because
+  $\func{J}(\diamond_{\func{H}A});\func{J}f =
+  \func{J}(\diamond_{\func{H}A};f) =
+  \func{J}(\diamond_{\func{H}B})$, by the uniqueness of the initial
+  map.
+
+\item[Case.] The functor $\func{W}$ is comonoidal itself.  To see this we
+  must exhibit a map
+  \[\s{\perp} := \id_\perp : \func{W}\perp \mto \perp\]
+  and a natural transformation
+  \[\s{A,B} := \rho^{-1}_\perp : \func{W}(A \oplus B) \mto \func{W}A \oplus \func{W}B\]
+  subject to the coherence conditions in
+  Definition~\ref{def:coSMCFUN}.  Clearly, the second map is a natural
+  transformation, but we leave showing they respect the coherence
+  conditions to the reader.  Now we can show that $\w{}$ is indeed
+  symmetric comonoidal.
+  \begin{itemize}
+  \item[Case.] \ \\
+    \begin{diagram}
+      \square|amma|<1000,500>[
+        \func{W}(A \oplus B)`
+        \func{W}A \oplus \func{W}B`
+        \wn (A \oplus B)`
+        \wn A \oplus \wn B;
+        \s{A,B}`
+        \w{A \oplus B}`
+        \w{A} \oplus \w{B}`
+        \r{A,B}]
+    \end{diagram}
+    Expanding the objects of the previous diagram results in the
+    following:
+    \begin{diagram}
+      \square|amma|<1000,500>[
+        \perp`
+        \perp \oplus \perp`
+        \wn (A \oplus B)`
+        \wn A \oplus \wn B;
+        \s{A,B}`
+        \w{A \oplus B}`
+        \w{A} \oplus \w{B}`
+        \r{A,B}]
+    \end{diagram}
+    This diagram commutes, because the following fully expanded
+    diagram commutes:
+    \begin{diagram}
+      \square|amma|/<-`->`->`->/<950,500>[
+        \J 0`
+        \J (0 + 0)`
+        \J\H (A \oplus B)`
+        \J (\H A + \H B);
+        \J\rho`
+        \J\diamond`
+        \J (\diamond + \diamond)`
+        \J\h{}]
+
+      \square(950, 0)|amma|/->``->`->/<950,500>[
+        \J (0 + 0)`
+        \J 0 + \J 0`
+        \J (\H A + \H B)`
+        \J\H A \oplus \J\H B;
+        \j{}``
+        \J\diamond \oplus \J\diamond`
+        \j{}]
+
+      \square(0,500)/->`->``/<1900,1500>[
+        \perp`
+        \perp \oplus \perp`
+        \J 0`;
+        \rho^{-1}`
+        \jinv{0}``]
+
+      \dtriangle(950,1300)|mma|<950,700>[
+        \perp \oplus \perp`
+        \J 0 \oplus \perp`
+        \J 0 \oplus \J 0;
+        \jinv{0} \oplus \id`
+        \jinv{0} \oplus \jinv{0}`
+        \id \oplus \jinv{0}]
+
+      \ptriangle(950,800)|amm|/`=`->/<950,500>[
+        \J 0 \oplus \perp`
+        \J 0 \oplus \J 0`
+        \J 0 \oplus \perp;``
+        \id \oplus \j{0}]
+
+      \morphism(1900,1300)|m|/=/<0,-800>[
+        \J 0 \oplus \J 0`
+        \J 0 \oplus \J 0;]
+
+      \morphism(0,500)|m|<950,800>[
+        \J 0`
+        \J0 \oplus \perp;
+        \rho^{-1}]
+
+      \place(475,250)[(1)]
+      \place(1425,250)[(2)]
+      \place(950,650)[(3)]
+      \place(1180,1100)[(4)]
+      \place(1620,1550)[(5)]
+      \place(475,1550)[(6)]
+    \end{diagram}
+    Diagram 1 commutes because $0$ is the initial object, diagram 2
+    commutes by naturality of $\j{}$, diagram 3 commutes because
+    $\J$ is a symmetric comonoidal functor, diagram 4 commutes
+    because $\j{0}$ is an isomorphism
+    (Lemma~\ref{lemma:symmetric_comonoidal_isomorphisms}), diagram 5
+    commutes by functorality of $\J$, and diagram 6 commutes by
+    naturality of $\rho$.
+    
+  \item[Case.]\ \\
+    \begin{diagram}
+      \Vtriangle/<-`<-`<-/[
+        \perp`
+        \wn \perp`
+        \func{W}\perp;
+        \r{\perp}`
+        \s{\perp}`
+        \w{\perp}]
+    \end{diagram}
+    Expanding the objects in the previous diagram results in the
+    following:
+    \begin{diagram}
+      \Vtriangle/<-`=`<-/[
+        \perp`
+        \wn \perp`
+        \perp;
+        \r{\perp}``
+        \w{\perp}]
+    \end{diagram}
+    This diagram commutes because the following one does:
+    \begin{diagram}
+      \dtriangle|ama|/=`<-`->/<950,500>[
+        \J 0`
+        \J 0`
+        \J\H \perp;`
+        \J\h{\perp}`
+        \J\diamond]
+      \square(-950,0)|aaaa|/`=``->/<950,500>[
+        \perp``
+        \perp`
+        \J 0;```
+        \jinv{0}]
+      \morphism(-950,500)/<-/<1900,0>[
+        \perp`
+        \J 0;
+        \j{0}]        
+    \end{diagram}
+    The diagram on the left commutes because $\j{0}$ is an
+    isomorphism
+    (Lemma~\ref{lemma:symmetric_comonoidal_isomorphisms}), and the
+    diagram on the right commutes because $0$ is the initial object.
+
+  \end{itemize}
+
+\item[Case.] Now we show that $\c{A} : \wn A \oplus \wn A \mto \wn
+  A$ is a natural transformation.  This requires the following
+  diagram to commute (for any $f : A \mto B$):
+  \[
+  \bfig
+  \square[
+    \func{C}A`
+    \wn A`
+    \func{C}B`
+    \wn B;
+    \c{A}`
+    \func{C}f`
+    \wn f`
+    \c{B}]
+  \efig
+  \]
+  This expands to the following diagram:
+  \[
+  \bfig
+  \square[
+    \wn A \oplus \wn A`
+    \wn A`
+    \wn B \oplus \wn B`
+    \wn B;
+    \c{A}`
+    \wn f \oplus \wn f`
+    \wn f`
+    \c{B}]
+  \efig
+  \]
+  This diagram commutes because the following diagram does:
+  \begin{diagram}
+    \hSquares[
+      \func{JH}A \oplus \func{JH}A`
+      \func{J}(\func{H}A + \func{H}A)`
+      \func{JH}A`
+      \func{JH}B \oplus \func{JH}B`
+      \func{J}(\func{H}B + \func{H}B)`
+      \func{JH}B;
+      \jinv{\func{H}A, \func{H}A}`
+      \func{J}\bigtriangledown_{\func{H}A}`
+      \func{JH}f \oplus \func{JH}f`
+      \func{J}(\func{H}f + \func{H}f)`
+      \func{JH}f`
+      \jinv{\func{H}B, \func{H}B}`
+      \func{J}\bigtriangledown_{\func{H}B}]
+  \end{diagram}
+  The left square commutes by naturality of $\jinv{}$, and the right square commutes by naturality of the codiagonal
+  $\bigtriangledown_{A} : A + A \mto A$.
+
+\item[Case.] The functor $\func{C} : \cat{L} \mto \cat{L}$ is indeed
+  symmetric comonoidal where the required maps are defined as follows:
+  \[
+  \small
+  \begin{array}{lll}
+    \quad\quad\quad\t_\perp := \wn \perp \oplus \wn \perp \mto/=/ \J\H\perp \oplus \J\H\perp \mto^{\jinv{}} \J(\H\perp + \H\perp) \mto^{\J\codiag{}} \J\H\perp \mto^{\J\h{\perp}} \J 0 \mto^{\j{0}} \perp\\
+    \\
+    \quad\quad\quad\t_{A,B} := \wn (A \oplus B) \oplus \wn (A \oplus B) \mto^{\r{A,B} \oplus \r{A,B}} (\wn A \oplus \wn B) \oplus (\wn A \oplus \wn B) \mto^{\iso} (\wn A \oplus \wn A) \oplus (\wn B \oplus \wn B)
+  \end{array}
+  \]
+  where $\mathsf{iso}$ is a natural isomorphism that can easily be
+  defined using the symmetric monoidal structure of
+  $\cat{L}$. Clearly, $\t$ is indeed a natural transformation, but
+  we leave checking that the required diagrams in
+  Definition~\ref{def:coSMCFUN} commute to the reader.  We can now
+  show that $\c{A} : \wn A \oplus \wn A \mto \wn A$ is symmetric
+  comonoidal.  The following diagrams from
+  Definition~\ref{def:coSMCNAT} must commute:
+  \begin{itemize}
+  \item[Case.] \ \\
+    \begin{diagram}
+      \square<1000,500>[
+        \func{C}(A \oplus B)`
+        \func{C}A \oplus \func{C}B`
+        \wn (A \oplus B)`
+        \wn A \oplus \wn B;
+        \t_{A,B}`
+        \c{A \oplus B}`
+        \c{A} \oplus \c{B}`
+        \r{A,B}]
+    \end{diagram}
+    Expanding the objects in the previous diagram results in the following:
+    \begin{diagram}
+      \square<2000,500>[
+        \wn (A \oplus B) \oplus \wn (A \oplus B)`
+        (\wn A \oplus \wn A) \oplus (\wn B \oplus \wn B)`
+        \wn (A \oplus B)`
+        \wn A \oplus \wn B;
+        \t_{A,B}`
+        \c{A \oplus B}`
+        \c{A} \oplus \c{B}`
+        \r{A,B}]
+    \end{diagram}
+    This diagram commutes, because the following fully expanded one
+    does:
+    \begin{center}
+      \rotatebox{90}{$
+        \bfig
+        \square|amma|<1500,500>[
+          \J(\H (A \oplus B) + \H (A \oplus B))`
+          \J((\H A + \H B) + (\H A + \H B))`
+          \J\H (A \oplus B)`
+          \J (\H A + \H B);
+          \J(\h{} + \h{})`
+          \J\codiag{}`
+          \J\codiag{}`
+          \J\h{}]
+
+        \square(0,500)|amma|<1500,500>[
+          \J\H(A \oplus B) \oplus \J\H(A \oplus B)`
+          \J(\H A + \H B) \oplus \J(\H A + \H B)`
+          \J(\H(A \oplus B) + \H(A \oplus B))`
+          \J((\H A + \H B) + (\H A + \H B));
+          \J\h{} \oplus \J\h{}`
+          \jinv{}`
+          \jinv{}`
+          \J(\h{} + \h{})]
+
+        \square(1500,0)|amma|/->`->`->`=/<1500,500>[
+          \J((\H A + \H B) + (\H A + \H B))`
+          \J((\H A + \H A) + (\H B + \H B))`
+          \J (\H A + \H B)`
+          \J (\H A + \H B);
+          \J\iso`
+          \J\codiag{}`
+          \J(\codiag{} + \codiag{})`]
+
+        \square(3000,0)|amma|<1500,500>[
+          \J((\H A + \H A) + (\H B + \H B))`
+          \J(\H A + \H A) \oplus \J(\H B + \H B)`
+          \J (\H A + \H B)`
+          \J\H A \oplus \J\H B;
+          \j{}`
+          \J(\codiag{} + \codiag{})`
+          \J\codiag{} \oplus \J\codiag{}`
+          \j{}]
+
+        \dtriangle(3000,500)|ama|/<-`->`->/<1500,500>[
+          (\J\H A \oplus \J\H A) \oplus (\J\H B \oplus \J\H B)`
+          \J((\H A + \H A) + (\H B + \H B))`
+          \J(\H A + \H A) \oplus \J(\H B + \H B);
+          \j{};(\j{} \oplus \j{})`
+          \jinv{} \oplus \jinv{}`
+          \j{}]          
+
+        \morphism(1500,1000)<1500,0>[
+          \J(\H A + \H B) \oplus \J(\H A + \H B)`
+          (\J\H A \oplus \J\H B) \oplus (\J\H A \oplus \J\H B);
+          \j{} \oplus \j{}]
+
+        \morphism(3000,1000)<1500,0>[
+          (\J\H A \oplus \J\H B) \oplus (\J\H A \oplus \J\H B)`
+          (\J\H A \oplus \J\H A) \oplus (\J\H B \oplus \J\H B);
+          \iso]
+
+        \place(750,250)[(1)]
+        \place(750,750)[(2)]
+        \place(2250,250)[(3)]
+        \place(2550,750)[(4)]
+        \place(3750,250)[(5)]
+        \place(4125,700)[(6)]
+        \efig
+        $}
+    \end{center}
+    Diagram 1 commutes by naturality of $\codiag{}$, diagram 2
+    commutes by naturality of $\jinv{}$, diagram 3 commutes by
+    straightforward reasoning on coproducts, diagram 4 commutes by
+    straightforward reasoning on the symmetric monoidal structure of
+    $\J$ after expanding the definition of the two isomorphisms --
+    here $\J\iso$ is the corresponding isomorphisms on coproducts --
+    diagram 5 commutes by naturality of $\j{}$, and diagram 6
+    commutes because $\j{}$ is an isomorphism
+    (Lemma~\ref{lemma:symmetric_comonoidal_isomorphisms}).
+    
+  \item[Case.] \ \\
+    \begin{diagram}
+      \Vtriangle/<-`<-`<-/[
+        \perp`
+        \wn \perp`
+        \func{C} \perp;
+        \r{\perp}`
+        \t{\perp}`
+        \c{\perp}]
+    \end{diagram}
+    Expanding the objects of this diagram results in the following:
+    \begin{diagram}
+      \square/<-`<-`<-`=/<950,500>[
+        \perp`
+        \wn \perp`
+        \wn \perp \oplus \wn \perp`
+        \wn \perp \oplus \wn \perp;
+        \r{\perp}`
+        \t{\perp}`
+        \c{\perp}`]          
+    \end{diagram}
+    Simply unfolding the morphisms in the previous diagram reveals the following:
+    \begin{diagram}
+      \square/`<-`<-`=/<950,500>[
+        \J(\H\perp + \H\perp)`
+        \J(\H\perp + \H\perp)`
+        \J\H\perp \oplus \J\H\perp`
+        \J\H\perp \oplus \J\H\perp;`
+        \jinv{}`
+        \jinv{}`]
+
+      \square(0,500)/`<-`<-`/<950,500>[
+        \J\H\perp`
+        \J\H\perp`
+        \J(\H\perp + \H\perp)`
+        \J(\H\perp + \H\perp);
+        `
+        \J\codiag{}`
+        \J\codiag{}`]
+
+      \square(0,1000)/`<-`<-`/<950,500>[
+        \J0`
+        \J0`
+        \J\H\perp`
+        \J\H\perp;
+        `
+        \J\h{\perp}`
+        \J\h{\perp}`]
+
+      \square(0,1500)/=`<-`<-`/<950,500>[
+        \perp`
+        \perp`
+        \J0`
+        \J0;
+        `
+        \j{}`
+        \j{}`]
+    \end{diagram}
+    Clearly, this diagram commutes.
+  \end{itemize}
+\end{itemize}
+At this point we have shown that $\w{A} : \perp \mto \wn A$ and
+$\c{A} : \wn A \oplus \wn A \mto \wn A$ are symmetric comonoidal
+naturality transformations.  Now we show that for any $\wn A$ the
+triple $(\wn A,\w{A},\c{A})$ forms a commutative monoid.  This means
+that the following diagrams must commute:
+\begin{itemize}
+\item[Case.]\ \\
+  \begin{diagram}
+    \hSquares|aammmmm|/->`->```->``/[
+      (\wn A \oplus \wn A) \oplus \wn A`
+      \wn A \oplus (\wn A \oplus \wn A)`
+      \wn A \oplus \wn A```
+      \wn A;
+      \alpha_{\wn A,\wn A,\wn A}`
+      \id_{\wn A} \oplus \c{A}```
+      \c{A}``]
+    \btriangle|maa|/->``->/<2407,500>[(\wn A \oplus \wn A) \oplus \wn A`
+      \wn A \oplus \wn A`
+      \wn A;
+      \c{A} \oplus \id_{A}``
+      \c{A}]
+  \end{diagram}
+  The previous diagram commutes, because the following one does (we
+  omit subscripts for readability):
+  \begin{diagram}
+    \scriptsize
+    \square|amma|/->`->``->/<950,500>[
+      (\func{JH}A \oplus \func{JH}A) \oplus \func{JH}A`
+      \func{JH}A \oplus (\func{JH}A \oplus \func{JH}A)`
+      \func{J}(\func{H}A + \func{H}A) \oplus \func{JH}A`
+      \func{J}((\func{H}A + \func{H}A) + \func{H}A);
+      \alpha`
+      \jinv{} \oplus \id``
+      \jinv{}]
+
+    \square(950,0)|amma|/->``->`->/<950,500>[
+      \func{JH}A \oplus (\func{JH}A \oplus \func{JH}A)`
+      \func{JH}A \oplus \func{J}(\func{H}A + \func{H}A)`
+      \func{J}((\func{H}A + \func{H}A) + \func{H}A)`
+      \func{J}(\func{H}A + (\func{H}A + \func{H}A));
+      \id \oplus \jinv{}``
+      \jinv{}`
+      \func{J}\alpha]
+
+    \square(1900,0)|amma|/->``->`->/<950,500>[
+      \func{JH}A \oplus \func{J}(\func{H}A + \func{H}A)`
+      \func{JH}A \oplus \func{JH}A`
+      \func{J}(\func{H}A + (\func{H}A + \func{H}A))`
+      \func{J}(\func{H}A + \func{H}A);
+      \id \oplus \func{J}\codiag{}``
+      \jinv{}`
+      \func{J}(\id + \codiag{})]
+
+    \square(0,-500)|amma|/`->`->`->/<950,500>[
+      \func{J}(\func{H}A + \func{H}A) \oplus \func{JH}A`
+      \func{J}((\func{H}A + \func{H}A) + \func{H}A)`
+      \func{JH}A \oplus \func{JH}A`
+      \func{J}(\func{H}A + \func{H}A);`
+      \func{J}\codiag{} \oplus \id`
+      \func{J}(\codiag{} + \id)`
+      \jinv{}]
+
+    \dtriangle(950,-500)|ama|/`->`->/<1900,500>[
+      \func{J}(\func{H}A + \func{H}A)`
+      \func{J}(\func{H}A + \func{H}A)`
+      \func{JH}A;`
+      \func{J}\codiag{}`
+      \func{J}\codiag{}]
+
+    \place(950,250)[(1)]
+    \place(2375,250)[(2)]
+    \place(475,-250)[(3)]
+    \place(1900,-250)[(4)]
+  \end{diagram}
+  Diagram 1 commutes because $\func{J}$ is a symmetric monoidal
+  functor (Corollary~\ref{corollary:J-SMMF}), diagrams 2 and 3
+  commute by naturality of $\jinv{}$, and diagram 4 commutes because
+  $(\func{H}A, \diamond, \codiag{})$ is a commutative monoid in
+  $\cat{C}$, but we leave the proof of this to the reader.
+
+\item[Case.]\ \\
+  \begin{diagram}
+    \btriangle|maa|/->`->`->/<1000,600>[
+      \wn A \oplus \perp`
+      \wn A \oplus \wn A`
+      \wn A;
+      \id_{\wn A} \oplus \w{A}`
+      \rho_{\wn A}`
+      \c{A}]
+  \end{diagram}
+  The previous diagram commutes, because the following one does:
+  \begin{diagram}
+    \square|amma|/->`->`->`->/<950,500>[
+      \func{JH}A \oplus \func{J}0`
+      \func{J}(\func{H}A + 0)`
+      \func{JH}A \oplus \func{JH}A`
+      \func{J}(\func{H}A + \func{H}A);
+      \jinv{}`
+      \id \oplus \func{J}\diamond`
+      \func{J}(\id \oplus \diamond)`
+      \jinv{}]
+
+    \square(950,0)|amma|/->``=`->/<950,500>[
+      \func{J}(\func{H}A + 0)`
+      \func{JH}A`
+      \func{J}(\func{H}A + \func{H}A)`
+      \func{JH}A;
+      \func{J}\rho```
+      \func{J}\codiag{}]
+
+    \square(0,500)|amma|/->`->`=`/<1900,500>[
+      \func{JH}A \oplus \perp`
+      \func{JH}A`
+      \func{JH}A \oplus \func{J}0`
+      \func{JH}A;
+      \rho`
+      \id \oplus \jinv{0}``]
+
+    \place(950,750)[(1)]
+    \place(475,250)[(2)]
+    \place(1425,250)[(3)]      
+  \end{diagram}
+  Diagram 1 commutes because $\func{J}$ is a symmetric monoidal
+  functor (Corollary~\ref{corollary:J-SMMF}), diagram 2 commutes by
+  naturality of $\jinv{}$, and diagram 3 commutes because
+  $(\func{H}A, \diamond, \codiag{})$ is a commutative monoid in
+  $\cat{C}$, but we leave the proof of this to the reader.
+  
+\item[Case.]\ \\
+  \begin{diagram}
+    \btriangle|maa|/->`->`->/<1000,600>[
+      \wn A \oplus \wn A`
+      \wn A \oplus \wn A`
+      \wn A;
+      \beta_{\wn A,\wn A}`
+      \c{A}`
+      \c{A}]
+  \end{diagram}
+  This diagram commutes, because the following one does:
+  \begin{diagram}
+    \hSquares/->`->`->`->`=`->`->/[
+      \func{JH}A \oplus \func{JH}A`
+      \func{J}(\func{H}A + \func{H}A)`
+      \func{JH}A`
+      \func{JH}A \oplus \func{JH}A`
+      \func{J}(\func{H}A + \func{H}A)`
+      \func{JH}A;
+      \jinv{}`
+      \func{J}\codiag{}`
+      \beta`
+      \func{J}\beta``
+      \jinv{}`
+      \func{J}\codiag{}]
+  \end{diagram}
+  The left diagram commutes by naturality of $\jinv{}$, and the right
+  diagram commutes because $(\func{H}A, \diamond, \codiag{})$ is a
+  commutative monoid in $\cat{C}$, but we leave the proof of this to
+  the reader.
+\end{itemize}
+
+Finally, we must show that $\w{A} : \perp \mto \wn A$ and $\c{A} :
+\wn A \oplus \wn A \mto \wn A$ are $\wn\text{-algebra}$ morphisms.
+The algebras in play here are $(\wn A,\mu : \wn\wn A \mto \wn A)$,
+$(\perp, \r{\perp} : \wn \perp \mto \perp)$, and $(\wn A \oplus \wn
+A, u_A : \wn (\wn A \oplus \wn A) \mto \wn A \oplus \wn A)$, where
+$u_A := \wn (\wn A \oplus \wn A) \mto^{\r{\wn A,\wn A}} ?^2 A \oplus
+?^2 A \mto^{\mu_A \oplus \mu_A} \wn A \oplus \wn A$.  It suffices to
+show that the following diagrams commute:
+\begin{itemize}
+\item[Case.]\ \\
+  \begin{diagram}
+    \square<950,500>[
+      \wn \perp`
+      \perp`
+      \wn\wn A`
+      \wn A;
+      \r{\perp}`
+      \wn\w{}`
+      \w{}`
+      \mu]
+  \end{diagram}
+  This diagram commutes, because the following fully expanded one does:
+  \begin{diagram}
+    \square|mmma|<2500,500>[
+      \J\H\J 0`
+      \J 0`
+      \J\H\J\H A`
+      \J\H A;
+      \J\varepsilon_0`
+      \J\H\J\diamond`
+      \J\diamond`
+      \J\varepsilon]
+
+    \square(0,500)|amma|/->`->``/<1250,1000>[
+      \J\H\perp`
+      \J 0`
+      \J\H\J 0`;
+      \J\h{\perp}`
+      \J\H\jinv{0}``]
+    \square(1250,500)|amma|/->``->`/<1250,1000>[
+      \J 0`
+      \perp``
+      \J 0;
+      \j{0}``
+      \jinv{0}`]
+
+    \Dtriangle(0,500)|mmm|/`->`=/<1250,500>[
+      \J\H \perp`
+      \J\H\J 0`
+      \J\H\J 0;`
+      \J\H\jinv{0}`]
+
+    \morphism(1250,1000)|m|<700,0>[
+      \J\H\J 0`
+      \J\H \perp;
+      \J\H\j{0}]
+
+    \morphism(1950,1000)|m|<550,-500>[
+      \J\H \perp`
+      \J 0;
+      \J\h{\perp}]
+
+    \place(1250,250)[(1)]
+    \place(1500,750)[(2)]
+    \place(380,1000)[(3)]
+    \place(2000,1250)[(4)]
+  \end{diagram}
+  Diagram 1 commutes by naturality of $\varepsilon$, diagram 2
+  commutes because $\varepsilon$ is the counit of the symmetric
+  comonoidal adjunction, diagram 3 clearly commutes, and diagram 4
+  commutes because $\j{0}$ is an isomorphism
+  (Lemma~\ref{lemma:symmetric_comonoidal_isomorphisms}).
+  
+\item[Case.]\ \\
+  \begin{diagram}
+    \square|amma|<950,500>[
+      \wn (\wn A \oplus \wn A)`
+      \wn A \oplus \wn A`
+      \wn\wn A`
+      \wn A;
+      u`
+      \wn\c{}`
+      \c{}`
+      \mu]
+  \end{diagram}
+  This diagram commutes because the following fully expanded one does:
+  \begin{center}
+    \tiny
+    \rotatebox{90}{$\bfig
+      \square|amma|/->`->``/<1250,1500>[
+        \J\H\J(\H A + \H A)`
+        \J\H(\J\H A \oplus \J\H A)`
+        \J\H\J\H A`;
+        \J\H\j{}`
+        \J\H\J\codiag{}``]
+      \square(1250,0)|amma|/->``->`/<1250,1500>[
+        \J\H(\J\H A \oplus \J\H A)`
+        \J(\H\J\H A + \H\J\H A)``
+        \J\H\J\H A;
+        \J\h{}``
+        \J\codiag{}`]
+      \morphism/=/<2500,0>[\J\H\J\H A`\J\H\J\H A;]
+
+      \Atriangle/<-`<-`=/<1250,500>[
+        \J\H A`
+        \J\H\J\H A`
+        \J\H\J\H A;
+        \J\varepsilon`
+        \J\varepsilon`]
+
+      \Vtriangle(0,1000)/`->`->/<1250,500>[
+        \J\H\J(\H A + \H A)`
+        \J(\H\J\H A + \H\J\H A)`
+        \J(\H A + \H A);`
+        \J\varepsilon`
+        \J(\varepsilon + \varepsilon)]
+
+      \morphism(1250,1000)|m|<0,-500>[
+        \J(\H A + \H A)`
+        \J\H A;
+        \J\codiag{}]
+
+      \square(0,1500)|amma|/->`->``/<1250,500>[
+        \J\H(\J\H A \oplus \J\H A)`
+        \J(\H\J\H A + \H\J\H A)`
+        \J\H\J(\H A + \H A)`;
+        \J\h{}`
+        \J\H\jinv{}``]        
+
+      \square(1250,1500)|amma|/->``->`/<1250,500>[
+        \J(\H\J\H A + \H\J\H A)`
+        \J\H\J\H A \oplus \J\H\J\H A`
+        \J\H(\J\H A \oplus \J\H A)`
+        \J(\H\J\H A + \H\J\H A);
+        \j{}`
+        `
+        \jinv{}`]
+
+      \square(2500,0)|amma|<1250,1500>[
+        \J(\H\J\H A + \H\J\H A)`
+        \J(\H A + \H A)`
+        \J\H\J\H A`
+        \J\H A;
+        \J(\varepsilon + \varepsilon)`
+        \J\codiag{}`
+        \J\codiag{}`
+        \J\varepsilon]
+
+      \square(2500,1500)|amma|<1250,500>[
+        \J\H\J\H A \oplus \J\H\J\H A`
+        \J\H A \oplus \J\H A`
+        \J(\H\J\H A + \H\J\H A)`
+        \J(\H A + \H A);
+        \J\varepsilon \oplus \J\varepsilon`
+        \jinv{}`
+        \jinv{}`
+        \J(\varepsilon + \varepsilon)]
+
+      \place(1250,250)[(1)]
+      \place(625,750)[(2)]
+      \place(1875,750)[(3)]
+      \place(1250,1250)[(4)]
+      \place(1250,1750)[(5)]
+      \place(3125,1750)[(6)]
+      \place(3125,750)[(7)]
+      \efig$}
+  \end{center}
+\end{itemize}
+Diagram 1 clearly commutes, diagram 2 commutes by naturality of
+$\varepsilon$, diagram 3 commutes by naturality of $\codiag{}$,
+diagram 4 commutes because $\varepsilon$ is the counit of the
+symmetric comonoidal adjunction, diagram 5 commutes because $\j{}$
+is an isomorphism
+(Lemma~\ref{lemma:symmetric_comonoidal_isomorphisms}), diagram 6
+commutes by naturality of $\jinv{}$, and diagram 7 is the same
+diagram as 3, but this diagram is redundant for readability.
+% subsection proof_of_lemma:right_weakening_and_contraction (end)
+
+\section{Proof of Lemma~\ref{lemma:monoid-morphism}}
+\label{sec:proof_of_lemma:monoid-morphism}
+Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a coLNL
+model.  Then we know $\wn A = \J\H A$ is a symmetric comonoidal
+monad by Lemma~\ref{lemma:symmetric_comonoidal_monad}.  Bellin
+\cite{Bellin:2012} remarks that by Maietti, Maneggia de Paiva and
+Ritter's Proposition~25 \cite{Maietti2005}, it suffices to show that
+$\mu_A : \wn\wn A \mto \wn A$ is a monoid morphism.  Thus, the
+following diagrams must commute:
+\begin{itemize}
+\item[Case.]\ \\
+  \begin{diagram}
+    \square|amma|<950,500>[
+      \wn\wn A \oplus \wn\wn A`
+      \wn\wn A`
+      \wn A \oplus \wn A`
+      \wn A;
+      \c{\wn A}`
+      \mu_A \oplus \mu_A`
+      \mu_A`
+      \c{A}]
+  \end{diagram}
+  This diagram commutes because the following fully expanded one
+  does:
+  \begin{diagram}
+    \square|amma|<1000,500>[
+      \J\H\J\H A \oplus \J\H\J\H A`
+      \J(\H\J\H A + \H\J\H A)`
+      \J\H A \oplus \J\H A`
+      \J(\H A + \H A);
+      \jinv{}`
+      \J\varepsilon \oplus \J\varepsilon`
+      \J(\varepsilon + \varepsilon)`
+      \jinv{}]
+
+    \square(1000,0)|amma|<1000,500>[
+      \J(\H\J\H A + \H\J\H A)`
+      \J\H\J\H A`
+      \J(\H A + \H A)`
+      \J\H A;
+      \J\codiag{}`
+      \J(\varepsilon + \varepsilon)`
+      \J\varepsilon`
+      \J\codiag{}]      
+  \end{diagram}
+  The left square commutes by naturality of $\jinv{}$ and the right
+  square commutes by naturality of the codiagonal.
+  
+\item[Case.]\ \\
+  \begin{diagram}
+    \Atriangle|aaa|[
+      \perp`
+      \wn\wn A`
+      \wn A;
+      \w{\wn A}`
+      \w{A}`
+      \mu_A]
+  \end{diagram}
+  This diagram commutes because the following fully expanded one
+  does:
+  \begin{diagram}
+    \square|amma|/=`->`->`=/<1000,500>[
+      \perp`
+      \perp`
+      \J 0`
+      \J 0;`
+      \jinv{0}`
+      \jinv{0}`]
+
+    \square(0,-500)|amma|/=`->`->`->/<1000,500>[
+      \J 0`
+      \J 0`
+      \J\H\J\H A`
+      \J\H A;`
+      \J\diamond`
+      \J\diamond`
+      \J\varepsilon]
+  \end{diagram}
+  The top square trivially commutes, and the bottom square commutes
+  by uniqueness of the initial map.
+\end{itemize}
+% section proof_of_lemma:monoid-morphism (end)
+
+% section proofs (end)

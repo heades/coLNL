@@ -1,0 +1,290 @@
+\documentclass{article}
+\usepackage{parskip}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{mathabx}
+\usetikzlibrary{arrows,automata,positioning,decorations.pathreplacing}
+\usepackage[barr]{xy}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{corollary}[thm]{Corollary}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{observation}[thm]{Observation}
+\newtheorem{example}[thm]{Example}
+
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\comp}[1]{\overline{#1}}
+\newcommand{\CABAC}[0]{\mathsf{CABACat}}
+\newcommand{\Set}[0]{\mathsf{Set}}
+\newcommand{\inO}[1]{\mathsf{in}_1(#1)}
+\newcommand{\inT}[1]{\mathsf{in}_2(#1)}
+\newcommand{\imp}[0]{\Rightarrow}
+\newcommand{\cur}[0]{\mathsf{cur}}
+\newcommand{\cocur}[0]{\mathsf{cocur}}
+\newcommand{\id}[0]{\mathsf{id}}
+\newcommand{\Hom}[2]{\mathsf{Hom}(#1,#2)}
+\newcommand{\eval}[0]{\mathsf{eval}}
+
+\title{Difference in Complete Atomic Boolean Algebras}
+\author{Prof. Harley Eades (heades@gru.edu).}
+\date{\vspace{-22px}}
+\begin{document}
+\maketitle
+
+\section{Complete Atomic Boolean Algebras}
+\label{sec:complete_atomic_boolean_algebras}
+\vspace{10px}
+\begin{definition}
+  \label{def:atomic}
+  Suppose $(A, \leq, \perp)$ is a poset with a least element $\perp$.
+  An element $a \in A$ is called \textbf{atomic} if for any $b \leq a$
+  we have $b = \perp$ or $b = a$.
+\end{definition}
+
+
+\vspace{10px}
+\begin{definition}
+  \label{def:CABA}
+  A \textbf{complete atomic boolean algebra (CABA)} is defined by the
+  following axioms on a poset $(B, \leq)$:
+  \begin{itemize}
+  \item (Top) There is an element $\top \in B$ such that for any $x \in B$, $x \leq \top$.
+  \item (Bottom) There is an element $\perp \in B$ such that for any $x \in B$, $\perp \leq x$.
+  \item (Meet) Given elements $a,b \in B$, there is an element $a \times b \in B$, such that,
+    $x \leq a$ and $x \leq b$ iff $x \leq a \times b$.
+  \item (Join) Given elements $a,b \in B$, there is an element $a + b \in B$, such that,
+    $a \leq x$ and $b \leq x$ iff $a + b \leq x$.
+  \item (Complement) Given an element $a \in B$ there is an element $\lnot a \in B$, such that,
+    $a \times \lnot a \leq \perp$ and $\top \leq a + \lnot a$.
+  \item (Distributivity) Given elements $a, b, c \in B$ the following
+    must hold $a \times (b + c) \leq (a \times b) + (a \times c)$.
+    
+  \item (Atomic) Given any element $b \in B$ we have that $b =
+    \bigplus_{i \in I} a_i$ where each element of ${a_i}_{i \in I} \subseteq B$ is atomic.
+    
+  \item (Complete) Every $B' \subseteq B$ has a supremum (least-upper bound).
+  \end{itemize}
+\end{definition}
+% section complete_atomic_boolean_algebras (end)
+
+\section{CABAs are Powerset Algebras}
+\label{sec:cabas_are_powerset_algebras}
+
+Given a CABA $(B,+,\times,\lnot,\perp,\top)$ we can define a powerset
+algebra $(\powerset{X},\cup,\cap,
+\overline{\stackrel{\,\,\,\,}{\stackrel{\,\,\,\,}{\,\,\,\,}}},\emptyset,X)$.
+Suppose $A \subseteq B$ is the set of atomic elements.  Then set $X =
+A$.  So we will define the powerset algebra $P = (\powerset{A},\cup,\cap,
+\overline{\stackrel{\,\,\,\,}{\stackrel{\,\,\,\,}{\,\,\,\,}}},\emptyset,A)$.
+
+(\textbf{Atomicity}) Notice that we have an isomorphism between
+$A$ and the set of single element subsets of $A$.  Thus, we define any
+subset of $X \subseteq A$ as the union of single element subsets of
+$A$.  This, implies that $P$ is atomic.
+
+(\textbf{Completeness}) We can also show that $P$ is complete.  Given
+any set $L \subseteq \powerset{A}$ the sup of $L$ is defined to be $L
+\subseteq \bigcup L$.  This is clearly least among all sets containing
+$L$.
+
+(\textbf{Greatest Element}) The greatest element is defined to be $A$
+because all subsets of $A$ are contained in $A$.
+
+(\textbf{Least Element}) The least element is defined to be the empty
+set, $\emptyset$, which is trivially contained in every set.
+
+(\textbf{Meet}) Suppose $b_1 \times b_2 \in B$ then by atomicity we
+know $b_1 = \bigplus_{i \in I} \{a_i\}$ and $b_1 = \bigplus_{j \in J}
+\{a_j\}$ for atomic variables $a_i$ and $a_j$.  We map $\times$ to
+$\cap$, and $b_1$ to the set $\{a_i\}$ and $b_2$ to the set $\{a_j\}$.
+Thus, we have $\{a_i\} \cap \{a_j\} \in P$, and the meet condition is
+clearly satisfied.
+
+(\textbf{Join}) Mapping an element $b_1 + b_2 \in B$ is similar to the
+previous case.
+
+(\textbf{Complement}) Given an element $L \in \powerset{A}$ we define
+$\comp{L} \in \powerset{A}$ as the complement relative to $A$. Thus,
+$\comp{\emptyset} = A$ and $\comp{A} = \emptyset$.  Furthermore, for
+$L \in P$, $L \cap \comp{L} = \emptyset$ and $L \cup \comp{L} = A$.
+Finally, mapping any element $\lnot b \in B$ can be mapped to the
+complement of the set of atomic elements defining $\lnot b$.
+
+(\textbf{Distributivity}) It is an elementary fact of set theory that
+intersection distributes over union.
+
+These facts show that any CABA can be mapped to a powerset algebra. It
+is also easy to see that every powerset algebra is a CABA. Thus, an
+isomorphism.  
+% section cabas_are_powerset_algebras (end)
+
+\section{The Category of CABAs}
+\label{sec:the_category_of_cabas}
+We now define the category of CABAs by taking CABAs as objects and
+CABA homomorphisms as morphisms.  We call this category
+$\CABAC$.
+\vspace{10px}
+\begin{definition}
+  \label{def:caba-morph}
+  A \textbf{CABA homomorphism} between CABAs
+  $(B_1,+,\times,\lnot,\perp,\top)$ and
+  $(B_2,+,\times,\lnot,\perp,\top)$ is a function $H : B_1 \to B_2$
+  such that the following holds:
+  \begin{itemize}
+  \item[1.] $H(\top) = \top$
+  \item[2.] $H(\perp) = \perp$
+  \item[3.] $H(b_1 \times b_2) = H(b_1) \times H(b_2)$
+  \item[4.] $H(b_1 + b_2) = H(b_1) + H(b_2)$
+  \item[5.] $H(\lnot b) = \lnot H(b)$
+  \item[6.] $H$ maps sups of $B_1$ to sups of $B_2$
+  \end{itemize}  
+\end{definition}
+It is easy to see that we can define identity CABA homomorphisms, and
+composition of CABA homomorphisms is simply set theoretic
+composition, which, is associative and respects identities.
+
+\subsection{Coproducts in $\CABAC$}
+\label{subsec:coproducts_in_cabac}
+The coproduct construction on CABAs is not obvious at first, but by
+working with powerset algebras we can more easily see how the
+construction should be done.
+
+Given two powerset algebras $(\powerset{X},\cup,\cap,
+\overline{\stackrel{\,\,\,\,}{\stackrel{\,\,\,\,}{\,\,\,\,}}},\emptyset,X)$
+and
+$(\powerset{Y},\cup,\cap,
+\overline{\stackrel{\,\,\,\,}{\stackrel{\,\,\,\,}{\,\,\,\,}}},\emptyset,Y)$
+we can define their coproduct as the powerset algebra
+$(\powerset{X \times Y},\cup,\cap,
+\overline{\stackrel{\,\,\,\,}{\stackrel{\,\,\,\,}{\,\,\,\,}}},\emptyset,X \times Y)$.
+Both injections can be defined as follows:
+\begin{center}
+  \begin{math}
+    \begin{array}{lll}
+      \begin{array}{lll}
+      i_1 : \powerset{X} \to \powerset{X \times Y}\\
+      i_1(S \subseteq X) = \{(x,y) \in X \times Y \mid x \in S\}\\
+      \end{array}\\
+      \\
+      \begin{array}{lll}
+        i_2 : \powerset{Y} \to \powerset{X \times Y}\\
+        i_2(S \subseteq Y) = \{(x,y) \in X \times Y \mid y \in S\}\\
+    \end{array}
+    \end{array}
+  \end{math}
+\end{center}
+It is easy to see that the previous injections are homomorphisms that
+preserve the structure of the powerset algebra.
+
+At this point we must make the following diagram commute:
+\begin{center}
+  \begin{math}
+    \bfig
+    \Atrianglepair/<-`<--`<-`->`<-/<900,700>[\powerset{Z}`\powerset{X}`\powerset{X \times Y}`\powerset{Y};f`h`g`i_1`i_2]
+    \efig
+  \end{math}
+\end{center}
+First, note that any subset $S \in \powerset{X \times Y}$ can be written as
+$S = \inO{S_X} \cup \inT{S_Y}$ where $S_X \subseteq X$ and $S_Y \subseteq Y$. We define $h$ as follows:
+\begin{center}
+  \begin{math}
+    \begin{array}{lll}
+      h : \powerset{X \times Y} \to \powerset{Z}\\
+      h(S \subseteq X \times Y) = f(\pi_1(S)) \cap g(\pi_2(S))\\
+    \end{array}
+  \end{math}
+\end{center}
+Given the previous definitions we can now see that the previous diagram commutes by construction.
+
+The definition of coproduct for powersets gives us a hint of how to do
+it for general CABAs, certainly, we know they must exist in $\CABAC$
+because it is isomorphic to the category of powerset algebras.  The
+coproduct construction just given shows that we must define the
+coproduct in terms of the disjoint union of the sets of atomic
+elements. In addition, notice that the least elements of both powerset
+algebras in the coproduct are the same, and the greatest element of
+the coproduct is defined in terms of the greatest elements of the two
+component powerset algebras.  This implies that we must collapse the
+greatest and lowest elements of two arbitrary CABAs in order to
+construct the coproduct.  
+
+Suppose $(B_1,+_1,\times_1,\lnot_1,\perp_1,\top_1)$ and
+$(B_2,+_2,\times_2,\lnot_2,\perp_2,\top_2)$ are two CABAs.
+Furthermore, suppose $A_1$ and $A_2$ are the sets of atomic elements
+of $B_1$ and $B_2$ respectively.  Now take the set $A_1 \oplus A_2$ to
+be the coequalizer:
+\begin{center}
+  \begin{math}
+    1 \two^{[\inO{\perp_1},\inT{\top_1}]}_{[\inO{\perp_2},\inT{\top_2}]} A_1 + A_2 \to A_1 \oplus A_2
+  \end{math}
+\end{center}
+Thus, the set $A_1 \oplus A_2$ is the set of equivalence classes where
+the only identified elements are the least and greatest elements.
+That is, $\inO{\perp_1} = \inT{\perp_2}$ and $\inO{\top_1} =
+\inT{\top_2}$.  Every other equivalence class consists of a single
+element of $A_1 + A_2$.  We denote each element, $[\inO{a_i}]$ and
+$[\inT{a_j}]$, by simply $a_i$ and $a_j$, and then denote the
+collapsed least and greatest elements by $\perp_\oplus$ and
+$\top_\oplus$.  We can now define the preorder on $A_1 \oplus A_2$,
+denoted by $\leq_\oplus$, as follows:
+\begin{center}
+  \begin{math}
+    \begin{array}{lll}
+      a_1 \leq_\oplus a_2 & \text{iff } a_1 \leq_1 a_2 \text{ or } a_1 \leq_2 a_2\\
+      \perp_\oplus \leq_\oplus a & \text{iff } a \in A_1 \text{ or } a \in A_2\\
+      a \leq_\oplus \top_\oplus & \text{iff } a \in A_1 \text{ or } a \in A_2\\
+    \end{array}
+  \end{math}
+\end{center}
+% subsection coproducts_in_$\cabac$ (end)
+
+\subsection{Cointernal Hom in $\CABAC$}
+\label{subsec:cointernal_hom_in_CABACat}
+The internal hom in $\Set$ is defined by $A \imp B = \{f \mid f : A
+\to B \text{ is a set function} \}$.  Curry can be defined as follows:
+\[
+\begin{array}{lll}
+  \cur : \Hom{A \times B}{C} \to \Hom{A}{B \imp C}\\
+  \cur(f : A \times B \to C) = \lambda a.\lambda b.f(a,b).  
+\end{array}
+\]
+It is easy to see that $\cur$ is indeed an isomorphism.  The evaluator
+can be defined as follows:
+\[
+\begin{array}{lll}
+  \eval : (A \imp B) \times A \to B\\
+  \eval = \cur^{-1}(\id_{A \imp B})
+\end{array}
+\]
+
+The following contravariant functor is called the \textbf{powerset functor}:
+\[
+\begin{array}{lll}
+  P : \Set \to \Set^{op}\\
+  P(X) = \powerset{X}\\
+  P(f : A \to B)(B' \subset B) = f^{-1}(B') = \{a \in A \mid \exists b \in B'.f(a) = b \}\\
+\end{array}
+\]
+Now we can compute the opposite of the internal hom:
+\[
+\begin{array}{lll}
+  P(A \imp B) = \powerset{A \imp B}\\
+\end{array}
+\]
+
+\[
+\cocur : \Hom{\powerset{B \imp C}}{\powerset{A}} \to \Hom{\powerset{C}}{\powerset{A \times B}}
+\]
+% subsection cointernal_hom_in_cabacat (end)
+
+% section the_category_of_cabas (end)
+
+
+\end{document}
