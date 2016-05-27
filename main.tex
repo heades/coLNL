@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage{mdframed}
 \usepackage[barr]{xy}
+\usepackage{enumerate}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -1037,11 +1038,11 @@ logic.
 
 Combining a symmetric monoidal coclosed category with a cocartesian
 coclosed category via a symmetric comonoidal adjunction defines a
-coLNL model.
+dual LNL model.
 \begin{definition}
-  \label{def:coLNL-model}
+  \label{def:dual LNL-model}
   A
-  \textbf{mixed linear/non-linear model for co-intuitionistic logic (coLNL model)},
+  \textbf{mixed linear/non-linear model for co-intuitionistic logic (dual LNL model)},
   $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$, consists of the following:
   \begin{itemize}
   \item[i.] a symmetric monoidal coclosed category $(\cat{L},\perp,\oplus,\colimp)$,
@@ -1057,7 +1058,7 @@ It is well-known that an adjunction $\cat{L} : \func{H} \dashv
 \cat{L}$, but when the adjunction is symmetric comonoidal we obtain a
 symmetric comonoidal monad, in fact, $\func{H};\func{J}$ defines the
 linear exponential why-not denoted $?A = \func{J}\,(\func{H}\,A))$.
-By the definition of coLNL models we know that both $\func{H}$ and
+By the definition of dual LNL models we know that both $\func{H}$ and
 $\func{J}$ are symmetric comonoidal functors, and hence, are equipped
 with natural transformations $\h{A,B} : \func{H}(A \oplus B) \mto
 \func{H}A + \func{H}B$ and $\j{R,S} : \func{J}(R + S) \mto \func{J}R
@@ -1065,13 +1066,40 @@ with natural transformations $\h{A,B} : \func{H}(A \oplus B) \mto
 $\j{0} : \func{J}0 \mto \perp$.  We will make heavy use of these
 maps throughout the sequel.
 
+Compare this definition with that of Bellin's dual category from
+\cite{Bellin:2012}, and we can easily see that the definition of dual
+LNL models -- much like LNL models -- is more succinct.
+\begin{definition}
+  \label{def:dual-linear-cat}
+  A \textbf{dual linear category}, $\cat{C}$, consists of the
+  following data:
+  \begin{enumerate}[i.]
+  \item A symmetric monoidal coclosed category $(\cat{C}, \oplus, \perp, \colimp)$ with
+  \item a symmetric co-monoidal monad $(\wn,\eta, \mu)$ on $\cat{C}$
+    such that
+  \begin{enumerate}[a.]
+  \item each free $\wn$-algebra carries naturally the structure of a
+    commutative $\oplus$-monoid.  This implies that there are
+    distinguished symmetric monoidal natural transformations $\w{A} :
+    \perp \mto \wn A$ and $\c{A} : \wn A \oplus \wn A \mto \wn A$
+    which form a commutative monoid and are $\wn$-algebra morphisms.
+
+  \item whenever $f : (\wn A, \mu_A) \mto (\wn B, \mu_B)$ is a
+    morphism of free $\wn$-algebras, then it is also a monoid
+    morphism.
+  \end{enumerate}
+  \end{enumerate}
+\end{definition}
+
+\subsubsection{A Useful Isomorphism}
+\label{subsec:a_useful_isomorphism}
 One useful property of Benton's LNL model is that the maps associated
 with the symmetric monoidal left adjoint in the model are
-isomorphisms.  Since coLNL models are dual we obtain similar
+isomorphisms.  Since dual LNL models are dual we obtain similar
 isomorphisms with respect to the right adjoint.
 \begin{lemma}[Symmetric Comonoidal Isomorphisms]
   \label{lemma:symmetric_comonoidal_isomorphisms}
-  Given any coLNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$, then there are the following isomorphisms:
+  Given any dual LNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$, then there are the following isomorphisms:
   \[
   \begin{array}{lll}
     \func{J}(R + S) \cong \func{J}R \oplus \func{J}S & \text{ and } & \func{J}0 \cong \perp\\
@@ -1080,7 +1108,7 @@ isomorphisms with respect to the right adjoint.
   Furthermore, the former is natural in $R$ and $S$.  
 \end{lemma}
 \begin{proof}
-  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a coLNL
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a dual LNL
   model.  Then we can define the following family of maps:
   \[
   \begin{array}{lll}
@@ -1099,12 +1127,12 @@ isomorphisms with respect to the right adjoint.
 Just as Benton we also do not have similar isomorphisms with respect
 to the functor $\H$.  One fact that we can point out, that Benton did
 not make explicit -- because he did not use the notion of symmetric
-comonoidal functor -- is that $\jinv{}$ is $\J$ also a symmetric
+comonoidal functor -- is that $\jinv{}$ makes $\J$ also a symmetric
 monoidal functor.
 
 \begin{corollary}
   \label{corollary:J-SMMF}
-  Given any coLNL model $\cat{L} : \func{H} \dashv \func{J} :
+  Given any dual LNL model $\cat{L} : \func{H} \dashv \func{J} :
   \cat{C}$, the functor $(\J, \jinv{})$ is symmetric monoidal.
 \end{corollary}
 \begin{proof}
@@ -1114,18 +1142,22 @@ monoidal functor.
   Definition~\ref{def:coSMCFUN}, using the fact that $\jinv{}$ is an
   isomorphism.
 \end{proof}
+% subsubsection a_useful_isomorphism (end)
 
-The next result shows that any coLNL model induces a symmetric
+\subsubsection{Dual LNL Model Implies Dual Category}
+\label{subsec:dual_lnl_model_implies_dual_category}
+
+The next result shows that any dual LNL model induces a symmetric
 comonoidal monad.
 \begin{lemma}[Symmetric Comonoidal Monad]
   \label{lemma:symmetric_comonoidal_monad}
-  Given a coLNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
+  Given a dual LNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
   the functor, $\wn = H;J$, defines a symmetric comonoidal monad.
 \end{lemma}
 \begin{proof}
   Suppose $(\func{H},\h{})$ and $(\func{J},\j{})$ are two symmetric
   comonoidal functors, such that, $\cat{L} : \func{H} \dashv \func{J}
-  : \cat{C}$ is a coLNL model.  We can easily show that $\wn A = \J\H
+  : \cat{C}$ is a dual LNL model.  We can easily show that $\wn A = \J\H
   A$ is symmetric monoidal by defining the following maps:
   \[
   \begin{array}{lll}
@@ -1138,7 +1170,7 @@ comonoidal monad.
   obvious, because symmetric comonoidal functors are closed under
   composition.  
 
-  We have a coLNL model, and hence, we have the symmetric comonoidal
+  We have a dual LNL model, and hence, we have the symmetric comonoidal
   natural transformations $\eta_A : A \mto \J\H A$ and $\varepsilon_R
   : \H\J R \mto R$ which correspond to the unit and counit of the
   adjunction respectfully.  Define $\mu_A := \J\varepsilon_{\H A} :
@@ -1159,7 +1191,7 @@ contraction, to be defined.
 
 \begin{lemma}[Right Weakening and Contraction]
   \label{lemma:right_weakening_and_contraction}
-  Given a coLNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
+  Given a dual LNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
   then for any $\wn A$ there are distinguished symmetric comonoidal
   natural transformations $\w{A} : \perp \mto \wn A$ and $\c{A} : \wn
   A \oplus \wn A \mto \wn A$ that form a commutative monoid, and are
@@ -1169,7 +1201,7 @@ contraction, to be defined.
 \begin{proof}
   Suppose $(\func{H},\h{})$ and $(\func{J},\j{})$ are two symmetric
   comonoidal functors, such that, $\cat{L} : \func{H} \dashv \func{J}
-  : \cat{C}$ is a coLNL model.  Again, we know $\wn A = H;J : \cat{L}
+  : \cat{C}$ is a dual LNL model.  Again, we know $\wn A = H;J : \cat{L}
   \mto \cat{L}$ is a symmetric comonoidal monad by
   Lemma~\ref{lemma:symmetric_comonoidal_monad}.  
   
@@ -1188,12 +1220,12 @@ contraction, to be defined.
 
 \begin{lemma}[$\wn$-Monoid Morphisms]
   \label{lemma:monoid-morphism}
-  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a coLNL
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a dual LNL
   model.  Then if $f : (\wn A, \mu_A) \mto (\wn B, \mu_B)$ is a
   morphism of free $\wn$-algebras, then it is a monoid morphism.
 \end{lemma}
 \begin{proof}
-  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a coLNL
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a dual LNL
   model.  Then we know $\wn A = \J\H A$ is a symmetric comonoidal
   monad by Lemma~\ref{lemma:symmetric_comonoidal_monad}.  Bellin
   \cite{Bellin:2012} remarks that by Maietti, Maneggia de Paiva and
@@ -1202,6 +1234,19 @@ contraction, to be defined.
   see the complete proof in
   Appendix~\ref{sec:proof_of_lemma:monoid-morphism}.
 \end{proof}
+
+\noindent
+Finally, we may now conclude the following corollary.
+\begin{corollary}
+  \label{corollary:dual_lnl_model_implies_dual_category}
+  Every dual LNL model is a dual category.
+\end{corollary}
+% subsubsection dual_lnl_model_implies_dual_category (end)
+
+\subsubsection{Dual Category implies Dual LNL Model}
+\label{subsec:dual_category_implies_dual_lnl_model}
+
+% subsubsection dual_category_implies_dual_lnl_model (end)
 
 % subsection a_mixed_linear/non-linear_model_for_co-intuitionistic_logic (end)
 
