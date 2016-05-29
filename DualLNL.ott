@@ -81,6 +81,7 @@ terminals :: '' ::=
   | >=   :: :: succeq {{ tex \succeq }}
   | <=   :: :: preceq {{ tex \preceq }}
   | ->   :: :: rightarrow  {{ tex \rightarrow }}
+  | *-   :: :: colimp  {{ tex \colimp }}  
   | <-   :: :: leftarrow  {{ tex \leftarrow }}
   | -<   :: :: Yleft  {{ tex \Yleft }}
   | ~*>  :: :: mstep  {{ tex \redto^* }}

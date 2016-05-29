@@ -313,10 +313,10 @@ definition describes when a symmetric monoidal category is coclosed.
   monoidal category, $(\cat{M},\perp,\oplus)$, such that, for any object
   $B$ of $\cat{M}$, the functor $- \oplus B : \cat{M} \mto \cat{M}$
   has a specified left adjoint.  Hence, for any objects $A$ and $C$
-  of $\cat{M}$ there is an object $B \colimp C$ of $\cat{M}$ and a
+  of $\cat{M}$ there is an object $C \colimp B$ of $\cat{M}$ and a
   natural bijection:
   \[
-  \Hom{\cat{M}}{C}{A \oplus B} \cong \Hom{\cat{M}}{B \colimp C}{A}
+  \Hom{\cat{M}}{C}{A \oplus B} \cong \Hom{\cat{M}}{C \colimp B}{A}
   \]
   We call the functor $\colimp : \cat{M} \times \cat{M} \mto \cat{M}$
   the internal cohom of $\cat{M}$.
@@ -869,161 +869,6 @@ Finally, the dual concept of a symmetric comonoidal comonad.
 \end{definition}
 % subsection symmetric_monoidal_categories (end)
 
-\subsection{Cartesian Closed and Cocartesian Coclosed Categories}
-\label{subsec:cartesian_closed_and_cocartesian_coclosed_categories}
-The notion of a cartesian closed category is well-known, but for
-completeness we define them here.  However, their dual is lesser
-known, especially in computer science, and so we given their full
-definition.  We also review some know results concerning cocartesian
-coclosed categories and categories that are both cartesian closed and
-cocartesian coclosed.
-\begin{definition}
-  \label{def:CC}
-  A \textbf{cartesian category} is a category, $(\cat{C}, 1, \times)$,
-  with an object, $1$, and a bi-functor, $\times : \cat{C} \times
-  \cat{C} \mto \cat{C}$, such that for any object $A$ there is exactly
-  one morphism $\diamond : A \to 1$, and for any morphisms $f : C \mto
-  A$ and $g : C \mto B$ there is a morphism $\langle f , g \rangle : C
-  \to A \times B$ subject to the following diagram:
-  \[
-  \bfig
-  \Atrianglepair/->`->`->`<-`->/[C`A`A\times B`B;
-    f`
-    \langle f , g \rangle`
-    g`
-    \pi_1`
-    \pi_2]
-  \efig
-  \]
-\end{definition}
-A cartesian category models conjunction by the product functor,
-$\times : \cat{C} \times \cat{C} \mto \cat{C}$ , and the unit of
-conjunction by the terminal object.  As we mention above modeling
-implication requires closer, and since it is well-known that any
-cartesian category is also a symmetric monoidal category the
-definition of closer for a cartesian category is the same as the
-definition of closer for a symmetric monoidal category
-(Definition~\ref{def:SMCC}).  We denote the internal hom for cartesian
-closed categories by $A \to B$.
-
-The dual of a cartesian category is a cocartesian category.  They are
-a model of intuitionistic logic with disjunction and its unit.
-\begin{definition}
-  \label{def:CC}
-  A \textbf{cocartesian category} is a category, $(\cat{C}, 0, +)$,
-  with an object, $0$, and a bi-functor,
-  $+ : \cat{C} \times \cat{C} \mto \cat{C}$, such that for any object $A$ there is exactly
-  one morphism $\Box : 0 \to A$, and for any morphisms $f : A \mto C$ and $g : B \mto C$
-  there is a morphism $\lbrack f , g \rbrack : A + B \mto C$
-  subject to the following diagram:
-  \[
-  \bfig
-  \Atrianglepair/<-`<-`<-`->`<-/[C`A`A+B`B;
-    f`
-    \lbrack f, g \rbrack`
-    g`
-    \iota_1`
-    \iota_2]
-  \efig
-  \]  
-\end{definition}
-Cocloser, just like closer for cartesian categories, is defined in
-the same way that cocloser is defined for symmetric monoidal
-categories, because cocartesian categories are also symmetric
-monoidal categories.  Thus, a cocartesian category is coclosed if
-there is a specified left-adjoint, which we denote $S - T$, to the
-coproduct.
-
-There are many examples of cocartesian coclosed categories.
-Basically, any interesting cartesian category has an interesting dual,
-and hence, induces an interesting cocartesian coclosed category.
-The opposite of the category of sets and functions between them is
-isomorphic to the category of complete atomic boolean algebras, and
-both of which, are examples of cocartesian coclosed categories.  As
-we mentioned above bi-linear categories \cite{Cockett:1997a} are
-models of bi-linear logic where the left adjoint to the cotensor
-models coimplication.  Similarly, cocartesian coclosed categories
-model cointuitionistic logic with disjunction and intuitionistic
-coimplication \cite{Crolard:2001,Bellin:2012}. \todo[inline]{Put more
-  examples in here.}
-
-We might now ask if we can a category can be both cartesian closed and
-cocartesian coclosed, but this turns out to be where the matter meets
-antimatter in such away that the category degenerates to a preorder.
-That is, every homspace contains at most one morphism.  We recall this
-proof here, which is due to Crolard \cite{Crolard:2001}. We need a
-couple basic facts about cartesian closed categories with initial
-objects.
-\begin{lemma}
-  \label{lemma:iso-prod-initial}
-  In any cartesian category $\cat{C}$, if $0$ is an initial object in
-  $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A \cong A \times 0$.
-\end{lemma}
-\begin{proof}
-  This follows easily from the universial mapping property for products.
-\end{proof}
-
-\begin{lemma}
-  \label{lemma:products-of-initial-gives-initial}
-  In any cartesian closed category $C$, if $0$ is an initial
-  object in $\cat{C}$, then so is $0 \times A$ for any object $A$
-  of $\cat{C}$.
-\end{lemma}
-\begin{proof}
-    We know that the universal morphism for the initial object is
-    unique, and hence, the homspace $\Hom{C}{0}{A \Rightarrow B}$ for
-    any object $B$ of $\cat{C}$ contains exactly one morphism.  Then
-    using the right adjoint to the product functor we know that
-    $\Hom{C}{0}{A \Rightarrow B} \cong \Hom{C}{0 \times A}{B}$, and
-    hence, there is only one arrow between $0 \times A$ and $B$.
-\end{proof}
-\noindent
-The following lemma is due to Joyal \cite{Crolard:2001}, and is key to
-the next theorem.
-\begin{lemma}[Joyal's]
-  \label{lemma:joyals}
-  In any cartesian closed category $\cat{C}$, if $0$ is an initial
-  object in $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A$ is an
-  initial object in $\cat{C}$.
-\end{lemma}
-\begin{proof}
-  Suppose $\cat{C}$ is a cartesian closed category, such that, $0$ is
-  an initial object in $\cat{C}$, and $A$ is an arbitrary object in
-  $\cat{C}$.  Furthermore, suppose $\Hom{C}{A}{0}$ is non-empty.  By
-  the first basic lemma above we know that $A \cong A \times 0$, and
-  by the second $A \times 0$ is initial, thus $A$ is initial.
-\end{proof}
-Finally, the following theorem shows that any category that is both
-cartesian closed and cocartesian coclosed is a preorder.
-\begin{theorem}[(co)Cartesian (co)Closed Categories are Preorders (Crolard\cite{Crolard:2001})]
-  \label{thm:dengerate-to-preorder}
-  If $\cat{C}$ is both cartesian closed and cocartesian coclosed, then
-  for any two objects $A$ and $B$ of $\cat{C}$, $\Hom{C}{A}{B}$ has at
-  most one element.
-\end{theorem}
-\begin{proof}
-  Suppose $\cat{C}$ is both cartesian closed and cocartesian coclosed,
-  and $A$ and $B$ are objects of $\cat{C}$.  Then by using the basic
-  fact that the initial object is the unit to the coproduct, and the
-  coproducts left adjoint we know the following:
-  \[\Hom{C}{A}{B} \cong \Hom{C}{A}{0 + B} \cong \Hom{C}{B - A}{0}\]
-  Therefore, by Joyal's theorem above $\Hom{C}{A}{B}$ has at most one
-  element.
-\end{proof}
-\noindent
-Notice that the previous result hinges on the fact that there are
-initial and terminal objects, and thus, this result does not hold for
-bi-linear categories, because the units to the tensor and cotensor are
-not initial nor terminal.
-
-The repercussions of this result are that if we do not want to work
-with preorders, but do want to work with all of the structure, then we
-must separate the two worlds.  Thus, this result can be seen as the
-motivation for the current work.  Our ultimate goal is to enforce the
-separation using linear logic, but through the power of linear logic
-will be able to show that the separation is not far.
-% subsection cartesian_closed_and_cocartesian_coclosed_categories (end)
-
 \subsection{A Mixed Linear/Non-Linear Model for Co-Intuitionistic Logic}
 \label{subsec:a_mixed_linear/non-linear_model_for_co-intuitionistic_logic}
 
@@ -1066,16 +911,16 @@ with natural transformations $\h{A,B} : \func{H}(A \oplus B) \mto
 $\j{0} : \func{J}0 \mto \perp$.  We will make heavy use of these
 maps throughout the sequel.
 
-Compare this definition with that of Bellin's dual category from
+Compare this definition with that of Bellin's dual linear category from
 \cite{Bellin:2012}, and we can easily see that the definition of dual
 LNL models -- much like LNL models -- is more succinct.
 \begin{definition}
   \label{def:dual-linear-cat}
-  A \textbf{dual linear category}, $\cat{C}$, consists of the
+  A \textbf{dual linear category}, $\cat{L}$, consists of the
   following data:
   \begin{enumerate}[i.]
-  \item A symmetric monoidal coclosed category $(\cat{C}, \oplus, \perp, \colimp)$ with
-  \item a symmetric co-monoidal monad $(\wn,\eta, \mu)$ on $\cat{C}$
+  \item A symmetric monoidal coclosed category $(\cat{L}, \oplus, \perp, \colimp)$ with
+  \item a symmetric co-monoidal monad $(\wn,\eta, \mu)$ on $\cat{L}$
     such that
   \begin{enumerate}[a.]
   \item each free $\wn$-algebra carries naturally the structure of a
@@ -1144,7 +989,7 @@ monoidal functor.
 \end{proof}
 % subsubsection a_useful_isomorphism (end)
 
-\subsubsection{Dual LNL Model Implies Dual Category}
+\subsubsection{Dual LNL Model Implies Dual Linear Category}
 \label{subsec:dual_lnl_model_implies_dual_category}
 
 The next result shows that any dual LNL model induces a symmetric
@@ -1181,13 +1026,6 @@ comonoidal monad.
   structure given by the adjunction.  For the complete proof see
   Appendix~\ref{subsec:proof_of_lemma:symmetric_comonoidal_monad}.
 \end{proof}
-
-A $\wn\text{-algebra}$ is a pair $(\wn A, t_X : \wn^2 A \mto \wn A)$,
-and is called \textit{free} if it is an object of the full subcategory
-of all $\wn\text{-algebra's}$ that is in adjunction with the category
-$\cat{L}$, such that, the right adjoint is the forgetful functor.  The
-why-not monad must allow for the right structural rules, weakening and
-contraction, to be defined.
 
 \begin{lemma}[Right Weakening and Contraction]
   \label{lemma:right_weakening_and_contraction}
@@ -1239,12 +1077,167 @@ contraction, to be defined.
 Finally, we may now conclude the following corollary.
 \begin{corollary}
   \label{corollary:dual_lnl_model_implies_dual_category}
-  Every dual LNL model is a dual category.
+  Every dual LNL model is a dual linear category.
 \end{corollary}
 % subsubsection dual_lnl_model_implies_dual_category (end)
 
-\subsubsection{Dual Category implies Dual LNL Model}
+\subsubsection{Dual Linear Category implies Dual LNL Model}
 \label{subsec:dual_category_implies_dual_lnl_model}
+
+\begin{itemize}
+\item The Eilenberg-Moore category, $\cat{L}^{\wn}$, has as objects
+  all $\wn$-algebras, $(A, h_A : \wn A \mto A)$, and as morphisms all
+  $\wn$-algebra morphisms.
+\item The Kleisli category, $\cat{L}_{\wn}$, is the full subcategory
+  of $\cat{L}^{\wn}$ of all free $\wn$-algebras $(\wn A, \mu_A :
+  \wn\wn A \mto \wn A)$.
+\end{itemize}
+
+Suppose $\cat{L}$ is a dual linear category, then the previous three
+categories are related by a pair of adjunctions:
+\begin{diagram}
+  \morphism(0,0)|m|/{@{->}@/^1em/}/<800,0>[\cat{L}`\cat{L}^{\wn};F]
+  \morphism(0,0)|m|/{@{<-}@/_1em/}/<800,0>[\cat{L}`\cat{L}^{\wn};U]
+
+  \morphism(0,-500)|m|/{@{->}@/^1em/}/<800,0>[\cat{L}`\cat{L}_{\wn};F]
+  \morphism(0,-500)|m|/{@{<-}@/_1em/}/<800,0>[\cat{L}`\cat{L}_{\wn};U]
+
+  \square|amma|/`=`->`/<800,-500>[
+    \cat{L}`
+    \cat{L}_{\wn}`
+    \cat{L}`
+    \cat{L}^{\wn};``
+    i`]
+\end{diagram}
+The functor $F(A) = (\wn A, \mu_A)$ is the free functor, and the
+functor $U(A, h_A) = A$ is the forgetful functor.  Note that we, just
+as Benton did, are overloading the symbols $F$ and $U$.  Lastly, the
+functor $i : \cat{L}_{\wn} \mto \cat{L}^{\wn}$ is the injection of the
+subcategory of free $\wn$-algebras into its parent category.
+
+\begin{lemma}
+  \label{lemma:EM-has-coproducts}
+  If $\cat{C}$ is a dual linear category, then $\cat{C}^{\wn}$ has finite coproducts.
+\end{lemma}
+\begin{proof}
+  We give a proof sketch of this result, because the proof is
+  essentially by duality of Benton's corresponding proof for LNL
+  models (see Lemma~9, \cite{Benton:1994}). Suppose $\cat{C}$ is a
+  dual linear category.  Then we first need to identify the initial object
+  which is defined by the $\wn$-algebra $(\perp, \r{\perp} : \wn \perp
+  \mto \perp)$.  The unique map between the initial map and any other
+  $\wn$-algebra $(A, h_A : \wn A \mto A)$ is defined by $\perp
+  \mto^{\w{A}} \wn A \mto^{h_A} A$.  The coproduct of the
+  $\wn$-algebras $(A, h_A : \wn A \mto A)$ and $(B, h_B : \wn B \mto
+  B)$ is $(A \oplus B, \r{A,B};(h_A \oplus h_B))$.  Injections and the
+  codiagonal map are defined as follows:
+  \begin{itemize}
+  \item Injections:
+    \[
+    \begin{array}{lll}
+      \iota_1 := A \mto^{\rho_A} A \oplus \perp \mto^{\id_A \oplus \w{B}} A \oplus \wn B \mto^{\id \oplus h_b} A \oplus B\\
+      \iota_2 := B \mto^{\lambda_A} \perp \oplus B \mto^{\w{A} \oplus \id_B} \wn A \oplus B \mto^{h_A \oplus \id_B} A \oplus B\\
+    \end{array}
+    \]
+  \item Codiagonal map:
+    \[
+    \codiag{} := A \oplus A \mto^{\eta_A \oplus \eta_A} \wn A \oplus \wn A \mto^{\c{A}} \wn A \mto^{h_A} A
+    \]
+  \end{itemize}
+  Showing that these respect the appropriate diagrams is
+  straightforward.
+\end{proof}
+\noindent
+Notice as a direct consequence of the previous result we know the following.
+\begin{corollary}
+  \label{corollary:Kleisli-has-coproducts}
+  The Kleisli category, $\cat{L}_{\wn}$, has finite coproducts.
+\end{corollary}
+
+Thus, both $\cat{L}^{\wn}$ and $\cat{L}_{\wn}$ are cocartesian, but we
+need a cocartesian coclosed category, and in general these are not
+coclosed, and so we follow Benton's lead and show that there are
+actually two subcategories of $\cat{L}^{\wn}$ that are coclosed.
+\begin{definition}
+  \label{def:subtractable}
+  We call an object, $A$, of a category, $\cat{L}$,
+  \textbf{subtractable} if for any object $B$ of $\cat{L}$, the
+  internal cohom $[[A *- B]]$ exists.
+\end{definition}
+\noindent
+We now have the following results:
+\begin{lemma}
+  \label{lemma:free-algebras-are-subtractable}
+  In $\cat{L}^{\wn}$, all the free $\wn$-algebras are subtractable, and the
+  internal cohom is a free $\wn$-algebra.
+\end{lemma}
+\begin{proof}
+  The internal cohom is defined as follows:
+  \[
+  (\wn A, \delta_A) [[*-]] (B, h_B) := (\wn ([[A *- B]]), \delta_{[[A *- B]]})
+  \]
+  We can capitalize on the adjunctions involving $F$ and $U$ from
+  above to lift the internal cohom of $\cat{L}$ into $\cat{L}^{\wn}$:
+  \[
+  \begin{array}{lll}
+    \mathsf{Hom}_{\cat{L}^{\wn}}((\wn ([[A *- B]]), \delta_{[[A *- B]]}), (C, h_C))
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}([[A *- B]]), (C, h_C))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}([[A *- B]], \func{U}(C, h_C))\\
+    & =  & \mathsf{Hom}_{\cat{L}}([[A *- B]], C)\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}([[A]], [[C (+) B]])\\
+    & =  & \mathsf{Hom}_{\cat{L}}([[A]], \func{U}([[C (+) B]],h_{[[C (+) B]]}))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}[[A]], ([[C (+) B]],h_{[[C (+) B]]}))\\
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), ([[C (+) B]],h_{[[C (+) B]]}))\\    
+  \end{array}
+  \]
+  The previous equation holds for any $h_{[[C (+) B]]}$ making $[[C
+      (+) B]]$ a $\wn$-algebra, in particular, the co-product in
+  $\cat{L}^{\wn}$ (Lemma~\ref{lemma:EM-has-coproducts}), and hence, we
+  may instantiate the final line of the previous equation with the following:
+  \[
+  \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), (C, h_c) + (B,\delta_A))
+  \]
+  Thus, we obtain our result.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:subtractable-subcats}
+  We have the following cocartesian coclosed categories:
+  \begin{enumerate}[i.]
+  \item The full subcategory, $\mathsf{Sub}(\cat{L}^{\wn})$, of
+    $\cat{L}^{\wn}$ consisting of objects the subtractable
+    $\wn$-algebras is cocartesian coclosed, and contains the Kleisli
+    category.
+
+  \item The full subcategory, $\cat{L}^*_{\wn}$, of
+    $\mathsf{Sub}(\cat{L}^{\wn})$ consisting of finite coproducts of
+    free $\wn$-algebras is cocartesian coclosed.
+  \end{enumerate}
+\end{lemma}
+\noindent
+Let $\cat{C}$ be either of the previous two categories.  Then we must
+exhibit a adjunction between $\cat{C}$ and $\cat{L}$, but this is
+easily done.
+\begin{lemma}
+  \label{lemma:dual-LNL-model}
+  The adjunction $\cat{L} : \func{F} \vdash \func{U} : \cat{C}$, with
+  the free functor, $\func{F}$, and the forgetful functor, $\func{U}$,
+  is symmetric comonoidal.
+\end{lemma}
+\begin{proof}
+  Showing that $\func{F}$ and $\func{U}$ are symmetric comonoidal
+  follows similar reasoning to Benton's result, but in the opposite;
+  see Lemma~13 and Lemma~14 of \cite{Benton:1994}.  Lastly, showing
+  that the unit and the counit of the adjunction are comonoidal
+  natural transformations is straightforward, and we leave it to the
+  reader. The reasoning is similar to Benton's, but in the opposite;
+  see Lemma~15 and Lemma~16 of \cite{Benton:1994}.
+\end{proof}
+
+\begin{corollary}
+  \label{corollary:dual-categories-implies-LNL-models}
+  Any dual linear category gives rise to a dual LNL model.
+\end{corollary}
 
 % subsubsection dual_category_implies_dual_lnl_model (end)
 
