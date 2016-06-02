@@ -1,8 +1,5 @@
 % Input variables.
-metavar ilabels, a, b, c ::=
-metavar paths , h {{tex \pi}} ::=
-metavar gindex ,  n , x , y, z , w , m , o ::=  % Indexes into the graph.
-
+metavar vars ,  n , x {{tex \alpha}} , y, z , w , m , o ::=  
 indexvar ivar, i , k , j , l ::= 
 
 grammar
@@ -37,6 +34,14 @@ A, B, C :: 'Bform_' ::=
   | ( A )   :: M :: Parens 
   | h( A )  :: M :: HiddenParens 
   {{ tex [[A]] }}
+
+% Terms:
+term, t :: 'Term_' ::=
+  | x :: :: Var  
+  | < t1 , t2 > :: :: CoApp
+    {{tex \langle [[t1]] , [[t2]] \rangle }}
+  
+  
 
 % Cointuitionistic Contexts:
 I {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
