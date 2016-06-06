@@ -1,4 +1,4 @@
-% Input variables.
+ % Input variables.
 metavar vars ,  n , x {{tex \alpha}} , y, z , w , m , o ::=  
 indexvar ivar, i , k , j , l ::= 
 
