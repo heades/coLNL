@@ -9,7 +9,6 @@
 \usepackage{hyperref}
 \usepackage{mdframed}
 \usepackage[barr]{xy}
-\usepackage{enumerate}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -122,6 +121,10 @@
 \author{Harley Eades III}
 \email{heades@augusta.edu}
 \address{Computer Science, Augusta University, Augusta, GA}
+
+\author{Gianluigi Bellin}
+\email{gianluigi.bellin@univr.it}
+\address{Dipartimento di Informatica, Universit\`{a} di Verona, Strada Le Grazie, 37134 Verona, Italy}
 
 \maketitle 
 
@@ -1182,11 +1185,11 @@ LNL models -- much like LNL models -- is more succinct.
   \label{def:dual-linear-cat}
   A \textbf{dual linear category}, $\cat{L}$, consists of the
   following data:
-  \begin{enumerate}[i.]
+  \begin{enumerate}[label=\roman*.]
   \item A symmetric monoidal coclosed category $(\cat{L}, \oplus, \perp, \colimp)$ with
   \item a symmetric co-monoidal monad $(\wn,\eta, \mu)$ on $\cat{L}$
     such that
-  \begin{enumerate}[a.]
+  \begin{enumerate}[label=\alph*.]
   \item each free $\wn$-algebra carries naturally the structure of a
     commutative $\oplus$-monoid.  This implies that there are
     distinguished symmetric monoidal natural transformations $\w{A} :
@@ -1482,7 +1485,7 @@ We now have the following results:
 \begin{lemma}
   \label{lemma:subtractable-subcats}
   We have the following cocartesian coclosed categories:
-  \begin{enumerate}[i.]
+  \begin{enumerate}[label=\roman*.]
   \item The full subcategory, $\mathsf{Sub}(\cat{L}^{\wn})$, of
     $\cat{L}^{\wn}$ consisting of objects the subtractable
     $\wn$-algebras is cocartesian coclosed, and contains the Kleisli
@@ -1543,7 +1546,7 @@ following definition.
   \label{def:biLNL-model}
   A \textbf{mixed bilinear/non-linear model} consists of the
   following:
-  \begin{enumerate}[i.]
+  \begin{enumerate}[label=\roman*.]
   \item a bilinear category $(\cat{L},
     \top,\otimes,\limp,\perp,\oplus,\colimp)$,
   \item a cartesian closed category $(\cat{I},1,\times,\to)$,

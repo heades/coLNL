@@ -39,9 +39,7 @@ A, B, C :: 'Bform_' ::=
 term, t :: 'Term_' ::=
   | x :: :: Var  
   | < t1 , t2 > :: :: CoApp
-    {{tex \langle [[t1]] , [[t2]] \rangle }}
-  
-  
+    {{tex \langle [[t1]] , [[t2]] \rangle }}  
 
 % Cointuitionistic Contexts:
 I {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
@@ -180,9 +178,9 @@ defn
 
  % Structural Rules:
 
-  A |-L D | I1,I2
+ A |-L D | I1,I2
  ------------------ :: wk
-  A |-L D | I1,S,I2
+ A |-L D | I1,S,I2
 
  A |-L D | I1,S,S,I2
  ------------------- :: ctr
