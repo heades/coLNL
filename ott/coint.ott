@@ -1,0 +1,156 @@
+metavar termvar, x , y ::=
+
+indexvar index, i , j , k ::=
+
+grammar
+    d :: 'd_' ::=
+      | 1 :: :: One
+      | 2 :: :: Two
+      | bar d :: M :: Tar
+      {{tex \overline{d} }}
+      
+  pol, p :: 'p_' ::=
+    | + :: :: Pos
+    | - :: :: Neg
+    | bar p :: M :: Tar
+    {{tex \overline{p} }}
+    
+  type, S, T, R :: 'ty_' ::= {{com Cointuitionistic types}}
+    | 0     ::   :: Initial
+    | S + T ::   :: Coproduct
+    | S - T ::   :: Subtraction
+    | ( S ) :: S :: Paren
+    | S d   :: M :: Indexed
+    {{tex [[S]]_{[[d]]} }}    
+   
+  term, t :: 't_' ::= {{com Cointuitionistic terms}}
+    | x                    ::   :: var                     
+    | unit                 ::   :: unit                    
+    {{tex \mathsf{unit} }}
+    | ( t1 , t2 )          ::   :: pair
+    | in d x . t               ::   :: injection
+    {{tex \mathsf{in}_{[[d]]}\,[[x]].[[t]] }}
+    | < t1 , t2 >          ::   :: subpair
+    {{tex \langle [[t1]],[[t2]] \rangle }}
+    | \ x . t              ::   :: lam
+    {{tex \lambda [[x]].[[t]] }}
+    | cut x . t1 * t2      ::   :: cut
+    {{tex \mathsf{cut}\,[[x]].[[t1]] \bullet [[t2]] }}
+    | [ t1 / x ] t2        :: M :: sub
+    | ( t )                :: S :: Paren
+
+  G {{ tex \Gamma }} :: G_ ::=      {{com Cointuitionistic contexts}}
+    | .                    ::   :: em                  
+    | x : p S              ::   :: el
+    | G , G'               ::   :: append              
+    | G1 , ... , Gk        :: M :: vec
+    | ( G )                :: S :: Parens
+    | D                    :: M :: ForNegOk
+
+  terminals :: 'terminals_' ::=
+    | 0                    ::   :: Initial
+    | .                    ::   :: Empty
+    {{tex \emptyset }}
+    | |-                   ::   :: turnstile
+    {{ tex \vdash }}
+    | &&                   :: M :: Quad
+    {{tex \quad }}
+    | ~>                   ::   :: Red
+    {{tex \rightsquigarrow }}
+ 
+  formula :: 'formula_' ::=
+    | judgement            ::   :: judgement
+    | formula1 && formula2 :: M :: quad
+    | ( formula )          :: S :: parens
+    {{tex [[formula]] }}
+    | x nin FV ( t )       :: M :: FV
+    {{tex [[x]] \notin \mathsf{FV}([[t]]) }}
+
+defns
+  Jtype :: '' ::=
+
+defn
+  G Neg :: :: ctxneg :: neg_
+  {{tex [[G]]\,\mathsf{Neg} }}
+by
+
+  ----- :: empty
+  . Neg
+
+  G Neg
+  ------------ :: neg
+  (G,x :- S) Neg
+
+defn
+  G Ok :: :: ctxok :: ok_
+  {{tex [[G]]\,\mathsf{Ok} }}
+by
+    ---- :: empty
+    . Ok
+
+    G Ok
+    --------------- :: neg
+    (G, x : - S) Ok
+
+    G Neg
+    ------------- :: pos
+    (G,x :+ S) Ok
+
+defn
+  G |- t : p S :: :: type :: ty_   
+by
+
+    (G,x : p S) Ok
+    -------------------- :: var
+    G,x : p S |- x : p S
+
+    G Neg    
+    --------------- :: iL
+    G |- unit : - 0
+
+    (G |- t1 : - S && G |- t2 : - T) && G Neg
+    ----------------------------------------- :: orL
+    G |- (t1, t2) : - (S + T)
+    
+    G, x : - T |- t : + S
+    ------------------------- :: orR1
+    G |- in 1 x.t : + (S + T)
+
+    G, x : - S |- t : + T
+    ------------------------- :: orR2
+    G |- in 2 x.t : + (S + T)
+    
+    G, x : - S |- t : - T && G Neg
+    ------------------------------ :: subL
+    G |- \x.t : - (S - T)
+    
+    G1 |- t1 : - S && G2 |- t2 : + T && G1 Neg
+    ------------------------------------------ :: subR
+    G1,G2 |- <t1 , t2> : + (S - T)
+    
+    (G1, x : - S |- t1 : - T && G2, x : - S |- t2 : + T) && G1 Neg
+    ---------------------------------------------------------------------- :: cut
+    G1,G2 |- cut x.t1 * t2 : + S
+    
+defns
+  Jrw :: '' ::=
+
+defn
+  t1 ~> t2 :: :: rw :: rw_   
+by
+
+  ------------------------------------------- :: cb
+  cut y.\x.t * <t1, t2> ~> cut y.[t1/x]t * t2
+
+  ----------------------------------------------- :: or1
+  cut y.(t1, t2) * in 1 x.t ~> cut y.t1 * [t2/x]t
+
+  ----------------------------------------------- :: or2
+  cut y.(t1, t2) * in 2 x.t ~> cut y.t2 * [t1/x]t
+
+  x nin FV(t)
+  ---------------- :: return
+  cut x.t * x ~> t
+
+  ---------------------------------------------------- :: cut
+  cut y.t * (cut x.t1 * t2) ~> cut x.[t/y]t1 * [t/y]t2
