@@ -25,6 +25,8 @@ ifeq ($(SKIM), skim_revert.sh)
 	$(SKIM) $(CURDIR)/main.pdf
 endif
 
+ott: main-output.tex
+
 main-output.tex : DualLNL.ott main.tex
 	@echo "\n\n***OTT: Preprocessing dtt.ott in main.tex.***"
 	@$(OTT) $(OTT_FLAGS) -i DualLNL.ott  -o DualLNL-inc.tex -tex_name_prefix DualLNL \

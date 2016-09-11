@@ -1,0 +1,75 @@
+% Input variables.
+metavar vars ,  n , a, x , y, z , w , m , o ::=  
+indexvar ivar, i , k , j , l ::= 
+
+grammar
+
+% Cointuitionistic Logic:
+R, S, T :: 'Cform_' ::=
+  | 0   ::   :: 0
+  | S + T ::   :: Disj
+  {{tex [[S]] + [[T]] }}
+  | S - T  ::   :: Subtrac
+  {{tex [[S]] - [[T]] }}
+  | H A     ::   :: H
+  {{tex \mathsf{H}\,[[A]] }}
+  | ( T )   :: M :: Parens 
+  | h( T )  :: M :: HiddenParens 
+  {{ tex [[T]] }}
+
+% Cointuitionistic (Linear) Logic:
+A, B, C :: 'Bform_' ::=
+  | False   ::   :: 0
+  {{tex \perp }}
+  | A + B ::   :: Disj
+  {{tex [[A]] + [[B]] }}
+  | A (+) B ::   :: Par
+  {{tex [[A]] \oplus [[B]] }}    
+  | A - B  ::   :: Subtrac
+  {{tex [[A]] - [[B]] }}
+  | A *- B ::   :: LSubtrac
+  {{tex [[A]] \colimp [[B]] }}
+  | J S     ::   :: J
+  {{tex \mathsf{J}\,[[S]] }}  
+  | ( A )   :: M :: Parens 
+  | h( A )  :: M :: HiddenParens 
+  {{ tex [[A]] }}
+
+% Co-intuitionistic terms:
+s, t :: 'citerm_' ::=
+  | x :: :: Var
+
+% Co-intuitionistic linear terms:
+e, u :: 'cilterm_' ::=
+  | x :: :: Var
+  | connectP to e :: :: connectPerp
+  {{tex \mathsf{connect}_\perp\,\mathsf{to}\,[[e]] }}
+  | postpP e      :: :: postpP
+  {{tex \mathsf{postp}_\perp\,[[e]] }}
+  | connect to e  :: :: connect
+  {{tex \mathsf{connect}\,\mathsf{to}\,[[e]] }}
+  | postp e       :: :: postp
+  {{tex \mathsf{postp}\,[[e]] }}
+  | mkc ( e , x ) :: :: mkc
+  {{tex \mathsf{mkc}([[e]],[[x]]) }}
+  | x ( e )       :: :: varE
+  | e1 (+) e2     :: :: Par
+  {{tex [[e1]] \oplus [[e2]] }}
+  | casel e       :: :: casel
+  {{tex \mathsf{casel}\,[[e]] }}
+  | caser e       :: :: caser
+  {{tex \mathsf{caser}\,[[e]] }}  
+
+  formula :: 'formula_' ::=
+    | judgement            ::   :: judgement
+    | formula1 && formula2 :: M :: quad
+    | ( formula )          :: S :: parens
+    {{tex [[formula]] }}
+
+defns
+  Jtype :: '' ::=
+
+% defn
+%   G Neg :: :: ctxneg :: neg_
+%   {{tex [[G]]\,\mathsf{Neg} }}
+% by

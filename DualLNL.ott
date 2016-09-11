@@ -1,5 +1,5 @@
 % Input variables.
-metavar vars ,  n , x {{tex \alpha}} , y, z , w , m , o ::=  
+metavar vars ,  n , a, x , y, z , w , m , o ::=  
 indexvar ivar, i , k , j , l ::= 
 
 grammar
@@ -16,6 +16,15 @@ R, S, T :: 'Cform_' ::=
   | ( T )   :: M :: Parens 
   | h( T )  :: M :: HiddenParens 
   {{ tex [[T]] }}
+
+% Cointuitionistic terms:
+r, s, t, f :: 'CTerm_' ::=
+  | x            ::   :: Var
+  | connect to r ::   :: Connect
+  | ( t )        :: S :: Parens
+  | R            :: M :: R
+  | vec R        :: M :: VecR
+  {{tex \overline{R} }}
 
 % Cointuitionistic (Linear) Logic:
 A, B, C :: 'Bform_' ::=
@@ -35,11 +44,9 @@ A, B, C :: 'Bform_' ::=
   | h( A )  :: M :: HiddenParens 
   {{ tex [[A]] }}
 
-% Terms:
-term, t :: 'Term_' ::=
-  | x :: :: Var  
-  | < t1 , t2 > :: :: CoApp
-    {{tex \langle [[t1]] , [[t2]] \rangle }}  
+e :: 'LTerm_' ::=
+  | a     ::   :: Var
+  | ( e ) :: S :: Parens
 
 % Cointuitionistic Contexts:
 I {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
@@ -137,10 +144,6 @@ defn
  ------- :: fL
  0 |-C I
 
- S |-C I1,I2
- ------------- :: fR
- S |-C I1,0,I2
-
  S |-C I1 && T |-C I2
  -------------------- :: dL
  S + T |-C I1,I2
@@ -148,6 +151,14 @@ defn
  R |-C I1,S, T, I2
  ------------------ :: dR
  R |-C I1,S + T, I2
+
+ R |-C I1,S,I2
+ ------------------ :: dR1
+ R |-C I1,S + T, I2
+
+ R |-C I1,T,I2
+ --------------- :: dR2
+ R |-C I1,S+T,I2
 
  S |-C T, I
  ----------- :: sL
