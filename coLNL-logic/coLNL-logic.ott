@@ -38,27 +38,58 @@ A, B, C :: 'Bform_' ::=
 % Co-intuitionistic terms:
 s, t :: 'citerm_' ::=
   | x :: :: Var
+  | connectW to t              :: :: connectWeak
+  {{tex \mathsf{connect}_w\,\mathsf{to}\,[[t]] }}
+  | let 0 = t1 in t2           :: :: Zero
+  {{tex \mathsf{let}\,0 = [[t1]]\,\mathsf{in}\,[[t2]] }}
+  | x ( t )                    :: :: VarE
+  | mkc ( t , x )              :: :: mkc
+  {{tex \mathsf{mkc}([[t]],[[x]]) }}
+  | postp( x -> t1 , t2 )      :: :: postp
+  {{tex \mathsf{postp}\,([[x]] \mapsto [[t1]], [[t2]]) }}
+  | inl t                      :: :: inl
+  {{tex \mathsf{inl}\,[[t]] }}
+  | inr t                      :: :: inr
+  {{tex \mathsf{inr}\,[[t]] }}
+  | case t1 of x . t2 , y . t3 :: :: case
+  {{tex \mathsf{case}\,[[t1]]\,\mathsf{of}\,[[x]].[[t2]],[[y]].[[t3]] }}
+  | H e                        :: :: H
+  {{tex \mathsf{H}\,[[e]] }}
+  | let J x = t1 in t2         :: :: letJ
+  {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[t1]]\,\mathsf{in}\,[[t2]] }}
+  | [ t / x ]                  :: M :: subst
+  | ( t )                      :: S :: parens
+  | h( t )                     :: M :: hparens
+  {{tex [[t]] }}
 
 % Co-intuitionistic linear terms:
 e, u :: 'cilterm_' ::=
-  | x :: :: Var
-  | connectP to e :: :: connectPerp
+  | x                      :: :: Var
+  | connectP to e          :: :: connectPerp
   {{tex \mathsf{connect}_\perp\,\mathsf{to}\,[[e]] }}
-  | postpP e      :: :: postpP
+  | postpP e               :: :: postpP
   {{tex \mathsf{postp}_\perp\,[[e]] }}
-  | connect to e  :: :: connect
+  | connect to e           :: :: connect
   {{tex \mathsf{connect}\,\mathsf{to}\,[[e]] }}
-  | postp e       :: :: postp
-  {{tex \mathsf{postp}\,[[e]] }}
-  | mkc ( e , x ) :: :: mkc
+  | postp ( x -> e1 , e2 )   :: :: postp
+  {{tex \mathsf{postp}\,([[x]] \mapsto [[e1]], [[e2]]) }}
+  | mkc ( e , x )          :: :: mkc
   {{tex \mathsf{mkc}([[e]],[[x]]) }}
-  | x ( e )       :: :: varE
-  | e1 (+) e2     :: :: Par
+  | x ( e )                :: :: varE
+  | e1 (+) e2              :: :: Par
   {{tex [[e1]] \oplus [[e2]] }}
-  | casel e       :: :: casel
+  | casel e                :: :: casel
   {{tex \mathsf{casel}\,[[e]] }}
-  | caser e       :: :: caser
-  {{tex \mathsf{caser}\,[[e]] }}  
+  | caser e                :: :: caser
+  {{tex \mathsf{caser}\,[[e]] }}
+  | J t                    :: :: J
+  {{tex \mathsf{J}\,[[t]] }}
+  | let H x = e1 : A in e2 :: :: letH
+  {{tex \mathsf{let}\,\mathsf{H}\,[[x]] = [[e1]] : [[A]]\,\mathsf{in}\,[[e2]] }}
+  | [ e / x ]                  :: M :: subst
+  | ( e )                      :: S :: parens
+  | h( e )                     :: M :: hparens
+  {{tex [[e]] }}
 
   formula :: 'formula_' ::=
     | judgement            ::   :: judgement
