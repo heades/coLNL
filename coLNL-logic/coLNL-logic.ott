@@ -16,7 +16,7 @@ R, S, T :: 'Cform_' ::=
   | ( T )   :: M :: Parens 
   | h( T )  :: M :: HiddenParens 
   {{ tex [[T]] }}
-
+  
 % Cointuitionistic (Linear) Logic:
 A, B, C :: 'Bform_' ::=
   | False   ::   :: 0
@@ -40,6 +40,8 @@ s, t :: 'citerm_' ::=
   | x :: :: Var
   | connectW to t              :: :: connectWeak
   {{tex \mathsf{connect}_w\,\mathsf{to}\,[[t]] }}
+  | t1 * t2                    :: :: contra
+  {{tex [[t1]] \cdot [[t2]] }}
   | let 0 = t1 in t2           :: :: Zero
   {{tex \mathsf{let}\,0 = [[t1]]\,\mathsf{in}\,[[t2]] }}
   | x ( t )                    :: :: VarE
@@ -55,12 +57,15 @@ s, t :: 'citerm_' ::=
   {{tex \mathsf{case}\,[[t1]]\,\mathsf{of}\,[[x]].[[t2]],[[y]].[[t3]] }}
   | H e                        :: :: H
   {{tex \mathsf{H}\,[[e]] }}
-  | let J x = t1 in t2         :: :: letJ
-  {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[t1]]\,\mathsf{in}\,[[t2]] }}
+  | let J x = e in t2         :: :: letJ
+  {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[e]]\,\mathsf{in}\,[[t2]] }}
+  | let H x = t1 in t2 :: :: letH
+  {{tex \mathsf{let}\,\mathsf{H}\,[[x]] = [[t1]]\,\mathsf{in}\,[[t2]] }}  
   | [ t / x ]                  :: M :: subst
   | ( t )                      :: S :: parens
   | h( t )                     :: M :: hparens
   {{tex [[t]] }}
+  | I                          :: M :: contexts
 
 % Co-intuitionistic linear terms:
 e, u :: 'cilterm_' ::=
@@ -84,23 +89,144 @@ e, u :: 'cilterm_' ::=
   {{tex \mathsf{caser}\,[[e]] }}
   | J t                    :: :: J
   {{tex \mathsf{J}\,[[t]] }}
-  | let H x = e1 : A in e2 :: :: letH
-  {{tex \mathsf{let}\,\mathsf{H}\,[[x]] = [[e1]] : [[A]]\,\mathsf{in}\,[[e2]] }}
   | [ e / x ]                  :: M :: subst
   | ( e )                      :: S :: parens
   | h( e )                     :: M :: hparens
   {{tex [[e]] }}
+  
+% Cointuitionistic Contexts:
+I {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
+  | .           ::   :: Empty
+  {{tex \cdot }}
+  | t : T       ::   :: El
+  | I , PI      ::   :: Ext
+  | ( I )       :: S :: Paren
+  | h( I )      :: M :: HiddenParens 
+  {{ tex [[I]] }}
+  | I1 , ... , Ii :: M :: vec
+  | [ t ]         :: M :: el2
+  {{tex [[t]] }}
+  | [ t / x ] I   :: M :: subst
+
+% Cointuitionistic Contexts:
+G {{tex \Gamma}}, D {{tex \Delta}} :: 'BG_' ::=
+  | .           ::   :: Empty
+  {{tex \cdot }}
+  | e : A       ::   :: El
+  | G , G'      ::   :: Ext
+  | ( G )       :: S :: Paren
+  | h( G )      :: M :: HiddenParens 
+  {{ tex [[G]] }}
+  | [ e ]         :: M :: el2
+  {{tex [[e]] }}
+  | [ e / x ] D   :: M :: subst
 
   formula :: 'formula_' ::=
     | judgement            ::   :: judgement
     | formula1 && formula2 :: M :: quad
+    {{tex [[formula1]] \quad [[formula2]] }}
+    | formula1 &&&& formula2 :: M :: quad2
+    {{tex [[formula1]] \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\hspace{1px} [[formula2]] }}    
+    | formula1 ... formulai :: M :: vec
     | ( formula )          :: S :: parens
     {{tex [[formula]] }}
+    | s : T in I           :: M :: in
+    {{tex [[s]]:[[T]] \in [[I]] }}
+    | e : A in D           :: M :: in2
+    {{tex [[e]]:[[A]] \in [[D]] }}    
+    | | I1 | = | I2 | :: M :: EraseTerms
 
 defns
   Jtype :: '' ::=
 
-% defn
-%   G Neg :: :: ctxneg :: neg_
-%   {{tex [[G]]\,\mathsf{Neg} }}
-% by
+defn
+  x : S |-C I :: :: nli :: C_
+  {{tex [[x]] : [[S]] \vdash_{\mathsf{C} } [[I]] }}
+by
+
+  --------------- :: var
+  x : S |-C x : S
+
+  s : T' in I
+  ------------------------------ :: weak
+  x : S |-C connectW to s : T, I
+
+  x : S |-C t1 : T, t2 : T, I
+  --------------------------- :: contr
+  x : S |-C t1 * t2 : T,I
+
+  (x : S |-C t : 0, I) && (x1 : S1 |-C I1 ... xi : Si |-C Ii)
+  ---------------------------------------------------------- :: zero
+  x : S |-C [let 0 = t in I1],...,[let 0 = t in Ii], I
+
+  x : S |-C t : T1,I1 && y : T2 |-C I2
+  ------------------------------------------ :: subi
+  x : S |-C I1,mkc(t,y) : T1 - T2,[y(t)/y]I2
+
+  x : S |-C t1 : T1 - T2,I1 && y : T1 |-C t2 : T2,I2
+  -------------------------------------------------- :: sube
+  x : S |-C [postp(y -> t2,t1)],I1,[z(t1)/z]I2
+
+  x : S |-C t : T1,I
+  --------------------------- :: ori1
+  x : S |-C inl t : T1 + T2,I
+
+  x : S |-C t : T2,I
+  --------------------------- :: ori2
+  x : S |-C inr t : T1 + T2,I
+
+  y : T1 |-C I2
+  (y : T2 |-C I3 && x : S |-C t : T1 + T2,I1) && |I2| = |I3|
+  ---------------------------------------------------------- :: ore
+  x : S |-C I1,[case t of y.I2,y.I3]
+
+  (x : S |-C t : H A,I1 && x : A |-L . ; I2) && |I1| = |I2|
+  --------------------------------------------------------- :: he
+  x : S |-C [I1 * (let H y = t in I2)]
+
+defn
+  x : A |-L D ; I :: :: li :: L_
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]];[[I]] }}
+by
+
+ ----------------- :: var
+ x : A |-L x : A;I
+
+ x : A |-L D;I && e : B in D
+ ----------------------------------- :: perpi
+ x : A |-L connectP to e : False,D;I
+
+ x : A |-L e : False, D;I
+ ------------------------ :: perpe
+ x : A |-L [postpP e],D;I
+
+ % In Bellin's original rule, he had [y(e)/y]I2, but y shouldn't be
+ % allows to be used in I2.
+ (x : A |-L D1,e : B;I1 && y : C |-L D2;I2) && |I1| = |I2|
+ --------------------------------------------------------- :: subi
+ x : A |-L D1,mkc(e,y) : B *- C,[y(e)/y]D2;[I1 * I2]
+
+ (x : A |-L D1,e1 : B *- C;I1 &&  y : C |-L e2 : B,D2;I2) && |I1| = |I2|
+ ----------------------------------------------------------------------- :: sube
+ x : A |-L D1,[postp(y -> e2, e1)],[y(e1)/y]D2;[I1 * I2]
+
+ x : A |-L D1,e1 : B,e2 : C,D2;I
+ ------------------------------------- :: pari
+ x : A |-L D1,e1 (+) e2 : B (+) C,D2;I
+
+ y : B |-L D2;I2 &&&& |I2| = |I3|
+ (((z : C |-L D3;I3 && x : A |-L e : B (+) C,D1;I1)) && |I1| = |I2|)
+ ------------------------------------------------------------------- :: pare
+ x : A |-L D1,[casel(e)/y]D2,[caser(e)/z]D3;[h(I1 * I2) * I3]
+
+ x : A |-L D;t : T,I
+ ----------------------- :: ji
+ x : A |-L D,J t : J T;I
+
+ (x : A |-L D, e : J T;I1 && y : T |-C I2) && |I1| = |I2|
+ -------------------------------------------------------- :: je
+ x : A |-L D;[I1 * let J y = e in I2]
+
+ x : A |-L D,e : B;I
+ ----------------------- :: hi
+ x : A |-L D;H e : H B,I
