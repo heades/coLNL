@@ -21,12 +21,8 @@ R, S, T :: 'Cform_' ::=
 A, B, C :: 'Bform_' ::=
   | False   ::   :: 0
   {{tex \perp }}
-  | A + B ::   :: Disj
-  {{tex [[A]] + [[B]] }}
   | A (+) B ::   :: Par
   {{tex [[A]] \oplus [[B]] }}    
-  | A - B  ::   :: Subtrac
-  {{tex [[A]] - [[B]] }}
   | A *- B ::   :: LSubtrac
   {{tex [[A]] \colimp [[B]] }}
   | J S     ::   :: J
