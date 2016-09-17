@@ -103,6 +103,7 @@ I {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
   | [ t ]         :: M :: el2
   {{tex [[t]] }}
   | [ t / x ] I   :: M :: subst
+  | [ e / x ] I   :: M :: subst2
 
 % Cointuitionistic Contexts:
 G {{tex \Gamma}}, D {{tex \Delta}} :: 'BG_' ::=
@@ -196,15 +197,13 @@ by
  ------------------------ :: perpe
  x : A |-L [postpP e],D;I
 
- % In Bellin's original rule, he had [y(e)/y]I2, but y shouldn't be
- % allows to be used in I2.
  (x : A |-L D1,e : B;I1 && y : C |-L D2;I2) && |I1| = |I2|
- --------------------------------------------------------- :: subi
- x : A |-L D1,mkc(e,y) : B *- C,[y(e)/y]D2;[I1 * I2]
+ ----------------------------------------------------------- :: subi
+ x : A |-L D1,mkc(e,y) : B *- C,[y(e)/y]D2;[I1 * [y(e)/y]I2]
 
  (x : A |-L D1,e1 : B *- C;I1 &&  y : C |-L e2 : B,D2;I2) && |I1| = |I2|
  ----------------------------------------------------------------------- :: sube
- x : A |-L D1,[postp(y -> e2, e1)],[y(e1)/y]D2;[I1 * I2]
+ x : A |-L D1,[postp(y -> e2, e1)],[y(e1)/y]D2;[I1 * [y(e1)/y]I2]
 
  x : A |-L D1,e1 : B,e2 : C,D2;I
  ------------------------------------- :: pari
@@ -212,8 +211,8 @@ by
 
  y : B |-L D2;I2 &&&& |I2| = |I3|
  (((z : C |-L D3;I3 && x : A |-L e : B (+) C,D1;I1)) && |I1| = |I2|)
- ------------------------------------------------------------------- :: pare
- x : A |-L D1,[casel(e)/y]D2,[caser(e)/z]D3;[h(I1 * I2) * I3]
+ ------------------------------------------------------------------------------------ :: pare
+ x : A |-L D1,[casel(e)/y]D2,[caser(e)/z]D3;[h(I1 * [casel(e)/y]I2) * [casel(e)/z]I3]
 
  x : A |-L D;t : T,I
  ----------------------- :: ji
