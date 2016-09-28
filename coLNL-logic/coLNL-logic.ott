@@ -38,8 +38,8 @@ s, t :: 'citerm_' ::=
   {{tex \mathsf{connect}_w\,\mathsf{to}\,[[t]] }}
   | t1 * t2                    :: :: contra
   {{tex [[t1]] \cdot [[t2]] }}
-  | let 0 = t1 in t2           :: :: Zero
-  {{tex \mathsf{let}\,0 = [[t1]]\,\mathsf{in}\,[[t2]] }}
+  | false t                    :: :: Zero
+  {{tex \mathsf{false}\,[[t]] }}
   | x ( t )                    :: :: VarE
   | mkc ( t , x )              :: :: mkc
   {{tex \mathsf{mkc}([[t]],[[x]]) }}
@@ -144,7 +144,7 @@ by
   --------------- :: var
   x : S |-C x : S
 
-  s : T' in I
+  s : T' in I && x : S |-C I
   ------------------------------ :: weak
   x : S |-C connectW to s : T, I
 
@@ -154,7 +154,7 @@ by
 
   (x : S |-C t : 0, I) && (x1 : S1 |-C I1 ... xi : Si |-C Ii)
   ---------------------------------------------------------- :: zero
-  x : S |-C [let 0 = t in I1],...,[let 0 = t in Ii], I
+  x : S |-C [ [false t/x1]I1],...,[ [false t/xi]Ii], I
 
   x : S |-C t : T1,I1 && y : T2 |-C I2
   ------------------------------------------ :: subi
@@ -162,7 +162,7 @@ by
 
   x : S |-C t1 : T1 - T2,I1 && y : T1 |-C t2 : T2,I2
   -------------------------------------------------- :: sube
-  x : S |-C [postp(y -> t2,t1)],I1,[z(t1)/z]I2
+  x : S |-C [postp(y -> t2,t1)],I1,[y(t1)/y]I2
 
   x : S |-C t : T1,I
   --------------------------- :: ori1
@@ -188,6 +188,14 @@ by
 
  ----------------- :: var
  x : A |-L x : A;I
+
+ s : T' in I && x : A |-L D;I
+ -------------------------------- :: weak
+ x : A |-L D;connectW to s : T, I
+
+ x : A |-L D;t1 : T, t2 : T, I
+ ----------------------------- :: contr
+ x : A |-L D;t1 * t2 : T,I
 
  x : A |-L D;I && e : B in D
  ----------------------------------- :: perpi
