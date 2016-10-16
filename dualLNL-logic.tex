@@ -1,0 +1,33 @@
+
+\begin{definition}
+  \label{def:dualLNL-syntax-TA}
+  The syntax for the Dual LNL Term Assignment is as follows:
+  \[
+  \begin{array}{lll}
+    \begin{array}{rrl}
+    \textbf{(cointuitionistic terms)} & [[s]],[[t]] ::= & [[x]] \mid
+           [[connectW to t]] \mid [[t1 * t2]] \mid [[false t]] \mid
+           [[x(t)]] \mid [[mkc (t , x)]] \mid\\ & & [[postp(x -> t1 , t2)]]
+           \mid [[inl t]] \mid [[inr t]] \mid [[case t1 of
+               x.t2,y.t3]] \mid \\ & & [[H e]] \mid [[let H x = t1 in t2]]
+           \mid [[let J x = e in t]]\\\\
+           
+   \textbf{(linear cointuitionistic terms)} & [[e]],[[u]] ::= & [[x]] \mid
+                [[connectP to e]] \mid [[postpP e]] \mid [[connect to
+                    e]] \mid \\ & & [[postp (x -> e1 , e2)]] \mid
+                [[mkc(e,x)]] \mid [[x(e)]] \mid [[e1 (+) e2]] \mid \\ & & 
+                [[casel e]] \mid [[caser e]] \mid [[J t]]\\\\
+
+   \textbf{(cointuitionistic contexts)} & [[I]], [[PI]] ::= & [[.]] \mid [[t : T]] \mid [[I,PI]]\\
+   \textbf{(linear cointuitionistic contexts)} & [[G]], [[D]] ::= & [[.]] \mid [[e : A]] \mid [[G,D]]\\
+  \end{array}
+   \\\\
+   \begin{array}{rll}
+     \textbf{(cointuitionistic sequents)} & [[x : R |-C I]]\\
+     \textbf{(linear cointuitionistic sequents)} & [[x : A |-L D;I]]\\
+   \end{array}
+  \end{array}
+  \]
+\end{definition}
+
+

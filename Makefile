@@ -27,6 +27,11 @@ endif
 
 ott: main-output.tex
 
+dualLNL-logic-output.tex : coLNL-logic/coLNL-logic.ott dualLNL-logic.tex
+	@echo "\n\n***OTT: Preprocessing coLNL-logic/coLNL-logic.ott in dualLNL-logic.tex.***"
+	@$(OTT) $(OTT_FLAGS) -i coLNL-logic/coLNL-logic.ott  -o DualLNLLogic-inc.tex -tex_name_prefix DualLNLLogic \
+		-tex_filter dualLNL-logic.tex dualLNL-logic-output.tex
+
 main-output.tex : DualLNL.ott main.tex
 	@echo "\n\n***OTT: Preprocessing dtt.ott in main.tex.***"
 	@$(OTT) $(OTT_FLAGS) -i DualLNL.ott  -o DualLNL-inc.tex -tex_name_prefix DualLNL \
@@ -34,7 +39,7 @@ main-output.tex : DualLNL.ott main.tex
 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main-output.tex ref.bib Makefile
+main.pdf : main-output.tex ref.bib Makefile dualLNL-logic-output.tex
 	$(PDFLATEX) -jobname=main main-output.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main-output.tex
