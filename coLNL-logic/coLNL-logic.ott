@@ -70,8 +70,8 @@ e, u :: 'cilterm_' ::=
   {{tex \mathsf{connect}_\perp\,\mathsf{to}\,[[e]] }}
   | postpP e               :: :: postpP
   {{tex \mathsf{postp}_\perp\,[[e]] }}
-  | connect to e           :: :: connect
-  {{tex \mathsf{connect}\,\mathsf{to}\,[[e]] }}
+  % | connectW to e           :: :: connect
+  % {{tex \mathsf{connect}_W\,\mathsf{to}\,[[e]] }}
   | postp ( x -> e1 , e2 )   :: :: postp
   {{tex \mathsf{postp}\,([[x]] \mapsto [[e1]], [[e2]]) }}
   | mkc ( e , x )          :: :: mkc
@@ -177,7 +177,7 @@ by
   ---------------------------------------------------------- :: ore
   x : S |-C I1,[case t of y.I2,y.I3]
 
-  (x : S |-C t : H A,I1 && x : A |-L . ; I2) && |I1| = |I2|
+  (x : S |-C t : H A,I1 && y : A |-L . ; I2) && |I1| = |I2|
   --------------------------------------------------------- :: he
   x : S |-C [I1 * (let H y = t in I2)]
 
@@ -220,7 +220,7 @@ by
  y : B |-L D2;I2 &&&& |I2| = |I3|
  (((z : C |-L D3;I3 && x : A |-L e : B (+) C,D1;I1)) && |I1| = |I2|)
  ------------------------------------------------------------------------------------ :: pare
- x : A |-L D1,[casel(e)/y]D2,[caser(e)/z]D3;[h(I1 * [casel(e)/y]I2) * [casel(e)/z]I3]
+ x : A |-L D1,[casel(e)/y]D2,[caser(e)/z]D3;[h(I1 * [casel(e)/y]I2) * [caser(e)/z]I3]
 
  x : A |-L D;t : T,I
  ----------------------- :: ji
