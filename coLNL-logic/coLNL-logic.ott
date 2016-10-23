@@ -57,7 +57,7 @@ s, t :: 'citerm_' ::=
   {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[e]]\,\mathsf{in}\,[[t2]] }}
   | let H x = t1 in t2 :: :: letH
   {{tex \mathsf{let}\,\mathsf{H}\,[[x]] = [[t1]]\,\mathsf{in}\,[[t2]] }}  
-  | [ t / x ]                  :: M :: subst
+  | [ t / x ] t'               :: M :: subst
   | ( t )                      :: S :: parens
   | h( t )                     :: M :: hparens
   {{tex [[t]] }}
@@ -70,8 +70,6 @@ e, u :: 'cilterm_' ::=
   {{tex \mathsf{connect}_\perp\,\mathsf{to}\,[[e]] }}
   | postpP e               :: :: postpP
   {{tex \mathsf{postp}_\perp\,[[e]] }}
-  % | connectW to e           :: :: connect
-  % {{tex \mathsf{connect}_W\,\mathsf{to}\,[[e]] }}
   | postp ( x -> e1 , e2 )   :: :: postp
   {{tex \mathsf{postp}\,([[x]] \mapsto [[e1]], [[e2]]) }}
   | mkc ( e , x )          :: :: mkc
@@ -85,7 +83,7 @@ e, u :: 'cilterm_' ::=
   {{tex \mathsf{caser}\,[[e]] }}
   | J t                    :: :: J
   {{tex \mathsf{J}\,[[t]] }}
-  | [ e / x ]                  :: M :: subst
+  | [ e / x ] e'               :: M :: subst
   | ( e )                      :: S :: parens
   | h( e )                     :: M :: hparens
   {{tex [[e]] }}
@@ -116,22 +114,35 @@ G {{tex \Gamma}}, D {{tex \Delta}} :: 'BG_' ::=
   {{ tex [[G]] }}
   | [ e ]         :: M :: el2
   {{tex [[e]] }}
-  | [ e / x ] D   :: M :: subst
+  | [ e / x ] D :: M :: subst
 
-  formula :: 'formula_' ::=
-    | judgement            ::   :: judgement
-    | formula1 && formula2 :: M :: quad
-    {{tex [[formula1]] \quad [[formula2]] }}
-    | formula1 &&&& formula2 :: M :: quad2
-    {{tex [[formula1]] \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\hspace{1px} [[formula2]] }}    
-    | formula1 ... formulai :: M :: vec
-    | ( formula )          :: S :: parens
-    {{tex [[formula]] }}
-    | s : T in I           :: M :: in
-    {{tex [[s]]:[[T]] \in [[I]] }}
-    | e : A in D           :: M :: in2
-    {{tex [[e]]:[[A]] \in [[D]] }}    
-    | | I1 | = | I2 | :: M :: EraseTerms
+formula :: 'formula_' ::=
+  | judgement            ::   :: judgement
+  | formula1 && formula2 :: M :: quad
+  {{tex [[formula1]] \quad [[formula2]] }}
+  | formula1 &&&& formula2 :: M :: quad2
+  {{tex [[formula1]] \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\hspace{1px} [[formula2]] }}
+  | formula1 &&& formula2 :: M :: quad3
+  {{tex [[formula1]] \quad\quad\hspace{1px} [[formula2]] }}
+  | formula1 &&&&& formula2 :: M :: quad4
+  {{tex [[formula1]] \quad\quad\quad\quad\quad\quad [[formula2]] }}
+  | formula1 &&&&&& formula2 :: M :: quad5
+  {{tex [[formula1]] \quad\hspace{3px} [[formula2]] }}          
+  | formula1 ... formulai :: M :: vec
+  | ( formula )          :: S :: parens
+  {{tex [[formula]] }}
+  | s : T in I           :: M :: in
+  {{tex [[s]]:[[T]] \in [[I]] }}
+  | e : A in D           :: M :: in2
+  {{tex [[e]]:[[A]] \in [[D]] }}    
+  | | I1 | = | I2 | :: M :: EraseTerms
+  | | D1 | = | D2 | :: M :: EraseTerms2
+  | e == e' :: :: Eqv
+  | D == D' :: :: DEqv  
+
+terminals :: 'terminals_' ::=
+  | == :: :: Eqv
+  {{tex \equiv }}
 
 defns
   Jtype :: '' ::=
@@ -233,3 +244,50 @@ by
  x : A |-L D,e : B;I
  ----------------------- :: hi
  x : A |-L D;H e : H B,I
+
+defn
+  x : T |-C I1 = I2 :: :: leq :: LEq_
+  {{tex [[x]] : [[T]] \vdash_{\mathsf{C} } [[I1]] = [[I2]] }}
+by
+
+   |I1|=|I1'| 
+   |I2|=|I2'| &&  x:T1 |-C I2 = I2'
+  (|I3|=|I3'| &&  y:T2 |-C I3 = I3') && z:S  |-C t1:T1, I1 = t1':T1, I1'
+  ----------------------------------------------------------------------- :: or1
+  z:S  |-C I1,[case (inl t1) of y.I2,y.I3] = [t1'/y]I'2 
+  
+   |I1|=|I1'|  
+   |I2|=|I2'| && x:T1 |-C I2  =  I2' 
+  (|I3|=|I3'| && y:T2 |-C I3  =  I3') && z:S  |-C t2:T2, I1  =  t2':T2, I1'
+  ------------------------------------------------------------------------- :: or2
+  z:S  |-C I1, [case (inr t2) of x.I2,y.I3] = [t2'/y]I'3
+  
+   |I1| = |I1'| 
+   |I2| = |I2'| && y:T2 |-C I2 = I2' 
+  (|I3| = |I3'| && z:T1 |-C t2:T2,I3 = t2':T2,I3') && x:S |-C t1:T1,I1 = t1':T1, I1'
+  ------------------------------------------------------------------------------------------------------------- :: sub
+  x:S |-C I1, [y(t1)/y]I2, [postp(z -> t2, mkc(t1,y))], [z(mkc(t1,y))/z]I3 = I1',[[t1'/z]t2'/y]I2', [t1'/z]I3'
+
+defn
+  x : A |-L D1 ; I1 = D2 ; I2 :: :: ceq :: CEq_
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D1]];[[I1]] = [[D2]];[[I2]] }}
+by
+
+   |I1| = |I2|
+   |I1| = |I1'|
+  (|I2| = |I2'| && y:S |-C I2 = I2') && x:A |-L D ; s:S, I1  =  D'; s': S, I1'
+  -------------------------------------------------------------------------- :: letJ
+  x:A |-L D ; I1,[(let J y = J s in I2)] = D' ; (I1',[s'/y]I2')
+
+  |I1| = |I2|
+  |I1| = |I1'|
+  (|I2| = |I2'| && x:B |-L D, e:A ; I1 = D',e':A ; I1') && y:A |-L . ; I2  = . ; I2'  
+  ---------------------------------------------------------------------------------- :: letH
+  x:B |-L D ; I1,[let H y = H e in I2] = D';(I1',[e'/y]I2')
+  
+  e == postp(z -> e2, mkc(e1,y))
+  e' == z(mkc(e1,y))                  &&&&& ((|I1| = |I1'| && |D1| = |D1'|) && x:B  |-L e1:A1, D1 ; I1  =  e1':A1, D1' ; I1')
+  D == [y(e1)/y]D2, [e], [e'/z]D3     &&&  ((|I2| = |I2'| && |D2| = |D2'|) && y:A2 |-L D2 ; I2  =  D2' ; I2')                
+  D' == [[e1'/z]e2'/y]D2', [e1'/z]D3' &&&&&& ((|I3| = |I3'| && |D3| = |D3'|) && z:A1 |-L e2:A2, D3 ; I3  =  e2':A2, D3' ; I3')
+  ---------------------------------------------------------------------------- :: sub
+  x:C |-L D1, D; I1, [y(e1)/y]I2, [e'/z]I3 = D1', D' ; I1', [[e1'/z]e2'/y]I2', [e1'/z]I3'
