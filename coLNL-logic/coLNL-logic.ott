@@ -127,7 +127,9 @@ formula :: 'formula_' ::=
   | formula1 &&&&& formula2 :: M :: quad4
   {{tex [[formula1]] \quad\quad\quad\quad\quad\quad [[formula2]] }}
   | formula1 &&&&&& formula2 :: M :: quad5
-  {{tex [[formula1]] \quad\hspace{3px} [[formula2]] }}          
+  {{tex [[formula1]] \quad\hspace{3px} [[formula2]] }}
+  | formula1 &&&&&&& formula2 :: M :: quad7
+  {{tex [[formula1]] \quad\hspace{7px} [[formula2]] }}            
   | formula1 ... formulai :: M :: vec
   | ( formula )          :: S :: parens
   {{tex [[formula]] }}
@@ -138,7 +140,11 @@ formula :: 'formula_' ::=
   | | I1 | = | I2 | :: M :: EraseTerms
   | | D1 | = | D2 | :: M :: EraseTerms2
   | e == e' :: :: Eqv
-  | D == D' :: :: DEqv  
+  | D == D' :: :: DEqv
+  | WS && formula :: :: quad6
+  {{tex \, \quad\quad\quad\quad\quad\quad\quad\quad\quad\hspace{4px} [[formula]] }}
+  | HS :: :: hspace
+  {{tex \hspace{1px} }}
 
 terminals :: 'terminals_' ::=
   | == :: :: Eqv
@@ -289,5 +295,27 @@ by
   e' == z(mkc(e1,y))                  &&&&& ((|I1| = |I1'| && |D1| = |D1'|) && x:B  |-L e1:A1, D1 ; I1  =  e1':A1, D1' ; I1')
   D == [y(e1)/y]D2, [e], [e'/z]D3     &&&  ((|I2| = |I2'| && |D2| = |D2'|) && y:A2 |-L D2 ; I2  =  D2' ; I2')                
   D' == [[e1'/z]e2'/y]D2', [e1'/z]D3' &&&&&& ((|I3| = |I3'| && |D3| = |D3'|) && z:A1 |-L e2:A2, D3 ; I3  =  e2':A2, D3' ; I3')
-  ---------------------------------------------------------------------------- :: sub
+  ---------------------------------------------------------------------------------------------------------------------------- :: sub
   x:C |-L D1, D; I1, [y(e1)/y]I2, [e'/z]I3 = D1', D' ; I1', [[e1'/z]e2'/y]I2', [e1'/z]I3'
+  
+  WS && ((|D1|=|D1'| && |I1|=|I1'|) && x:A1 |-L D2 ; I2  =  D2' ; I2')
+  e == casel(e1 (+) e2) &&& ((|D2|=|D2'| && |I2|=|I2'|) && y:A2 |-L D3 ; I3  =  D3' ; I3')
+  e' == caser(e1 (+) e2) &&&&&&& ((|D3|=|D3'| && |I3|=|I3'|) && z:B  |-L e1:A1, e2:A2, D1 ; I1  =  e1':A1, e2':A2, D1' ; I1')
+  ------------------------------------------------------------ :: par
+  z:B  |-L D1, [e/x]D2, [e'/x]D3 ; I1, [e/x]I2, [e'/x]I3 = D1',[e1'/x]D2', [e2'/x]D3' ; I1', [e1'/x]I2', [e2'/x]I3'
+
+  x:A |-L D ; I = D' ; I'   e:B in D
+  ------------------------------------------------------------ :: unit
+  x:A |-L D , [postpP (connectP to e)] ; I  = D' ; I'
+  
+  (|D| = |D'| && |I| = |I'|) && z : B |-L D ; I = D' ; I'
+  ------------------------------------------------------------------------------- :: etaSub
+  z:B  |-L [postp(x -> y, e)], mkc(x(e),y) : A1 *- A2,D;I = e : A1 *- A2, D' ; I'
+  
+  (|D| = |D'|   && |I| = |I'|) && z : B |-L D ; I = D' ; I'
+  ------------------------------------------------------------------------- :: etaPar
+  z:B  |-L (casel e) (+) (caser e) : A1 (+) A2,D;I = e : A1 (+) A2, D' ; I'
+
+  (|D| = |D'| && |I| = |I'|) && z : B |-L D ; I = D' ; I'
+  ----------------------------------------------------------------- :: etaUnit
+  z:B  |-L connectP to (postpP e) : False,D;I = e : False,  D' ; I'
