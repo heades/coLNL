@@ -6,8 +6,12 @@ coimplication. One leading question with respect to BINT is, what does
 BINT look like across the three arcs -- logic, typed
 $\lambda$-calculi, and category theory -- of the Curry-Howard-Lambek
 correspondence?  A non-trivial (does not degenerate to a poset)
-categorical model of BINT is currently an open problem.  This paper is
-the first of two that will provide an answer to this open problem.
+categorical model of BINT is currently an open problem.  This paper
+directly contributes to the solution of this open problem by giving a
+new categorical model based on adjunctions for cointuitionistic logic,
+and then proposing a new categorical model for BINT.  In addition, we
+give a new sequent calculus and term assignment for cointuitionistic
+logic.
 
 BINT can be seen as a mixing of two worlds: the first being
 intuitionistic logic (IL), which is modeled categorically by a
@@ -20,9 +24,9 @@ there is at most one morphism between any two objects; we review this
 result in
 Section~\ref{subsec:cartesian_closed_and_cocartesian_coclosed_categories}.
 However, this degeneration does not occur when both logics are linear.
-We propose that these two worlds need to be separated, and then mixed
-in a control way using the modalities from linear logic.  This
-separation can be ultimately achieved by an adjoint formalization of
+We propose that IL and coIL need to be separated, and then mixed in a
+control way using the modalities from linear logic.  This separation
+can be ultimately achieved by an adjoint formalization of
 bi-intuitionistic logic.  This formalization consists of three worlds
 instead of two: the first is intuitionistic logic, the second is
 linear bi-intuitionistic (Bi-ILL), and the third is cointuitionistic
@@ -62,6 +66,13 @@ our dual LNL models with Benton's LNL models to obtain a categorical
 model of bi-intuitionistic logic
 (Section~\ref{subsec:a_mixed_bi-linear_non-linear_model}), but we
 leave its analysis and corresponding logic to a future paper.
-Finally, we give the definition of dual LNL logic with a term
-assignment (Section~\ref{sec:dual_lnl_logic} and
-Section~\ref{sec:dual_lnl_term_assignment} respectively).
+Following the categorical model we define and analyze a new sequent
+calculus (Section~\ref{sec:sequent_calculus}), natural deduction
+formalization (Section~\ref{sec:sequent-style_natural_deduction}), and
+a term assignment (Section~\ref{sec:term_assignment}) for dual LNL
+logic.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: main.tex
+%%% End: 

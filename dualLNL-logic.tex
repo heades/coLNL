@@ -1,4 +1,5 @@
-\section{Sequent Calculus}
+?\subsection{Sequent Calculus}
+\label{sec:sequent_calculus}
 
 \begin{table}
  \begin{center}
@@ -503,7 +504,10 @@ Of course additive contexts can be simulated using weakening and contraction.
 \DisplayProof
 \]
 \end{remark}
-\section{Sequent-style Natural Deduction}
+% subsection sequent_calculus (end)
+
+\subsection{Sequent-style Natural Deduction}
+\label{sec:sequent-style_natural_deduction}
 
 In Tables \ref{non-linear-coint-natded},\ref{linear-coint-natded} we give the rules of a sequent-style natural deduction system \emph{co-ND}  for linear - non linear co-intuitionistic logic, corresponding to the sequent calculus $\mathbf{co-LNL}$. 
 Some rules are formulated here \emph{additively} (see remark \ref{additive}).
@@ -729,9 +733,12 @@ is derivable in the sequent calculus as follows:
 \BinaryInfC{$S\vdash_C \Psi, \Psi_1, \ldots \Psi_{n-1}, \Psi_n$ }
 \DisplayProof
 \]
+% subsection sequent-style_natural_deduction (end)
 
-\section{Term Assignment}
-\subsection{Terms}
+\subsection{Term Assignment}
+\label{sec:term_assignment}
+
+\subsubsection{Terms}
 
 The term calculus is given by the following grammar: 
 \begin{center}
@@ -815,7 +822,7 @@ $FV(t)$ &\ =\ & $FV(t)$
 \end{center}
 \end{definition}
 
-\subsection{Contexts}
+\subsubsection{Contexts}
 We type terms by assigning terms to natural deduction derivations in \emph{co-ND}. To denote a linear context 
 we write $\Delta = e_1: A_1, \ldots, e_n: A_n$  and $|\Delta| = A_1, \ldots, A_n$ for the list of its types. 
 Similarly we use $\Psi = t_1: S_1, \ldots, t_n: S_n$  and $|\Psi| = S_1, \ldots, S_n$. 
@@ -875,7 +882,7 @@ $(\Psi_1\|\Pi_1)\cdot(\Psi_2\|Pi_2)$ &\ =\ & $(\Psi_1\cdot\Psi_2)\|(\Pi_1\cdot\P
 $|\Pi_1|=|\Pi_2|$.
 \end{tabular}
 \end{center}
-\subsection{Bound variables and substitution.}
+\subsubsection{Bound variables and substitution.}
 \begin{definition}
  We define the substitution of an $e$ term for a free variable in an $e$ term and in a $p$ term of a correct context as follows.  
  \begin{itemize}
@@ -1147,8 +1154,8 @@ The term assignment for the admissible rules of the calculus is as follows:
 }
 
 \end{definition}
-\subsection{$\beta$ reductions}
-\subsubsection{Non-linear terms}
+\subsubsection{$\beta$ reductions}
+\textbf{Non-linear terms}
 \begin{center}
 {\small
 \AxiomC{\small{\bf $-$ Redex:}}
@@ -1242,7 +1249,7 @@ The term assignment for the admissible rules of the calculus is as follows:
 \DisplayProof
 \end{center}
 
-\subsubsection{Linear terms}
+\textbf{Linear terms}
 
 \begin{center}
 {\small
@@ -1394,14 +1401,17 @@ where the double line stands for any $n$-ary inference, $n = 1,2,3$.
 \noindent
 There is also a zero commutation rule, which we omit here. 
 
-\section{Categorical interpretation of rules}
+% subsection term_assignment (end)
+
+\subsection{Categorical interpretation of rules}
+\label{sec:categorical_interpretation_of_rules}
 
 \noindent
 Given a {\em signature} $Sg$, consisting of a collection of types $\sigma_i$, where $\sigma_i = A\ \hbox{or}\ S$, 
 and a collection of {\em sorted function symbols} $f_j : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ and given 
 a Symmetric Monoidal Category (SMC) $(\mathbb{C}, \bullet, 1, \alpha, \lambda, \rho, \gamma)$,  a {\em structure} 
 $\mathcal{M}$ for $Sg$ is an assignment of an object $[\![\sigma]\!]$ of $\mathcal{L}$ for each type $\sigma$ and of 
-a morphism $[\![f]\!] : [\![\sigma_1]\!]\bullet\ldots\bullet[\![\sigma_n]\!]\rightarrow [\![\tau]\!]$ for each function $f : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ of $Sg$.\footnote{ In this section only we use the symbol $\bullet$ and 1 for the monoidal binary operation and its unit in the categorical structure, distinguished from the $\oplus$ and $\bot$ symbols 
+a morphism $[\![f]\!] : [\![\sigma_1]\!]\bullet\ldots\bullet[\![\sigma_n]\!]\rightarrow [\![\tau]\!]$ for each function $f : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ of $Sg$.\footnote{ In this subsection only we use the symbol $\bullet$ and 1 for the monoidal binary operation and its unit in the categorical structure, distinguished from the $\oplus$ and $\bot$ symbols 
 in the formal language. We shall show that the interpretation of $\oplus$ is isomorphic to the operation $\bullet$, 
 so we shall be able to identify them ( and similarly for $\bot$ and 1).}
 
@@ -1467,7 +1477,7 @@ We now go through some cases of the rules in the sequent-style Natural Deduction
 their categorical interpretation so as to satify the equations in context and to prove consistency of the 
 LNL co-intuitionistic logic in the model thus defined. 
 
-\subsection{Linear disjunction Par}\label{lindisj} 
+\subsubsection{Linear disjunction Par}\label{lindisj} 
 
 
 \ref{lindisj}.1. 
@@ -1610,7 +1620,7 @@ is also satisfied:
 }
 \end{equation}
 
-\subsection{Linear subtraction}\label{linsubtr}
+\subsubsection{Linear subtraction}\label{linsubtr}
 \ref{linsubtr}.1. {\em Subtraction introduction.} The introduction rule for subtraction has the form 
 \begin{center} 
 \AxiomC{$x:A\vdash_L \Delta_1, e: B; \Psi_1$}
@@ -1815,7 +1825,7 @@ i.e., that $\smallsetminus$ is the left adjoint to the bifunctor $\bullet$.
 %
 %
 %
-\subsection{Unit rules}
+\subsubsection{Unit rules}
 \label{units}  The introduction and elimination rules for the unit $\bot$ are
 \begin{center}
 \begin{tabular}{cc} 
@@ -1896,7 +1906,7 @@ e: \bot,  \Delta'; \Psi'$}
 \quad}
 \end{equation} 
 
-\subsection{Functors}\label{functors}
+\subsubsection{Functors}\label{functors}
 
 Recall that a model of Linear-Non Linear co-intuitionistic logic consists of  a symmetric comonoidal adjunction 
 $\mathcal{L} : H \dashv  J : \mathcal{C}$ where $\mathcal{L} = (\mathcal{L}, \bot, \oplus, \limp)$ 
@@ -2015,3 +2025,9 @@ Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we
 \ar[rrr]^{HJ(\overline{S}) + id_{\Psi}} &&& \Psi + \Psi \ar[r]^{\quad\nabla_{\Psi}}& \Psi }$}
 \DisplayProof\\
 \end{center}
+% subsection categorical_interpretation_of_rules (end)
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: main.tex
+%%% End: 
