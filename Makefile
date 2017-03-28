@@ -39,7 +39,7 @@ main-output.tex : DualLNL.ott main.tex
 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main-output.tex ref.bib Makefile dualLNL-logic-output.tex
+main.pdf : main-output.tex ref.bib Makefile dualLNL-logic-output.tex introduction.tex
 	$(PDFLATEX) -jobname=main main-output.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main-output.tex

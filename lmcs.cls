@@ -531,7 +531,4 @@
   \ialign{\strut\hfil$\displaystyle{##}$&$\displaystyle{{}##}$\hfil
       \crcr#1\crcr}}\,}
 
-\usepackage{color}
-\def\cW{\color{white}}
-
 \endinput
