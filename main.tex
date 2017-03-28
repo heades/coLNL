@@ -8,6 +8,7 @@
 \usepackage{mathpartir}
 \usepackage{hyperref}
 \usepackage{mdframed}
+\usepackage[all]{xypic}
 \usepackage[barr]{xy}
 
 \newtheorem{theorem}{Theorem}
@@ -16,6 +17,7 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
 
 %% This renames Barr's \to to \mto.  This allows us to use \to for imp
 %% and \mto for a inline morphism.
@@ -100,6 +102,7 @@
   }%
   \item[]}{\end{list}}
 
+\let\diagram\relax
 \newenvironment{diagram}{
   \begin{center}
     \begin{math}
@@ -109,6 +112,10 @@
     \end{math}
   \end{center}
 }
+
+\input{bussproofs.sty}
+\def\limp{\mathrel{-\!\circ}}
+\def\lsub{\mathrel{\bullet\!-}}
 
 %% Ott
 \input{DualLNL-inc}
@@ -1570,128 +1577,7 @@ logic is the key.
 % subsection a_mixed_bi-linear_non-linear_model (end)
 % section the_categorical_model (end)
 
-\section{Mixed Linear/Non-Linear Cointuitionistic Logic: Dual LNL Logic}
-\label{sec:dual_lnl_logic}
-
-Following Benton's \cite{Benton:1994} lead we can define a mixed
-linear/non-linear cointuitionistic logic, called dual LNL logic, based
-on the categorical model given in the previous section.  Dual LNL
-logic consists of two fragments: an cointuitionistic fragment and a
-linear cointuitionistic fragment.  Each of the fragments are related
-through a syntactic formalization of the adjoint functors from the
-dual LNL model.  First, we define the syntax of dual LNL logic, and
-then discuss the inference rules for each fragment.
-\begin{definition}
-  \label{def:DualLNL-syntax}
-  The syntax for dual LNL logic is defined as follows:
-  \begin{center}
-    \begin{math}
-      \begin{array}{rlllllllllll}        
-        \text{(Cointuitionistic Formulas)} &  [[R]], [[S]], [[T]] ::= 0 \mid [[S + T]] \mid [[S - T]] \mid [[H A]]\\
-        \text{(Linear Cointuitionistic Formulas)} &
-             [[A]],[[B]],[[C]] ::= [[False]] \mid [[A (+) B]] \mid [[A *- B]] \mid [[J S]]\\        
-        \text{(Cointuitionistic Contexts)}  & [[I]] ::= [[.]] \mid
-             [[R]] \mid [[I1 , I2]]\\
-        \text{(Linear Cointuitionistic Contexts)}  &
-             [[G]],[[D]] ::= [[.]] \mid [[A]] \mid [[G1,G2]]\\        
-      \end{array}
-    \end{math}
-  \end{center}
-  \ \\
-  \noindent
-  Sequents have the following syntax:
-  \begin{center}
-    \begin{math}
-      \begin{array}{rll}
-        \text{(Cointuitionistic Sequents)} & [[R |-C I]]\\
-        \text{(Dual LNL Sequents)} & [[A |-L D | I]]\\
-      \end{array}
-    \end{math}
-  \end{center}
-\end{definition}
-
-The syntax of cointuitionistic formulas are typical.  We denote
-coimplication by $[[S - T]]$, but all the other connectives are the
-usual ones. Linear cointuitionistic formulas are denoted in somewhat
-of a non-traditional style. We denote cotensor by $[[A (+) B]]$,
-instead of $[[A]] \parr [[B]]$.  Lastly, we denote linear
-coimplication by $[[A *- B]]$ to emphasize its duality with linear
-implication $[[A]] \limp [[B]]$.  Each syntactic category of formulas
-contains the respective functor from the dual LNL model, and thus, we
-should view $H$ as the left adjoint to $J$.
-
-Sequents for the linear fragment have the form $[[A |-L D | I]]$.
-Similarly to the sequents of Benton's LNL logic \cite{Benton:1994},
-each context is separated for readability, but should actually be
-understood as being able to be mixed, that is, the contexts $[[D]]$
-and $[[I]]$ could be a single context.
-
-The inference rules for the cointuitionistic fragment can be found in
-Figure~\ref{fig:ifr-CL}.  
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \DualLNLdruleCXXid{} \and
-      \DualLNLdruleCXXcut{} \and
-      \DualLNLdruleCXXwk{} \and
-      \DualLNLdruleCXXcr{} \and
-      \DualLNLdruleCXXex{} \and                  
-      \DualLNLdruleCXXfL{} \and
-      \DualLNLdruleCXXdL{} \and
-      \DualLNLdruleCXXdROne{} \and
-      \DualLNLdruleCXXdRTwo{} \and      
-      \DualLNLdruleCXXsL{} \and
-      \DualLNLdruleCXXsR{} \and
-      \DualLNLdruleCXXhL{}
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for Dual LNL Logic: Cointuitionistic Fragment}
-  \label{fig:ifr-CL}
-\end{figure}
-
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \DualLNLdruleLXXwk{} \and
-      \DualLNLdruleLXXctr{} \and
-      \DualLNLdruleLXXex{} \and
-      \DualLNLdruleLXXCex{} \and
-      \DualLNLdruleLXXid{} \and
-      \DualLNLdruleLXXcut{} \and
-      \DualLNLdruleLXXCcut{} 
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for Dual LNL Logic: Structural Rules, Identity, and Cut Rules}
-  \label{fig:ifr-biLNL-structural}
-\end{figure}
-
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \DualLNLdruleLXXflL{}   \and
-      \DualLNLdruleLXXflR{}   \and
-      \DualLNLdruleLXXdROne{} \and
-      \DualLNLdruleLXXdRTwo{} \and      
-      \DualLNLdruleLXXpL{}    \and
-      \DualLNLdruleLXXpR{}    \and
-      \DualLNLdruleLXXsL{}    \and
-      \DualLNLdruleLXXsR{}    \and
-      \DualLNLdruleLXXCsR{}   \and
-      \DualLNLdruleLXXjL{}    \and
-      \DualLNLdruleLXXjR{}    \and
-      \DualLNLdruleLXXhR{}
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Inference Rules for Dual LNL Logic: Cotensor, Coimplication, and Functor Rules}
-  \label{fig:ifr-dualLNL-coten-coimp-funct}
-\end{figure}
-
-
-\section{Dual LNL Term Assignment}
-\label{sec:dual_lnl_term_assignment}
 \input{dualLNL-logic-output}
-% section dual_lnl_term_assignment (end)
-
 
 \section{Related Work}
 \label{sec:related_work}

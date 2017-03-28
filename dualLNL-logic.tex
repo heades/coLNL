@@ -1,73 +1,2017 @@
+\section{Sequent Calculus}
+
+\begin{table}
+ \begin{center}
+  \begin{small}
+   \begin{tabular}{|c|}
+\hline
+\\
+\AxiomC{\it C identity}
+\noLine
+\UnaryInfC{$S \vdash_C S  $}
+\DisplayProof\\
+\\
+\AxiomC{\it CC Cut}
+\noLine
+\UnaryInfC{$ S \vdash_C \Psi_1, T\quad T \vdash_C \Psi_2$}
+\UnaryInfC{$S \vdash_C \Psi_1, \Psi_2$}
+\DisplayProof\\
+\\
+\AxiomC{\it C exchange}
+\noLine
+\UnaryInfC{$S \vdash_C \Psi_1, S, T, \Psi_2 $}
+\UnaryInfC{$S \vdash_C \Psi_1, T, S, \Psi_2 $} 
+\DisplayProof
+\AxiomC{\it C weakening }
+\noLine
+\UnaryInfC{$S \vdash_C \Psi $}
+\UnaryInfC{$S \vdash_C T, \Psi $} 
+\DisplayProof
+\qquad
+\AxiomC{\it C contraction}
+\noLine
+\UnaryInfC{$S \vdash_C T, T, \Psi $}
+\UnaryInfC{$S \vdash_C T, \Psi $} 
+\DisplayProof\\
+\\
+ \AxiomC{\it C zero}
+\noLine
+\UnaryInfC{$0 \vdash_C \Psi$} 
+\DisplayProof\\
+\\
+\AxiomC{\it C subtraction R }
+\noLine
+\UnaryInfC{$S \vdash_C \Psi_1, T_1 \qquad  
+T_2 \vdash_C \Psi_2$}
+\UnaryInfC{$S \vdash_C \Psi_1, \Psi_2, T_1 - T_2$}
+\DisplayProof\qquad
+\AxiomC{\it C subtraction L}
+\noLine
+\UnaryInfC{$T_1 \vdash_C T_2, \Psi$}
+\UnaryInfC{$T_1 - T_2 \vdash_C \Psi$}
+\DisplayProof \\
+\\
+\AxiomC{\it C disjunction R$_1$}
+\noLine
+\UnaryInfC{$S \vdash_C  \Psi, T_1$}
+\UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
+\DisplayProof \qquad
+\AxiomC{\it C disjunction R$_2$}
+\noLine
+\UnaryInfC{$S \vdash_C  \Psi, T_2$}
+\UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
+\DisplayProof \\
+\\
+\AxiomC{\it C disjunction L}
+\noLine
+\UnaryInfC{$T_1 \vdash_C \Psi_1 \qquad T_2 \vdash_C \Psi_2$}
+\UnaryInfC{$T_1 + T_2 \vdash_C \Psi_1, \Psi_2$}
+\DisplayProof\\
+\\
+\hline
+\\
+\centerline{\it H rules}
+\\
+\\
+\AxiomC{\it H R}
+\noLine
+\UnaryInfC{$A \vdash_L, \Delta, B ; \Psi $}
+\UnaryInfC{$A \vdash_L, \Delta; H B, \Psi$}
+\DisplayProof
+\qquad
+\AxiomC{\it H L}
+\noLine
+\UnaryInfC{$A \vdash_L ; \Psi $}
+\UnaryInfC{$H A \vdash_C \Psi_2$}
+\DisplayProof\\
+\\
+\\
+\hline
+  \end{tabular} 
+  \end{small}
+ \caption{Non-linear {\bf  co-LNL}}
+  \label{non-linear-coint}
+ \end{center} 
+\end{table}
+\begin{table}
+ \begin{center}
+  \begin{small}
+   \begin{tabular}{|c|}
+\hline
+\\
+\AxiomC{\it L identity}
+\noLine
+\UnaryInfC{$A \vdash_L A $}
+\DisplayProof\\
+\\
+\AxiomC{\it LL Cut}
+\noLine
+\UnaryInfC{$ A \vdash_L \Delta_1, B ; \Psi_1\quad B \vdash_L\Delta_2;  \Psi_2$}
+\UnaryInfC{$A \vdash_L \Delta_1, \Delta_2 ; \Psi_1, \Psi_2$}
+\DisplayProof
+\qquad 
+\AxiomC{\it LC Cut}
+\noLine
+\UnaryInfC{$ A \vdash_L \Delta ; \Psi_1, T\quad T \vdash_C  \Psi_2$}
+\UnaryInfC{$A \vdash_L \Delta ; \Psi_1, \Psi_2$}
+\DisplayProof\\
+\\
+\AxiomC{\it LL exchange}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta_1, B_1, B_2, \Delta_2; \Psi $}
+\UnaryInfC{$A \vdash_L \Delta_1, B_2, B_1, \Delta_2; \Psi$} 
+\DisplayProof\qquad 
+\AxiomC{\it LC exchange}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta; \Psi_1, S, T, \Psi_2 $}
+\UnaryInfC{$A \vdash_L \Delta;  \Psi_1, T, S, \Psi_2 $} 
+\DisplayProof\\
+\\
+\AxiomC{\it L weakening }
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; \Psi $}
+\UnaryInfC{$A \vdash_L \Delta ; T, \Psi $} 
+\DisplayProof
+\qquad
+\AxiomC{\it L contraction}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; T, T,  \Psi $}
+\UnaryInfC{$A \vdash_L \Delta ; T, \Psi $} 
+\DisplayProof\\
+\\
+ \AxiomC{\it $\bot$ R}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; \Psi$}
+\UnaryInfC{$A \vdash_L \bot, \Delta ; \Psi$} 
+\DisplayProof \qquad 
+\AxiomC{$\bot$ L} 
+\noLine
+\UnaryInfC{$\bot \vdash_L$}
+\DisplayProof\\
+\\
+\AxiomC{\it L subtraction R }
+\noLine
+\UnaryInfC{$A \vdash_L \Delta_1; \Psi_1, B_1 \qquad  
+B_2 \vdash_L \Delta_2; \Psi_2$}
+\UnaryInfC{$A \vdash_L B_1 \lsub B_2 \Delta_1, \Delta_2; \Psi_1, \Psi_2$}
+\DisplayProof\qquad
+\AxiomC{\it L subtraction L}
+\noLine
+\UnaryInfC{$B_1 \vdash_L B_2, \Delta ;  \Psi$}
+\UnaryInfC{$B_1 \lsub B_2 \vdash_L \Delta ; \Psi$}
+\DisplayProof
+\\
+\\
+\AxiomC{\it L disjunction R}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta, B_1, B_2;  \Psi$}
+\UnaryInfC{$A \vdash_L \Delta, B_1\oplus B_2;  \Psi$}
+\DisplayProof \qquad
+\AxiomC{\it L disjunction L$_2$}
+\noLine
+\UnaryInfC{$B_1 \vdash_L \Delta_1; \Psi_1 \qquad B_2 \vdash_L  \Delta_2; \Psi_2$}
+\UnaryInfC{$B_1\oplus B_2 \vdash_L \Delta_1, \Delta_2 ; \Psi_1, \Psi_2$}
+\DisplayProof \\
+\\
+\hline
+\\
+\centerline{\it J rules}
+\\
+\\
+\AxiomC{\it J R}
+\noLine
+\UnaryInfC{$A \vdash_L, \Delta ; T, \Psi $}
+\UnaryInfC{$A \vdash_L, \Delta, J T ; \Psi$}
+\DisplayProof
+\qquad
+\AxiomC{\it J L}
+\noLine
+\UnaryInfC{$T \vdash_C \Psi $}
+\UnaryInfC{$J T \vdash_L ; \Psi$}
+\DisplayProof
+\\
+\\
+\hline
+  \end{tabular} 
+  \end{small}
+ \caption{Linear {\bf  co-LNL}}
+  \label{Linear-coint}
+ \end{center} 
+\end{table}
+
+
+We follow Benton almost verbatim in our sequent calculus for {\bf co-LNL}. 
+We use $n$-ary cuts:
+\begin{center}
+ \begin{tabular}{cc}
+\AxiomC{$T \vdash_C \Psi, S^n\qquad S\vdash_C \Psi'$}
+\RightLabel{CC-cut$_n$}
+\UnaryInfC{$T\vdash_C \Psi, \Psi'$}
+\DisplayProof &\qquad 
+\AxiomC{$A \vdash_L \Delta; \Psi, S^n\qquad S\vdash_C \Psi'$}
+\RightLabel{LC-cut$_n$}
+\UnaryInfC{$A\vdash_C \Delta; \Psi, \Psi'$}
+\DisplayProof
+\end{tabular}
+\end{center}
+where $S^n = S, \ldots, S$ $n$-times. We call $\mathbf{co-LNL}^+$ the system {\bf co-LNL} with $n$-cuts replacing 
+ordinary 1-cuts. Such cuts are admissible in {\bf co-LNL} and cut-elimination for $\mathbf{co-LNL}^+$ implies 
+cut-elimination for {\bf co-LNL}.
+
+We have the familiar definitions: 
+\begin{itemize}
+\item the \emph{rank} $|A|$ or $|S|$ of a formula $A$ or $S$ is the number of the logical symbols in it.
+\item the \emph{cut-rank} $c(\Pi)$ of a proof $\Pi$ is the maximum of the ranks of the cut formulas in $\Pi$ plus one; 
+if $\Pi$ is cut-free its cut rank is 0.
+\item the \emph{depth} $d(\Pi)$ of a proof $\Pi$ is the length of the longest path in the proof tree.
+\end{itemize}
+\begin{lemma}
+\end{lemma} ({\bf Cut Reduction}) 
+\begin{enumerate}
+\item If $\Pi_1$ is a derivation of $T \vdash_C \Psi, S^n$ and  $\Pi_2$ is a derivation of $S \vdash_C\Psi'$ with 
+$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_C \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
+\item If $\Pi_1$ is a derivation of $T \vdash_L \Delta; \Psi, S^n$ and  $\Pi_2$ is a derivation of $S \vdash_C\Psi'$ with 
+$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_L \Delta; \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
+\item If $\Pi_1$ is a derivation of $B\vdash_L \Delta; \Psi, A^n$ and  $\Pi_2$ is a derivation of $A \vdash_L\Delta', \Psi'$ with $c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $B\vdash_C\Delta, \Delta', \Psi, \Psi'$ with $c(\Pi) \leq |A|$.
+\end{enumerate}
+
+\noindent
+{\bf Proof.} By induction on $d(\Pi_1) + d(\Pi_2)$. 
+
+\noindent
+We consider only the case where the last inferences of $\Pi_1$ and $\Pi_2$ are logical inferences. The other cases 
+are handled mainly by permutation of inferences and use of the inductive hypothesis; we refer to Benton's text for them.
+
+\vspace{1ex}
+
+ \noindent
+\emph{J right / J left}. We have 
+\begin{center}
+\AxiomC{$\pi_1$}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta, J T^n ; T, \Psi$}
+\LeftLabel{$\Pi_1 =$} 
+\RightLabel{$J R$}
+\UnaryInfC{$A \vdash_L \Delta, J T^{n+1}; \Psi$}
+\DisplayProof
+\qquad 
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$T \vdash_C \Psi'$}
+\LeftLabel{$\Pi_2 =$} 
+\RightLabel{$J L$}
+\UnaryInfC{$JT \vdash_L ; \Delta, J T^{n+1}, \Psi'$}
+\DisplayProof
+\end{center}
+By the inductive hypothesis appled to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $A \vdash_L \Delta; T, \Psi, \Psi'$
+with $c(\Pi') \leq |J T| = |T | + 1$.  Then the following derivation 
+\begin{center}
+\AxiomC{$\Pi'$}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; T, \Psi, \Psi'$}
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$T \vdash_C \Psi'$}
+\LeftLabel{$\Pi_1 =$} 
+\RightLabel{$cut$}
+\BinaryInfC{$A \vdash_L \Delta, \Psi, \Psi', \Psi'$}
+\doubleLine
+\RightLabel{\it contractions}
+\UnaryInfC{$A \vdash_L \Delta, \Psi, \Psi'$}
+\DisplayProof
+\end{center}
+has cut rank $\mathit{max}( |T|+1, c(\Pi'), c(\pi_2)) = |T|+1 = |J T|$. 
+
+\vspace{1ex}
+
+ \noindent
+\emph{H right / H left}. We have 
+\begin{center}
+\AxiomC{$\pi_1$}
+\noLine
+\UnaryInfC{$B \vdash_L \Delta, A; H A^n ; \Psi$}
+\LeftLabel{$\Pi_1 =$} 
+\RightLabel{$H R$}
+\UnaryInfC{$B \vdash_L \Delta; H A^{n+1}, \Psi$}
+\DisplayProof
+\qquad 
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$A \vdash_L ; \Psi'$}
+\LeftLabel{$\Pi_2 =$} 
+\RightLabel{$H L$}
+\UnaryInfC{$H A \vdash_C ; \Psi'$}
+\DisplayProof
+\end{center}
+By the inductive hypothesis applied to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $B \vdash_L \Delta; A, \Psi, \Psi'$
+with $c(\Pi') \leq |H A| = |A | + 1$.  Then the following derivation 
+\begin{center}
+\AxiomC{$\Pi'$}
+\noLine
+\UnaryInfC{$B \vdash_L \Delta ; A, \Psi, \Psi'$}
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$A \vdash_L ; \Psi'$}
+\LeftLabel{$\Pi_1 =$} 
+\RightLabel{$cut$}
+\BinaryInfC{$B \vdash_L \Delta, \Psi, \Psi', \Psi'$}
+\doubleLine
+\RightLabel{\it contractions}
+\UnaryInfC{$B \vdash_L \Delta, \Psi, \Psi'$}
+\DisplayProof
+\end{center}
+has cut rank $\mathit{max}( |A|+1, c(\Pi'), c(\pi_2)) = |A|+1 = |H A|$. 
+
+\vspace{1ex}
+
+ \noindent
+\emph{+ right$_1$ / + left}.  We have 
+\begin{center}
+\AxiomC{$\pi_1$}
+\noLine
+\UnaryInfC{$S \vdash_C T_1, (T_1 + T_2)^{n}, \Psi$}
+\LeftLabel{$\Pi_1 =$} 
+\RightLabel{$+ R$}
+\UnaryInfC{$S \vdash_C (T_1 + T_2)^{n+1}, \Psi$}
+\DisplayProof
+\qquad 
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$T_1 \vdash_C \Psi_1$}
+\AxiomC{$\pi_3$}
+\noLine
+\UnaryInfC{$T_2 \vdash_C \Psi_2$}
+\LeftLabel{$\Pi_2 =$} 
+\RightLabel{$+ L$}
+\BinaryInfC{$T_1+ T_2 \vdash_C ; \Psi_1, \Psi_2$}
+\DisplayProof
+\end{center}
+
+\noindent
+If $n = 0$, then the reduction is as follows:
+\begin{center}
+\begin{tabular}{c}
+\AxiomC{$\pi_1$}
+\noLine
+\UnaryInfC{$S \vdash_C T_1, \Psi$}
+\LeftLabel{$\Pi_1 =$} 
+\RightLabel{$+ R$}
+\UnaryInfC{$S \vdash_C T_1 + T_2, \Psi$}
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$T_1 \vdash_C \Psi_1$}
+\AxiomC{$\pi_3$}
+\noLine
+\UnaryInfC{$T_2 \vdash_C \Psi_2$}
+\LeftLabel{$\Pi_2 =$} 
+\RightLabel{$+ L$}
+\BinaryInfC{$T_1+ T_2 \vdash_C  \Psi_1, \Psi_2$}
+\RightLabel{\it cut}
+\BinaryInfC{$S\vdash_C \Psi, \Psi_1, \Psi_2$}
+\DisplayProof\\
+\\
+ reduces to \\ 
+\\
+\AxiomC{$\pi_1$}
+\noLine
+\UnaryInfC{$S \vdash_C T_1, \Psi$}
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$T_1 \vdash_C \Psi_1$}
+\RightLabel{\it cut}
+\BinaryInfC{$S \vdash_C \Psi, \Psi_1$}
+\doubleLine
+\LeftLabel{$\Pi$}
+\RightLabel{\it weakening}
+\UnaryInfC{$S\vdash_C \Psi, \Psi_1, \Psi_2$}
+\DisplayProof
+\end{tabular}
+\end{center}
+
+\noindent
+Here $c(\Pi) = max(|T_1 + 1|, c(\pi_1), c(\pi_2)) \leq |T_1 + T_2|$.
+
+\vspace{1ex}
+ 
+\noindent
+If $n > 0$, then by the inductive hypothesis applied to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of 
+$S \vdash_C T_1, \Psi, \Psi_1, \Psi_2$ with $c(\Pi') \leq |T_1+ T_2| = |T_1|+|T_2 | + 1$.  Then the following derivation 
+\begin{center}
+\AxiomC{$\Pi' $}
+\noLine
+\UnaryInfC{$S \vdash_C T_1, \Psi, \Psi_1, \Psi_2$}
+\AxiomC{$\pi_2$}
+\noLine
+\UnaryInfC{$T_1 \vdash_C  \Psi_1$}
+\LeftLabel{$\Pi =$} 
+\RightLabel{$cut$}
+\BinaryInfC{$S \vdash_C \Psi, \Psi_1, \Psi_1, \Psi_2$}
+\doubleLine
+\RightLabel{\it contractions}
+\UnaryInfC{$S \vdash_C \Psi, \Psi_1, \Psi_2$}
+\DisplayProof
+\end{center}
+has cut rank $\mathit{max}( |T_1|+1, c(\Pi'), c(\pi_2)) \leq |T_1 + T_2|$. 
+
+\vspace{1ex}
+
+\noindent
+$\lsub$ right / $\lsub$ left. We have 
+\begin{center}
+\begin{tabular}{c}
+\AxiomC{$\pi_1$ }
+\noLine
+\UnaryInfC{$A \vdash_L \Delta_1; \Psi_1, B_1$}
+ \AxiomC{$\pi_2$ } 
+\noLine
+\UnaryInfC{$B_2 \vdash_L \Delta_2; \Psi_2$}
+\LeftLabel{$\Pi_1 =$}
+\RightLabel{$\lsub R$}
+\BinaryInfC{$A \vdash_L B_1 \lsub B_2,  \Delta_1, \Delta_2; \Psi_1, \Psi_2$}
+% 
+\AxiomC{$\pi_3$}
+\noLine
+\UnaryInfC{$B_1 \vdash_L B_2, \Delta ;  \Psi$}
+\LeftLabel{$\Pi_2 =$}
+\RightLabel{$\lsub L$}
+\UnaryInfC{$B_1 \lsub B_2 \vdash_L \Delta ; \Psi$}
+\RightLabel{\it cut}
+\BinaryInfC{$A \vdash_L \Delta_1, \Delta_2, \Delta ; \Psi_1, \Psi_2, \Psi$}
+\DisplayProof\\
+\\
+reduces to $\Pi$ 
+\\
+\\
+\AxiomC{$\pi_1$}
+\noLine
+\UnaryInfC{$A\vdash_L \Delta_1, B_1; \Psi_1$}
+ \AxiomC{$\pi_3$}
+\noLine
+\UnaryInfC{$B_1 \vdash_L B_2, \Delta ;  \Psi$}
+% \LeftLabel{$\Pi'$}
+\RightLabel{$cut_1$}
+\BinaryInfC{$A\vdash_L \Delta_1, \Delta, B_2; \Psi_1,\Psi$}
+ \AxiomC{$\pi_2$ } 
+\noLine
+\UnaryInfC{$B_2 \vdash_L \Delta_2; \Psi_2$}
+\RightLabel{$cut_2$}
+\BinaryInfC{$A \vdash_L \Delta_1, \Delta_2, \Delta; \Psi_1, \Psi_2, \Psi$}
+\DisplayProof
+\end{tabular}
+\end{center}
+The resulting derivation $\Pi$ has cut rank $c(\Pi) = max(|B_1|+1, c(\pi_1), c(\pi_2), |B_2|+1, c(\pi_3)) \leq |B_1\lsub B_2|$.
+\begin{lemma}
+Let $\Pi$ be a {\bf co-}$\mathbf{LNL}^+$ proof of a sequent  $S \vdash_C \Psi$ or $A \vdash_L \Delta; \Psi$ with 
+$c(\Pi)>0$. Then there exists a proof $\Pi'$ of the same sequent with $c(\Pi') < c(\Pi)$. 
+\end{lemma} 
+
+\noindent
+{\bf Proof.} By induction on $d(\Pi)$. If the last inference is not a cut, then we apply the 
+inductive hypothesis. If it the last inference is a cut on a formula $A$, but $A$ is not of maximal rank
+among the cut formulas, so that $c(\Pi) > |A|+1$, then we apply the induction hypothesis. Finally,  
+if the last inference is a cut on $A$ and $c(\Pi) = |A| + 1$ we have 
+\begin{center}
+\AxiomC{$\Pi_1$}
+\noLine
+\UnaryInfC{$B \vdash_L \Delta, A ; \Psi$}
+\AxiomC{$\Pi_2$}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta' ; \Psi'$}
+\LeftLabel{$\Pi =$}
+\RightLabel{\it LL cut}
+\BinaryInfC{$B \vdash_L \Delta, \Delta'; \Psi, \Psi'$}
+\DisplayProof
+\end{center}
+Since $c(\Pi_1), c(\Pi_2) \leq |A| + 1$ by induction we can construct derivations $\Pi'_1$, $\Pi'_2$ of the sequent premises of the cut with $c(\Pi'_1), c(\Pi'_2) \leq |A|$. Then by the Cut-reduction Lemma we can construct a $\Pi'$ 
+proving $B \vdash_L \Delta, \Delta'; \Psi, \Psi'$ with $c(\Pi') \leq |A|$ as required. 
+\begin{theorem}
+Let $\Pi$ be a proof of a sequent $S \vdash_C \Psi$ or $A\vdash_L \Delta ; \Psi$ such that $c(\Pi)> 0$. There is an 
+algorithm  which yields a cut free proof of the same sequent. 
+\end{theorem}
+
+\noindent
+{\bf Proof} By induction on $c(\Pi)$ using the previous lemma. 
+
+\begin{remark}\label{additive}
+Contexts are treated multiplicatively. Some cases would be best treated with additive contexts, for instance non-linear disjunction elimination to match  the categorical interpretation of disjunction as coproduct. 
+Of course additive contexts can be simulated using weakening and contraction.  
+ \[
+\AxiomC{\it additive disjunction elimination}
+\noLine
+\UnaryInfC{$T_1 \vdash_C \Psi\qquad T_2\vdash_C \Psi$}
+\UnaryInfC{$T_1 + T_2 \vdash \Psi$}
+\DisplayProof
+\]
+\end{remark}
+\section{Sequent-style Natural Deduction}
+
+In Tables \ref{non-linear-coint-natded},\ref{linear-coint-natded} we give the rules of a sequent-style natural deduction system \emph{co-ND}  for linear - non linear co-intuitionistic logic, corresponding to the sequent calculus $\mathbf{co-LNL}$. 
+Some rules are formulated here \emph{additively} (see remark \ref{additive}).
+\begin{table}
+ \begin{center}
+  \begin{small}
+   \begin{tabular}{|c|}
+\hline
+\\
+\AxiomC{\it C assumption}
+\noLine
+\UnaryInfC{$S \vdash_C S  $}
+\DisplayProof\\
+
+\\
+ \AxiomC{\it C zero}
+\noLine
+\UnaryInfC{$S\vdash_C 0, \Psi \qquad S_1 \vdash_C \Psi_1\quad \ldots\quad S_n \vdash \Psi_n$} 
+\UnaryInfC{$S \vdash_C  \Psi, \Psi_1\quad \ldots\quad\Psi_n$} 
+\DisplayProof\\
+\\
+\AxiomC{\it C subtraction intro }
+\noLine
+\UnaryInfC{$S \vdash_C \Psi_1, T_1 \qquad  
+T_2 \vdash_C \Psi_2$}
+\UnaryInfC{$S \vdash_C \Psi_1, \Psi_2, T_1 - T_2$}
+\DisplayProof\qquad
+\AxiomC{\it C subtraction elim}
+\noLine
+\UnaryInfC{$S \vdash_C \Psi_1, T_1 - T_2\qquad T_1 \vdash_C T_2, \Psi_2$}
+\UnaryInfC{$S \vdash_C \Psi_1,  \Psi_2$} 
+\DisplayProof\\
+\\
+\AxiomC{\it C disjunction intro$_1$}
+\noLine
+\UnaryInfC{$S \vdash_C  \Psi, T_1$}
+\UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
+\DisplayProof \qquad
+\AxiomC{\it C disjunction intro$_2$}
+\noLine
+\UnaryInfC{$S \vdash_C  \Psi, T_2$}
+\UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
+\DisplayProof \\
+\\
+\AxiomC{\it C disjunction elim}
+\noLine
+\UnaryInfC{$S \vdash_C \Psi, T_1 + T_2 \qquad T_1 \vdash_C \Psi' \quad T_2 \vdash_C \Psi'$}
+\UnaryInfC{$S \vdash_C \Psi,  \Psi'$}
+\DisplayProof\\
+\\
+\AxiomC{\it H elim}
+\noLine
+\UnaryInfC{$S \vdash_C  \Psi, HA \quad A \vdash_L ; \Psi$}
+\UnaryInfC{$S \vdash_C \Psi$}
+\DisplayProof\\
+\\
+\\
+\hline
+  \end{tabular} 
+  \end{small}
+ \caption{Natural deduction for non-linear {\it  co-ND}}
+  \label{non-linear-coint-natded}
+ \end{center} 
+\end{table}
+
+\begin{table}
+ \begin{center}
+  \begin{small}
+   \begin{tabular}{|c|}
+\hline
+\\
+\AxiomC{\it L identity}
+\noLine
+\UnaryInfC{$A \vdash_L A $}
+\DisplayProof\\
+\\
+ \AxiomC{\it $\bot$ intro}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; \Psi$}
+\UnaryInfC{$A \vdash_L \bot, \Delta ; \Psi$} 
+\DisplayProof \qquad 
+\AxiomC{\it $\bot$ elim} 
+\noLine
+\UnaryInfC{$A \vdash_L \bot, \Delta$}
+\UnaryInfC{$A \vdash_L  \Delta$}
+\DisplayProof\\
+\\
+\AxiomC{\it L subtraction intro }
+\noLine
+\UnaryInfC{$A \vdash_L \Delta_1; \Psi_1, B_1 \qquad  
+B_2 \vdash_L \Delta_2; \Psi_2$}
+\UnaryInfC{$A \vdash_L B_1 \lsub B_2, \Delta_1, \Delta_2; \Psi_1, \Psi_2$}
+\DisplayProof\qquad
+\AxiomC{\it L subtraction elim}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta_1, B_1 \lsub B_2, 	\Psi_1\qquad B_1 \vdash_L B_2, \Delta_2 ;  \Psi_2$}
+\UnaryInfC{$B_1 \lsub B_2 \vdash_L \Delta_1, \Delta_2 ; \Psi_1, \Psi_2$}
+\DisplayProof
+\\
+\\
+\AxiomC{\it L disjunction intro}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta, B_1, B_2;  \Psi$}
+\UnaryInfC{$A \vdash_L \Delta, B_1\oplus B_2;  \Psi$}
+\DisplayProof \qquad
+\AxiomC{\it L disjunction elim$_2$}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta, B_1\oplus B_2 ; \Psi \qquad B_1 \vdash_L \Delta_1; \Psi_1 \quad B_2 \vdash_L  \Delta_2; \Psi_2$}
+\UnaryInfC{$A \vdash_L \Delta, \Delta_1, \Delta_2 ; \Psi, \Psi_1, \Psi_2$}
+\DisplayProof \\
+\\
+\AxiomC{\it J intro}
+\noLine
+\UnaryInfC{$A \vdash_L, \Delta ; T, \Psi $}
+\UnaryInfC{$A \vdash_L, \Delta, J T ; \Psi$}
+\DisplayProof
+\qquad
+\AxiomC{\it J elim}
+\noLine
+\UnaryInfC{$S \vdash_L \Delta, J T; \Psi_1 \qquad T \vdash_C \Psi_2 $}
+\UnaryInfC{$S \vdash_L \Delta;  \Psi_1, \Psi_2$}
+\DisplayProof\\
+\\
+\AxiomC{\it H intro}
+\noLine
+\UnaryInfC{$A \vdash_L, \Delta, B ; \Psi $}
+\UnaryInfC{$A \vdash_L, \Delta; H B, \Psi$}
+\DisplayProof\qquad 
+\AxiomC{H elim$_1$}
+\noLine
+\UnaryInfC{$B \vdash_L \Delta; \Psi_1, HA_2 \qquad A \vdash_L; \Psi_2$}
+\UnaryInfC{$B \vdash_L \Delta; \Psi_1, \Psi_2$}
+\DisplayProof 
+\\
+\\
+\hline
+  \end{tabular} 
+  \end{small}
+ \caption{Natural Deduction for linear {\it co-ND}}
+  \label{linear-coint-natded}
+ \end{center} 
+\end{table}
+
+\begin{lemma}\label{admissible} The following rules are admissible in the natural deduction system \emph{co-ND}: 
+
+% {\bf Admissible Rules:}
+\[
+\AxiomC{\it C weakening }
+\noLine
+\UnaryInfC{$S \vdash_C \Psi $}
+\UnaryInfC{$S \vdash_C T, \Psi $} 
+\DisplayProof
+\qquad
+\AxiomC{\it C contraction}
+\noLine
+\UnaryInfC{$S \vdash_C T, T, \Psi $}
+\UnaryInfC{$S \vdash_C T, \Psi $} 
+\DisplayProof\\
+\]
+\[
+\AxiomC{\it CC substitution }
+\noLine
+\UnaryInfC{$S \vdash_C \Psi_1, T \qquad T \vdash_C  \Psi_2$}
+\UnaryInfC{$S \vdash_C \Psi_1, \Psi_2$}
+\DisplayProof  
+\]
+\[
+\AxiomC{\it L weakening }
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; \Psi $}
+\UnaryInfC{$A \vdash_L \Delta ; T, \Psi $} 
+\DisplayProof
+\qquad
+\AxiomC{\it L contraction}
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; T, T,  \Psi $}
+\UnaryInfC{$A \vdash_L \Delta ; T, \Psi $} 
+\DisplayProof
+\]
+\[
+\AxiomC{\it LC substitution }
+\noLine
+\UnaryInfC{$A \vdash_L \Delta ; \Psi_1, T \qquad T \vdash_C  \Psi_2$}
+\UnaryInfC{$A \vdash_L \Delta ; \Psi_1, \Psi_2$}
+\DisplayProof 
+\qquad 
+\AxiomC{\it LL substitution }
+\noLine
+\UnaryInfC{$B \vdash_L \Delta_1, A ; \Psi_1 \qquad A \vdash_L \Delta_2 ; \Psi_2$}
+\UnaryInfC{$B \vdash_L \Delta_1, \Delta_2, \Psi_1, \Psi_2$}
+\DisplayProof 
+\]
+\end{lemma}
+
+\begin{proposition}
+There are functions $\mathcal{S}: \mathit{co-ND} \rightarrow \mathbf{co-LNL}$ 
+and $\mathcal{N}:  \mathbf{co-LNL} \rightarrow \mathit{co-ND}$ from natural deduction to sequent 
+calculus derivations. 
+\end{proposition}
+Notice that the right rules of the sequent calculus and the introductions of natural deduction
+have the same form. Elimination rules are derivable from left rules with \emph{cut} and left 
+rules are derivable using substitutions. For instance, the \emph{C zero} rule 
+\[
+ \AxiomC{\it C zero}
+\noLine
+\UnaryInfC{$S\vdash_C 0, \Psi \qquad S_1 \vdash_C \Psi_1\quad \ldots\quad S_n \vdash \Psi_n$} 
+\UnaryInfC{$S \vdash_C  \Psi, \Psi_1\quad \ldots\quad\Psi_n$} 
+\DisplayProof
+\]
+is derivable in the sequent calculus as follows: 
+\[
+\AxiomC{$S\vdash_C 0, \Psi$}
+\AxiomC{$0\vdash S_1, \ldots S_n$}
+\RightLabel{\it cut}
+\BinaryInfC{$S\vdash_C \Psi, S_1, \ldots S_n$}
+\AxiomC{$ S_1 \vdash_C \Psi_1$}
+\RightLabel{\it cut}
+\BinaryInfC{$S\vdash_C  \Psi, \Psi_1, S_2, \ldots, S_n$}
+\AxiomC{$\vdots$} 
+\BinaryInfC{$S\vdash_C  \Psi, \Psi_1, \ldots \Psi_{n-1}, S_n$}
+\AxiomC{$S_n \vdash \Psi_n$} 
+\RightLabel{\it cut}
+\BinaryInfC{$S\vdash_C \Psi, \Psi_1, \ldots \Psi_{n-1}, \Psi_n$ }
+\DisplayProof
+\]
+
+\section{Term Assignment}
+\subsection{Terms}
+
+The term calculus is given by the following grammar: 
+\begin{center}
+
+\begin{tabular}{rcl}
+&&{\bf non linear terms:}\\
+\\
+$s, t$ & \quad ::=\quad &$\ x\ |\  \mathtt{connect}_w\ \mathtt{to}\  t\ |\  t_1\cdot t_2\ |\  \mathtt{false}\  t\ $\\
+&& $\ |\ x(t)\ |\ \mathtt{mkc}(t, x)\ |\  \mathtt{inl}\ t\ |\ \mathtt{inr}\ t \ |\  \mathtt{case}\ t_1\ \mathtt{of}\ x.t_2 , y.t_3$\\
+&& $\ |\ He\ |\  \mathtt{let}J x\ =\ e\ \mathtt{in}\ t_2\ |\ \mathtt{let} H x\ =\ t_1\ \mathtt{in}\ t_2$\\
+&& $\ |\ \mathtt{postp} (x 􏰀\mapsto t_1, t_2)\ |\ (t) \ |\ (e) $ \\
+\\
+&&{\bf linear terms:}\\
+\\
+$e, u$ &\quad::=\quad & $ \ x\ |\  \mathtt{connect}_{\bot}\ \mathtt{to}\ e\ |$ \\
+&& $\ |\  \mathtt{mkc}(e, x)\ |\  x(e)\ |\  e_1\oplus e_2\ |\ \mathtt{casel}\ e\ |\  \mathtt{caser}\ e\ |\ Jt$ \\
+&& $\ |\  \mathtt{postp}_{\bot}\ e\ |\ \mathtt{postp} (x 􏰀\mapsto e_1, e_2)$\\
+\end{tabular}
+\end{center}
+\begin{remark}
+Let us call the terms of the form $\mathtt{postp} (x 􏰀\mapsto t_1, t_2)$, $\mathtt{postp}_{\bot}\ e$ and 
+$\mathtt{postp} (x 􏰀\mapsto e_1, e_2)$ $p$ \emph{terms}. Let us say that a term $t$ is \emph{$p$-normal}  if $t$ does not 
+contain any $p$ term as a proper subterm. Thus the class of \emph{$p$-normal} terms $r$ is defined by the following 
+grammar:
+\begin{center}
+\begin{tabular}{rcl}
+% &&{\bf non linear terms:}\\
+$s, t$ & \quad ::=\quad &$\ x\ |\  \mathtt{connect}_w\ \mathtt{to}\  t\ |\  t_1\cdot t_2\ |\  \mathtt{false}\  t\ $\\
+&& $\ |\ x(t)\ |\ \mathtt{mkc}(t, x)\ |\   \mathtt{inl}\ t\ |\ \mathtt{inr}\ t \ |\  \mathtt{case}\ t_1\ \mathtt{of}\ x.t_2 , y.t_3$\\
+&& $\ |\ He\ |\  \mathtt{let}J x\ =\ e\ \mathtt{in}\ t_2\ |\ \mathtt{let} H x\ =\ t_1\ \mathtt{in}\ t_2$\\
+$p$ &\quad ::= \quad &\ $\mathtt{postp} (x 􏰀\mapsto t_1, t_2)$\\
+% &&{\bf linear terms:}\\
+% \\
+$e, u$ &\quad::=\quad & $ \ x\ |\  \mathtt{connect}_{\bot}\ \mathtt{to}\ e\ |$ \\
+&& $\ |\  \mathtt{mkc}(e, x)\ |\  x(e)\ |\  e_1\oplus e_2\ |\ \mathtt{casel}\ e\ |\  \mathtt{caser}\ e\ |\ Jt$ \\
+$p$ &\quad ::=\quad & $\ \mathtt{postp}_{\bot}\ e\ |\ \mathtt{postp} (x 􏰀\mapsto e_1, e_2)$\\
+$r$ &\quad ::= \quad & $ t \ |\ e\ |\ p $
+\end{tabular}
+\end{center}
+\end{remark}
+When the calculus is typed, linear $p$-terms can be typed with $\bot$, non-linear $p$ terms can be typed with $0$.
+In presence of the $\bot$ rule and of the 0-rule it is possible to replace a non-$p$-normal $p$-term removed by a
+$\beta$-reduction with a $\bot$ or 0-rule. However this creates an anomaly in the proof theory since the newly 
+introduced unit rule is unnecessary and could be eliminated in the case of $p$-normal terms. Hence we choose 
+to leave the typing of $p$ terms implicit in the syntax and enforce the requirement of $p$-normality.
+
+\vspace{1ex}
 
 \begin{definition}
-  \label{def:dualLNL-syntax-TA}
-  The syntax for the Dual LNL Term Assignment is as follows:
-  \[
-  \begin{array}{lll}
-    \begin{array}{rrl}
-    \textbf{(cointuitionistic terms)} & [[s]],[[t]] ::= & [[x]] \mid
-           [[connectW to t]] \mid [[t1 * t2]] \mid [[false t]] \mid
-           [[x(t)]] \mid [[mkc (t , x)]] \mid\\ & & [[postp(x -> t1 , t2)]]
-           \mid [[inl t]] \mid [[inr t]] \mid [[case t1 of
-               x.t2,y.t3]] \mid \\ & & [[H e]] \mid [[let H x = t1 in t2]]
-           \mid [[let J x = e in t]]\\\\
-           
-   \textbf{(linear cointuitionistic terms)} & [[e]],[[u]] ::= & [[x]] \mid
-          [[connectP to e]] \mid [[postpP e]] \mid \\ & &
-          [[postp (x -> e1 , e2)]] \mid
-          [[mkc(e,x)]] \mid [[x(e)]] \mid [[e1 (+) e2]] \mid \\ & & 
-          [[casel e]] \mid [[caser e]] \mid [[J t]]\\\\
-
-   \textbf{(cointuitionistic contexts)} & [[I]], [[PI]] ::= & [[.]] \mid [[t : T]] \mid [[I,PI]]\\
-   \textbf{(linear cointuitionistic contexts)} & [[G]], [[D]] ::= & [[.]] \mid [[e : A]] \mid [[G,D]]\\
-  \end{array}
-   \\\\
-   \begin{array}{rll}
-     \textbf{(cointuitionistic sequents)} & [[x : R |-C I]]\\
-     \textbf{(linear cointuitionistic sequents)} & [[x : A |-L D;I]]\\
-   \end{array}
-  \end{array}
-  \]
+The free variables $FV(e)$ of a linear term $e$ are defined as follows:
+\begin{center}
+\begin{tabular}{rcl}
+$FV(x)$ &\ =\ & $\{ x\}$\\
+$FV(\mathtt{connect}_{\bot} \mathtt{to}\; e)$ &\ =\ &$FV(e)$ \\ 
+$FV(x(e))$ &\ =\ &$FV(e)$\\
+$FV(\mathtt{mkc}(e,y)$ &\ =\ & $FV(e)$\\
+$FV(e_1\oplus e_2)$ &\ =\ & $FV(e_1) \cup FV(e_2)$\\
+$FV(\mathtt{casel}\; e)$ = $FV(\mathtt{caser}\; e)$ &\ =\ & $FV(e)$\\
+\end{tabular}
+\end{center}
+The free variables of a $p$-term are defined s follows: 
+\[
+FV(\mathtt{postp}_{\bot}\ e) = FV(e);\  FV(\mathtt{postp} (x 􏰀\mapsto e_1, e_2)) = FV(e_1) \smallsetminus \{x\} \cup FV(e_2)
+\] 
+and similarly for terms $\mathtt{postp} (x 􏰀\mapsto t_1, t_2)$.
+The free variables $FV(t)$ of a non-linear term $t$ are defined as follows:
+\begin{center}
+\begin{tabular}{rcl}
+$FV(x)$ &\ =\ & $\{ x\}$\\
+$FV(\mathtt{connect}_w \mathtt{to}\; t)$ &\ =\ &$FV(t)$ \\ 
+$FV(t_1\cdot t_2) $ &\ =\ &$FV(t_1)\cup FV(t_2) $\\
+$FV(\mathtt{false}\ t)$ &\ =\ & $FV(t) $\\
+$FV(x(t))$ &\ =\ &$FV(t)$\\
+$FV(\mathtt{mkc}(t,y)$ &\ =\ & $FV(t)$\\
+$FV(\mathtt{inl}\; t) = FV(\mathtt{inr}\; t)$ &\ =\ &$FV(t)$\\
+$FV(\mathtt{case}\; t_1 \mathtt{of}\; x.t_2,y.t_3)$ &\ =\ &$FV(t_1)\cup FV(t_2)\smallsetminus\{x\}\cup FV(t_3)\smallsetminus \{y\}$\\
+$FV(\mathtt{let}\; Jy = e\; \mathtt{in}\; t)$ &\ =\ &$FV(e)\cup FV(t)\smallsetminus \{y\} $\\
+$FV(\mathtt{let}\; Hy = t\; \mathtt{in}\; e)$ &\ =\ & $FV(t)\cup FV(e)\smallsetminus \{y\} $\\
+$FV(t)$ &\ =\ & $FV(t)$
+\end{tabular}
+\end{center}
 \end{definition}
 
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \DualLNLLogicdruleCXXvar{} \and
-      \DualLNLLogicdruleCXXweak{} \and
-      \DualLNLLogicdruleCXXcontr{} \and
-      \DualLNLLogicdruleCXXzero{} \and
-      \DualLNLLogicdruleCXXsubi{} \and
-      \DualLNLLogicdruleCXXsube{} \and
-      \DualLNLLogicdruleCXXoriOne{} \and
-      \DualLNLLogicdruleCXXoriTwo{} \and
-      \DualLNLLogicdruleCXXore{} \and
-      \DualLNLLogicdruleCXXhe{}
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Cointuitionistic Typing Rules}
-  \label{fig:coint-typing-rules}
-\end{figure}
+\subsection{Contexts}
+We type terms by assigning terms to natural deduction derivations in \emph{co-ND}. To denote a linear context 
+we write $\Delta = e_1: A_1, \ldots, e_n: A_n$  and $|\Delta| = A_1, \ldots, A_n$ for the list of its types. 
+Similarly we use $\Psi = t_1: S_1, \ldots, t_n: S_n$  and $|\Psi| = S_1, \ldots, S_n$. 
+The grammar of contexts is 
+as follows:
+\begin{center}
+   \begin{tabular}{rcl}
+$\Psi, \Pi$ \qquad & ::= & $| \cdot\ |\ t : T\ |\ \Psi, \Pi$\\
+$\Gamma, \Delta$\qquad&  ::= & $|\cdot\ |\ e: A |\ \Gamma, \Gamma'$\\
+\end{tabular}
+\end{center}
+We also use the notation 
+\[
+\Delta = e_1: A_1\| \ldots \| e_n: A_n\qquad \hbox{and}\qquad \Psi = t_1: S_1, \ldots, t_n: S_n
+\]
+for contexts. Here the operation $\|$ (\emph{``parallel composition})'' is regarded as associative, commutative and 
+having the empty context as identity. 
+\begin{definition}
+A context $\Psi$ or $\Gamma$ is \emph{correct} if 
+\begin{enumerate}
+\item every expression $e:A$ or $t: S$ in it contains exactly one free variable;
+\item in every term of the form $\mathtt{mkc}(e, y)$ the variable $y$ does not occur free in $e$; 
+similarly for terms $\mathtt{mkc}(t, y)$;
+\item in every term of the form $\mathtt{postp}(y\mapsto e_1, e_2)$ the term 
+$e_1$ contains exactly one free variable $y$ and $y \notin e_2$; similarly, for terms 
+$\mathtt{postp}(y\mapsto t_1, t_2)$.  
+\end{enumerate}
+\end{definition}
+We may leave the type notation implicit in contexts and write $\mathcal{S}_x$ for a correct untyped context whose only free
+variable is $x$.
 
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \DualLNLLogicdruleLXXvar{} \and
-      \DualLNLLogicdruleLXXweak{} \and
-      \DualLNLLogicdruleLXXcontr{} \and
-      \DualLNLLogicdruleLXXperpi{} \and
-      \DualLNLLogicdruleLXXperpe{} \and
-      \DualLNLLogicdruleLXXsubi{} \and
-      \DualLNLLogicdruleLXXsube{} \and
-      \DualLNLLogicdruleLXXpari{} \and
-      \DualLNLLogicdruleLXXpare{} \and
-      \DualLNLLogicdruleLXXji{} \and
-      \DualLNLLogicdruleLXXje{} \and
-      \DualLNLLogicdruleLXXhi{}
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Linear Cointuitionistic Typing Rules}
-  \label{fig:linear-coint-typing-rules}
-\end{figure}
+\vspace{1ex}
+
+\noindent
+We extend the notation of $\mathtt{let}$ terms and $\mathtt{case\ of}$ terms to contexts as follows: 
+\begin{center}
+\begin{tabular}{rcl}
+$\mathtt{let}\; p\; = t\; \mathtt{in}\ \cdot$ &\ =\ & $\cdot$\\
+$\mathtt{let}\; p\; = t\; \mathtt{in}\ (t': A)$ &\ =\ & $(\mathtt{let}\; p\; = t) : A$\\
+$\mathtt{let}\; p\; = t\; \mathtt{in}\ (\Delta_1\|\Delta_2)$ &\ =\ & 
+$(\mathtt{let}\; p\; = t \mathtt{in}\ \Delta_1)\| (\mathtt{let}\; p\; = t\ \mathtt{in}\ \Delta_2)$
+\end{tabular}
+\end{center}
+(where $p = Hy$ or $Jy$). Terms $\mathtt{case\ of}$ are handled similarly. 
+
+\vspace{1ex}
+
+\noindent
+Finally, the admissible rule of contraction is also generalized to contexts. Let $t_1$ and $t_2$ be multisets of terms, 
+let $t_1 \cdot t_2$ is the sum of multisets. (If multisets are represented as lists, then the sum is representable as the
+appending of the lists). Then we can define $\Psi_1 \cdot \Psi_2$ recursively as follows:
+\begin{center}
+\begin{tabular}{rcl}
+$(\cdot)\cdot(\cdot)$ &\ =\ & $(\cdot)$\\
+$(t_1: S)\cdot (t_2:S)$ &\ =\ & $t_1\cdot t_2 : S$\\
+$(\Psi_1\|\Pi_1)\cdot(\Psi_2\|Pi_2)$ &\ =\ & $(\Psi_1\cdot\Psi_2)\|(\Pi_1\cdot\Pi_2)$, \qquad where $|\Psi_1|=|\Psi_2|$, 
+$|\Pi_1|=|\Pi_2|$.
+\end{tabular}
+\end{center}
+\subsection{Bound variables and substitution.}
+\begin{definition}
+ We define the substitution of an $e$ term for a free variable in an $e$ term and in a $p$ term of a correct context as follows.  
+ \begin{itemize}
+\item $[e/x]y = e$ if $x = y$, $[e/x]y = y$ otherwise;
+\item $[e'/x]\mathtt{connect}_{\bot} \mathtt{to}\; e = \mathtt{connect}_{\bot} \mathtt{to}\; [e'/x]e$;  
+\item $[e'/x]\mathtt{mkc}(e,y) = \mathtt{mkc}([e'/x]e,y)$;
+\item $[e'/x]y(e) = y([e'/x]e)$;
+\item $[e'/x](e_1\oplus e_2) = ([e'/x]e_1)\oplus ([e'/x]e_2)$;
+\item $[e'/x]\mathtt{casel}\;e = \mathtt{casel}\;[e'/x]e;\quad [e'/x]\mathtt{caser}\;e = \mathtt{caser}\;[e'/x]e$;  
+\item $[t'/x] J(t) = J[t'/x]t; $
+\item $[e'/x]\mathtt{postp}_{\bot}\; e = \mathtt{postp}_{\bot}\; e [e'/x]$; 
+\item $[e'/x]\mathtt{postp}(x\mapsto e_1, e_2) = \mathtt{postp}(x\mapsto e_1,  [e'/x]e_2$
+\end{itemize}
+ \end{definition}
+Substitution in a $t$ term is defined similarly, but here we have to define substitution of a multiset of terms in a term:
+\begin{enumerate}
+\item $[t_1\cdot\ldots\cdot t_n/ z]s = [t_1]s\cdot\ldots\cdot [t_n/ z]s;$
+\item $[t_1\cdot\ldots\cdot t_n/ z]p = [t_1]p\| \ldots\| [t_n/ z]p,$ where $p$ is a $p$-term.
+ \end{enumerate}
+The operation of substitution is generalized to contexts in the obvious way: 
+\begin{itemize}
+\item $[e'/x](e_1 \| \ldots \| e_n) = ([e'/x]e_1 \| \ldots \| [e'/x]e_n)$;
+\item $[t/x](s_1 \| \ldots \| s_n) = ([t/x]s_1 \| \ldots \| [t/x]s_n)$;
+\item $[t_1\cdot \ldots \cdot t_n/x]s = [t_1/x]s \| \ldots \| [t_n]s$.
+\end{itemize}
+Variable binding is of two kinds, local and global.
+\begin{definition}
+\begin{enumerate}
+\item The variable $y$ is locally bound in $\mathtt{mkc}(e,y)$, $\mathtt{mkc}(t,y)$; 
+$y$ is locally bound in $\mathtt{postp}(y\mapsto e_1, e_2)$ and in $\mathtt{postp}(y\mapsto t_1, t_2)$.
+\item the variable $x$ is locally bound in $\mathtt{let}\; Jx = e_1\; \mathtt{in}\; e_2$, $\mathtt{let}\; Hx = t_1\; \mathtt{in}\; t_2$.
+\item $x$ is bound in $t_2$ and $y$ in $t_3$ in the term $\mathtt{case}\; t_1\; \mathtt{of}\; x.t_2, y.t_3$.
+\end{enumerate}
+\end{definition}
+Global binding occurs when two contexts are merged at a subtraction introduction with term  $\mathtt{mkc}(e,y)$, or at a subtraction elimination, with term $\mathtt{postp}(y\mapsto e_1, e)$ for the occurrences of $y$ in the context outside the term $\mathtt{mkc}(e,y)$ or $\mathtt{postp}(y\mapsto e_1, e)$ where $y$ is locally bounded. All occurrences of $y$ in 
+the other terms of the context are globally bound, and such binding is represented by substituting $y(e)$ for $y$. 
+%  It is possible to define substitution for globally bound variables and $\alpha$-reduction with respect to it 
+% \cite{BellinTranchini}.
+% It seems that in a sequent style natural deduction the following should suffice: 
+% % We give it here for completeness, altough in a sequent style version of natural deduction it may not be needed. 
+% % \begin{definition}\label{boundvar-subst} (substitution for globally bounded variables) 
+% % \begin{enumerate}
+% % \item $[s/z(r)]y = y$; 
+% % \item $[s/z(r)]\mathtt{mkc}(t,y) = \mathtt{mkc}([s/z(r)]t, y)$;
+% % \item $[s/z(r)]y(t) = s$ if $z(r) = y(t)$, $[s/z(r)]y(t) = y(t)$ otherwise; 
+% % \item $[s/z(r)](t_1\cdot \ldots \cdot t_n) = [s/z(r)]t_1\cdot \ldots\cdot [s/z(r)]t_n$; 
+% % \item $[s/z(r)]\mathtt{postp}(y\mapsto t_1, t) =   \mathtt{postp}(y\mapsto [\; [y/y(t)]s/ [y/y(t)] z(r)\;] t_1$ if $y(t)$ 
+% % occurs in $s$;
+% % $[s/z(r)]\mathtt{postp}(y\mapsto t_1, t) = \mathtt{postp}(y\mapsto t_1, [s/z(r)]t)$ otherwise. 
+% % \end{enumerate}
+% % and similarly for other terms. 
+% % \end{definition}
+% \begin{definition} The relation of $\alpha$ equivalence is the smallest reflexive, symmetric and transitive relation on 
+% contexts satisfying the following conditions: 
+% \begin{enumerate}
+% \item $\mathcal{S}_x \| \mathtt{mkc}(t,y) \| [y(t)/y] \mathcal{S}_y \quad \equiv_{\alpha} \quad 
+% \mathcal{S}_x \| [\mathtt{mkc}(t,w) \| w(t)/w] \mathcal{S}_w$, where $\mathcal{S}_x\| t$ is a correct context and 
+% $\mathcal{S}_w = [w/y]\mathcal{S}_y$;
+% \item $\mathcal{S}_x\| \mathtt{postp}(y\mapsto t',t) \| [y(t)/y] \mathcal{S}_y \quad \equiv_{\alpha} \quad 
+% \mathcal{S}_x\| \mathtt{postp}(w\mapsto t',t) \| [w(t)/w] \mathcal{S}_w$  where $\mathcal{S}_x\| t$ is a correct context
+% and $\mathcal{S}_w = [w/y]\mathcal{S}_y$.
+% \end{enumerate}
+% \end{definition}
+% For other terms the definition of $\alpha$ equivalence is standard.
+% The intuition is the following. The linear terms $\mathtt{postp}_{\bot}\ e\ |\ \mathtt{postp} (x 􏰀\mapsto e_1, e_2)$ 
+% may be given type $\bot$, which is also the type of $\mathtt{connect}_{\bot}\ \mathtt{to}\  x$.
+% However it is possible to define a term $t$ as \emph{$p$-normal}  if in $t$ no $p$-term is a subterm of another term.
+% Then to any term $t$ it is possible to associate a list of $p$-normal terms which are equivalent in terms of their 
+% behaviour (operational semantics). Let $t$ contain a subterm $\mathtt{postp} (x 􏰀\mapsto t_1, t_2)$ which is in 
+% $p$-normal form.  
+
+\vspace{1ex}
+
+\noindent
+In tables \ref{non-linear-coint-TA}, \ref{Linear-coint-TA} we give the term assignment to {\it co-ND}.
+
+\begin{table}
+ \begin{center}
+  \begin{small}
+   \begin{tabular}{|c|}
+\hline
+\\
+\AxiomC{\it C assumption}
+\noLine
+\UnaryInfC{$x:S \vdash_C x:S  $}
+\DisplayProof\\
+
+\\
+ \AxiomC{\it C zero}
+\noLine
+\UnaryInfC{$x:S\vdash_C t:0, \Psi \qquad x_1:S_1 \vdash_C \Psi_1\quad \ldots\quad x_n:S_n \vdash \Psi_n$} 
+\UnaryInfC{$x:S \vdash_C  \Psi, [\mathtt{false}\;t/x_1]\Psi_1\quad \ldots\quad[\mathtt{false}\;t/x_n]\Psi_n$} 
+\DisplayProof\\
+\\
+\AxiomC{\it C subtraction intro }
+\noLine
+\UnaryInfC{$x:S \vdash_C \Psi_1, t: T_1 \qquad  
+y:T_2 \vdash_C \Psi_2$}
+\UnaryInfC{$x:S \vdash_C \Psi_1, \mathtt{mkc}(t,y): T_1 - T_2,  [y(t)/y] \Psi_2$}
+\DisplayProof\\
+\\
+\AxiomC{\it C subtraction elim}
+\noLine
+\UnaryInfC{$x: S \vdash_C \Psi_1, s:T_1 - T_2\qquad y: T_1 \vdash_C t: T_2, \Psi_2$}
+\UnaryInfC{$x: S \vdash_C \Psi_1, \mathtt{postp}(y\mapsto t, s), [y(s)/y]\Psi_2$} 
+\DisplayProof\\
+\\
+\AxiomC{\it C disjunction intro$_1$}
+\noLine
+\UnaryInfC{$x: S \vdash_C  \Psi, t_1: T_1$}
+\UnaryInfC{$x: S \vdash_C  \Psi, \mathtt{inl}\; t_1: T_1 + T_2$}
+\DisplayProof \qquad
+\AxiomC{\it C disjunction intro$_2$}
+\noLine
+\UnaryInfC{$x: S \vdash_C  \Psi, t_2: T_2$}
+\UnaryInfC{$x: S \vdash_C  \Psi, \mathtt{inr}\; t_2:  T_1 + T_2$}
+\DisplayProof \\
+\\
+\AxiomC{\it C disjunction elim}
+\noLine
+\UnaryInfC{$x: S \vdash_C \Psi, t: T_1 + T_2 \qquad y: T_1 \vdash_C \Psi_1 \quad z: T_2 \vdash_C \Psi_2\quad 
+|\Psi_1| = |\Psi_2|$}
+\UnaryInfC{$x: S \vdash_C \Psi, \mathtt{case}\; t\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
+\DisplayProof\\
+\\
+\AxiomC{\it H elim$_2$}
+\noLine
+\UnaryInfC{$x: S \vdash_C \Psi_1, t: HA \qquad y: A \vdash_L ; \Psi_2\qquad |\Psi_1| = |\Psi_2|$}
+\UnaryInfC{$S \vdash_C \Psi_1 \cdot (\mathtt{let}\; Hy = t\: \mathtt{in}\; \Psi_2)$}
+\DisplayProof\\
+\\
+\\
+\hline
+  \end{tabular} 
+  \end{small}
+ \caption{Term Assignment to non-linear {\it  co-ND}}
+  \label{non-linear-coint-TA}
+ \end{center} 
+\end{table}
+\begin{table}
+ \begin{center}
+  \begin{small}
+   \begin{tabular}{|c|}
+\hline
+\\
+\AxiomC{\it L identity}
+\noLine
+\UnaryInfC{$x: A \vdash_L x: A $}
+\DisplayProof\\
+\\
+ \AxiomC{\it $\bot$ intro}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta ; \Psi\qquad e:B \in \Delta$}
+\UnaryInfC{$x: A \vdash_L \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi$} 
+\DisplayProof \qquad 
+\AxiomC{$\bot$ elim} 
+\noLine
+\UnaryInfC{$x:A  \vdash_L e: \bot, \Delta ; \Psi$}
+\UnaryInfC{$x:A \vdash_L \mathtt{postp}_{\bot}\;e, \Delta ; \Psi$}
+\DisplayProof\\
+\\
+\AxiomC{\it L subtraction intro }
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta_1, e: B_1 ; \Psi_1 \qquad  
+y: B_2 \vdash_L \Delta_2; \Psi_2$}
+\UnaryInfC{$x: A \vdash_L \mathtt{mkc}(e, y) : B_1 \lsub B_2, \Delta_1, [y(e)] / y]\Delta_2; \Psi_1, [y(e)] / y]\Psi_2$}
+\DisplayProof\\
+\\
+\AxiomC{\it L subtraction elim}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta_1, e: B_1 \lsub B_2;\Psi_1\qquad y :B_1 \vdash_L e': B_2, \Delta_2 ;  \Psi_2$}
+\UnaryInfC{$x: A \vdash_L \Delta_1, \mathtt{postp}(y\mapsto e', e), \Delta_2 ; \Psi_1, \Psi_2$}
+\DisplayProof
+\\
+\\
+\AxiomC{\it L disjunction intro}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta, e_1: B_1, e_2: B_2;  \Psi$}
+\UnaryInfC{$x: A \vdash_L \Delta, e_1\oplus e_2: B_1\oplus B_2;  \Psi$}
+\DisplayProof \\
+\\
+\AxiomC{\it L disjunction elim$_2$}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta, e: B_1\oplus B_2 ; \Psi \qquad y: B_1 \vdash_L \Delta_1; \Psi_1 \quad z: B_2 \vdash_L  \Delta_2; \Psi_2$}
+\UnaryInfC{$x: A \vdash_L \Delta, [\mathtt{casel}(e)/y]\Delta_1, [\mathtt{caser}(e)/z]\Delta_2 ; \Psi, [\mathtt{casel}(e)/y]\Psi_1, [\mathtt{caser}(e)/z]\Psi_2$}
+\DisplayProof \\
+\\
+\AxiomC{\it J intro}
+\noLine
+\UnaryInfC{$A \vdash_L, \Delta ; T, \Psi $}
+\UnaryInfC{$A \vdash_L, \Delta, J T ; \Psi$}
+\DisplayProof
+\qquad
+\AxiomC{\it J elim}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta, e: J T; \Psi_1 \qquad y: T \vdash_C \Psi_2 $}
+\UnaryInfC{$x: A \vdash_L \Delta;  \Psi_1,  \mathtt{let}\;Jy = e\; \mathtt{in}\; \Psi_2$}
+\DisplayProof\\
+\\
+\AxiomC{\it H intro}
+\noLine
+\UnaryInfC{$x: A \vdash_L, \Delta, e: B ; \Psi $}
+\UnaryInfC{$x: A \vdash_L, \Delta; He : H B, \Psi$}
+\DisplayProof
+\qquad
+\AxiomC{\it H elim$_1$}
+\noLine
+\UnaryInfC{$x: B \vdash_L \Delta; \Psi_1, t: HA \quad y: A \vdash_L ; \Psi_2$}
+\UnaryInfC{$x: B \vdash_L \Delta; \Psi_1, \mathtt{let} Hy = t\; \mathtt{in}\;  \Psi_2$}
+\DisplayProof\\
+\\
+\\
+\hline
+  \end{tabular} 
+  \end{small} 
+ \caption{Term Assignment to linear {\it co-ND}}
+  \label{Linear-coint-TA}
+ \end{center} 
+\end{table}
+\begin{definition}
+The term assignment for the admissible rules of the calculus is as follows: 
+{\small
+\[
+\AxiomC{\it C weakening }
+\noLine
+\UnaryInfC{$x: S \vdash_C \Psi \qquad s:T'\in \Psi$}
+\UnaryInfC{$x: S \vdash_C \mathtt{connect}_w \mathtt{to}\; s: T, \Psi $} 
+\DisplayProof
+\qquad
+\AxiomC{\it C contraction}
+\noLine
+\UnaryInfC{$x: S \vdash_C t_1:T, t_2: T, \Psi $}
+\UnaryInfC{$x: S \vdash_C (t_1\cdot t_2): T, \Psi $} 
+\DisplayProof
+\]
+\[
+\AxiomC{\it CC substitution }
+\noLine
+\UnaryInfC{$x: S \vdash_C \Psi_1, t:T \qquad y:T \vdash_C  \Psi_2$}
+\UnaryInfC{$x: S \vdash_C \Psi_1, [t/y]\Psi_2$}
+\DisplayProof  
+\]
+\[
+\AxiomC{\it L weakening }
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta ; \Psi \qquad r:T'\in \Psi \hbox{\ or\ } r: B\in \Delta$}
+\UnaryInfC{$x: A \vdash_L \Delta ; \mathtt{connect}_w \mathtt{to}\;r : T, \Psi $} 
+\DisplayProof
+\qquad
+\AxiomC{\it L contraction}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta ; t_1: T,  t_2: T,  \Psi $}
+\UnaryInfC{$x: A \vdash_L \Delta ; (t_1\cdot t_2):T, \Psi $} 
+\DisplayProof
+\]
+\[
+\AxiomC{\it LC substitution }
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta ; \Psi_1, s: T \qquad y:T \vdash_C \Psi_2$}
+\UnaryInfC{$x: A \vdash_L \Delta ; \Psi_1,  [s/y]\Psi_2$}
+\DisplayProof 
+\qquad 
+\AxiomC{\it LL substitution }
+\noLine
+\UnaryInfC{$x: B \vdash_L \Delta_1, e: A ; \Psi_1 \qquad y:A \vdash_L \Delta_2 ; \Psi_2$}
+\UnaryInfC{$x: B \vdash_L \Delta_1, [e/y]\Delta_2; \Psi_1, [e/y]\Psi_2$}
+\DisplayProof 
+\]
+}
+
+\end{definition}
+\subsection{$\beta$ reductions}
+\subsubsection{Non-linear terms}
+\begin{center}
+{\small
+\AxiomC{\small{\bf $-$ Redex:}}
+\noLine
+\UnaryInfC{$x:S \vdash_C \Psi_1, t: T_1 \qquad y:T_2\vdash_C \Psi_2$}
+\UnaryInfC{$x:S \vdash_C \Psi_1, \mathtt{mkc}(t, y): T_1 - T_2, \Psi_1,  [y(t)/y]\Psi_2$}
+\AxiomC{$ z:T_1\vdash_L t_2:T_2, \Psi_3$}
+\BinaryInfC{$x:S\vdash_C \Psi_1, \mathtt{postp}(z\mapsto t_2, \mathtt{mkc}(t_1,y)), 
+ [y(e_1)/y]\Psi_2, z(\mathtt{mkc}(e_1,y))]:\Psi_3  $}
+\DisplayProof}
+\end{center}
+\begin{center}
+{\small
+\AxiomC{\small{\bf $-$ Reductum:}}
+\noLine
+\UnaryInfC{$x:S \vdash_C  \Psi_1, t: T_1 \qquad  z: T_1\vdash_C t_2: T_2, \Psi_3$}
+\UnaryInfC{$x:S \vdash_C \Psi_1,       [t/z]t_2 : T_2; \Psi_1,  [t/z]\Psi_3$}
+\AxiomC{$T_2\vdash_C  \Psi_2$}
+\BinaryInfC{$x:S \vdash_C \Psi_1, [ [t/z]t_2/y]\Psi_2,\ [t/z]\Psi_3$}
+\DisplayProof}
+\end{center}
+
+\vspace{3ex}
+
+\centerline{\small {\bf $+_1$ Redex:}}
+\begin{center}
+{\small
+\AxiomC{$x: S \vdash_C \Psi, t_1: T_1$}
+\UnaryInfC{$x: S \vdash_C \Psi, \mathtt{inl}\; t_1: T_1 + T_2$}
+\AxiomC{$y: T_1 \vdash_C \Psi_1 \quad z: T_2 \vdash_C \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
+\BinaryInfC{$x: S \vdash_C \Psi, \mathtt{case\ inl}\ t_1\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
+\DisplayProof}
+\end{center}
+\centerline{\small {\bf $+_1$ Reductum:}}
+\begin{center}
+{\small
+\AxiomC{$x: S \vdash_C \Psi, t: T_1$}
+\AxiomC{$y: T_1 \vdash_C \Psi_1$}
+\BinaryInfC{$x: S \vdash_C \Delta,  [t_1/y]\Psi_1$}
+\DisplayProof}
+\end{center}
+
+\vspace{3ex}
+
+\centerline{\small {\bf $+_2$ Redex:}}
+\begin{center}
+{\small
+\AxiomC{$x: S \vdash_C \Psi, t_2: T_2$}
+\UnaryInfC{$x: S \vdash_C \Psi, \mathtt{inr}\; t_2: T_1 + T_2$}
+\AxiomC{$y: T_1 \vdash_C \Psi_1 \quad z: T_2 \vdash_C \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
+\BinaryInfC{$x: S \vdash_C \Psi, \mathtt{case\ inr}\ t_2\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
+\DisplayProof}
+\end{center}
+\centerline{\small {\bf $+_2$ Reductum:}}
+\begin{center}
+{\small
+\AxiomC{$x: S \vdash_C \Psi, t_2: T_2$}
+\AxiomC{$z: T_2 \vdash_C \Psi_2$}
+\BinaryInfC{$x: S \vdash_C  [t_2/z]\Psi_2$}
+\DisplayProof}
+\end{center}
+
+\vspace{3ex}
+
+\begin{center}
+{\small
+\AxiomC{$y:HB \vdash_C y: HB$}
+% 
+\AxiomC{\bf $H_2$ Redex}
+\noLine
+\UnaryInfC{$x:B \vdash_L e:A ; \Psi_1$}
+\RightLabel{$H$ {\em intro}}
+\UnaryInfC{$x:B \vdash_L ; He: HA, \Psi_1 $}
+\RightLabel{$H$ {\em elim}$_2$}
+\BinaryInfC{$y:HB \vdash_C (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1),  (\mathtt{let} Hx = y\ \mathtt{in}\ He): HA $}
+\AxiomC{$z:A \vdash_L ; \Psi_2$}
+\RightLabel{$H$ {\em elim}$_2$}
+\BinaryInfC{$x:B \vdash_C ; (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let}\ Hz = (\mathtt{let} Hx = y\ \mathtt{in}\ He ) 
+\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof}
+\end{center}
+ 
+\begin{center}
+\AxiomC{$y:HB \vdash_C y: HB$}
+\AxiomC{\bf $H_2$ Reductum}
+\noLine
+\UnaryInfC{$x:B \vdash_L e:A ; \Psi_1\qquad z:A \vdash_L ; \Psi_2 $}
+\UnaryInfC{$x:B \vdash_L \Psi_1\cdot [e/z]\Psi_2 $}
+\RightLabel{$H$ {\em elim}$_2$}
+\BinaryInfC{$y:HB \vdash_C (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let} Hx = y\ \mathtt{in}\ [e/z]\Psi_2$}
+\DisplayProof
+\end{center}
+
+\subsubsection{Linear terms}
+
+\begin{center}
+{\small
+\AxiomC{\bf $\bot$ Redex}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta ; \Psi\qquad e:B \in \Delta$}
+\UnaryInfC{$x: A \vdash_L \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi$} 
+\UnaryInfC{$x:A \vdash_L \mathtt{postp}_{\bot} \mathtt{connect}_{\bot}\; \mathtt{to}\; e, \Delta ; \Psi$}
+\DisplayProof}
+\end{center}
+
+\begin{center}
+{\small
+\AxiomC{\bf $\bot$ Reductum}
+\noLine
+\UnaryInfC{$x: A \vdash_L \Delta ; \Psi$}
+\DisplayProof}
+\end{center}
+
+\vspace{3ex}
+
+\begin{center}
+{\small
+\AxiomC{\bf $\lsub$ Redex:}
+\noLine
+\UnaryInfC{$x:B \vdash_L e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_L\Delta_2; \Psi_2$}
+\UnaryInfC{$x:B \vdash_L \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
+\UnaryInfC{$\hskip2in z:A_1\vdash_L e_2:A_2, \Delta_3; \Psi_3$}
+\UnaryInfC{$x:B\vdash_L \Delta_1, 
+\mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y)) 
+ [y(e_1)/y]\Delta_2,  [z(\mathtt{mkc}(e_1,y))/z]\Delta_3 ;$}
+\noLine
+\UnaryInfC{$\hskip2in \Psi_1,  [y(e_1)/y]\Psi_2, z(\mathtt{mkc}(e_1,y))]:\Psi_3  $}
+\DisplayProof}
+\end{center}
+\begin{center}
+{\small
+\AxiomC{\bf $\lsub$ Reductum:}
+\noLine
+\UnaryInfC{$x:B \vdash_L e_1:A_1, \Delta_1; \Psi_1\qquad  z:A_1\vdash_L e_2:A_2, \Delta_3; \Psi_3$}
+\UnaryInfC{$x:B \vdash_L \Delta_1, [e_1/z]\Delta_3,       [e_1/z]e_2 : A_2; \Psi_1,  [e_1/z]\Psi_3$}
+\UnaryInfC{$\hskip2in y:A_2\vdash_L \Delta_2; \Psi_2$}
+\UnaryInfC{$x:B \vdash_L\Delta_1, [ [e_1/z]e_2/y]\Delta_2,\ [e_1/z]\Delta_3; \Psi_1,[ [e_1/z]e_2]\Psi_2,\ [e_1/z]\Psi_3$}
+\DisplayProof}
+\end{center}
+
+\vspace{3ex}
+
+\centerline{\small {\bf $\oplus$ Redex:}}
+\begin{center}
+{\small
+\AxiomC{$x: A \vdash_L \Delta, e_1: B_1, e_2: B_2;  \Psi$}
+\UnaryInfC{$x: A \vdash_L \Delta, e_1\oplus e_2: B_1\oplus B_2;  \Psi$}
+\AxiomC{$y: B_1 \vdash_L \Delta_1; \Psi_1 \quad z: B_2 \vdash_L  \Delta_2; \Psi_2$}
+\BinaryInfC{$x: A \vdash_L \Delta, [\mathtt{casel}(e_1\oplus e_2)/y]\Delta_1, [\mathtt{caser}(e_1\oplus e_2)/z]\Delta_2 ;$}
+\noLine
+\UnaryInfC{$\hskip1in  \Psi, [\mathtt{casel}(e_1\oplus e_2)/y]\Psi_1, [\mathtt{caser}(e_1\oplus e_2)/z]\Psi_2$}
+\DisplayProof}
+\end{center}
+\centerline{\small {\bf $\oplus$ Reductum:}}
+\begin{center}
+{\small
+\AxiomC{$x: A \vdash_L \Delta, e_1: B_1, e_2: B_2;  \Psi$}
+\AxiomC{$y: B_1 \vdash_L \Delta_1; \Psi_1$}
+\BinaryInfC{$x: A \vdash_L \Delta,  [e_1/y]\Delta_1, e_2: B_2;  \Psi, [e_1/y]\Psi_1$}
+\AxiomC{$z: B_2 \vdash_L  \Delta_2; \Psi_2$}
+\BinaryInfC{$x: A \vdash_L \Delta, [e_1/y] \Delta_1, [e_2/z]\Delta_2 ;\Psi,  [e_1/y]\Psi_1, [e_2/z]\Psi_2$}
+\DisplayProof}
+\end{center}
+
+\vspace{3ex}
+
+\begin{center}
+{\small
+\begin{tabular}{c}
+{\bf $J$ Redex:}\\
+\AxiomC{$x:A \vdash_L ,\Delta; t:T, \Psi$}
+\RightLabel{\emph{J-intro}}
+\UnaryInfC{$x:A\vdash_L \Delta, Jt: JT; \Psi$}
+\AxiomC{$ y:T \vdash_C \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\RightLabel{\emph{J-elim}}
+\BinaryInfC{$x:A\vdash_L \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = Jt\  \mathtt{in}\ \Psi_2$}
+\DisplayProof\\
+\\
+{\bf $J$ Reductum:}\\
+\AxiomC{$x:A \vdash_L \Delta; t:T, \Psi$}
+\AxiomC{$y:T \vdash_C \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\BinaryInfC{$x:A \vdash_L \Delta;\Psi_1, [t/y]\Psi_2$}
+\DisplayProof
+\end{tabular}}
+\end{center}
+
+\vspace{3ex}
+
+\centerline{\small{\bf $H_1$ Redex}}
+\begin{center}
+\AxiomC{$x:B \vdash_L \Delta, e:A ; \Psi_1$}
+\UnaryInfC{$x:B \vdash_L \Delta; He: HA, \Psi_1 $}
+\AxiomC{$y:A \vdash_L ; \Psi_2$}
+\BinaryInfC{$x:B \vdash_L \Delta; \Psi_1\cdot (\mathtt{let} Hy = He\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof
+\end{center}
+\centerline{\small{\bf $H_1$ Reductum}}
+
+\begin{center}
+\AxiomC{$x:B \vdash_L \Delta, e:A ; \Psi_1$}
+\AxiomC{$y:A \vdash_L ; \Psi_2$}
+\BinaryInfC{$x:B \vdash_L \Delta; \Psi_1\cdot [e/y] \Psi_2$}
+\DisplayProof
+\end{center}
+
+\vspace{3ex}
+
+\centerline{\small{\bf weakening commutations}}
+
+\begin{center}
+\AxiomC{$x: S \vdash_C \mathtt{connect}_w\; \mathtt{to}\; t: T,  \Psi\qquad t \in \Psi$} 
+\doubleLine
+\UnaryInfC{$y:S \vdash C \mathtt{connect}_w\; \mathtt{to}\; t': T',  \Psi'\qquad t' \in \Psi'$}
+\DisplayProof
+\end{center}
+where the double line stands for any $n$-ary inference, $n = 1,2,3$ or no inference (it is possible to ``rewire''  the attachment
+within the same context).
+
+\vspace{1ex}
+
+\begin{center}
+\AxiomC{$x: B \vdash_L \Delta ; \mathtt{connect}_w\; \mathtt{to}\; e: T,  \Psi\qquad e \in \Delta$} 
+\doubleLine
+\UnaryInfC{$y:S \vdash C \Delta' ; \mathtt{connect}_w\; \mathtt{to}\; e': T',  \Psi'\qquad e' \in \Delta'$}
+\DisplayProof
+\end{center}
+where the double line stands for any  $n$-ary inference, $n = 1,2,3$ or no inference. The weakening formula could be 
+attached also to a term in the non-linear part. 
+
+\vspace{3ex}
+
+\centerline{\small{\bf $\bot$ commutations}}
+\begin{center}
+\AxiomC{$x: A \vdash_L \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi\qquad e \in \Delta$} 
+\doubleLine
+\UnaryInfC{$y:B \vdash L \mathtt{connect}_{\bot}\; \mathtt{to}\; e': \bot, \Delta' ; \Psi'\qquad e \in \Delta'$}
+\DisplayProof
+\end{center}
+where the double line stands for any $n$-ary inference, $n = 1,2,3$.
+ 
+\vspace{1ex}
+
+\noindent
+There is also a zero commutation rule, which we omit here. 
+
+\section{Categorical interpretation of rules}
+
+\noindent
+Given a {\em signature} $Sg$, consisting of a collection of types $\sigma_i$, where $\sigma_i = A\ \hbox{or}\ S$, 
+and a collection of {\em sorted function symbols} $f_j : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ and given 
+a Symmetric Monoidal Category (SMC) $(\mathbb{C}, \bullet, 1, \alpha, \lambda, \rho, \gamma)$,  a {\em structure} 
+$\mathcal{M}$ for $Sg$ is an assignment of an object $[\![\sigma]\!]$ of $\mathcal{L}$ for each type $\sigma$ and of 
+a morphism $[\![f]\!] : [\![\sigma_1]\!]\bullet\ldots\bullet[\![\sigma_n]\!]\rightarrow [\![\tau]\!]$ for each function $f : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ of $Sg$.\footnote{ In this section only we use the symbol $\bullet$ and 1 for the monoidal binary operation and its unit in the categorical structure, distinguished from the $\oplus$ and $\bot$ symbols 
+in the formal language. We shall show that the interpretation of $\oplus$ is isomorphic to the operation $\bullet$, 
+so we shall be able to identify them ( and similarly for $\bot$ and 1).}
+
+\vspace{1ex}
+
+\noindent
+The types of terms in context $\Delta = [e_1: A_1, \ldots, e_n: A_n]$ or $\Delta = [t_1: T_1, \ldots, t_n: T_n]$ are 
+interpreted as $[\![\sigma_1, \sigma_2, \ldots, \sigma_n]\!]$ =   
+$(\ldots ([\![\sigma_1]\!]\bullet[\![\sigma_2]\!])\ldots ) \bullet [\![\sigma_n]\!]$; left associativity is also 
+intended for concatenations of type sequences $\Gamma, \Delta$. Thus we need the ``book-keeping'' functions 
+$\mathtt{Split}(\Gamma, \Delta): [\![\Gamma, \Delta]\!] \rightarrow [\![\Gamma]\!]\bullet [\![\Delta]\!]$ and 
+$\mathtt{Join}(\Gamma, \Delta): [\![\Gamma]\!] \bullet  [\![\Delta]\!] \rightarrow [\![\Gamma, \Delta]\!]$ inductively defined 
+using the associativity laws $\alpha$ and their inverse $\alpha^{-1}$ (cfr Bierman 1994, Bellin 2015).  
+
+\vspace{1ex}
+
+\noindent
+The semantics of terms in context is then specified by induction on terms: 
+\begin{center}
+\begin{tabular}{c}
+$[\![x: A\vdash_L x: A]\!] =_{df} id_{[\![\sigma]\!]}$\\
+\\
+$[\![x: A\vdash_L  f(e_1,\ldots, e_n): B]\!] =_{df} [\![x: A\vdash e_1: A_1]\!]\bullet
+\ldots\bullet [\![x:\sigma\triangleright e_n: A_n]\!]; [\![ f ]\!]$
+\end{tabular}
+\end{center}   
+and similarly with non-linear types. 
+Next one proves by induction on the type derivation that substitution in the term calculus 
+corresponds to composition in the category (\cite{Bierman94}, Lemma 13). 
+
+\vspace{1ex}
+
+\noindent
+In a Linear Non-Linear Co-intuitionistic logic sequent, mixed sequents $x:A \vdash_L \Delta ; \Psi, t:T$ 
+non-linear terms are interpreted through the functor $J : \mathcal{C} \rightarrow \mathcal{L}$. Here we use 
+the same symbol for the functor $J$ in the structure and the name of the functor in the syntax of the langage. 
+Thus we have 
+\[
+[\![ x:A \vdash_L \Delta ; \Psi, t:T]\!]  \quad = \quad [\![ x:A \vdash_L \Delta, J \Psi, Jt: J(T) ]\!] 
+\]  
+
+\vspace{1ex}
 
 
+\noindent
+Let $\mathcal{M}$ be a structure for a signature $Sg$ in a SMC $\mathcal{L}$. Given an equation in
+context for $Sg$ 
+$$
+x: A \vdash_L \overline{e}:\Gamma, e_1 = e_2 : B; \Psi
+$$
+we say that the structure \emph{satisfies} the equation if it assigns the same morphisms to  
+$x: A \vdash_L \overline{e}:\Gamma, e_1 : B; \Psi$.  and to $A\vdash \overline{e}:\Gamma, e_2: B;\Psi$.
+Similarly, $\mathcal{M}$ satisfies $x: S \vdash_L \overline{t}:\Psi, t_1 = t_2$ if it assigns the same morphism
+to $x: S \vdash_L \overline{t}:\Psi, t_1 : T$ and to $x: S \vdash_L \overline{t}:\Psi,  t_2 : Y$.
+Then given an algebraic theory 
+$Th = (Sg, Ax)$, a structure $\mathcal{M}$ for $Sg$ is a {\em model} for $Th$ if it satisfies all the 
+axioms in $Ax$. 
+
+
+\vspace{1ex}
+
+We now go through some cases of the rules in the sequent-style Natural Deduction calculus to specify 
+their categorical interpretation so as to satify the equations in context and to prove consistency of the 
+LNL co-intuitionistic logic in the model thus defined. 
+
+\subsection{Linear disjunction Par}\label{lindisj} 
+
+
+\ref{lindisj}.1. 
+{\em Par introduction.} 
+The introduction rule for Par is of the form 
+\begin{center} 
+\AxiomC{$x:A\vdash_L \Delta_1, e_1:B, e_2:C; \Psi$}
+\RightLabel{$\oplus$ I}
+\UnaryInfC{$x:A\vdash_L \Delta_1, e_1\oplus e_2: B\oplus C, \Psi$}
+\DisplayProof
+\end{center}
+This suggests an operation on Hom-sets of the form 
+$$
+\Phi_{A, \Delta J\Psi}: \mathcal{L}(A, \Delta\bullet A\bullet B \bullet J\Psi) \rightarrow 
+\mathcal{L}(A, \Delta\bullet B\oplus C \bullet J\Psi)
+$$
+{\em natural in} $\Delta$, $A$ and $J\Psi$. Given 
+$$e: A\rightarrow \Delta \bullet B\bullet C\bullet J\Psi,$$ 
+and $d: A' \rightarrow A$
+ $h: \Delta\rightarrow\Delta'$ and  $p: J\Psi\rightarrow J\Psi'$, naturality yields 
+$$
+\Phi_{A', \Delta'}(d; e; h\bullet id_B\bullet id_C\bullet p) = d; \Phi_{A, \Delta}(e); h\bullet id_{B\oplus C}\bullet p
+$$
+In particular, letting $$e = id_{\Delta} \bullet id_B \bullet id_C,\quad d: A \rightarrow \Delta\bullet B\bullet C,$$ 
+$h = id_{\Delta}$ and $p = id_{J\Psi}$ we have 
+$$
+\Phi_{A, \Delta}(d) = d; \Phi_{\Delta} (id_{\Delta}\bullet id_B \bullet id_C)
+$$
+By functoriality of $\bullet$ we have $id_{B}\bullet id_{C} = id_{B\bullet C}$. Hence, writing  
+$\bigoplus$ for $\Phi_{\Delta} (id_{\Delta}\bullet id_{B \bullet C})$ we have 
+$\Phi_{A, \Delta}(d) = d; \bigoplus$. We define
+$$
+[\![x:A \vdash_L  :\Delta, e_1 \oplus e_2: B\oplus C]\!] =_{df} 
+     [\![x:A \vdash_L \Delta, e_1:B, e_2:C, ]\!]; \bigoplus.
+$$
+
+\vspace{3ex}
+
+\noindent
+\ref{lindisj}.2. {\em Par elimination}. The Par elimination rule has the form 
+\begin{center} 
+\AxiomC{$z:A\vdash_L e: B\oplus C, \Delta_1;\Psi_1$}
+\AxiomC{$x:B\vdash_L \Delta_2;\Psi_2$}
+\AxiomC{$y:C\vdash_L \Delta_3; \Psi_3$}
+\RightLabel{$\oplus$ E}
+\TrinaryInfC{$z:A\vdash_L \Delta_1, [\mathtt{casel} z/x] \Delta_2, [\mathtt{caser} z/y]\Delta_3; \Psi_1 \cdot \Psi_2\cdot \Psi_3$}
+\DisplayProof
+\end{center}
+This suggests an operation on Hom-sets of the form 
+$$
+\Psi_{A,\Delta,J\Psi}: \mathcal{L}(A, B\oplus C \bullet \Delta_1\bullet J\Psi_1)\times
+\mathcal{L}(B, \Delta_2\bullet J\Psi_2)\times\mathcal{L}(C, \Delta_3\bullet J\Psi_3)\rightarrow 
+\mathcal{L}(A, \Delta\,\bullet\, J\Psi)
+$$
+{\em natural in} $A,\Delta, J\Psi$ where we write $\Delta = \Delta_1, \Delta_2, \Delta_3$, $J\Psi = J\Psi_1,J\Psi_2, J\Psi_3$. Given morphisms 
+$$g:A\rightarrow \Delta_1\bullet J\Psi_1\bullet B\wp C, \quad e: B\rightarrow\Delta_2\bullet J\Psi_2 \quad
+ \hbox{ and } f: C\rightarrow \Delta_3\bullet J\Psi_3$$ and also $a: A'\rightarrow A$, 
+$d_1:\Delta_1\rightarrow \Delta_1'$, 
+$d_2: \Delta_2 \rightarrow \Delta_2'$ and $d_3: \Delta_3 \rightarrow \Delta_3'$,  $p_1: J\Psi_1\rightarrow J\Psi_1'$, 
+$p_2: J\Psi_2 \rightarrow J\Psi_2'$ and $p_3: J\Psi_3 \rightarrow J\Psi_3'$
+naturality yields
+\begin{center}
+\begin{tabular}{rl}
+$\Psi_{A',\Delta',\Gamma',J\Psi'}\bigl((a;g;d_1\bullet id_{B\oplus C}), (e;d_2\bullet p_2),$ & $(f;d_3\bullet p_3)\bigr)$ =\\ 
+$a; \Psi_{A,\Delta,J\Psi}(g,e,f);$ & 
+$d_1 \bullet d_2\bullet d_3\bullet p_1\bullet p_2\bullet p_3; \mathtt{Join}(\Delta',J\Psi').$
+\end{tabular}
+\end{center}
+In particular, set $$e = id_B, \quad f = id_C$$ and also $a = id_A$, $d_i = id_{\Delta_i}$, $p_i = id_{J\Psi_i}$ we get 
+$$
+\Psi_{A,\Delta J\Psi}(g, e, f) = \Psi_{A,\Delta, J\Psi}(g, id_B, id_C); 
+id_{\Delta}\bullet c\bullet d; \mathtt{Join}(\Delta, J\Psi) 
+$$
+where the operation $\mathtt{Join}$ establishes left associativity.
+Writing $(g)^{\ast}$ for $\Psi_{D,\Delta}(g, id_B, id_C)$ we define
+\begin{center}
+\begin{tabular}{l}
+$[\![z:A\vdash_L \Delta_1, [\mathtt{casel}\ e/x]\Delta_2, [\mathtt{caser}\ e/y] \Delta_3; \Psi_2, \Psi_3]\!]=_{df}$\\
+$[\![z:A\vdash_L \Delta_1, e, B\,\oplus\, C; \Psi_1]\!]^*; 
+id_{\Delta_1}\bullet [\![x:B\vdash_L \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_L \Delta_3; \Psi_3]\!];
+\mathtt{Join}(\Delta,J\Psi)$.\\
+\end{tabular}
+\end{center}
+
+\vspace{3ex}
+
+\noindent
+\ref{lindisj}.3. {\em Equations in context.} We have equations in context of the form
+\begin{equation}\label{context:par}
+%\framebox{\quad
+\AxiomC{$\mathbf \oplus - \beta$ rules:}
+\noLine
+\UnaryInfC{$e\equiv\mathtt{casel}(e_1 \oplus e_2)\quad e' \equiv \mathtt{caser}(e_1 \oplus e_2)\hskip3in$}
+\noLine
+\UnaryInfC{$|\Delta_1| = |\Delta'_1|\ | \Psi_1| = |\Psi'_1| \hskip1in
+x : A_1 \vdash_L \Delta_2; J\Psi_2 = \Delta'_2; J\Psi'_2 \hskip1in$}
+\noLine
+\UnaryInfC{$|\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\hskip1in y:A_2 \vdash_L \Delta_3; J\Psi_3 =\Delta'_3; J\Psi'_3\hskip1in$}
+\noLine
+ \UnaryInfC{$|\Delta_3|=|\Delta_3'|\ |\Psi_3|=|\Psi'_3| \quad
+z:B \vdash_L e_1 :A_1,e_2 :A_2, \Delta_1; J\Psi_1 = e'_1 :A_1,e'_2 :A_2,\Delta'_1;J\Psi'_1$}
+\UnaryInfC{$z:B\vdash_L \Delta_1,[e/x]\Delta_2,[e'/x]\Delta_3;\Psi_1,[e/x]\Psi_2,[e'/x]\Psi_3 =$}
+\noLine
+\UnaryInfC{$\hskip.5in = \Delta'_1, [e'_1/x]\Delta_2,[e'_2/x]\Delta′_3;\Psi′_1,[e'_1/x]\Psi'_2,[e'_2/x]\Psi'_3$}
+\DisplayProof
+\end{equation}
+Let 
+$$
+q: B\rightarrow A_1\bullet A_2 \bullet \Delta_1\bullet J\Psi,\qquad m:A_1\rightarrow\Delta_2\bullet J\Psi_2 \quad
+\hbox{ and }\quad  
+n: A_2\rightarrow\Delta_3\bullet J\Psi_3.
+$$
+Then to satisfy the above equations in context we need that the following diagram commutes:
+\begin{center}
+$\xymatrix@R=.4in{B\ar[r]^(.25){q} & \Delta_1\bullet J\Psi_1\bullet (A_1\bullet A_2) \ar[d]_{\oplus} \ar[rr]^(.4){id_{\Delta_1}\bullet m\bullet n} &
+&\Delta_1\bullet J\Psi_1\bullet\Delta_2\bullet J\Psi_2\bullet \Delta_3\bullet J\Psi_3\\
+&\Delta_1\bullet  J\Psi_1\bullet A\oplus B \ar[rr]_{\ast} & &\Delta_1\bullet  J\Psi_1\bullet A\bullet B \ar[u]_{id_{\Delta_1}\bullet m\bullet n}\\}$
+\end{center}   
+We make the assumption that the above decomposition is unique. 
+Moreover, supposing $\Delta_1$ to be empty and $m = id_A$, $n = id_B$, $q = id_A\bullet id_B = id_{A\bullet B}$ 
+we obtain $(id_A\bullet id_B; \mathbf{\bigoplus})^{\ast} = id_A\bullet id_B$ and similarly 
+$(id_{A \oplus B})^*; \mathbf{\bigoplus} = id_{A \oplus B}$; hence we may conclude that there is a natural isomorphism 
+\begin{center}
+\AxiomC{$D \rightarrow \Gamma\bullet A\bullet B$}
+\doubleLine
+\UnaryInfC{$D \rightarrow \Gamma\bullet A\oplus B$}
+\DisplayProof
+\end{center}
+so we can identify $\bullet$ and $\oplus$. Finally we see that the following $\eta$ equation in context 
+is also satisfied:  
+\begin{equation}\label{eta:par}
+\quad\framebox{
+\AxiomC{$\oplus - \eta$ rule}
+\noLine
+\UnaryInfC{$|\Delta| = |\Delta'| \quad|\Psi| = |\Psi'| \quad z:B \vdash_L \Delta; \Psi = \Delta'; \Psi'$}
+\UnaryInfC{$z:B \vdash_L (\mathtt{casel\, e}\oplus\mathtt{caser}\, e): A_1\oplus A_2, \Delta; \Psi = e:A_1\oplus A_2, \Delta'; \Psi'$}
+\noLine
+\UnaryInfC{\strut}
+\DisplayProof
+}
+\end{equation}
+
+\subsection{Linear subtraction}\label{linsubtr}
+\ref{linsubtr}.1. {\em Subtraction introduction.} The introduction rule for subtraction has the form 
+\begin{center} 
+\AxiomC{$x:A\vdash_L \Delta_1, e: B; \Psi_1$}
+\AxiomC{$y:C\vdash_L \Delta_2; \Psi_2\quad |\Psi_1 | = |\Psi_2|$}
+\RightLabel{$L sub I$}
+\BinaryInfC{$x:A\vdash_L \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, [y(e)/y]\Delta_2; \Psi_1\cdot [y(e)/y]\Psi_2$}
+\DisplayProof
+\end{center}
+This suggests a natural transformation with components
+$$
+\Phi_{A, \Delta,J\Psi}: \mathcal{L}(A, \Delta_1\bullet B\bullet J\Psi_1)\times\mathcal{L}(C, \Delta_2\bullet J\Psi_2) \rightarrow 
+\mathcal{L}(A, \Delta_1\bullet (B\lsub C)\bullet \Delta_2\bullet J\Psi_1\bullet J\Psi_2)
+$$
+natural in $A, \Delta_1, \Delta_2, J \Psi_1, J\Psi_2$.
+Taking morphisms 
+$$e: A\rightarrow \Delta_1\bullet B \bullet J\Psi_1, \quad  f:C\rightarrow \Delta_2 \bullet J\Psi_2$$ 
+and also $a: A'\rightarrow A$, $d_1:\Delta_1\rightarrow \Delta_1'$, 
+$d_2: \Delta_2\rightarrow \Delta_2'$, $p_1: J\Psi_1\rightarrow J\Psi_1'$, $p_2: J\Psi_2\rightarrow J\Psi_2'$, 
+by naturality we have
+\begin{center}
+\begin{tabular}{c}
+$\Phi_{A', \Delta_1',\Delta'_2, J\Psi'_1J\Psi'_2}\left((a; e; d_1\bullet id_B\bullet p_1), (f;d_2;p_2)\right) =\qquad\qquad $\\
+$\qquad\qquad = a; \Phi_{A,\Delta, J\Psi}(e, f); d_1\bullet d_2\bullet id_{B\lsub C}; 
+\mathtt{Join}(\Delta_1',\Delta_2', B\lsub C, J\Psi_1', J\Psi_2')$
+\end{tabular}
+\end{center}
+In particular, taking $a=id_A$, $d_1=id_{\Delta_1}$, $p_1 = id_{J\Psi_1}, p_2 = id_{J\Psi_2}$ but 
+$d_2: C\rightarrow\Delta_2\cdot J\Psi_2$ and $f= id_C$ we have:
+\begin{center}
+\begin{tabular}{c}
+$\Phi_{A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2}(e, d_2) = \Phi_{A,\Delta_1} (e, id_C); 
+id_{\Delta_1}\bullet d_2 \bullet id_{A\lsub B}\bullet id_{J\Psi_1}\bullet id{J\Psi_2}; $\\
+$\hskip2in\mathtt{Join}(\Delta_1, \Delta_2, A\lsub B, J\Psi_1, J\Psi_2)$\\
+\end{tabular}
+\end{center}
+Writing $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}(e)$ for $ \Phi_{A,\Delta_1 J\Psi_1} (e, id_C)$, 
+$\Phi_{A, \Delta, J\Psi}(e, d_2)$ can be expressed as the composition 
+$$
+\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}(e); id_{\Delta_1}\bullet d_2\bullet id_{B\lsub C}
+$$ 
+where $\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}$ is a natural transformation with components 
+$$
+\mathcal{L}(A, \Delta_1\bullet B\bullet J\Psi)\times\mathcal{L}(C, C) \rightarrow 
+\mathcal{L}(A, \Delta_1\bullet C \bullet C\lsub C)
+$$
+so we make the definition 
+\begin{center}
+\begin{tabular}{l}
+$[\![x:A \vdash_L \Delta_1, \mathtt{mkc}(e,y):\, B\lsub C, [y(e)/y+\Delta_2; \Psi_1\cdot [y(e)/y] \Psi_2]\!] =_{df}$\\
+\quad $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}[\![x:A\vdash_L\Delta_1, e_1:B]\!];
+id_{\Delta}\bullet [\![y:C\vdash_L\Delta_2; \Psi_2]\!]\bullet id_{B\lsub C}; $\\
+$\hskip2in \mathtt{Join}(\Delta_1,\Delta_2, B\lsub C, J\Psi_1, J\Psi_2)$\\
+\end{tabular}
+\end{center}
+Notice that $\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}$ corresponds to the one-premise form of the 
+subtraction introduction rule
+\begin{center} 
+\AxiomC{$x:A\vdash_L \Delta_1, e: B; \Psi_1$}
+\RightLabel{$L sub I$}
+\UnaryInfC{$x:A\vdash_L \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, y(e): C; \Psi_1$}
+\DisplayProof
+\vspace{3ex}
+\end{center}
+which is equivalent in terms of provability to the more general form considered here (cfr Crolard 2004).
+
+\vspace{1ex}
+
+\noindent
+\ref{linsubtr}.2. {\em Subtraction elimination.} The subtraction elimination rule has the form 
+\begin{center} 
+\AxiomC{$x:A\vdash_L \Delta_1, e_1: B\lsub C; \Psi_1$}
+\AxiomC{$y:B\vdash_L e_2:C, \Delta_2; \Psi_2\quad |\Psi_1| = |\Psi_2|$}
+\RightLabel{$\smallsetminus$ E}
+\BinaryInfC{$x:A\vdash_L  \mathtt{postp}(y\mapsto e_2, e_1), \Delta_1, [y(e_1)/y]\Delta_2; 
+\Psi_1, [y(e_1)/y]\Psi_2$} 
+\DisplayProof
+\end{center}
+This suggests a natural transformation with components
+$$
+\Psi_{A,\Delta_1, \Delta_2, J\Psi_1, J\Psi_2}: \mathcal{L}(A, \Delta_1\bullet (B\lsub C)\bullet J\Psi_1)\times
+\mathcal{L}(B, C\bullet\Delta_2\bullet J\Psi_2) \rightarrow 
+\mathcal{L}(A,  \Delta_1\bullet \Delta_2\bullet J\Psi_1\bullet J\Psi_2)
+$$
+natural in $A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2$. Here $\mathtt{postp}(y\mapsto e_2, e_1)$ is given 
+type $1$ and an application of left identity $\lambda_{1,\Delta_2}$ is assumed implicitly. 
+
+\vspace{1ex}
+
+\noindent 
+Given 
+$$e: A\rightarrow \Delta_1\bullet (B\lsub C) \bullet J\Psi_1,\qquad  
+f: B\rightarrow C\bullet \Delta_2\bullet J\Psi_2
+$$ and also $a: A'\rightarrow A$, $d_1: \Delta_1\rightarrow\Delta_1'$, 
+$d_2:\Delta_2\rightarrow\Delta_2'$, $p_1: J\Psi_1 \rightarrow J\Psi'_1$ $p_2: J\Psi_2 \rightarrow J\Psi'_2$
+naturality yields 
+\begin{center}
+\begin{tabular}{l}
+$\Psi_{A', \Delta_1',\Delta_2', J\Psi_1', J\Psi_2'}\left((a; e; d_1\bullet id_{B\lsub C}\bullet p_1), (f; id_C\bullet d_2\bullet p_2)\right) = $\\
+$a; \Psi_{A, \Delta_1,\Delta_2,J\Psi_1}(e, f);\lambda_{1,\Delta_1} \bullet d_1\bullet d_2\bullet p_1\bullet p_2; \mathtt{Join}(\Delta_1',\Delta_2', J\Psi_1,J\Psi_2)$
+\end{tabular}
+\end{center}
+In particular, taking $a: A\rightarrow \Delta_1\bullet(B\lsub C)$, 
+$e = id_{\Delta_1\bullet(B\lsub C)}$, $d_1= id_{\Delta_1}$, $d_2: id_{\Delta_2}$, $p_1 = id_{J\Psi_1}$, $p_2 = id{J\Psi_2}$ we obtain
+$$
+\Psi_{A, \Delta_1,\Delta_2}(a, f) = a; \Psi_{A, \Delta_1,\Delta_2}(id_{\Delta_1\bullet(C\lsub D)\bullet id_{J\Psi_1}}, f); \mathtt{Join}(\Delta_1,\Delta_2, J\Psi_1, J\Psi_2)
+$$
+Writing $\mathbf{POSTP}(f)$ for $\Psi_{A, \Delta_1,\Delta_2,J\Psi_1, J\Psi_2}(id_{\Delta_1\bullet(B\lsub C)\bullet J\Psi_1}, f)$
+we define 
+\begin{center}
+\begin{tabular}{l}
+$[\![x:A \vdash_L \Delta_1, \mathtt{postp}(y\mapsto e_2, e_1), [y(e_1)/y]\Delta_2; \Psi_1, [y(e_1)/y], \Psi_2]\!] =_{df}$\\
+\quad $[\![x:A\vdash_L \Delta_1, e_1: B\lsub C]\!]; id_{\Delta_1}\bullet
+\mathbf{POSTP}[\![y:B \vdash_L e_2: C,\Delta_2; \Psi_2]\!]; \mathtt{Join}(\Delta_1,\Delta_2,J\Psi_1,J\Psi_2)$ 
+\end{tabular}
+\end{center}
+
+\vspace{1ex}
+
+\noindent
+\ref{linsubtr}.3. {\em Equations in context.}  We have equations in context of the form 
+\begin{equation}\label{context:sub}
+\framebox{\AxiomC{$\mathbf \lsub - \beta$ rules:}
+\noLine
+\UnaryInfC{$e_p\equiv \mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))\quad e_z\equiv z(\mathtt{mkc}(e_1,y))\hskip1in $}
+\noLine
+\UnaryInfC{$|\Delta_1| = |\Delta'_1|\ | \Psi_1| = |\Psi'_1| \qquad
+x : B \vdash_L e_1:A_1, \Delta_1; \Psi_1 = e'_1: A_1,\Delta'_1; \Psi'_1 $}
+\noLine
+\UnaryInfC{$\quad |\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\qquad y:A_2 \vdash_L \Delta_2; \Psi_2 =\Delta'_2; \Psi'_2
+\hskip1in$}
+\noLine
+\UnaryInfC{$\hskip1.8in z:A_1 \vdash_L e_2 :A_2, \Delta_3; \Psi_3 =e'_2 :A_2,\Delta'_3;\Psi'_3$}
+\UnaryInfC{$x: B\vdash_L \Delta_1. e_p, [y(e_1)/y]\Delta_2, [e_z/z]\Delta_3; \Psi_1, [y(e_1))y]\Psi_2, [e_z/z]\Psi_3 = $}
+\noLine
+\UnaryInfC{$\qquad = \Delta'_1, [ [e'_1/z]e'_2/y]\Delta_2, [e'_1/z]\Delta'_3; \Psi'_1, [ [e'_1/z]e'_2/y]\Psi'_2, [e'_1/z]\Psi'_3$}
+\DisplayProof
+}
+\end{equation}
+
+
+We repeat the derivations of the redex and of the reductum.
+
+\centerline{\bf Redex:}
+{\small
+\begin{center}
+\AxiomC{$x:B \vdash_L e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_L\Delta_2; \Psi_2$}
+\UnaryInfC{$x:B \vdash_L \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
+\AxiomC{$z:A_1\vdash_L e_2:A_2, \Delta_3; \Psi_3$}
+\BinaryInfC{$x:B\vdash_L \Delta_1, 
+\overbrace{\mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))}^{e_p}, 
+ [y(e_1)/y]\Delta_2,  [\overbrace{z(\mathtt{mkc}(e_1,y))}^{e_z}/z]\Delta_3 ;$}
+\noLine
+\UnaryInfC{$\hskip2in \Psi_1,  [y(e_1)/y]\Psi_2, [z(\mathtt{mkc}(e_1,y)/z)]:\Psi_3 $}
+\DisplayProof
+\end{center}}
+\centerline{\bf Reductum:}
+{\small
+\begin{center}
+\AxiomC{$x:B \vdash_L e'_1:A_1, \Delta'_1; \Psi'_1\qquad  z:A_1\vdash_L e'_2:A_2, \Delta'_3; \Psi'_3$}
+\UnaryInfC{$x:B \vdash_L \Delta'_1, [e'_1/z]\Delta'_3,       [e'_1/z]e'_2 : A_2; \Psi'_1,  [e'_1/z]\Psi'_3$}
+\AxiomC{$y:A_2\vdash_L \Delta_2; \Psi_2$}
+\BinaryInfC{$x:B \vdash_L\Delta'_1, [ [e'_1/z]e'_2/y]\Delta'_2,\ [e'_1/z]\Delta'_3; \Psi'_1,[ [e'_1/z]e'_2]\Psi'_2,\ [e'_1/z]\Psi'_3$}
+\DisplayProof
+\end{center}}
+
+
+\vspace{1ex}
+
+\noindent
+Given morphisms $n: B\rightarrow \Delta_1\bullet A_1$ and $m: A_1\rightarrow \Delta_3\bullet A_2$, for these equations to be satisfied we need the following diagram to commute (omitting non-linear terms):
+\begin{center}
+$\xymatrix@R=.4in{B\ar[d]_{\mathbf{MKC}^{A_2}(n)} \ar[rr]^n &\qquad & 
+\Delta_1\bullet A_1\ar[d]^{id_{\Delta_1}\bullet m}\\
+\Delta_1\bullet(A_1\lsub A_2)\bullet A_2\ar[rr]_{\mathbf{POSTP}(m)\bullet id_{A_2}} &&\Delta_1\bullet\Delta_3\bullet A_2\\
+}$
+\end{center}
+in particular, taking $n = id_{A_1}$ we have 
+\begin{center}
+$\xymatrix@R=.4in{A_1 \ar[d]_{\mathbf{MKC}^A_2(id_{A_1})}\ar[r]^m&\Delta_3\bullet A_2\\
+(A_1\lsub A_2)\bullet A_2 \ar[ur]|{\mathbf{POSTP}(m)\bullet id_{A_2}} &\\
+}$
+\end{center}
+Assuming the above decomposition to be unique, we can show that the $\eta$ equation in context
+is also satisfied:     
+\begin{equation}\label{eta:subtr}
+\framebox{\small 
+\AxiomC{$|\Delta| = |\Delta'| \quad |\Psi| = |\Psi'|\quad z;B \vdash_L \Delta, \Psi = \Delta', \Psi'$}
+\UnaryInfC{$z:B \vdash_L \mathtt{postp}(x\mapsto y,e), \mathtt{mkc}(x(e),y): A_1\lsub A_2, \Delta, \Psi = 
+e: A_1\lsub A_2, \Delta'; \Psi'$}
+\DisplayProof
+}
+\end{equation}
+and conclude that there is a natural isomorphism between the maps 
+\begin{center}
+\AxiomC{$A \rightarrow \Delta\bullet B$}
+\doubleLine
+\UnaryInfC{$A\smallsetminus B\rightarrow \Delta$}
+\DisplayProof
+\end{center}
+i.e., that $\smallsetminus$ is the left adjoint to the bifunctor $\bullet$.  
+%
+%
+%
+%
+\subsection{Unit rules}
+\label{units}  The introduction and elimination rules for the unit $\bot$ are
+\begin{center}
+\begin{tabular}{cc} 
+\AxiomC{$\bot$ {\em introduction}}
+\noLine
+\UnaryInfC{$x:A\vdash_L \Delta; \Psi\quad r: B \in Delta,\ \hbox{or}\  r:S \in \Psi$}
+\UnaryInfC{$x:A\vdash_L \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi$}
+% \noLine
+% \UnaryInfC{where $R \in \kappa$.}
+\DisplayProof \quad
+&\quad
+\AxiomC{$\bot$ {\em elimination}}
+\noLine
+\UnaryInfC{$x:A \vdash_L e:\bot,  \Delta; \Psi$}
+\UnaryInfC{$x:A \vdash_L \mathtt{postp_{\bot}}(e), \Delta; \Psi$}
+\DisplayProof
+\end{tabular} 
+\end{center}
+Both the introduction and the elimination rules can be interpreted by a map $a: A \rightarrow 1$, if we give
+the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
+in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
+
+\vspace{1ex}
+
+\noindent 
+The introduction rule requires a natural transformation with components
+\begin{center}
+$\Phi_{A,\Delta, J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
+\end{center}
+natural in $A$, $\Delta$, $J\Psi$. Given morphisms $e:A\rightarrow \Delta\bullet J\Psi$, $d:A'\rightarrow A$, $c:\Delta\rightarrow\Delta'$ and $p:J\Psi\rightarrow J\Psi'$, naturality yields
+\begin{center}
+$\Phi_{A', \Delta',J\Psi}(d;e;c\bullet id_{J\Psi}) = d;\Phi_{A, \Delta}(e);c\bullet id_{J\Psi}$.
+\end{center} 
+Letting $d:A\rightarrow\Delta,J\Psi$ and $e = id_{\Delta\bullet J\Psi}$, $c = id_{\Delta\bullet\bot}$ we have 
+$$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
+where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
+We define 
+$$
+[\![x:A\vdash_L \Delta \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
+[\![x:A\vdash_L \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
+$$
+\ref{units}.2. {\em Equations in context.}
+
+The equation in context        
+ \begin{equation}\label{context:bot}
+ \framebox{\quad
+\AxiomC{\bf $\bot - \beta$ rule}
+\noLine
+ \UnaryInfC{$x:A\vdash_L \Delta; \Psi = \Delta'; \Psi'$}
+\UnaryInfC{$x:A\vdash_L \Delta, \mathtt{postp}_{\bot}(\mathtt{connect}_{\bot}\ \mathtt{to}(x)); \Psi = \Delta'; \Psi'$}
+ \DisplayProof
+ \quad}
+ \end{equation}
+requires that for any $m: D\rightarrow \Gamma$ the following diagram commutes: 
+\begin{center}
+$\xymatrix@R=.4in{D \ar[r]^{m;\mathbf{Bot}} \ar[dr]_m& 
+\Gamma\bullet\bot\ar[d]^{id_{\Gamma}\bullet \langle\rangle;\lambda_{A}}\\
+&\Gamma.\\}$
+\end{center}
+Assuming that this decomposition is unique and taking $m = id_A$ we have that 
+$\mathbf{Bot}_A; id_A\bullet\langle\rangle;\lambda_A = id_A$. Arguing as before, 
+we see that there is a natural isomorphism 
+\begin{center}
+\AxiomC{$D\rightarrow\Gamma\bullet 1$}
+\doubleLine
+\UnaryInfC{$D\rightarrow\Gamma\bullet \bot$}
+\DisplayProof
+\end{center}
+(so we identify $\bot$ and 1) and that the following equation in context is satisfied:
+\begin{equation}\label{eta:bot}
+\quad\framebox{
+\AxiomC{\bf $\bot - \eta$ rule:}
+\noLine
+\UnaryInfC{$z:B \vdash_L \Delta ; \Psi = \Delta'; \Psi'$}
+\UnaryInfC{$z:B \vdash_L \mathtt{connect}_{\bot}\ \mathtt{to}(x): \bot, \mathtt{postp}_{\bot}(e) \Delta; \Psi= \bot
+e: \bot,  \Delta'; \Psi'$}
+\DisplayProof
+\quad}
+\end{equation} 
+
+\subsection{Functors}\label{functors}
+
+Recall that a model of Linear-Non Linear co-intuitionistic logic consists of  a symmetric comonoidal adjunction 
+$\mathcal{L} : H \dashv  J : \mathcal{C}$ where $\mathcal{L} = (\mathcal{L}, \bot, \oplus, \limp)$ 
+is a symmetric monoidal coclosed category and $\mathcal{C} = (\mathcal{C}, 0, +, -)$
+ is a cocartesian coclosed category.
+
+We use the same symbols for the functors
+$J: \mathcal{C} \rightarrow \mathcal{L}$ and $\mathcal{H}: \mathcal{L} \rightarrow  \mathcal{C}$ 
+in the models and for the operators that represent them in the language.
+
+\vspace{1ex}
+
+\ref{functors}.1 {\em rules for $J: \mathcal{C} \rightarrow \mathcal{L}$.} 
+\begin{equation}
+\framebox{
+\AxiomC{\it $J$ introduction}
+\noLine
+\UnaryInfC{$x:A \vdash_L ,\Delta; t:T, \Psi$}
+\UnaryInfC{$x:A\vdash_L \Delta, Jt: JT; \Psi$}
+\DisplayProof
+}
+\end{equation}
+If $\Delta = \overline{R}: \Delta$ and $\Psi = \overline{S}: \Psi$, then the categorical interpetation of the rule is 
+an application of $\alpha^{-1}$: 
+\begin{center}
+\AxiomC{$\xymatrix@R=.4in{A\ar[rr]^{\overline{R} \bullet Jt \bullet J\overline{S}} & &\Delta\bullet JT \bullet J\Psi}$}
+\UnaryInfC{$\xymatrix@R=.4in{A\ar[rr]^{(\overline{R} \bullet Jt )\bullet J\overline{S}} & &(\Delta\bullet JT) \bullet J\Psi}$}
+\DisplayProof
+\end{center}
+
+
+\begin{equation}
+\framebox{
+\AxiomC{\it $J$ elimination}
+\noLine
+\UnaryInfC{$x:A \vdash_L \Delta, e: JT;\Psi_1\qquad  y:T \vdash_C \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:A\vdash_L \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
+\DisplayProof
+}
+\end{equation}
+If $\Delta = \overline{R}: \Delta$,  $\Psi_1 = \overline{R'}: \Psi_1$, $\Psi_2 = \overline{S}:\Psi_2$, 
+then the categorical interpretation of the rule is given by an operation of the form 
+\[
+\mathcal{L}(A, \Delta\bullet JT\bullet J\Psi_1) \times \mathcal{C}(T, \Psi_2)\rightarrow 
+\mathcal{L}(A, \Delta\bullet J\Psi_1\bullet J\Psi_2) 
+\]
+given by the following compositions
+\begin{center}
+\AxiomC{$\xymatrix@R=.4in{A \ar[rr]^{\overline{R}\bullet e \bullet J\overline{R}'} && \Delta\bullet JT\bullet J\Psi_1}$}
+\AxiomC{$\xymatrix@R=.4in{T \ar[r]^{\overline{S}} & \Psi_2} \quad \hbox{in} \  \mathcal{C}$}
+\UnaryInfC{$\xymatrix@R=.4in{JT \ar[r]^{\overline{JS}}& J\Psi_2} \quad \hbox{in} \  \mathcal{L}$}
+\BinaryInfC{$\xymatrix@R=.1in@C=.6cm{A \ar[rr]^{\overline{R}\bullet e \bullet J(\overline{R}')\quad} &
+& \Delta\bullet J(T) \bullet J(\Psi_1) 
+\ar[rrr]^{id_{\Delta}\bullet J(\overline{S}) \bullet id_{J(\Psi_1)}}&&&\Delta\bullet J(\Psi_1)\bullet J(\Psi_2)
+\ar[rr]^{id_{\Delta} \bullet j^{-1}_{\Psi_1\Psi_2}} &&\Delta\bullet J(\Psi_1+\Psi_2)}$}
+\noLine
+\UnaryInfC{\hskip3in since $|\Psi_1| = |\Psi_2|, \quad \xymatrix@R=.1in@C=.6cm{ 
+\ar[rr]^{id_{\Delta}\bullet\nabla_{\Psi_1}} &&\Delta \bullet J(\Psi_1)}$}
+\DisplayProof
+\end{center}
+
+\vspace{3ex}
+
+\noindent
+\ref{functors}.2 {\em rules for $H: \mathcal{L} \rightarrow \mathcal{C}$.} 
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ intro}
+\noLine
+\UnaryInfC{$x:A\vdash_L \overline{R}: \Delta, e: B; \Psi$}
+\UnaryInfC{$x:A\vdash_L \overline{R}: \Delta;He:HB, \Psi$}
+\DisplayProof
+}
+\end{equation}
+Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then 
+\begin{center}
+\AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{\overline{R}\wp e\wp J(\overline{S})\quad}&&
+\Delta \bullet B \bullet  J(\Psi)}$}
+\RightLabel{using $\eta_B: B \rightarrow JHB$}
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{A \ar[rrr]^{\overline{R}\wp JH(e) \bullet J(\overline{S})\quad}&&
+& \Delta\bullet JH(B)\bullet J(\Psi)}$}
+\DisplayProof
+\end{center}
+
+\vspace{3ex}
+ 
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ elim$_1$}
+\noLine
+\UnaryInfC{$x:B \vdash_L \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_L ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:B \vdash_L \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof
+}
+\end{equation}
+
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ elim$_2$}
+\noLine
+\UnaryInfC{$x:S \vdash_C t:HA, \Psi_1\qquad y:A\vdash_L ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:S \vdash_C \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof
+}
+\end{equation}
+The categorical interpretation of $H$ elim$_2$ is as follows:
+Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we have the following compositions: 
+\begin{center}
+\AxiomC{$\strut\quad$}
+\noLine
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi}$}
+\AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{J(\overline{S})} && J(\Psi)}\quad \hbox{in}\ \mathcal{L}$}
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{HA \ar[rr]^{HJ(\overline{S})} && HJ(\Psi) 
+\ar[r]^{\quad\epsilon_{\Psi}} &\Psi}\quad \hbox{in}\ \mathcal{C}$}
+\BinaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi
+\ar[rrr]^{HJ(\overline{S}) + id_{\Psi}} &&& \Psi + \Psi \ar[r]^{\quad\nabla_{\Psi}}& \Psi }$}
+\DisplayProof\\
+\end{center}
