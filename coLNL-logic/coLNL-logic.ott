@@ -251,6 +251,10 @@ defn
  ----------- :: hL
  H A |-C P
 
+ T1 |-C P && T2 |-C P
+ -------------------- :: adL
+ T1 + T2 |-C P
+
 % Cointuitionistic Linear Logic:
 defn
  A |-L D ; P :: :: LBPLog :: 'L_' 
