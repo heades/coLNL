@@ -61,7 +61,7 @@ s, t :: 'citerm_' ::=
   | ( t )                      :: S :: parens
   | h( t )                     :: M :: hparens
   {{tex [[t]] }}
-  | I                          :: M :: contexts
+  | P                          :: M :: contexts
 
 % Co-intuitionistic linear terms:
 e, u :: 'cilterm_' ::=
@@ -89,24 +89,26 @@ e, u :: 'cilterm_' ::=
   {{tex [[e]] }}
   
 % Cointuitionistic Contexts:
-I {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
+P {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
   | .           ::   :: Empty
   {{tex \cdot }}
+  | T           ::   :: El2
   | t : T       ::   :: El
-  | I , PI      ::   :: Ext
-  | ( I )       :: S :: Paren
-  | h( I )      :: M :: HiddenParens 
-  {{ tex [[I]] }}
-  | I1 , ... , Ii :: M :: vec
+  | P , PI      ::   :: Ext
+  | ( P )       :: S :: Paren
+  | h( P )      :: M :: HiddenParens 
+  {{ tex [[P]] }}
+  | P1 , ... , Pi :: M :: vec
   | [ t ]         :: M :: el2
   {{tex [[t]] }}
-  | [ t / x ] I   :: M :: subst
-  | [ e / x ] I   :: M :: subst2
+  | [ t / x ] P   :: M :: subst
+  | [ e / x ] P   :: M :: subst2
 
 % Cointuitionistic Contexts:
 G {{tex \Gamma}}, D {{tex \Delta}} :: 'BG_' ::=
   | .           ::   :: Empty
   {{tex \cdot }}
+  | A           ::   :: El2
   | e : A       ::   :: El
   | G , G'      ::   :: Ext
   | ( G )       :: S :: Paren
@@ -115,6 +117,46 @@ G {{tex \Gamma}}, D {{tex \Delta}} :: 'BG_' ::=
   | [ e ]         :: M :: el2
   {{tex [[e]] }}
   | [ e / x ] D :: M :: subst
+
+terminals :: '' ::=
+  | F    ::  :: FunctorF
+  {{tex \mathsf{F} }}
+  | Gf    ::  :: FunctorG
+  {{tex \mathsf{G} }}
+  | Hf    ::  :: FunctorH
+  {{tex \mathsf{H} }}
+  | J    ::  :: FunctorJ
+  {{tex \mathsf{J} }}  
+  | 1    ::  :: One
+  | 0    ::  :: Zero
+  | []   :: :: Box  {{ tex \Box }}
+  | |=   :: :: models  {{ tex \models }}
+  | |-   :: :: Turnstyle  {{tex \vdash }}
+  | star :: :: star   {{ tex \mathop{\star} }}
+  | >>   :: :: RR   {{ tex \gg}}
+  | _    :: :: Under   {{tex \Box}}
+  | \    :: :: slash  {{ tex \lambda }}
+  | ~>   :: :: step  {{ tex \redto }}
+  | ~*>   :: :: sstep  {{ tex \redto^* }}
+  | >=   :: :: succeq {{ tex \succeq }}
+  | <=   :: :: preceq {{ tex \preceq }}
+  | ->   :: :: rightarrow  {{ tex \rightarrow }}
+  | *-   :: :: colimp  {{ tex \colimp }}  
+  | <-   :: :: leftarrow  {{ tex \leftarrow }}
+  | -<   :: :: Yleft  {{ tex \Yleft }}
+  | ~*>  :: :: mstep  {{ tex \redto^* }}
+  | =    :: :: Eq
+  | ==   :: :: Equiv  {{ tex \equiv }}
+  | =~   :: :: Cong  {{ tex \cong }}
+  | bot  :: :: Bottom   {{ tex \mathop{\perp} }}
+  | top  :: :: Top   {{ tex \top }}
+  | *    :: :: Cut  {{ tex \bullet}}
+  | ~    :: :: Tilde  {{tex \mathop{\sim} }}
+  | \    :: :: Lam {{ tex \lambda }}
+  | mu   :: :: Mu {{ tex \mu }}
+  | !=   :: :: Neq {{tex \neq }}
+  | FV   :: :: FV  {{ tex \mathsf{FV} }}
+  | in   :: :: In {{ tex \in }}
 
 formula :: 'formula_' ::=
   | judgement            ::   :: judgement
@@ -133,11 +175,11 @@ formula :: 'formula_' ::=
   | formula1 ... formulai :: M :: vec
   | ( formula )          :: S :: parens
   {{tex [[formula]] }}
-  | s : T in I           :: M :: in
-  {{tex [[s]]:[[T]] \in [[I]] }}
+  | s : T in P           :: M :: in
+  {{tex [[s]]:[[T]] \in [[P]] }}
   | e : A in D           :: M :: in2
   {{tex [[e]]:[[A]] \in [[D]] }}    
-  | | I1 | = | I2 | :: M :: EraseTerms
+  | | P1 | = | P2 | :: M :: EraseTerms
   | | D1 | = | D2 | :: M :: EraseTerms2
   | e == e' :: :: Eqv
   | D == D' :: :: DEqv
@@ -146,176 +188,320 @@ formula :: 'formula_' ::=
   | HS :: :: hspace
   {{tex \hspace{1px} }}
 
-terminals :: 'terminals_' ::=
-  | == :: :: Eqv
-  {{tex \equiv }}
-
 defns
   Jtype :: '' ::=
 
+% Co-intuitionistic Logic:
 defn
-  x : S |-C I :: :: nli :: C_
-  {{tex [[x]] : [[S]] \vdash_{\mathsf{C} } [[I]] }}
+ S |-C P :: :: CLog :: 'C_' 
+ {{tex [[S]] \vdash_{\mathsf{C} } [[P]] }}
+ by
+
+ ------- :: id
+ S |-C S
+
+ S |-C P
+ -------- :: wk
+ S |-C T,P
+
+ S |-C T,T, P
+ ------------ :: cr
+ S |-C T,P
+
+ R |-C P1,S, T, P2
+ ----------------- :: ex
+ R |-C P1,T, S, P2
+
+ ------- :: fL
+ 0 |-C P
+
+ T1 |-C P1 && T2 |-C P2
+ ---------------------- :: dL
+ T1 + T2 |-C P1,P2
+
+ R |-C P,T1
+ --------------- :: dR1
+ R |-C P,T1 + T2
+
+ R |-C P,T2
+ ------------- :: dR2
+ R |-C P,T1+T2
+
+ T1 |-C T2, P
+ ------------- :: sL
+ T1 - T2 |-C P
+
+ S |-C P1, T1 && T2 |-C P2
+ ------------------------- :: sR
+ S |-C P1,P2,T1 - T2
+
+ S |-C P1,T && T |-C P2
+ ----------------------- :: cut
+ S |-C P1,P2
+
+ A |-L . ; P
+ ----------- :: hL
+ H A |-C P
+
+% Cointuitionistic Linear Logic:
+defn
+ A |-L D ; P :: :: LBPLog :: 'L_' 
+ {{tex [[A]] \vdash_{\mathsf{L} } [[D]] ; [[P]] }}
+ by
+
+ % Axiom:
+
+ --------- :: id
+ A |-L A;.
+
+ % Structural Rules:
+
+ A |-L D;P
+ ----------- :: wk
+ A |-L D;T,P
+
+ A |-L D;T,T,P
+ ------------- :: ctr
+ A |-L D;T,P
+
+ A |-L D1,A, B,D2;P
+ -------------------- :: ex
+ A |-L D1,B, A,D2;P
+
+ A |-L D;P1,S, T,P2
+ -------------------- :: Cex
+ A |-L D;P1,T, S,P2
+
+ % Cut:
+
+ A |-L D1,B;P1 &&   B |-L D2;P2
+ ------------------------------ :: cut
+ A |-L D1,D2;P1,P2
+
+ A |-L D;P1,T && T |-C P2
+ ------------------------ :: Ccut
+ A |-L D;P1,P2
+
+ % Units:
+
+ --------------- :: flL
+ False |-L .;.
+
+ A |-L D;P
+ --------------- :: flR
+ A |-L False,D;P
+
+ % Additives from coPL:
+ 
+ A |-L D;P,T1
+ ----------------- :: dR1
+ A |-L D;P,T1 + T2
+
+ A |-L D;P,T2
+ --------------- :: dR2
+ A |-L D;P,T1+T2
+
+ % Cotensor:
+
+ B1 |-L D1;P1 && B2 |-L D2;P2
+ ------------------------------ :: pL
+ B1 (+) B2 |-L D1,D2;P1,P2
+
+ A |-L D, B, C;P
+ ------------------ :: pR
+ A |-L D, B (+) C;P
+
+ % Co-implication:
+ 
+ B1 |-L B2, D;P
+ ---------------- :: sL
+ B1 *- B2 |-L D;P
+
+ A |-L B1,D1;P1 && B2 |-L D2;P2
+ ------------------------------ :: sR
+ A |-L B *- C,D1,D2;P1,P2
+
+ A |-L D;P1,T1 && T2 |-C P2
+ -------------------------- :: CsR
+ A |-L D;P1,P2,T1 - T2
+
+ % Co-intuitionistic Functors:
+
+ T |-C P
+ ------------- :: jL
+ J T |-L .;P
+
+ A |-L D;T,P
+ ------------- :: jR
+ A |-L D,J T;P
+
+ A |-L D,B;P
+ ---------------- :: hR
+ A |-L D;H B,P
+
+defn
+  x : S |-C P :: :: nli :: C_
+  {{tex [[x]] : [[S]] \vdash_{\mathsf{C} } [[P]] }}
 by
 
   --------------- :: var
   x : S |-C x : S
 
-  s : T' in I && x : S |-C I
+  s : T' in P && x : S |-C P
   ------------------------------ :: weak
-  x : S |-C connectW to s : T, I
+  x : S |-C connectW to s : T, P
 
-  x : S |-C t1 : T, t2 : T, I
+  x : S |-C t1 : T, t2 : T, P
   --------------------------- :: contr
-  x : S |-C t1 * t2 : T,I
+  x : S |-C t1 * t2 : T,P
 
-  (x : S |-C t : 0, I) && (x1 : S1 |-C I1 ... xi : Si |-C Ii)
+  (x : S |-C t : 0, P) && (x1 : S1 |-C P1 ... xi : Si |-C Pi)
   ---------------------------------------------------------- :: zero
-  x : S |-C [ [false t/x1]I1],...,[ [false t/xi]Ii], I
+  x : S |-C [ [false t/x1]P1],...,[ [false t/xi]Pi], P
 
-  x : S |-C t : T1,I1 && y : T2 |-C I2
+  x : S |-C t : T1,P1 && y : T2 |-C P2
   ------------------------------------------ :: subi
-  x : S |-C I1,mkc(t,y) : T1 - T2,[y(t)/y]I2
+  x : S |-C P1,mkc(t,y) : T1 - T2,[y(t)/y]P2
 
-  x : S |-C t1 : T1 - T2,I1 && y : T1 |-C t2 : T2,I2
+  x : S |-C t1 : T1 - T2,P1 && y : T1 |-C t2 : T2,P2
   -------------------------------------------------- :: sube
-  x : S |-C [postp(y -> t2,t1)],I1,[y(t1)/y]I2
+  x : S |-C [postp(y -> t2,t1)],P1,[y(t1)/y]P2
 
-  x : S |-C t : T1,I
+  x : S |-C t : T1,P
   --------------------------- :: ori1
-  x : S |-C inl t : T1 + T2,I
+  x : S |-C inl t : T1 + T2,P
 
-  x : S |-C t : T2,I
+  x : S |-C t : T2,P
   --------------------------- :: ori2
-  x : S |-C inr t : T1 + T2,I
+  x : S |-C inr t : T1 + T2,P
 
-  y : T1 |-C I2
-  (y : T2 |-C I3 && x : S |-C t : T1 + T2,I1) && |I2| = |I3|
+  y : T1 |-C P2
+  (y : T2 |-C P3 && x : S |-C t : T1 + T2,P1) && |P2| = |P3|
   ---------------------------------------------------------- :: ore
-  x : S |-C I1,[case t of y.I2,y.I3]
+  x : S |-C P1,[case t of y.P2,y.P3]
 
-  (x : S |-C t : H A,I1 && y : A |-L . ; I2) && |I1| = |I2|
+  (x : S |-C t : H A,P1 && y : A |-L . ; P2) && |P1| = |P2|
   --------------------------------------------------------- :: he
-  x : S |-C [I1 * (let H y = t in I2)]
+  x : S |-C [P1 * (let H y = t in P2)]
 
 defn
-  x : A |-L D ; I :: :: li :: L_
-  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]];[[I]] }}
+  x : A |-L D ; P :: :: li :: L_
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]];[[P]] }}
 by
 
  ----------------- :: var
- x : A |-L x : A;I
+ x : A |-L x : A;P
 
- s : T' in I && x : A |-L D;I
+ s : T' in P && x : A |-L D;P
  -------------------------------- :: weak
- x : A |-L D;connectW to s : T, I
+ x : A |-L D;connectW to s : T, P
 
- x : A |-L D;t1 : T, t2 : T, I
+ x : A |-L D;t1 : T, t2 : T, P
  ----------------------------- :: contr
- x : A |-L D;t1 * t2 : T,I
+ x : A |-L D;t1 * t2 : T,P
 
- x : A |-L D;I && e : B in D
+ x : A |-L D;P && e : B in D
  ----------------------------------- :: perpi
- x : A |-L connectP to e : False,D;I
+ x : A |-L connectP to e : False,D;P
 
- x : A |-L e : False, D;I
+ x : A |-L e : False, D;P
  ------------------------ :: perpe
- x : A |-L [postpP e],D;I
+ x : A |-L [postpP e],D;P
 
- (x : A |-L D1,e : B;I1 && y : C |-L D2;I2) && |I1| = |I2|
+ (x : A |-L D1,e : B;P1 && y : C |-L D2;P2) && |P1| = |P2|
  ----------------------------------------------------------- :: subi
- x : A |-L D1,mkc(e,y) : B *- C,[y(e)/y]D2;[I1 * [y(e)/y]I2]
+ x : A |-L D1,mkc(e,y) : B *- C,[y(e)/y]D2;[P1 * [y(e)/y]P2]
 
- (x : A |-L D1,e1 : B *- C;I1 &&  y : C |-L e2 : B,D2;I2) && |I1| = |I2|
+ (x : A |-L D1,e1 : B *- C;P1 &&  y : C |-L e2 : B,D2;P2) && |P1| = |P2|
  ----------------------------------------------------------------------- :: sube
- x : A |-L D1,[postp(y -> e2, e1)],[y(e1)/y]D2;[I1 * [y(e1)/y]I2]
+ x : A |-L D1,[postp(y -> e2, e1)],[y(e1)/y]D2;[P1 * [y(e1)/y]P2]
 
- x : A |-L D1,e1 : B,e2 : C,D2;I
+ x : A |-L D1,e1 : B,e2 : C,D2;P
  ------------------------------------- :: pari
- x : A |-L D1,e1 (+) e2 : B (+) C,D2;I
+ x : A |-L D1,e1 (+) e2 : B (+) C,D2;P
 
- y : B |-L D2;I2 &&&& |I2| = |I3|
- (((z : C |-L D3;I3 && x : A |-L e : B (+) C,D1;I1)) && |I1| = |I2|)
+ y : B |-L D2;P2 &&&& |P2| = |P3|
+ (((z : C |-L D3;P3 && x : A |-L e : B (+) C,D1;P1)) && |P1| = |P2|)
  ------------------------------------------------------------------------------------ :: pare
- x : A |-L D1,[casel(e)/y]D2,[caser(e)/z]D3;[h(I1 * [casel(e)/y]I2) * [caser(e)/z]I3]
+ x : A |-L D1,[casel(e)/y]D2,[caser(e)/z]D3;[h(P1 * [casel(e)/y]P2) * [caser(e)/z]P3]
 
- x : A |-L D;t : T,I
+ x : A |-L D;t : T,P
  ----------------------- :: ji
- x : A |-L D,J t : J T;I
+ x : A |-L D,J t : J T;P
 
- (x : A |-L D, e : J T;I1 && y : T |-C I2) && |I1| = |I2|
+ (x : A |-L D, e : J T;P1 && y : T |-C P2) && |P1| = |P2|
  -------------------------------------------------------- :: je
- x : A |-L D;[I1 * let J y = e in I2]
+ x : A |-L D;[P1 * let J y = e in P2]
 
- x : A |-L D,e : B;I
+ x : A |-L D,e : B;P
  ----------------------- :: hi
- x : A |-L D;H e : H B,I
+ x : A |-L D;H e : H B,P
 
 defn
-  x : T |-C I1 = I2 :: :: leq :: LEq_
-  {{tex [[x]] : [[T]] \vdash_{\mathsf{C} } [[I1]] = [[I2]] }}
+  x : T |-C P1 = P2 :: :: leq :: LEq_
+  {{tex [[x]] : [[T]] \vdash_{\mathsf{C} } [[P1]] = [[P2]] }}
 by
 
-   |I1|=|I1'| 
-   |I2|=|I2'| &&  x:T1 |-C I2 = I2'
-  (|I3|=|I3'| &&  y:T2 |-C I3 = I3') && z:S  |-C t1:T1, I1 = t1':T1, I1'
+   |P1|=|P1'| 
+   |P2|=|P2'| &&  x:T1 |-C P2 = P2'
+  (|P3|=|P3'| &&  y:T2 |-C P3 = P3') && z:S  |-C t1:T1, P1 = t1':T1, P1'
   ----------------------------------------------------------------------- :: or1
-  z:S  |-C I1,[case (inl t1) of y.I2,y.I3] = [t1'/y]I'2 
+  z:S  |-C P1,[case (inl t1) of y.P2,y.P3] = [t1'/y]P'2 
   
-   |I1|=|I1'|  
-   |I2|=|I2'| && x:T1 |-C I2  =  I2' 
-  (|I3|=|I3'| && y:T2 |-C I3  =  I3') && z:S  |-C t2:T2, I1  =  t2':T2, I1'
+   |P1|=|P1'|  
+   |P2|=|P2'| && x:T1 |-C P2  =  P2' 
+  (|P3|=|P3'| && y:T2 |-C P3  =  P3') && z:S  |-C t2:T2, P1  =  t2':T2, P1'
   ------------------------------------------------------------------------- :: or2
-  z:S  |-C I1, [case (inr t2) of x.I2,y.I3] = [t2'/y]I'3
+  z:S  |-C P1, [case (inr t2) of x.P2,y.P3] = [t2'/y]P'3
   
-   |I1| = |I1'| 
-   |I2| = |I2'| && y:T2 |-C I2 = I2' 
-  (|I3| = |I3'| && z:T1 |-C t2:T2,I3 = t2':T2,I3') && x:S |-C t1:T1,I1 = t1':T1, I1'
+   |P1| = |P1'| 
+   |P2| = |P2'| && y:T2 |-C P2 = P2' 
+  (|P3| = |P3'| && z:T1 |-C t2:T2,P3 = t2':T2,P3') && x:S |-C t1:T1,P1 = t1':T1, P1'
   ------------------------------------------------------------------------------------------------------------- :: sub
-  x:S |-C I1, [y(t1)/y]I2, [postp(z -> t2, mkc(t1,y))], [z(mkc(t1,y))/z]I3 = I1',[[t1'/z]t2'/y]I2', [t1'/z]I3'
+  x:S |-C P1, [y(t1)/y]P2, [postp(z -> t2, mkc(t1,y))], [z(mkc(t1,y))/z]P3 = P1',[[t1'/z]t2'/y]P2', [t1'/z]P3'
 
 defn
-  x : A |-L D1 ; I1 = D2 ; I2 :: :: ceq :: CEq_
-  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D1]];[[I1]] = [[D2]];[[I2]] }}
+  x : A |-L D1 ; P1 = D2 ; P2 :: :: ceq :: CEq_
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D1]];[[P1]] = [[D2]];[[P2]] }}
 by
 
-   |I1| = |I2|
-   |I1| = |I1'|
-  (|I2| = |I2'| && y:S |-C I2 = I2') && x:A |-L D ; s:S, I1  =  D'; s': S, I1'
+   |P1| = |P2|
+   |P1| = |P1'|
+  (|P2| = |P2'| && y:S |-C P2 = P2') && x:A |-L D ; s:S, P1  =  D'; s': S, P1'
   -------------------------------------------------------------------------- :: letJ
-  x:A |-L D ; I1,[(let J y = J s in I2)] = D' ; (I1',[s'/y]I2')
+  x:A |-L D ; P1,[(let J y = J s in P2)] = D' ; (P1',[s'/y]P2')
 
-  |I1| = |I2|
-  |I1| = |I1'|
-  (|I2| = |I2'| && x:B |-L D, e:A ; I1 = D',e':A ; I1') && y:A |-L . ; I2  = . ; I2'  
+  |P1| = |P2|
+  |P1| = |P1'|
+  (|P2| = |P2'| && x:B |-L D, e:A ; P1 = D',e':A ; P1') && y:A |-L . ; P2  = . ; P2'  
   ---------------------------------------------------------------------------------- :: letH
-  x:B |-L D ; I1,[let H y = H e in I2] = D';(I1',[e'/y]I2')
+  x:B |-L D ; P1,[let H y = H e in P2] = D';(P1',[e'/y]P2')
   
   e == postp(z -> e2, mkc(e1,y))
-  e' == z(mkc(e1,y))                  &&&&& ((|I1| = |I1'| && |D1| = |D1'|) && x:B  |-L e1:A1, D1 ; I1  =  e1':A1, D1' ; I1')
-  D == [y(e1)/y]D2, [e], [e'/z]D3     &&&  ((|I2| = |I2'| && |D2| = |D2'|) && y:A2 |-L D2 ; I2  =  D2' ; I2')                
-  D' == [[e1'/z]e2'/y]D2', [e1'/z]D3' &&&&&& ((|I3| = |I3'| && |D3| = |D3'|) && z:A1 |-L e2:A2, D3 ; I3  =  e2':A2, D3' ; I3')
+  e' == z(mkc(e1,y))                  &&&&& ((|P1| = |P1'| && |D1| = |D1'|) && x:B  |-L e1:A1, D1 ; P1  =  e1':A1, D1' ; P1')
+  D == [y(e1)/y]D2, [e], [e'/z]D3     &&&  ((|P2| = |P2'| && |D2| = |D2'|) && y:A2 |-L D2 ; P2  =  D2' ; P2')                
+  D' == [[e1'/z]e2'/y]D2', [e1'/z]D3' &&&&&& ((|P3| = |P3'| && |D3| = |D3'|) && z:A1 |-L e2:A2, D3 ; P3  =  e2':A2, D3' ; P3')
   ---------------------------------------------------------------------------------------------------------------------------- :: sub
-  x:C |-L D1, D; I1, [y(e1)/y]I2, [e'/z]I3 = D1', D' ; I1', [[e1'/z]e2'/y]I2', [e1'/z]I3'
+  x:C |-L D1, D; P1, [y(e1)/y]P2, [e'/z]P3 = D1', D' ; P1', [[e1'/z]e2'/y]P2', [e1'/z]P3'
   
-  WS && ((|D1|=|D1'| && |I1|=|I1'|) && x:A1 |-L D2 ; I2  =  D2' ; I2')
-  e == casel(e1 (+) e2) &&& ((|D2|=|D2'| && |I2|=|I2'|) && y:A2 |-L D3 ; I3  =  D3' ; I3')
-  e' == caser(e1 (+) e2) &&&&&&& ((|D3|=|D3'| && |I3|=|I3'|) && z:B  |-L e1:A1, e2:A2, D1 ; I1  =  e1':A1, e2':A2, D1' ; I1')
+  WS && ((|D1|=|D1'| && |P1|=|P1'|) && x:A1 |-L D2 ; P2  =  D2' ; P2')
+  e == casel(e1 (+) e2) &&& ((|D2|=|D2'| && |P2|=|P2'|) && y:A2 |-L D3 ; P3  =  D3' ; P3')
+  e' == caser(e1 (+) e2) &&&&&&& ((|D3|=|D3'| && |P3|=|P3'|) && z:B  |-L e1:A1, e2:A2, D1 ; P1  =  e1':A1, e2':A2, D1' ; P1')
   ------------------------------------------------------------ :: par
-  z:B  |-L D1, [e/x]D2, [e'/x]D3 ; I1, [e/x]I2, [e'/x]I3 = D1',[e1'/x]D2', [e2'/x]D3' ; I1', [e1'/x]I2', [e2'/x]I3'
+  z:B  |-L D1, [e/x]D2, [e'/x]D3 ; P1, [e/x]P2, [e'/x]P3 = D1',[e1'/x]D2', [e2'/x]D3' ; P1', [e1'/x]P2', [e2'/x]P3'
 
-  x:A |-L D ; I = D' ; I'   e:B in D
+  x:A |-L D ; P = D' ; P'   e:B in D
   ------------------------------------------------------------ :: unit
-  x:A |-L D , [postpP (connectP to e)] ; I  = D' ; I'
+  x:A |-L D , [postpP (connectP to e)] ; P  = D' ; P'
   
-  (|D| = |D'| && |I| = |I'|) && z : B |-L D ; I = D' ; I'
+  (|D| = |D'| && |P| = |P'|) && z : B |-L D ; P = D' ; P'
   ------------------------------------------------------------------------------- :: etaSub
-  z:B  |-L [postp(x -> y, e)], mkc(x(e),y) : A1 *- A2,D;I = e : A1 *- A2, D' ; I'
+  z:B  |-L [postp(x -> y, e)], mkc(x(e),y) : A1 *- A2,D;P = e : A1 *- A2, D' ; P'
   
-  (|D| = |D'|   && |I| = |I'|) && z : B |-L D ; I = D' ; I'
+  (|D| = |D'|   && |P| = |P'|) && z : B |-L D ; P = D' ; P'
   ------------------------------------------------------------------------- :: etaPar
-  z:B  |-L (casel e) (+) (caser e) : A1 (+) A2,D;I = e : A1 (+) A2, D' ; I'
+  z:B  |-L (casel e) (+) (caser e) : A1 (+) A2,D;P = e : A1 (+) A2, D' ; P'
 
-  (|D| = |D'| && |I| = |I'|) && z : B |-L D ; I = D' ; I'
+  (|D| = |D'| && |P| = |P'|) && z : B |-L D ; P = D' ; P'
   ----------------------------------------------------------------- :: etaUnit
-  z:B  |-L connectP to (postpP e) : False,D;I = e : False,  D' ; I'
+  z:B  |-L connectP to (postpP e) : False,D;P = e : False,  D' ; P'

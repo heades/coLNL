@@ -104,13 +104,55 @@ our dual LNL models with Benton's LNL models to obtain a categorical
 model of bi-intuitionistic logic
 (Section~\ref{subsec:a_mixed_bi-linear_non-linear_model}), but we
 leave its analysis and corresponding logic to a future paper.
-Following the categorical model we define and analyze a new sequent
-calculus (Section~\ref{sec:sequent_calculus}), natural deduction
-formalization (Section~\ref{sec:sequent-style_natural_deduction}), and
-a term assignment (Section~\ref{sec:term_assignment}) for dual LNL
-logic.
 
-***Introduce dual LNL logic.***
+Benton~\cite{Benton:1994} showed that, syntactically, LNL models have
+a corresponding logic by first defining intuitionistic logic, whose
+sequent is denoted, $\Theta \vdash_{\cat{C}} X$, and then
+intuitionistic linear logic, $\Theta;\Gamma \vdash_{\cat{L}} A$, but
+the key insight was that $\Theta$ contains non-linear assumptions
+while $\Gamma$ contains linear assumptions, but one should view their
+separation as merely cosmetic; all assumptions can consistently be
+mixed within a single context.  The two logics are then connected by
+syntactic versions of the functors $\func{F}$ and $\func{G}$ which
+allow formulas to move between both fragments.
+
+Following Benton's lead the design of dual LNL logic is similar.  We
+have a non-linear cointuitionistic fragment, $T \vdash_{\cat{C}}
+\Psi$, and a linear cointuitionistic fragment, $A \vdash_{\cat{C}}
+\Delta;\Psi$, where $\Delta$ contains linear conclusions and $\Psi$
+contains non-linear conclusions, but again the separation of contexts
+is only cosmetic. The non-linear fragment has the following structural rules:
+\begin{mathpar}
+  ?
+  \and
+  ?
+\end{mathpar}
+Then we connect these two fragments together using the following rules
+for the functors $\func{H}$ and $\func{J}$:
+\begin{mathpar}
+  \inferrule* [right=$\func{H}_r$] {
+    A \vdash_{\cat{L}} \delta,B;\Psi
+  }{A \vdash_{\cat{L}} \delta;\func{H}B,\Psi}
+  \and
+  \inferrule* [right=$\func{H}_l$] {
+    A \vdash_{\cat{L}} .;\Psi
+  }{\func{H}A \vdash_{\cat{C}} \Psi}
+  \and
+  \inferrule* [right=$\func{J}_r$] {
+    A \vdash_{\cat{L}} \Delta;T,\Psi
+  }{A \vdash_{\cat{L}} \Delta,\func{J}T;\Psi}
+  \and  
+  \inferrule* [right=$\func{J}_l$] {
+    T \vdash_{\cat{C}} \Psi
+  }{\func{J}T \vdash_{\cat{L}} .;\Psi}
+\end{mathpar}
+These allow for linear and non-linear formulas to move from one
+fragment to the other.  We will give a sequent calculus and natural
+deduction formalization (Section~\ref{sec:sequent_calculus} and
+Section~\ref{sec:sequent-style_natural_deduction}) as well as a term
+assignment (Section~\ref{sec:term_assignment}).  The latter is
+particularly interesting, because of the fact that cointuitionistic
+logic has multiple conclusions, but only a single hypothesis.
 
 %%% Local Variables: 
 %%% mode: latex

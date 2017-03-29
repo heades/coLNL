@@ -1,99 +1,109 @@
 ?\subsection{Sequent Calculus}
 \label{sec:sequent_calculus}
 
+\begin{figure}
+  \begin{mdframed}
+    ?
+  \end{mdframed}
+  \caption{Non-linear Fragment of \textbf{co-LNL} Sequent Calculus}
+  \label{fig:non-linear-sequent}
+\end{figure}
+
+
 \begin{table}
- \begin{center}
-  \begin{small}
-   \begin{tabular}{|c|}
-\hline
-\\
-\AxiomC{\it C identity}
-\noLine
-\UnaryInfC{$S \vdash_C S  $}
-\DisplayProof\\
-\\
-\AxiomC{\it CC Cut}
-\noLine
-\UnaryInfC{$ S \vdash_C \Psi_1, T\quad T \vdash_C \Psi_2$}
-\UnaryInfC{$S \vdash_C \Psi_1, \Psi_2$}
-\DisplayProof\\
-\\
-\AxiomC{\it C exchange}
-\noLine
-\UnaryInfC{$S \vdash_C \Psi_1, S, T, \Psi_2 $}
-\UnaryInfC{$S \vdash_C \Psi_1, T, S, \Psi_2 $} 
-\DisplayProof
-\AxiomC{\it C weakening }
-\noLine
-\UnaryInfC{$S \vdash_C \Psi $}
-\UnaryInfC{$S \vdash_C T, \Psi $} 
-\DisplayProof
-\qquad
-\AxiomC{\it C contraction}
-\noLine
-\UnaryInfC{$S \vdash_C T, T, \Psi $}
-\UnaryInfC{$S \vdash_C T, \Psi $} 
-\DisplayProof\\
-\\
- \AxiomC{\it C zero}
-\noLine
-\UnaryInfC{$0 \vdash_C \Psi$} 
-\DisplayProof\\
-\\
-\AxiomC{\it C subtraction R }
-\noLine
-\UnaryInfC{$S \vdash_C \Psi_1, T_1 \qquad  
-T_2 \vdash_C \Psi_2$}
-\UnaryInfC{$S \vdash_C \Psi_1, \Psi_2, T_1 - T_2$}
-\DisplayProof\qquad
-\AxiomC{\it C subtraction L}
-\noLine
-\UnaryInfC{$T_1 \vdash_C T_2, \Psi$}
-\UnaryInfC{$T_1 - T_2 \vdash_C \Psi$}
-\DisplayProof \\
-\\
-\AxiomC{\it C disjunction R$_1$}
-\noLine
-\UnaryInfC{$S \vdash_C  \Psi, T_1$}
-\UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
-\DisplayProof \qquad
-\AxiomC{\it C disjunction R$_2$}
-\noLine
-\UnaryInfC{$S \vdash_C  \Psi, T_2$}
-\UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
-\DisplayProof \\
-\\
-\AxiomC{\it C disjunction L}
-\noLine
-\UnaryInfC{$T_1 \vdash_C \Psi_1 \qquad T_2 \vdash_C \Psi_2$}
-\UnaryInfC{$T_1 + T_2 \vdash_C \Psi_1, \Psi_2$}
-\DisplayProof\\
-\\
-\hline
-\\
-\centerline{\it H rules}
-\\
-\\
-\AxiomC{\it H R}
-\noLine
-\UnaryInfC{$A \vdash_L, \Delta, B ; \Psi $}
-\UnaryInfC{$A \vdash_L, \Delta; H B, \Psi$}
-\DisplayProof
-\qquad
-\AxiomC{\it H L}
-\noLine
-\UnaryInfC{$A \vdash_L ; \Psi $}
-\UnaryInfC{$H A \vdash_C \Psi_2$}
-\DisplayProof\\
-\\
-\\
-\hline
-  \end{tabular} 
-  \end{small}
- \caption{Non-linear {\bf  co-LNL}}
-  \label{non-linear-coint}
- \end{center} 
+  \begin{center}
+    \begin{small}
+      \begin{tabular}{|c|}
+        \hline
+        \\
+        \AxiomC{\it C identity}
+        \noLine
+        \UnaryInfC{$S \vdash_C S  $}
+        \DisplayProof\\
+        \\
+        \AxiomC{\it CC Cut}
+        \noLine
+        \UnaryInfC{$ S \vdash_C \Psi_1, T\quad T \vdash_C \Psi_2$}
+        \UnaryInfC{$S \vdash_C \Psi_1, \Psi_2$}
+        \DisplayProof\\
+        \\
+        \AxiomC{\it C exchange}
+        \noLine
+        \UnaryInfC{$S \vdash_C \Psi_1, S, T, \Psi_2 $}
+        \UnaryInfC{$S \vdash_C \Psi_1, T, S, \Psi_2 $} 
+        \DisplayProof
+        \AxiomC{\it C weakening }
+        \noLine
+        \UnaryInfC{$S \vdash_C \Psi $}
+        \UnaryInfC{$S \vdash_C T, \Psi $} 
+        \DisplayProof
+        \qquad
+        \AxiomC{\it C contraction}
+        \noLine
+        \UnaryInfC{$S \vdash_C T, T, \Psi $}
+        \UnaryInfC{$S \vdash_C T, \Psi $} 
+        \DisplayProof\\
+        \\
+        \AxiomC{\it C zero}
+        \noLine
+        \UnaryInfC{$0 \vdash_C \Psi$} 
+        \DisplayProof\\
+        \\
+        \AxiomC{\it C subtraction R }
+        \noLine
+        \UnaryInfC{$S \vdash_C \Psi_1, T_1 \qquad  
+          T_2 \vdash_C \Psi_2$}
+        \UnaryInfC{$S \vdash_C \Psi_1, \Psi_2, T_1 - T_2$}
+        \DisplayProof\qquad
+        \AxiomC{\it C subtraction L}
+        \noLine
+        \UnaryInfC{$T_1 \vdash_C T_2, \Psi$}
+        \UnaryInfC{$T_1 - T_2 \vdash_C \Psi$}
+        \DisplayProof \\
+        \\
+        \AxiomC{\it C disjunction R$_1$}
+        \noLine
+        \UnaryInfC{$S \vdash_C  \Psi, T_1$}
+        \UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
+        \DisplayProof \qquad
+        \AxiomC{\it C disjunction R$_2$}
+        \noLine
+        \UnaryInfC{$S \vdash_C  \Psi, T_2$}
+        \UnaryInfC{$S \vdash_C  \Psi, T_1 + T_2$}
+        \DisplayProof \\
+        \\
+        \AxiomC{\it C disjunction L}
+        \noLine
+        \UnaryInfC{$T_1 \vdash_C \Psi_1 \qquad T_2 \vdash_C \Psi_2$}
+        \UnaryInfC{$T_1 + T_2 \vdash_C \Psi_1, \Psi_2$}
+        \DisplayProof\\
+        \\
+        \hline
+        \\
+        \centerline{\it H rules}
+        \\
+        \\
+        \AxiomC{\it H R}
+        \noLine
+        \UnaryInfC{$A \vdash_L, \Delta, B ; \Psi $}
+        \UnaryInfC{$A \vdash_L, \Delta; H B, \Psi$}
+        \DisplayProof
+        \qquad
+        \AxiomC{\it H L}
+        \noLine
+        \UnaryInfC{$A \vdash_L ; \Psi $}
+        \UnaryInfC{$H A \vdash_C \Psi_2$}
+        \DisplayProof\\
+        \\
+        \\
+        \hline
+      \end{tabular} 
+    \end{small}
+    \caption{Non-linear {\bf  co-LNL}}
+    \label{non-linear-coint}
+  \end{center} 
 \end{table}
+
 \begin{table}
  \begin{center}
   \begin{small}

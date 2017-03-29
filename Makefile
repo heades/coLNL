@@ -34,7 +34,7 @@ dualLNL-logic-output.tex : coLNL-logic/coLNL-logic.ott dualLNL-logic.tex
 
 main-output.tex : DualLNL.ott main.tex
 	@echo "\n\n***OTT: Preprocessing dtt.ott in main.tex.***"
-	@$(OTT) $(OTT_FLAGS) -i DualLNL.ott  -o DualLNL-inc.tex -tex_name_prefix DualLNL \
+	@$(OTT) $(OTT_FLAGS) -i coLNL-logic/coLNL-logic.ott  -o DualLNLLogic-inc.tex -tex_name_prefix DualLNLLogic \
 		-tex_filter main.tex main-output.tex
 
 # Now this takes the full LaTex translation and compiles it using
