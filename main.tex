@@ -119,6 +119,42 @@
 
 %% Ott
 \input{DualLNLLogic-inc}
+\renewcommand{\DualLNLLogicdrule}[4][]{{\displaystyle\frac{\begin{array}{l}#2\end{array}}{#3}\,\DualLNLLogicdrulename{#4}}}
+\renewcommand{\DualLNLLogicdrulename}[1]{#1}
+
+\renewcommand{\DualLNLLogicdruleCXXidName}{\text{C\_}\text{id}}
+\renewcommand{\DualLNLLogicdruleCXXwkName}{\text{C\_}\text{weak}}
+\renewcommand{\DualLNLLogicdruleCXXcrName}{\text{C\_}\text{contr}}
+\renewcommand{\DualLNLLogicdruleCXXexName}{\text{C\_}\text{ex}}
+\renewcommand{\DualLNLLogicdruleCXXfLName}{\text{C\_}0}
+\renewcommand{\DualLNLLogicdruleCXXdLName}{\text{C\_}+_L}
+\renewcommand{\DualLNLLogicdruleCXXdROneName}{\text{C\_}+_{R_1}}
+\renewcommand{\DualLNLLogicdruleCXXdRTwoName}{\text{C\_}+_{R_2}}
+\renewcommand{\DualLNLLogicdruleCXXsLName}{\text{C\_}-_L}
+\renewcommand{\DualLNLLogicdruleCXXsRName}{\text{C\_}-_R}
+\renewcommand{\DualLNLLogicdruleCXXcutName}{\text{C\_}\text{cut}}
+\renewcommand{\DualLNLLogicdruleCXXhLName}{\mathsf{H}_L}
+\renewcommand{\DualLNLLogicdruleCXXmcutName}{\text{C\_cut}_n}
+\renewcommand{\DualLNLLogicdruleLXXidName}{\text{LL\_id}}
+\renewcommand{\DualLNLLogicdruleLXXwkName}{\text{LC\_weak}}
+\renewcommand{\DualLNLLogicdruleLXXctrName}{\text{LC\_contr}}
+\renewcommand{\DualLNLLogicdruleLXXexName}{\text{LL\_ex}}
+\renewcommand{\DualLNLLogicdruleLXXCexName}{\text{LC\_ex}}
+\renewcommand{\DualLNLLogicdruleLXXcutName}{\text{LL\_cut}}
+\renewcommand{\DualLNLLogicdruleLXXCcutName}{\text{LC\_cut}}
+\renewcommand{\DualLNLLogicdruleLXXflLName}{\text{LL\_}\hspace{-3px}\perp_L}
+\renewcommand{\DualLNLLogicdruleLXXflRName}{\text{LL\_}\hspace{-3px}\perp_R}
+\renewcommand{\DualLNLLogicdruleLXXdROneName}{\text{LC\_}+_{R_1}}
+\renewcommand{\DualLNLLogicdruleLXXdRTwoName}{\text{LC\_}+_{R_2}}
+\renewcommand{\DualLNLLogicdruleLXXpLName}{\text{LL\_}\oplus_L}
+\renewcommand{\DualLNLLogicdruleLXXpRName}{\text{LL\_}\oplus_R}
+\renewcommand{\DualLNLLogicdruleLXXsLName}{\text{LL\_}\hspace{-3px}\colimp_L}
+\renewcommand{\DualLNLLogicdruleLXXsRName}{\text{LL\_}\hspace{-3px}\colimp_R}
+\renewcommand{\DualLNLLogicdruleLXXCsRName}{\text{LL\_}-_R}
+\renewcommand{\DualLNLLogicdruleLXXjLName}{\text{LL\_}\func{J}_L}
+\renewcommand{\DualLNLLogicdruleLXXjRName}{\text{LL\_}\func{J}_R}
+\renewcommand{\DualLNLLogicdruleLXXhRName}{\text{LL\_}\func{H}_R}
+\renewcommand{\DualLNLLogicdruleLXXCmcutName}{\text{LC\_cut}_n}
 
 \urldef{\mailsa}\path|{heades}@augusta.edu|
 

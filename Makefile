@@ -32,7 +32,7 @@ dualLNL-logic-output.tex : coLNL-logic/coLNL-logic.ott dualLNL-logic.tex
 	@$(OTT) $(OTT_FLAGS) -i coLNL-logic/coLNL-logic.ott  -o DualLNLLogic-inc.tex -tex_name_prefix DualLNLLogic \
 		-tex_filter dualLNL-logic.tex dualLNL-logic-output.tex
 
-main-output.tex : DualLNL.ott main.tex
+main-output.tex : main.tex coLNL-logic/coLNL-logic.ott dualLNL-logic-output.tex
 	@echo "\n\n***OTT: Preprocessing dtt.ott in main.tex.***"
 	@$(OTT) $(OTT_FLAGS) -i coLNL-logic/coLNL-logic.ott  -o DualLNLLogic-inc.tex -tex_name_prefix DualLNLLogic \
 		-tex_filter main.tex main-output.tex

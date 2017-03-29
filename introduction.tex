@@ -123,28 +123,20 @@ have a non-linear cointuitionistic fragment, $T \vdash_{\cat{C}}
 contains non-linear conclusions, but again the separation of contexts
 is only cosmetic. The non-linear fragment has the following structural rules:
 \begin{mathpar}
-  ?
+  \DualLNLLogicdruleCXXwk{}  
   \and
-  ?
+  \DualLNLLogicdruleCXXcr{} 
 \end{mathpar}
 Then we connect these two fragments together using the following rules
 for the functors $\func{H}$ and $\func{J}$:
 \begin{mathpar}
-  \inferrule* [right=$\func{H}_r$] {
-    A \vdash_{\cat{L}} \delta,B;\Psi
-  }{A \vdash_{\cat{L}} \delta;\func{H}B,\Psi}
+  \DualLNLLogicdruleCXXhL{}
   \and
-  \inferrule* [right=$\func{H}_l$] {
-    A \vdash_{\cat{L}} .;\Psi
-  }{\func{H}A \vdash_{\cat{C}} \Psi}
+  \DualLNLLogicdruleLXXhR{}
   \and
-  \inferrule* [right=$\func{J}_r$] {
-    A \vdash_{\cat{L}} \Delta;T,\Psi
-  }{A \vdash_{\cat{L}} \Delta,\func{J}T;\Psi}
-  \and  
-  \inferrule* [right=$\func{J}_l$] {
-    T \vdash_{\cat{C}} \Psi
-  }{\func{J}T \vdash_{\cat{L}} .;\Psi}
+  \DualLNLLogicdruleLXXjL{}
+  \and
+  \DualLNLLogicdruleLXXjR{}
 \end{mathpar}
 These allow for linear and non-linear formulas to move from one
 fragment to the other.  We will give a sequent calculus and natural
