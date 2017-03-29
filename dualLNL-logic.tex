@@ -70,10 +70,10 @@ if $\Pi$ is cut-free its cut rank is 0.
 \end{lemma} ({\bf Cut Reduction}) 
 \begin{enumerate}
 \item If $\Pi_1$ is a derivation of $[[T |-C P, S^n]]$ and  $\Pi_2$ is a derivation of $[[S |-C P']]$ with 
-$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_C \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
-\item If $\Pi_1$ is a derivation of $T \vdash_L \Delta; \Psi, S^n$ and  $\Pi_2$ is a derivation of $S \vdash_C\Psi'$ with 
-$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_L \Delta; \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
-\item If $\Pi_1$ is a derivation of $B\vdash_L \Delta; \Psi, A^n$ and  $\Pi_2$ is a derivation of $A \vdash_L\Delta', \Psi'$ with $c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $B\vdash_C\Delta, \Delta', \Psi, \Psi'$ with $c(\Pi) \leq |A|$.
+$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_{\mathsf{C}} \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
+\item If $\Pi_1$ is a derivation of $T \vdash_{\mathsf{L}} \Delta; \Psi, S^n$ and  $\Pi_2$ is a derivation of $S \vdash_{\mathsf{C}}\Psi'$ with 
+$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_{\mathsf{L}} \Delta; \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
+\item If $\Pi_1$ is a derivation of $B\vdash_{\mathsf{L}} \Delta; \Psi, A^n$ and  $\Pi_2$ is a derivation of $A \vdash_{\mathsf{L}}\Delta', \Psi'$ with $c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $B\vdash_{\mathsf{C}}\Delta, \Delta', \Psi, \Psi'$ with $c(\Pi) \leq |A|$.
 \end{enumerate}
 
 \noindent
@@ -90,35 +90,35 @@ are handled mainly by permutation of inferences and use of the inductive hypothe
 \begin{center}
 \AxiomC{$\pi_1$}
 \noLine
-\UnaryInfC{$A \vdash_L \Delta, J T^n ; T, \Psi$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta, J T^n ; T, \Psi$}
 \LeftLabel{$\Pi_1 =$} 
 \RightLabel{$\DualLNLLogicdruleLXXjRName$}
-\UnaryInfC{$A \vdash_L \Delta, J T^{n+1}; \Psi$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta, J T^{n+1}; \Psi$}
 \DisplayProof
 \qquad 
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$T \vdash_C \Psi'$}
+\UnaryInfC{$T \vdash_{\mathsf{C}} \Psi'$}
 \LeftLabel{$\Pi_2 =$} 
 \RightLabel{$\DualLNLLogicdruleLXXjLName$}
-\UnaryInfC{$JT \vdash_L ; \Delta, J T^{n+1}, \Psi'$}
+\UnaryInfC{$JT \vdash_{\mathsf{L}} ; \Delta, J T^{n+1}, \Psi'$}
 \DisplayProof
 \end{center}
-By the inductive hypothesis appled to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $A \vdash_L \Delta; T, \Psi, \Psi'$
+By the inductive hypothesis appled to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $A \vdash_{\mathsf{L}} \Delta; T, \Psi, \Psi'$
 with $c(\Pi') \leq |J T| = |T | + 1$.  Then the following derivation 
 \begin{center}
 \AxiomC{$\Pi'$}
 \noLine
-\UnaryInfC{$A \vdash_L \Delta ; T, \Psi, \Psi'$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta ; T, \Psi, \Psi'$}
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$T \vdash_C \Psi'$}
+\UnaryInfC{$T \vdash_{\mathsf{C}} \Psi'$}
 \LeftLabel{$\Pi_1 =$} 
 \RightLabel{$\DualLNLLogicdruleLXXCcutName$}
-\BinaryInfC{$A \vdash_L \Delta, \Psi, \Psi', \Psi'$}
+\BinaryInfC{$A \vdash_{\mathsf{L}} \Delta, \Psi, \Psi', \Psi'$}
 \doubleLine
 \RightLabel{$\DualLNLLogicdruleCXXcrName^*$}
-\UnaryInfC{$A \vdash_L \Delta, \Psi, \Psi'$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta, \Psi, \Psi'$}
 \DisplayProof
 \end{center}
 has cut rank $\mathit{max}( |T|+1, c(\Pi'), c(\pi_2)) = |T|+1 = |J T|$. 
@@ -130,35 +130,35 @@ has cut rank $\mathit{max}( |T|+1, c(\Pi'), c(\pi_2)) = |T|+1 = |J T|$.
 \begin{center}
 \AxiomC{$\pi_1$}
 \noLine
-\UnaryInfC{$B \vdash_L \Delta, A; H A^n ; \Psi$}
+\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta, A; H A^n ; \Psi$}
 \LeftLabel{$\Pi_1 =$} 
 \RightLabel{$\DualLNLLogicdruleLXXhRName$}
-\UnaryInfC{$B \vdash_L \Delta; H A^{n+1}, \Psi$}
+\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta; H A^{n+1}, \Psi$}
 \DisplayProof
 \qquad 
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$A \vdash_L ; \Psi'$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} ; \Psi'$}
 \LeftLabel{$\Pi_2 =$} 
 \RightLabel{$\DualLNLLogicdruleCXXhLName$}
-\UnaryInfC{$H A \vdash_C ; \Psi'$}
+\UnaryInfC{$H A \vdash_{\mathsf{C}} ; \Psi'$}
 \DisplayProof
 \end{center}
-By the inductive hypothesis applied to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $B \vdash_L \Delta; A, \Psi, \Psi'$
+By the inductive hypothesis applied to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $B \vdash_{\mathsf{L}} \Delta; A, \Psi, \Psi'$
 with $c(\Pi') \leq |H A| = |A | + 1$.  Then the following derivation 
 \begin{center}
 \AxiomC{$\Pi'$}
 \noLine
-\UnaryInfC{$B \vdash_L \Delta ; A, \Psi, \Psi'$}
+\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta ; A, \Psi, \Psi'$}
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$A \vdash_L ; \Psi'$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} ; \Psi'$}
 \LeftLabel{$\Pi_1 =$} 
 \RightLabel{$\DualLNLLogicdruleLXXcutName$}
-\BinaryInfC{$B \vdash_L \Delta, \Psi, \Psi', \Psi'$}
+\BinaryInfC{$B \vdash_{\mathsf{L}} \Delta, \Psi, \Psi', \Psi'$}
 \doubleLine
 \RightLabel{$\DualLNLLogicdruleCXXcrName^*$}
-\UnaryInfC{$B \vdash_L \Delta, \Psi, \Psi'$}
+\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta, \Psi, \Psi'$}
 \DisplayProof
 \end{center}
 has cut rank $\mathit{max}( |A|+1, c(\Pi'), c(\pi_2)) = |A|+1 = |H A|$. 
@@ -170,21 +170,21 @@ has cut rank $\mathit{max}( |A|+1, c(\Pi'), c(\pi_2)) = |A|+1 = |H A|$.
 \begin{center}
 \AxiomC{$\pi_1$}
 \noLine
-\UnaryInfC{$S \vdash_C T_1, (T_1 + T_2)^{n}, \Psi$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, (T_1 + T_2)^{n}, \Psi$}
 \LeftLabel{$\Pi_1 =$} 
 \RightLabel{$\DualLNLLogicdruleCXXdROneName$}
-\UnaryInfC{$S \vdash_C (T_1 + T_2)^{n+1}, \Psi$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} (T_1 + T_2)^{n+1}, \Psi$}
 \DisplayProof
 \qquad 
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$T_1 \vdash_C \Psi_1$}
+\UnaryInfC{$T_1 \vdash_{\mathsf{C}} \Psi_1$}
 \AxiomC{$\pi_3$}
 \noLine
-\UnaryInfC{$T_2 \vdash_C \Psi_2$}
+\UnaryInfC{$T_2 \vdash_{\mathsf{C}} \Psi_2$}
 \LeftLabel{$\Pi_2 =$} 
 \RightLabel{$\DualLNLLogicdruleCXXdLName$}
-\BinaryInfC{$T_1+ T_2 \vdash_C ; \Psi_1, \Psi_2$}
+\BinaryInfC{$T_1+ T_2 \vdash_{\mathsf{C}} ; \Psi_1, \Psi_2$}
 \DisplayProof
 \end{center}
 
@@ -194,37 +194,37 @@ If $n = 0$, then the reduction is as follows:
 \begin{tabular}{c}
 \AxiomC{$\pi_1$}
 \noLine
-\UnaryInfC{$S \vdash_C T_1, \Psi$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, \Psi$}
 \LeftLabel{$\Pi_1 =$} 
 \RightLabel{$\DualLNLLogicdruleCXXdROneName$}
-\UnaryInfC{$S \vdash_C T_1 + T_2, \Psi$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} T_1 + T_2, \Psi$}
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$T_1 \vdash_C \Psi_1$}
+\UnaryInfC{$T_1 \vdash_{\mathsf{C}} \Psi_1$}
 \AxiomC{$\pi_3$}
 \noLine
-\UnaryInfC{$T_2 \vdash_C \Psi_2$}
+\UnaryInfC{$T_2 \vdash_{\mathsf{C}} \Psi_2$}
 \LeftLabel{$\Pi_2 =$} 
 \RightLabel{$\DualLNLLogicdruleCXXdLName$}
-\BinaryInfC{$T_1+ T_2 \vdash_C  \Psi_1, \Psi_2$}
+\BinaryInfC{$T_1+ T_2 \vdash_{\mathsf{C}}  \Psi_1, \Psi_2$}
 \RightLabel{$\DualLNLLogicdruleCXXcutName$}
-\BinaryInfC{$S\vdash_C \Psi, \Psi_1, \Psi_2$}
+\BinaryInfC{$S\vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_2$}
 \DisplayProof\\
 \\
  reduces to \\ 
 \\
 \AxiomC{$\pi_1$}
 \noLine
-\UnaryInfC{$S \vdash_C T_1, \Psi$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, \Psi$}
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$T_1 \vdash_C \Psi_1$}
+\UnaryInfC{$T_1 \vdash_{\mathsf{C}} \Psi_1$}
 \RightLabel{$\DualLNLLogicdruleCXXcutName$}
-\BinaryInfC{$S \vdash_C \Psi, \Psi_1$}
+\BinaryInfC{$S \vdash_{\mathsf{C}} \Psi, \Psi_1$}
 \doubleLine
 \LeftLabel{$\Pi$}
 \RightLabel{$\DualLNLLogicdruleCXXwkName^*$}
-\UnaryInfC{$S\vdash_C \Psi, \Psi_1, \Psi_2$}
+\UnaryInfC{$S\vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_2$}
 \DisplayProof
 \end{tabular}
 \end{center}
@@ -236,20 +236,20 @@ Here $c(\Pi) = max(|T_1 + 1|, c(\pi_1), c(\pi_2)) \leq |T_1 + T_2|$.
  
 \noindent
 If $n > 0$, then by the inductive hypothesis applied to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of 
-$S \vdash_C T_1, \Psi, \Psi_1, \Psi_2$ with $c(\Pi') \leq |T_1+ T_2| = |T_1|+|T_2 | + 1$.  Then the following derivation 
+$S \vdash_{\mathsf{C}} T_1, \Psi, \Psi_1, \Psi_2$ with $c(\Pi') \leq |T_1+ T_2| = |T_1|+|T_2 | + 1$.  Then the following derivation 
 \begin{center}
 \AxiomC{$\Pi' $}
 \noLine
-\UnaryInfC{$S \vdash_C T_1, \Psi, \Psi_1, \Psi_2$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, \Psi, \Psi_1, \Psi_2$}
 \AxiomC{$\pi_2$}
 \noLine
-\UnaryInfC{$T_1 \vdash_C  \Psi_1$}
+\UnaryInfC{$T_1 \vdash_{\mathsf{C}}  \Psi_1$}
 \LeftLabel{$\Pi =$} 
 \RightLabel{$\DualLNLLogicdruleCXXcutName$}
-\BinaryInfC{$S \vdash_C \Psi, \Psi_1, \Psi_1, \Psi_2$}
+\BinaryInfC{$S \vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_1, \Psi_2$}
 \doubleLine
 \RightLabel{$\DualLNLLogicdruleCXXcrName^*$}
-\UnaryInfC{$S \vdash_C \Psi, \Psi_1, \Psi_2$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_2$}
 \DisplayProof
 \end{center}
 has cut rank $\mathit{max}( |T_1|+1, c(\Pi'), c(\pi_2)) \leq |T_1 + T_2|$. 
@@ -262,22 +262,22 @@ $\lsub$ right / $\lsub$ left. We have
 \begin{tabular}{c}
 \AxiomC{$\pi_1$ }
 \noLine
-\UnaryInfC{$A \vdash_L \Delta_1; \Psi_1, B_1$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta_1; \Psi_1, B_1$}
  \AxiomC{$\pi_2$ } 
 \noLine
-\UnaryInfC{$B_2 \vdash_L \Delta_2; \Psi_2$}
+\UnaryInfC{$B_2 \vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
 \LeftLabel{$\Pi_1 =$}
 \RightLabel{$\DualLNLLogicdruleLXXsRName$}
-\BinaryInfC{$A \vdash_L B_1 \lsub B_2,  \Delta_1, \Delta_2; \Psi_1, \Psi_2$}
+\BinaryInfC{$A \vdash_{\mathsf{L}} B_1 \lsub B_2,  \Delta_1, \Delta_2; \Psi_1, \Psi_2$}
 % 
 \AxiomC{$\pi_3$}
 \noLine
-\UnaryInfC{$B_1 \vdash_L B_2, \Delta ;  \Psi$}
+\UnaryInfC{$B_1 \vdash_{\mathsf{L}} B_2, \Delta ;  \Psi$}
 \LeftLabel{$\Pi_2 =$}
 \RightLabel{$\DualLNLLogicdruleLXXsLName$}
-\UnaryInfC{$B_1 \lsub B_2 \vdash_L \Delta ; \Psi$}
+\UnaryInfC{$B_1 \lsub B_2 \vdash_{\mathsf{L}} \Delta ; \Psi$}
 \RightLabel{$\DualLNLLogicdruleLXXcutName$}
-\BinaryInfC{$A \vdash_L \Delta_1, \Delta_2, \Delta ; \Psi_1, \Psi_2, \Psi$}
+\BinaryInfC{$A \vdash_{\mathsf{L}} \Delta_1, \Delta_2, \Delta ; \Psi_1, \Psi_2, \Psi$}
 \DisplayProof\\
 \\
 reduces to $\Pi$ 
@@ -285,24 +285,24 @@ reduces to $\Pi$
 \\
 \AxiomC{$\pi_1$}
 \noLine
-\UnaryInfC{$A\vdash_L \Delta_1, B_1; \Psi_1$}
+\UnaryInfC{$A\vdash_{\mathsf{L}} \Delta_1, B_1; \Psi_1$}
  \AxiomC{$\pi_3$}
 \noLine
-\UnaryInfC{$B_1 \vdash_L B_2, \Delta ;  \Psi$}
+\UnaryInfC{$B_1 \vdash_{\mathsf{L}} B_2, \Delta ;  \Psi$}
 % \LeftLabel{$\Pi'$}
 \RightLabel{$\DualLNLLogicdruleLXXcutName$}
-\BinaryInfC{$A\vdash_L \Delta_1, \Delta, B_2; \Psi_1,\Psi$}
+\BinaryInfC{$A\vdash_{\mathsf{L}} \Delta_1, \Delta, B_2; \Psi_1,\Psi$}
  \AxiomC{$\pi_2$ } 
 \noLine
-\UnaryInfC{$B_2 \vdash_L \Delta_2; \Psi_2$}
+\UnaryInfC{$B_2 \vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
 \RightLabel{$\DualLNLLogicdruleLXXcutName$}
-\BinaryInfC{$A \vdash_L \Delta_1, \Delta_2, \Delta; \Psi_1, \Psi_2, \Psi$}
+\BinaryInfC{$A \vdash_{\mathsf{L}} \Delta_1, \Delta_2, \Delta; \Psi_1, \Psi_2, \Psi$}
 \DisplayProof
 \end{tabular}
 \end{center}
 The resulting derivation $\Pi$ has cut rank $c(\Pi) = max(|B_1|+1, c(\pi_1), c(\pi_2), |B_2|+1, c(\pi_3)) \leq |B_1\lsub B_2|$.
 \begin{lemma}
-Let $\Pi$ be a {\bf co-}$\mathbf{LNL}^+$ proof of a sequent  $S \vdash_C \Psi$ or $A \vdash_L \Delta; \Psi$ with 
+Let $\Pi$ be a {\bf co-}$\mathbf{LNL}^+$ proof of a sequent  $S \vdash_{\mathsf{C}} \Psi$ or $A \vdash_{\mathsf{L}} \Delta; \Psi$ with 
 $c(\Pi)>0$. Then there exists a proof $\Pi'$ of the same sequent with $c(\Pi') < c(\Pi)$. 
 \end{lemma} 
 
@@ -314,19 +314,19 @@ if the last inference is a cut on $A$ and $c(\Pi) = |A| + 1$ we have
 \begin{center}
 \AxiomC{$\Pi_1$}
 \noLine
-\UnaryInfC{$B \vdash_L \Delta, A ; \Psi$}
+\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta, A ; \Psi$}
 \AxiomC{$\Pi_2$}
 \noLine
-\UnaryInfC{$A \vdash_L \Delta' ; \Psi'$}
+\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta' ; \Psi'$}
 \LeftLabel{$\Pi =$}
 \RightLabel{$\DualLNLLogicdruleLXXcutName$}
-\BinaryInfC{$B \vdash_L \Delta, \Delta'; \Psi, \Psi'$}
+\BinaryInfC{$B \vdash_{\mathsf{L}} \Delta, \Delta'; \Psi, \Psi'$}
 \DisplayProof
 \end{center}
 Since $c(\Pi_1), c(\Pi_2) \leq |A| + 1$ by induction we can construct derivations $\Pi'_1$, $\Pi'_2$ of the sequent premises of the cut with $c(\Pi'_1), c(\Pi'_2) \leq |A|$. Then by the Cut-reduction Lemma we can construct a $\Pi'$ 
-proving $B \vdash_L \Delta, \Delta'; \Psi, \Psi'$ with $c(\Pi') \leq |A|$ as required. 
+proving $B \vdash_{\mathsf{L}} \Delta, \Delta'; \Psi, \Psi'$ with $c(\Pi') \leq |A|$ as required. 
 \begin{theorem}
-Let $\Pi$ be a proof of a sequent $S \vdash_C \Psi$ or $A\vdash_L \Delta ; \Psi$ such that $c(\Pi)> 0$. There is an 
+Let $\Pi$ be a proof of a sequent $S \vdash_{\mathsf{C}} \Psi$ or $A\vdash_{\mathsf{L}} \Delta ; \Psi$ such that $c(\Pi)> 0$. There is an 
 algorithm  which yields a cut free proof of the same sequent. 
 \end{theorem}
 
@@ -351,7 +351,7 @@ Some rules are formulated here \emph{additively} (see remark \ref{additive}).
   \begin{mdframed}
     \begin{mathpar}
       \DualLNLLogicdruleNCXXid{} \and
-      \DualLNLLogicdruleNCXXzI{} \and
+      \DualLNLLogicdruleNCXXzE{} \and
       \DualLNLLogicdruleNCXXdIOne{} \and
       \DualLNLLogicdruleNCXXdITwo{} \and
       \DualLNLLogicdruleNCXXdE{} \and
@@ -385,54 +385,15 @@ Some rules are formulated here \emph{additively} (see remark \ref{additive}).
 \end{figure}
 
 \begin{lemma}\label{admissible} The following rules are admissible in the natural deduction system \emph{co-ND}: 
-
-% {\bf Admissible Rules:}
-\[
-\AxiomC{\it C weakening }
-\noLine
-\UnaryInfC{$S \vdash_C \Psi $}
-\UnaryInfC{$S \vdash_C T, \Psi $} 
-\DisplayProof
-\qquad
-\AxiomC{\it C contraction}
-\noLine
-\UnaryInfC{$S \vdash_C T, T, \Psi $}
-\UnaryInfC{$S \vdash_C T, \Psi $} 
-\DisplayProof\\
-\]
-\[
-\AxiomC{\it CC substitution }
-\noLine
-\UnaryInfC{$S \vdash_C \Psi_1, T \qquad T \vdash_C  \Psi_2$}
-\UnaryInfC{$S \vdash_C \Psi_1, \Psi_2$}
-\DisplayProof  
-\]
-\[
-\AxiomC{\it L weakening }
-\noLine
-\UnaryInfC{$A \vdash_L \Delta ; \Psi $}
-\UnaryInfC{$A \vdash_L \Delta ; T, \Psi $} 
-\DisplayProof
-\qquad
-\AxiomC{\it L contraction}
-\noLine
-\UnaryInfC{$A \vdash_L \Delta ; T, T,  \Psi $}
-\UnaryInfC{$A \vdash_L \Delta ; T, \Psi $} 
-\DisplayProof
-\]
-\[
-\AxiomC{\it LC substitution }
-\noLine
-\UnaryInfC{$A \vdash_L \Delta ; \Psi_1, T \qquad T \vdash_C  \Psi_2$}
-\UnaryInfC{$A \vdash_L \Delta ; \Psi_1, \Psi_2$}
-\DisplayProof 
-\qquad 
-\AxiomC{\it LL substitution }
-\noLine
-\UnaryInfC{$B \vdash_L \Delta_1, A ; \Psi_1 \qquad A \vdash_L \Delta_2 ; \Psi_2$}
-\UnaryInfC{$B \vdash_L \Delta_1, \Delta_2, \Psi_1, \Psi_2$}
-\DisplayProof 
-\]
+  \begin{mathpar}
+    \DualLNLLogicdruleNCXXweak{} \and
+    \DualLNLLogicdruleNCXXcontr{} \and
+    \DualLNLLogicdruleNCXXcut{} \and
+    \DualLNLLogicdruleNLXXweak{} \and
+    \DualLNLLogicdruleNLXXcontr{} \and
+    \DualLNLLogicdruleNLXXCcut{} \and
+    \DualLNLLogicdruleNLXXcut{}
+  \end{mathpar}
 \end{lemma}
 
 \begin{proposition}
@@ -442,28 +403,22 @@ calculus derivations.
 \end{proposition}
 Notice that the right rules of the sequent calculus and the introductions of natural deduction
 have the same form. Elimination rules are derivable from left rules with \emph{cut} and left 
-rules are derivable using substitutions. For instance, the \emph{C zero} rule 
-\[
- \AxiomC{\it C zero}
-\noLine
-\UnaryInfC{$S\vdash_C 0, \Psi \qquad S_1 \vdash_C \Psi_1\quad \ldots\quad S_n \vdash \Psi_n$} 
-\UnaryInfC{$S \vdash_C  \Psi, \Psi_1\quad \ldots\quad\Psi_n$} 
-\DisplayProof
-\]
+rules are derivable using substitutions. For instance, the $\DualLNLLogicdruleNCXXzEName$ rule 
+\[ \DualLNLLogicdruleNCXXzE{} \]
 is derivable in the sequent calculus as follows: 
 \[
-\AxiomC{$S\vdash_C 0, \Psi$}
+\AxiomC{$S\vdash_{\mathsf{C}} 0, \Psi$}
 \AxiomC{$0\vdash S_1, \ldots S_n$}
-\RightLabel{\it cut}
-\BinaryInfC{$S\vdash_C \Psi, S_1, \ldots S_n$}
-\AxiomC{$ S_1 \vdash_C \Psi_1$}
-\RightLabel{\it cut}
-\BinaryInfC{$S\vdash_C  \Psi, \Psi_1, S_2, \ldots, S_n$}
+\RightLabel{$\DualLNLLogicdruleCXXcutName{}$}
+\BinaryInfC{$S\vdash_{\mathsf{C}} \Psi, S_1, \ldots S_n$}
+\AxiomC{$ S_1 \vdash_{\mathsf{C}} \Psi_1$}
+\RightLabel{$\DualLNLLogicdruleCXXcutName{}$}
+\BinaryInfC{$S\vdash_{\mathsf{C}}  \Psi, \Psi_1, S_2, \ldots, S_n$}
 \AxiomC{$\vdots$} 
-\BinaryInfC{$S\vdash_C  \Psi, \Psi_1, \ldots \Psi_{n-1}, S_n$}
+\BinaryInfC{$S\vdash_{\mathsf{C}}  \Psi, \Psi_1, \ldots \Psi_{n-1}, S_n$}
 \AxiomC{$S_n \vdash \Psi_n$} 
-\RightLabel{\it cut}
-\BinaryInfC{$S\vdash_C \Psi, \Psi_1, \ldots \Psi_{n-1}, \Psi_n$ }
+\RightLabel{$\DualLNLLogicdruleCXXcutName{}$}
+\BinaryInfC{$S\vdash_{\mathsf{C}} \Psi, \Psi_1, \ldots \Psi_{n-1}, \Psi_n$ }
 \DisplayProof
 \]
 % subsection sequent-style_natural_deduction (end)
@@ -700,51 +655,51 @@ In tables \ref{non-linear-coint-TA}, \ref{Linear-coint-TA} we give the term assi
 \\
 \AxiomC{\it C assumption}
 \noLine
-\UnaryInfC{$x:S \vdash_C x:S  $}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} x:S  $}
 \DisplayProof\\
 
 \\
  \AxiomC{\it C zero}
 \noLine
-\UnaryInfC{$x:S\vdash_C t:0, \Psi \qquad x_1:S_1 \vdash_C \Psi_1\quad \ldots\quad x_n:S_n \vdash \Psi_n$} 
-\UnaryInfC{$x:S \vdash_C  \Psi, [\mathtt{false}\;t/x_1]\Psi_1\quad \ldots\quad[\mathtt{false}\;t/x_n]\Psi_n$} 
+\UnaryInfC{$x:S\vdash_{\mathsf{C}} t:0, \Psi \qquad x_1:S_1 \vdash_{\mathsf{C}} \Psi_1\quad \ldots\quad x_n:S_n \vdash \Psi_n$} 
+\UnaryInfC{$x:S \vdash_{\mathsf{C}}  \Psi, [\mathtt{false}\;t/x_1]\Psi_1\quad \ldots\quad[\mathtt{false}\;t/x_n]\Psi_n$} 
 \DisplayProof\\
 \\
 \AxiomC{\it C subtraction intro }
 \noLine
-\UnaryInfC{$x:S \vdash_C \Psi_1, t: T_1 \qquad  
-y:T_2 \vdash_C \Psi_2$}
-\UnaryInfC{$x:S \vdash_C \Psi_1, \mathtt{mkc}(t,y): T_1 - T_2,  [y(t)/y] \Psi_2$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, t: T_1 \qquad  
+y:T_2 \vdash_{\mathsf{C}} \Psi_2$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, \mathtt{mkc}(t,y): T_1 - T_2,  [y(t)/y] \Psi_2$}
 \DisplayProof\\
 \\
 \AxiomC{\it C subtraction elim}
 \noLine
-\UnaryInfC{$x: S \vdash_C \Psi_1, s:T_1 - T_2\qquad y: T_1 \vdash_C t: T_2, \Psi_2$}
-\UnaryInfC{$x: S \vdash_C \Psi_1, \mathtt{postp}(y\mapsto t, s), [y(s)/y]\Psi_2$} 
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi_1, s:T_1 - T_2\qquad y: T_1 \vdash_{\mathsf{C}} t: T_2, \Psi_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi_1, \mathtt{postp}(y\mapsto t, s), [y(s)/y]\Psi_2$} 
 \DisplayProof\\
 \\
 \AxiomC{\it C disjunction intro$_1$}
 \noLine
-\UnaryInfC{$x: S \vdash_C  \Psi, t_1: T_1$}
-\UnaryInfC{$x: S \vdash_C  \Psi, \mathtt{inl}\; t_1: T_1 + T_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}}  \Psi, t_1: T_1$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}}  \Psi, \mathtt{inl}\; t_1: T_1 + T_2$}
 \DisplayProof \qquad
 \AxiomC{\it C disjunction intro$_2$}
 \noLine
-\UnaryInfC{$x: S \vdash_C  \Psi, t_2: T_2$}
-\UnaryInfC{$x: S \vdash_C  \Psi, \mathtt{inr}\; t_2:  T_1 + T_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}}  \Psi, t_2: T_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}}  \Psi, \mathtt{inr}\; t_2:  T_1 + T_2$}
 \DisplayProof \\
 \\
 \AxiomC{\it C disjunction elim}
 \noLine
-\UnaryInfC{$x: S \vdash_C \Psi, t: T_1 + T_2 \qquad y: T_1 \vdash_C \Psi_1 \quad z: T_2 \vdash_C \Psi_2\quad 
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, t: T_1 + T_2 \qquad y: T_1 \vdash_{\mathsf{C}} \Psi_1 \quad z: T_2 \vdash_{\mathsf{C}} \Psi_2\quad 
 |\Psi_1| = |\Psi_2|$}
-\UnaryInfC{$x: S \vdash_C \Psi, \mathtt{case}\; t\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{case}\; t\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
 \DisplayProof\\
 \\
 \AxiomC{\it H elim$_2$}
 \noLine
-\UnaryInfC{$x: S \vdash_C \Psi_1, t: HA \qquad y: A \vdash_L ; \Psi_2\qquad |\Psi_1| = |\Psi_2|$}
-\UnaryInfC{$S \vdash_C \Psi_1 \cdot (\mathtt{let}\; Hy = t\: \mathtt{in}\; \Psi_2)$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi_1, t: HA \qquad y: A \vdash_{\mathsf{L}} ; \Psi_2\qquad |\Psi_1| = |\Psi_2|$}
+\UnaryInfC{$S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\; Hy = t\: \mathtt{in}\; \Psi_2)$}
 \DisplayProof\\
 \\
 \\
@@ -763,68 +718,68 @@ y:T_2 \vdash_C \Psi_2$}
 \\
 \AxiomC{\it L identity}
 \noLine
-\UnaryInfC{$x: A \vdash_L x: A $}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} x: A $}
 \DisplayProof\\
 \\
  \AxiomC{\it $\bot$ intro}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta ; \Psi\qquad e:B \in \Delta$}
-\UnaryInfC{$x: A \vdash_L \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi$} 
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi\qquad e:B \in \Delta$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi$} 
 \DisplayProof \qquad 
 \AxiomC{$\bot$ elim} 
 \noLine
-\UnaryInfC{$x:A  \vdash_L e: \bot, \Delta ; \Psi$}
-\UnaryInfC{$x:A \vdash_L \mathtt{postp}_{\bot}\;e, \Delta ; \Psi$}
+\UnaryInfC{$x:A  \vdash_{\mathsf{L}} e: \bot, \Delta ; \Psi$}
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} \mathtt{postp}_{\bot}\;e, \Delta ; \Psi$}
 \DisplayProof\\
 \\
 \AxiomC{\it L subtraction intro }
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta_1, e: B_1 ; \Psi_1 \qquad  
-y: B_2 \vdash_L \Delta_2; \Psi_2$}
-\UnaryInfC{$x: A \vdash_L \mathtt{mkc}(e, y) : B_1 \lsub B_2, \Delta_1, [y(e)] / y]\Delta_2; \Psi_1, [y(e)] / y]\Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta_1, e: B_1 ; \Psi_1 \qquad  
+y: B_2 \vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \mathtt{mkc}(e, y) : B_1 \lsub B_2, \Delta_1, [y(e)] / y]\Delta_2; \Psi_1, [y(e)] / y]\Psi_2$}
 \DisplayProof\\
 \\
 \AxiomC{\it L subtraction elim}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta_1, e: B_1 \lsub B_2;\Psi_1\qquad y :B_1 \vdash_L e': B_2, \Delta_2 ;  \Psi_2$}
-\UnaryInfC{$x: A \vdash_L \Delta_1, \mathtt{postp}(y\mapsto e', e), \Delta_2 ; \Psi_1, \Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta_1, e: B_1 \lsub B_2;\Psi_1\qquad y :B_1 \vdash_{\mathsf{L}} e': B_2, \Delta_2 ;  \Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta_1, \mathtt{postp}(y\mapsto e', e), \Delta_2 ; \Psi_1, \Psi_2$}
 \DisplayProof
 \\
 \\
 \AxiomC{\it L disjunction intro}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta, e_1: B_1, e_2: B_2;  \Psi$}
-\UnaryInfC{$x: A \vdash_L \Delta, e_1\oplus e_2: B_1\oplus B_2;  \Psi$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, e_1: B_1, e_2: B_2;  \Psi$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, e_1\oplus e_2: B_1\oplus B_2;  \Psi$}
 \DisplayProof \\
 \\
 \AxiomC{\it L disjunction elim$_2$}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta, e: B_1\oplus B_2 ; \Psi \qquad y: B_1 \vdash_L \Delta_1; \Psi_1 \quad z: B_2 \vdash_L  \Delta_2; \Psi_2$}
-\UnaryInfC{$x: A \vdash_L \Delta, [\mathtt{casel}(e)/y]\Delta_1, [\mathtt{caser}(e)/z]\Delta_2 ; \Psi, [\mathtt{casel}(e)/y]\Psi_1, [\mathtt{caser}(e)/z]\Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, e: B_1\oplus B_2 ; \Psi \qquad y: B_1 \vdash_{\mathsf{L}} \Delta_1; \Psi_1 \quad z: B_2 \vdash_{\mathsf{L}}  \Delta_2; \Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, [\mathtt{casel}(e)/y]\Delta_1, [\mathtt{caser}(e)/z]\Delta_2 ; \Psi, [\mathtt{casel}(e)/y]\Psi_1, [\mathtt{caser}(e)/z]\Psi_2$}
 \DisplayProof \\
 \\
 \AxiomC{\it J intro}
 \noLine
-\UnaryInfC{$A \vdash_L, \Delta ; T, \Psi $}
-\UnaryInfC{$A \vdash_L, \Delta, J T ; \Psi$}
+\UnaryInfC{$A \vdash_{\mathsf{L}}, \Delta ; T, \Psi $}
+\UnaryInfC{$A \vdash_{\mathsf{L}}, \Delta, J T ; \Psi$}
 \DisplayProof
 \qquad
 \AxiomC{\it J elim}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta, e: J T; \Psi_1 \qquad y: T \vdash_C \Psi_2 $}
-\UnaryInfC{$x: A \vdash_L \Delta;  \Psi_1,  \mathtt{let}\;Jy = e\; \mathtt{in}\; \Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, e: J T; \Psi_1 \qquad y: T \vdash_{\mathsf{C}} \Psi_2 $}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta;  \Psi_1,  \mathtt{let}\;Jy = e\; \mathtt{in}\; \Psi_2$}
 \DisplayProof\\
 \\
 \AxiomC{\it H intro}
 \noLine
-\UnaryInfC{$x: A \vdash_L, \Delta, e: B ; \Psi $}
-\UnaryInfC{$x: A \vdash_L, \Delta; He : H B, \Psi$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}}, \Delta, e: B ; \Psi $}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}}, \Delta; He : H B, \Psi$}
 \DisplayProof
 \qquad
 \AxiomC{\it H elim$_1$}
 \noLine
-\UnaryInfC{$x: B \vdash_L \Delta; \Psi_1, t: HA \quad y: A \vdash_L ; \Psi_2$}
-\UnaryInfC{$x: B \vdash_L \Delta; \Psi_1, \mathtt{let} Hy = t\; \mathtt{in}\;  \Psi_2$}
+\UnaryInfC{$x: B \vdash_{\mathsf{L}} \Delta; \Psi_1, t: HA \quad y: A \vdash_{\mathsf{L}} ; \Psi_2$}
+\UnaryInfC{$x: B \vdash_{\mathsf{L}} \Delta; \Psi_1, \mathtt{let} Hy = t\; \mathtt{in}\;  \Psi_2$}
 \DisplayProof\\
 \\
 \\
@@ -841,47 +796,47 @@ The term assignment for the admissible rules of the calculus is as follows:
 \[
 \AxiomC{\it C weakening }
 \noLine
-\UnaryInfC{$x: S \vdash_C \Psi \qquad s:T'\in \Psi$}
-\UnaryInfC{$x: S \vdash_C \mathtt{connect}_w \mathtt{to}\; s: T, \Psi $} 
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi \qquad s:T'\in \Psi$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \mathtt{connect}_w \mathtt{to}\; s: T, \Psi $} 
 \DisplayProof
 \qquad
 \AxiomC{\it C contraction}
 \noLine
-\UnaryInfC{$x: S \vdash_C t_1:T, t_2: T, \Psi $}
-\UnaryInfC{$x: S \vdash_C (t_1\cdot t_2): T, \Psi $} 
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} t_1:T, t_2: T, \Psi $}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} (t_1\cdot t_2): T, \Psi $} 
 \DisplayProof
 \]
 \[
 \AxiomC{\it CC substitution }
 \noLine
-\UnaryInfC{$x: S \vdash_C \Psi_1, t:T \qquad y:T \vdash_C  \Psi_2$}
-\UnaryInfC{$x: S \vdash_C \Psi_1, [t/y]\Psi_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi_1, t:T \qquad y:T \vdash_{\mathsf{C}}  \Psi_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi_1, [t/y]\Psi_2$}
 \DisplayProof  
 \]
 \[
 \AxiomC{\it L weakening }
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta ; \Psi \qquad r:T'\in \Psi \hbox{\ or\ } r: B\in \Delta$}
-\UnaryInfC{$x: A \vdash_L \Delta ; \mathtt{connect}_w \mathtt{to}\;r : T, \Psi $} 
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi \qquad r:T'\in \Psi \hbox{\ or\ } r: B\in \Delta$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \mathtt{connect}_w \mathtt{to}\;r : T, \Psi $} 
 \DisplayProof
 \qquad
 \AxiomC{\it L contraction}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta ; t_1: T,  t_2: T,  \Psi $}
-\UnaryInfC{$x: A \vdash_L \Delta ; (t_1\cdot t_2):T, \Psi $} 
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; t_1: T,  t_2: T,  \Psi $}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; (t_1\cdot t_2):T, \Psi $} 
 \DisplayProof
 \]
 \[
 \AxiomC{\it LC substitution }
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta ; \Psi_1, s: T \qquad y:T \vdash_C \Psi_2$}
-\UnaryInfC{$x: A \vdash_L \Delta ; \Psi_1,  [s/y]\Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi_1, s: T \qquad y:T \vdash_{\mathsf{C}} \Psi_2$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi_1,  [s/y]\Psi_2$}
 \DisplayProof 
 \qquad 
 \AxiomC{\it LL substitution }
 \noLine
-\UnaryInfC{$x: B \vdash_L \Delta_1, e: A ; \Psi_1 \qquad y:A \vdash_L \Delta_2 ; \Psi_2$}
-\UnaryInfC{$x: B \vdash_L \Delta_1, [e/y]\Delta_2; \Psi_1, [e/y]\Psi_2$}
+\UnaryInfC{$x: B \vdash_{\mathsf{L}} \Delta_1, e: A ; \Psi_1 \qquad y:A \vdash_{\mathsf{L}} \Delta_2 ; \Psi_2$}
+\UnaryInfC{$x: B \vdash_{\mathsf{L}} \Delta_1, [e/y]\Delta_2; \Psi_1, [e/y]\Psi_2$}
 \DisplayProof 
 \]
 }
@@ -893,10 +848,10 @@ The term assignment for the admissible rules of the calculus is as follows:
 {\small
 \AxiomC{\small{\bf $-$ Redex:}}
 \noLine
-\UnaryInfC{$x:S \vdash_C \Psi_1, t: T_1 \qquad y:T_2\vdash_C \Psi_2$}
-\UnaryInfC{$x:S \vdash_C \Psi_1, \mathtt{mkc}(t, y): T_1 - T_2, \Psi_1,  [y(t)/y]\Psi_2$}
-\AxiomC{$ z:T_1\vdash_L t_2:T_2, \Psi_3$}
-\BinaryInfC{$x:S\vdash_C \Psi_1, \mathtt{postp}(z\mapsto t_2, \mathtt{mkc}(t_1,y)), 
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, t: T_1 \qquad y:T_2\vdash_{\mathsf{C}} \Psi_2$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, \mathtt{mkc}(t, y): T_1 - T_2, \Psi_1,  [y(t)/y]\Psi_2$}
+\AxiomC{$ z:T_1\vdash_{\mathsf{L}} t_2:T_2, \Psi_3$}
+\BinaryInfC{$x:S\vdash_{\mathsf{C}} \Psi_1, \mathtt{postp}(z\mapsto t_2, \mathtt{mkc}(t_1,y)), 
  [y(e_1)/y]\Psi_2, z(\mathtt{mkc}(e_1,y))]:\Psi_3  $}
 \DisplayProof}
 \end{center}
@@ -904,10 +859,10 @@ The term assignment for the admissible rules of the calculus is as follows:
 {\small
 \AxiomC{\small{\bf $-$ Reductum:}}
 \noLine
-\UnaryInfC{$x:S \vdash_C  \Psi_1, t: T_1 \qquad  z: T_1\vdash_C t_2: T_2, \Psi_3$}
-\UnaryInfC{$x:S \vdash_C \Psi_1,       [t/z]t_2 : T_2; \Psi_1,  [t/z]\Psi_3$}
-\AxiomC{$T_2\vdash_C  \Psi_2$}
-\BinaryInfC{$x:S \vdash_C \Psi_1, [ [t/z]t_2/y]\Psi_2,\ [t/z]\Psi_3$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}}  \Psi_1, t: T_1 \qquad  z: T_1\vdash_{\mathsf{C}} t_2: T_2, \Psi_3$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1,       [t/z]t_2 : T_2; \Psi_1,  [t/z]\Psi_3$}
+\AxiomC{$T_2\vdash_{\mathsf{C}}  \Psi_2$}
+\BinaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, [ [t/z]t_2/y]\Psi_2,\ [t/z]\Psi_3$}
 \DisplayProof}
 \end{center}
 
@@ -916,18 +871,18 @@ The term assignment for the admissible rules of the calculus is as follows:
 \centerline{\small {\bf $+_1$ Redex:}}
 \begin{center}
 {\small
-\AxiomC{$x: S \vdash_C \Psi, t_1: T_1$}
-\UnaryInfC{$x: S \vdash_C \Psi, \mathtt{inl}\; t_1: T_1 + T_2$}
-\AxiomC{$y: T_1 \vdash_C \Psi_1 \quad z: T_2 \vdash_C \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
-\BinaryInfC{$x: S \vdash_C \Psi, \mathtt{case\ inl}\ t_1\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
+\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t_1: T_1$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{inl}\; t_1: T_1 + T_2$}
+\AxiomC{$y: T_1 \vdash_{\mathsf{C}} \Psi_1 \quad z: T_2 \vdash_{\mathsf{C}} \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
+\BinaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{case\ inl}\ t_1\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
 \DisplayProof}
 \end{center}
 \centerline{\small {\bf $+_1$ Reductum:}}
 \begin{center}
 {\small
-\AxiomC{$x: S \vdash_C \Psi, t: T_1$}
-\AxiomC{$y: T_1 \vdash_C \Psi_1$}
-\BinaryInfC{$x: S \vdash_C \Delta,  [t_1/y]\Psi_1$}
+\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t: T_1$}
+\AxiomC{$y: T_1 \vdash_{\mathsf{C}} \Psi_1$}
+\BinaryInfC{$x: S \vdash_{\mathsf{C}} \Delta,  [t_1/y]\Psi_1$}
 \DisplayProof}
 \end{center}
 
@@ -936,18 +891,18 @@ The term assignment for the admissible rules of the calculus is as follows:
 \centerline{\small {\bf $+_2$ Redex:}}
 \begin{center}
 {\small
-\AxiomC{$x: S \vdash_C \Psi, t_2: T_2$}
-\UnaryInfC{$x: S \vdash_C \Psi, \mathtt{inr}\; t_2: T_1 + T_2$}
-\AxiomC{$y: T_1 \vdash_C \Psi_1 \quad z: T_2 \vdash_C \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
-\BinaryInfC{$x: S \vdash_C \Psi, \mathtt{case\ inr}\ t_2\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
+\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t_2: T_2$}
+\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{inr}\; t_2: T_1 + T_2$}
+\AxiomC{$y: T_1 \vdash_{\mathsf{C}} \Psi_1 \quad z: T_2 \vdash_{\mathsf{C}} \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
+\BinaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{case\ inr}\ t_2\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
 \DisplayProof}
 \end{center}
 \centerline{\small {\bf $+_2$ Reductum:}}
 \begin{center}
 {\small
-\AxiomC{$x: S \vdash_C \Psi, t_2: T_2$}
-\AxiomC{$z: T_2 \vdash_C \Psi_2$}
-\BinaryInfC{$x: S \vdash_C  [t_2/z]\Psi_2$}
+\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t_2: T_2$}
+\AxiomC{$z: T_2 \vdash_{\mathsf{C}} \Psi_2$}
+\BinaryInfC{$x: S \vdash_{\mathsf{C}}  [t_2/z]\Psi_2$}
 \DisplayProof}
 \end{center}
 
@@ -955,30 +910,30 @@ The term assignment for the admissible rules of the calculus is as follows:
 
 \begin{center}
 {\small
-\AxiomC{$y:HB \vdash_C y: HB$}
+\AxiomC{$y:HB \vdash_{\mathsf{C}} y: HB$}
 % 
 \AxiomC{\bf $H_2$ Redex}
 \noLine
-\UnaryInfC{$x:B \vdash_L e:A ; \Psi_1$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} e:A ; \Psi_1$}
 \RightLabel{$H$ {\em intro}}
-\UnaryInfC{$x:B \vdash_L ; He: HA, \Psi_1 $}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} ; He: HA, \Psi_1 $}
 \RightLabel{$H$ {\em elim}$_2$}
-\BinaryInfC{$y:HB \vdash_C (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1),  (\mathtt{let} Hx = y\ \mathtt{in}\ He): HA $}
-\AxiomC{$z:A \vdash_L ; \Psi_2$}
+\BinaryInfC{$y:HB \vdash_{\mathsf{C}} (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1),  (\mathtt{let} Hx = y\ \mathtt{in}\ He): HA $}
+\AxiomC{$z:A \vdash_{\mathsf{L}} ; \Psi_2$}
 \RightLabel{$H$ {\em elim}$_2$}
-\BinaryInfC{$x:B \vdash_C ; (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let}\ Hz = (\mathtt{let} Hx = y\ \mathtt{in}\ He ) 
+\BinaryInfC{$x:B \vdash_{\mathsf{C}} ; (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let}\ Hz = (\mathtt{let} Hx = y\ \mathtt{in}\ He ) 
 \ \mathtt{in}\ \Psi_2)$}
 \DisplayProof}
 \end{center}
  
 \begin{center}
-\AxiomC{$y:HB \vdash_C y: HB$}
+\AxiomC{$y:HB \vdash_{\mathsf{C}} y: HB$}
 \AxiomC{\bf $H_2$ Reductum}
 \noLine
-\UnaryInfC{$x:B \vdash_L e:A ; \Psi_1\qquad z:A \vdash_L ; \Psi_2 $}
-\UnaryInfC{$x:B \vdash_L \Psi_1\cdot [e/z]\Psi_2 $}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} e:A ; \Psi_1\qquad z:A \vdash_{\mathsf{L}} ; \Psi_2 $}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Psi_1\cdot [e/z]\Psi_2 $}
 \RightLabel{$H$ {\em elim}$_2$}
-\BinaryInfC{$y:HB \vdash_C (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let} Hx = y\ \mathtt{in}\ [e/z]\Psi_2$}
+\BinaryInfC{$y:HB \vdash_{\mathsf{C}} (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let} Hx = y\ \mathtt{in}\ [e/z]\Psi_2$}
 \DisplayProof
 \end{center}
 
@@ -988,9 +943,9 @@ The term assignment for the admissible rules of the calculus is as follows:
 {\small
 \AxiomC{\bf $\bot$ Redex}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta ; \Psi\qquad e:B \in \Delta$}
-\UnaryInfC{$x: A \vdash_L \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi$} 
-\UnaryInfC{$x:A \vdash_L \mathtt{postp}_{\bot} \mathtt{connect}_{\bot}\; \mathtt{to}\; e, \Delta ; \Psi$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi\qquad e:B \in \Delta$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi$} 
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} \mathtt{postp}_{\bot} \mathtt{connect}_{\bot}\; \mathtt{to}\; e, \Delta ; \Psi$}
 \DisplayProof}
 \end{center}
 
@@ -998,7 +953,7 @@ The term assignment for the admissible rules of the calculus is as follows:
 {\small
 \AxiomC{\bf $\bot$ Reductum}
 \noLine
-\UnaryInfC{$x: A \vdash_L \Delta ; \Psi$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi$}
 \DisplayProof}
 \end{center}
 
@@ -1008,10 +963,10 @@ The term assignment for the admissible rules of the calculus is as follows:
 {\small
 \AxiomC{\bf $\lsub$ Redex:}
 \noLine
-\UnaryInfC{$x:B \vdash_L e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_L\Delta_2; \Psi_2$}
-\UnaryInfC{$x:B \vdash_L \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
-\UnaryInfC{$\hskip2in z:A_1\vdash_L e_2:A_2, \Delta_3; \Psi_3$}
-\UnaryInfC{$x:B\vdash_L \Delta_1, 
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_{\mathsf{L}}\Delta_2; \Psi_2$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
+\UnaryInfC{$\hskip2in z:A_1\vdash_{\mathsf{L}} e_2:A_2, \Delta_3; \Psi_3$}
+\UnaryInfC{$x:B\vdash_{\mathsf{L}} \Delta_1, 
 \mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y)) 
  [y(e_1)/y]\Delta_2,  [z(\mathtt{mkc}(e_1,y))/z]\Delta_3 ;$}
 \noLine
@@ -1022,10 +977,10 @@ The term assignment for the admissible rules of the calculus is as follows:
 {\small
 \AxiomC{\bf $\lsub$ Reductum:}
 \noLine
-\UnaryInfC{$x:B \vdash_L e_1:A_1, \Delta_1; \Psi_1\qquad  z:A_1\vdash_L e_2:A_2, \Delta_3; \Psi_3$}
-\UnaryInfC{$x:B \vdash_L \Delta_1, [e_1/z]\Delta_3,       [e_1/z]e_2 : A_2; \Psi_1,  [e_1/z]\Psi_3$}
-\UnaryInfC{$\hskip2in y:A_2\vdash_L \Delta_2; \Psi_2$}
-\UnaryInfC{$x:B \vdash_L\Delta_1, [ [e_1/z]e_2/y]\Delta_2,\ [e_1/z]\Delta_3; \Psi_1,[ [e_1/z]e_2]\Psi_2,\ [e_1/z]\Psi_3$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1\qquad  z:A_1\vdash_{\mathsf{L}} e_2:A_2, \Delta_3; \Psi_3$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta_1, [e_1/z]\Delta_3,       [e_1/z]e_2 : A_2; \Psi_1,  [e_1/z]\Psi_3$}
+\UnaryInfC{$\hskip2in y:A_2\vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}}\Delta_1, [ [e_1/z]e_2/y]\Delta_2,\ [e_1/z]\Delta_3; \Psi_1,[ [e_1/z]e_2]\Psi_2,\ [e_1/z]\Psi_3$}
 \DisplayProof}
 \end{center}
 
@@ -1034,10 +989,10 @@ The term assignment for the admissible rules of the calculus is as follows:
 \centerline{\small {\bf $\oplus$ Redex:}}
 \begin{center}
 {\small
-\AxiomC{$x: A \vdash_L \Delta, e_1: B_1, e_2: B_2;  \Psi$}
-\UnaryInfC{$x: A \vdash_L \Delta, e_1\oplus e_2: B_1\oplus B_2;  \Psi$}
-\AxiomC{$y: B_1 \vdash_L \Delta_1; \Psi_1 \quad z: B_2 \vdash_L  \Delta_2; \Psi_2$}
-\BinaryInfC{$x: A \vdash_L \Delta, [\mathtt{casel}(e_1\oplus e_2)/y]\Delta_1, [\mathtt{caser}(e_1\oplus e_2)/z]\Delta_2 ;$}
+\AxiomC{$x: A \vdash_{\mathsf{L}} \Delta, e_1: B_1, e_2: B_2;  \Psi$}
+\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, e_1\oplus e_2: B_1\oplus B_2;  \Psi$}
+\AxiomC{$y: B_1 \vdash_{\mathsf{L}} \Delta_1; \Psi_1 \quad z: B_2 \vdash_{\mathsf{L}}  \Delta_2; \Psi_2$}
+\BinaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, [\mathtt{casel}(e_1\oplus e_2)/y]\Delta_1, [\mathtt{caser}(e_1\oplus e_2)/z]\Delta_2 ;$}
 \noLine
 \UnaryInfC{$\hskip1in  \Psi, [\mathtt{casel}(e_1\oplus e_2)/y]\Psi_1, [\mathtt{caser}(e_1\oplus e_2)/z]\Psi_2$}
 \DisplayProof}
@@ -1045,11 +1000,11 @@ The term assignment for the admissible rules of the calculus is as follows:
 \centerline{\small {\bf $\oplus$ Reductum:}}
 \begin{center}
 {\small
-\AxiomC{$x: A \vdash_L \Delta, e_1: B_1, e_2: B_2;  \Psi$}
-\AxiomC{$y: B_1 \vdash_L \Delta_1; \Psi_1$}
-\BinaryInfC{$x: A \vdash_L \Delta,  [e_1/y]\Delta_1, e_2: B_2;  \Psi, [e_1/y]\Psi_1$}
-\AxiomC{$z: B_2 \vdash_L  \Delta_2; \Psi_2$}
-\BinaryInfC{$x: A \vdash_L \Delta, [e_1/y] \Delta_1, [e_2/z]\Delta_2 ;\Psi,  [e_1/y]\Psi_1, [e_2/z]\Psi_2$}
+\AxiomC{$x: A \vdash_{\mathsf{L}} \Delta, e_1: B_1, e_2: B_2;  \Psi$}
+\AxiomC{$y: B_1 \vdash_{\mathsf{L}} \Delta_1; \Psi_1$}
+\BinaryInfC{$x: A \vdash_{\mathsf{L}} \Delta,  [e_1/y]\Delta_1, e_2: B_2;  \Psi, [e_1/y]\Psi_1$}
+\AxiomC{$z: B_2 \vdash_{\mathsf{L}}  \Delta_2; \Psi_2$}
+\BinaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, [e_1/y] \Delta_1, [e_2/z]\Delta_2 ;\Psi,  [e_1/y]\Psi_1, [e_2/z]\Psi_2$}
 \DisplayProof}
 \end{center}
 
@@ -1059,18 +1014,18 @@ The term assignment for the admissible rules of the calculus is as follows:
 {\small
 \begin{tabular}{c}
 {\bf $J$ Redex:}\\
-\AxiomC{$x:A \vdash_L ,\Delta; t:T, \Psi$}
+\AxiomC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
 \RightLabel{\emph{J-intro}}
-\UnaryInfC{$x:A\vdash_L \Delta, Jt: JT; \Psi$}
-\AxiomC{$ y:T \vdash_C \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
+\AxiomC{$ y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
 \RightLabel{\emph{J-elim}}
-\BinaryInfC{$x:A\vdash_L \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = Jt\  \mathtt{in}\ \Psi_2$}
+\BinaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = Jt\  \mathtt{in}\ \Psi_2$}
 \DisplayProof\\
 \\
 {\bf $J$ Reductum:}\\
-\AxiomC{$x:A \vdash_L \Delta; t:T, \Psi$}
-\AxiomC{$y:T \vdash_C \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\BinaryInfC{$x:A \vdash_L \Delta;\Psi_1, [t/y]\Psi_2$}
+\AxiomC{$x:A \vdash_{\mathsf{L}} \Delta; t:T, \Psi$}
+\AxiomC{$y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\BinaryInfC{$x:A \vdash_{\mathsf{L}} \Delta;\Psi_1, [t/y]\Psi_2$}
 \DisplayProof
 \end{tabular}}
 \end{center}
@@ -1079,18 +1034,18 @@ The term assignment for the admissible rules of the calculus is as follows:
 
 \centerline{\small{\bf $H_1$ Redex}}
 \begin{center}
-\AxiomC{$x:B \vdash_L \Delta, e:A ; \Psi_1$}
-\UnaryInfC{$x:B \vdash_L \Delta; He: HA, \Psi_1 $}
-\AxiomC{$y:A \vdash_L ; \Psi_2$}
-\BinaryInfC{$x:B \vdash_L \Delta; \Psi_1\cdot (\mathtt{let} Hy = He\ \mathtt{in}\ \Psi_2)$}
+\AxiomC{$x:B \vdash_{\mathsf{L}} \Delta, e:A ; \Psi_1$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; He: HA, \Psi_1 $}
+\AxiomC{$y:A \vdash_{\mathsf{L}} ; \Psi_2$}
+\BinaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1\cdot (\mathtt{let} Hy = He\ \mathtt{in}\ \Psi_2)$}
 \DisplayProof
 \end{center}
 \centerline{\small{\bf $H_1$ Reductum}}
 
 \begin{center}
-\AxiomC{$x:B \vdash_L \Delta, e:A ; \Psi_1$}
-\AxiomC{$y:A \vdash_L ; \Psi_2$}
-\BinaryInfC{$x:B \vdash_L \Delta; \Psi_1\cdot [e/y] \Psi_2$}
+\AxiomC{$x:B \vdash_{\mathsf{L}} \Delta, e:A ; \Psi_1$}
+\AxiomC{$y:A \vdash_{\mathsf{L}} ; \Psi_2$}
+\BinaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1\cdot [e/y] \Psi_2$}
 \DisplayProof
 \end{center}
 
@@ -1099,7 +1054,7 @@ The term assignment for the admissible rules of the calculus is as follows:
 \centerline{\small{\bf weakening commutations}}
 
 \begin{center}
-\AxiomC{$x: S \vdash_C \mathtt{connect}_w\; \mathtt{to}\; t: T,  \Psi\qquad t \in \Psi$} 
+\AxiomC{$x: S \vdash_{\mathsf{C}} \mathtt{connect}_w\; \mathtt{to}\; t: T,  \Psi\qquad t \in \Psi$} 
 \doubleLine
 \UnaryInfC{$y:S \vdash C \mathtt{connect}_w\; \mathtt{to}\; t': T',  \Psi'\qquad t' \in \Psi'$}
 \DisplayProof
@@ -1110,7 +1065,7 @@ within the same context).
 \vspace{1ex}
 
 \begin{center}
-\AxiomC{$x: B \vdash_L \Delta ; \mathtt{connect}_w\; \mathtt{to}\; e: T,  \Psi\qquad e \in \Delta$} 
+\AxiomC{$x: B \vdash_{\mathsf{L}} \Delta ; \mathtt{connect}_w\; \mathtt{to}\; e: T,  \Psi\qquad e \in \Delta$} 
 \doubleLine
 \UnaryInfC{$y:S \vdash C \Delta' ; \mathtt{connect}_w\; \mathtt{to}\; e': T',  \Psi'\qquad e' \in \Delta'$}
 \DisplayProof
@@ -1122,7 +1077,7 @@ attached also to a term in the non-linear part.
 
 \centerline{\small{\bf $\bot$ commutations}}
 \begin{center}
-\AxiomC{$x: A \vdash_L \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi\qquad e \in \Delta$} 
+\AxiomC{$x: A \vdash_{\mathsf{L}} \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi\qquad e \in \Delta$} 
 \doubleLine
 \UnaryInfC{$y:B \vdash L \mathtt{connect}_{\bot}\; \mathtt{to}\; e': \bot, \Delta' ; \Psi'\qquad e \in \Delta'$}
 \DisplayProof
@@ -1165,9 +1120,9 @@ using the associativity laws $\alpha$ and their inverse $\alpha^{-1}$ (cfr Bierm
 The semantics of terms in context is then specified by induction on terms: 
 \begin{center}
 \begin{tabular}{c}
-$[\![x: A\vdash_L x: A]\!] =_{df} id_{[\![\sigma]\!]}$\\
+$[\![x: A\vdash_{\mathsf{L}} x: A]\!] =_{df} id_{[\![\sigma]\!]}$\\
 \\
-$[\![x: A\vdash_L  f(e_1,\ldots, e_n): B]\!] =_{df} [\![x: A\vdash e_1: A_1]\!]\bullet
+$[\![x: A\vdash_{\mathsf{L}}  f(e_1,\ldots, e_n): B]\!] =_{df} [\![x: A\vdash e_1: A_1]\!]\bullet
 \ldots\bullet [\![x:\sigma\triangleright e_n: A_n]\!]; [\![ f ]\!]$
 \end{tabular}
 \end{center}   
@@ -1178,12 +1133,12 @@ corresponds to composition in the category (\cite{Bierman94}, Lemma 13).
 \vspace{1ex}
 
 \noindent
-In a Linear Non-Linear Co-intuitionistic logic sequent, mixed sequents $x:A \vdash_L \Delta ; \Psi, t:T$ 
+In a Linear Non-Linear Co-intuitionistic logic sequent, mixed sequents $x:A \vdash_{\mathsf{L}} \Delta ; \Psi, t:T$ 
 non-linear terms are interpreted through the functor $J : \mathcal{C} \rightarrow \mathcal{L}$. Here we use 
 the same symbol for the functor $J$ in the structure and the name of the functor in the syntax of the langage. 
 Thus we have 
 \[
-[\![ x:A \vdash_L \Delta ; \Psi, t:T]\!]  \quad = \quad [\![ x:A \vdash_L \Delta, J \Psi, Jt: J(T) ]\!] 
+[\![ x:A \vdash_{\mathsf{L}} \Delta ; \Psi, t:T]\!]  \quad = \quad [\![ x:A \vdash_{\mathsf{L}} \Delta, J \Psi, Jt: J(T) ]\!] 
 \]  
 
 \vspace{1ex}
@@ -1193,12 +1148,12 @@ Thus we have
 Let $\mathcal{M}$ be a structure for a signature $Sg$ in a SMC $\mathcal{L}$. Given an equation in
 context for $Sg$ 
 $$
-x: A \vdash_L \overline{e}:\Gamma, e_1 = e_2 : B; \Psi
+x: A \vdash_{\mathsf{L}} \overline{e}:\Gamma, e_1 = e_2 : B; \Psi
 $$
 we say that the structure \emph{satisfies} the equation if it assigns the same morphisms to  
-$x: A \vdash_L \overline{e}:\Gamma, e_1 : B; \Psi$.  and to $A\vdash \overline{e}:\Gamma, e_2: B;\Psi$.
-Similarly, $\mathcal{M}$ satisfies $x: S \vdash_L \overline{t}:\Psi, t_1 = t_2$ if it assigns the same morphism
-to $x: S \vdash_L \overline{t}:\Psi, t_1 : T$ and to $x: S \vdash_L \overline{t}:\Psi,  t_2 : Y$.
+$x: A \vdash_{\mathsf{L}} \overline{e}:\Gamma, e_1 : B; \Psi$.  and to $A\vdash \overline{e}:\Gamma, e_2: B;\Psi$.
+Similarly, $\mathcal{M}$ satisfies $x: S \vdash_{\mathsf{L}} \overline{t}:\Psi, t_1 = t_2$ if it assigns the same morphism
+to $x: S \vdash_{\mathsf{L}} \overline{t}:\Psi, t_1 : T$ and to $x: S \vdash_{\mathsf{L}} \overline{t}:\Psi,  t_2 : Y$.
 Then given an algebraic theory 
 $Th = (Sg, Ax)$, a structure $\mathcal{M}$ for $Sg$ is a {\em model} for $Th$ if it satisfies all the 
 axioms in $Ax$. 
@@ -1217,9 +1172,9 @@ LNL co-intuitionistic logic in the model thus defined.
 {\em Par introduction.} 
 The introduction rule for Par is of the form 
 \begin{center} 
-\AxiomC{$x:A\vdash_L \Delta_1, e_1:B, e_2:C; \Psi$}
+\AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e_1:B, e_2:C; \Psi$}
 \RightLabel{$\oplus$ I}
-\UnaryInfC{$x:A\vdash_L \Delta_1, e_1\oplus e_2: B\oplus C, \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta_1, e_1\oplus e_2: B\oplus C, \Psi$}
 \DisplayProof
 \end{center}
 This suggests an operation on Hom-sets of the form 
@@ -1232,19 +1187,19 @@ $$e: A\rightarrow \Delta \bullet B\bullet C\bullet J\Psi,$$
 and $d: A' \rightarrow A$
  $h: \Delta\rightarrow\Delta'$ and  $p: J\Psi\rightarrow J\Psi'$, naturality yields 
 $$
-\Phi_{A', \Delta'}(d; e; h\bullet id_B\bullet id_C\bullet p) = d; \Phi_{A, \Delta}(e); h\bullet id_{B\oplus C}\bullet p
+\Phi_{A', \Delta'}(d; e; h\bullet id_B\bullet id_{\mathsf{C}}\bullet p) = d; \Phi_{A, \Delta}(e); h\bullet id_{B\oplus C}\bullet p
 $$
-In particular, letting $$e = id_{\Delta} \bullet id_B \bullet id_C,\quad d: A \rightarrow \Delta\bullet B\bullet C,$$ 
+In particular, letting $$e = id_{\Delta} \bullet id_B \bullet id_{\mathsf{C}},\quad d: A \rightarrow \Delta\bullet B\bullet C,$$ 
 $h = id_{\Delta}$ and $p = id_{J\Psi}$ we have 
 $$
-\Phi_{A, \Delta}(d) = d; \Phi_{\Delta} (id_{\Delta}\bullet id_B \bullet id_C)
+\Phi_{A, \Delta}(d) = d; \Phi_{\Delta} (id_{\Delta}\bullet id_B \bullet id_{\mathsf{C}})
 $$
 By functoriality of $\bullet$ we have $id_{B}\bullet id_{C} = id_{B\bullet C}$. Hence, writing  
 $\bigoplus$ for $\Phi_{\Delta} (id_{\Delta}\bullet id_{B \bullet C})$ we have 
 $\Phi_{A, \Delta}(d) = d; \bigoplus$. We define
 $$
-[\![x:A \vdash_L  :\Delta, e_1 \oplus e_2: B\oplus C]\!] =_{df} 
-     [\![x:A \vdash_L \Delta, e_1:B, e_2:C, ]\!]; \bigoplus.
+[\![x:A \vdash_{\mathsf{L}}  :\Delta, e_1 \oplus e_2: B\oplus C]\!] =_{df} 
+     [\![x:A \vdash_{\mathsf{L}} \Delta, e_1:B, e_2:C, ]\!]; \bigoplus.
 $$
 
 \vspace{3ex}
@@ -1252,11 +1207,11 @@ $$
 \noindent
 \ref{lindisj}.2. {\em Par elimination}. The Par elimination rule has the form 
 \begin{center} 
-\AxiomC{$z:A\vdash_L e: B\oplus C, \Delta_1;\Psi_1$}
-\AxiomC{$x:B\vdash_L \Delta_2;\Psi_2$}
-\AxiomC{$y:C\vdash_L \Delta_3; \Psi_3$}
+\AxiomC{$z:A\vdash_{\mathsf{L}} e: B\oplus C, \Delta_1;\Psi_1$}
+\AxiomC{$x:B\vdash_{\mathsf{L}} \Delta_2;\Psi_2$}
+\AxiomC{$y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3$}
 \RightLabel{$\oplus$ E}
-\TrinaryInfC{$z:A\vdash_L \Delta_1, [\mathtt{casel} z/x] \Delta_2, [\mathtt{caser} z/y]\Delta_3; \Psi_1 \cdot \Psi_2\cdot \Psi_3$}
+\TrinaryInfC{$z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel} z/x] \Delta_2, [\mathtt{caser} z/y]\Delta_3; \Psi_1 \cdot \Psi_2\cdot \Psi_3$}
 \DisplayProof
 \end{center}
 This suggests an operation on Hom-sets of the form 
@@ -1279,18 +1234,18 @@ $a; \Psi_{A,\Delta,J\Psi}(g,e,f);$ &
 $d_1 \bullet d_2\bullet d_3\bullet p_1\bullet p_2\bullet p_3; \mathtt{Join}(\Delta',J\Psi').$
 \end{tabular}
 \end{center}
-In particular, set $$e = id_B, \quad f = id_C$$ and also $a = id_A$, $d_i = id_{\Delta_i}$, $p_i = id_{J\Psi_i}$ we get 
+In particular, set $$e = id_B, \quad f = id_{\mathsf{C}}$$ and also $a = id_A$, $d_i = id_{\Delta_i}$, $p_i = id_{J\Psi_i}$ we get 
 $$
-\Psi_{A,\Delta J\Psi}(g, e, f) = \Psi_{A,\Delta, J\Psi}(g, id_B, id_C); 
+\Psi_{A,\Delta J\Psi}(g, e, f) = \Psi_{A,\Delta, J\Psi}(g, id_B, id_{\mathsf{C}}); 
 id_{\Delta}\bullet c\bullet d; \mathtt{Join}(\Delta, J\Psi) 
 $$
 where the operation $\mathtt{Join}$ establishes left associativity.
-Writing $(g)^{\ast}$ for $\Psi_{D,\Delta}(g, id_B, id_C)$ we define
+Writing $(g)^{\ast}$ for $\Psi_{D,\Delta}(g, id_B, id_{\mathsf{C}})$ we define
 \begin{center}
 \begin{tabular}{l}
-$[\![z:A\vdash_L \Delta_1, [\mathtt{casel}\ e/x]\Delta_2, [\mathtt{caser}\ e/y] \Delta_3; \Psi_2, \Psi_3]\!]=_{df}$\\
-$[\![z:A\vdash_L \Delta_1, e, B\,\oplus\, C; \Psi_1]\!]^*; 
-id_{\Delta_1}\bullet [\![x:B\vdash_L \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_L \Delta_3; \Psi_3]\!];
+$[\![z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel}\ e/x]\Delta_2, [\mathtt{caser}\ e/y] \Delta_3; \Psi_2, \Psi_3]\!]=_{df}$\\
+$[\![z:A\vdash_{\mathsf{L}} \Delta_1, e, B\,\oplus\, C; \Psi_1]\!]^*; 
+id_{\Delta_1}\bullet [\![x:B\vdash_{\mathsf{L}} \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3]\!];
 \mathtt{Join}(\Delta,J\Psi)$.\\
 \end{tabular}
 \end{center}
@@ -1306,13 +1261,13 @@ id_{\Delta_1}\bullet [\![x:B\vdash_L \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_L 
 \UnaryInfC{$e\equiv\mathtt{casel}(e_1 \oplus e_2)\quad e' \equiv \mathtt{caser}(e_1 \oplus e_2)\hskip3in$}
 \noLine
 \UnaryInfC{$|\Delta_1| = |\Delta'_1|\ | \Psi_1| = |\Psi'_1| \hskip1in
-x : A_1 \vdash_L \Delta_2; J\Psi_2 = \Delta'_2; J\Psi'_2 \hskip1in$}
+x : A_1 \vdash_{\mathsf{L}} \Delta_2; J\Psi_2 = \Delta'_2; J\Psi'_2 \hskip1in$}
 \noLine
-\UnaryInfC{$|\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\hskip1in y:A_2 \vdash_L \Delta_3; J\Psi_3 =\Delta'_3; J\Psi'_3\hskip1in$}
+\UnaryInfC{$|\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\hskip1in y:A_2 \vdash_{\mathsf{L}} \Delta_3; J\Psi_3 =\Delta'_3; J\Psi'_3\hskip1in$}
 \noLine
  \UnaryInfC{$|\Delta_3|=|\Delta_3'|\ |\Psi_3|=|\Psi'_3| \quad
-z:B \vdash_L e_1 :A_1,e_2 :A_2, \Delta_1; J\Psi_1 = e'_1 :A_1,e'_2 :A_2,\Delta'_1;J\Psi'_1$}
-\UnaryInfC{$z:B\vdash_L \Delta_1,[e/x]\Delta_2,[e'/x]\Delta_3;\Psi_1,[e/x]\Psi_2,[e'/x]\Psi_3 =$}
+z:B \vdash_{\mathsf{L}} e_1 :A_1,e_2 :A_2, \Delta_1; J\Psi_1 = e'_1 :A_1,e'_2 :A_2,\Delta'_1;J\Psi'_1$}
+\UnaryInfC{$z:B\vdash_{\mathsf{L}} \Delta_1,[e/x]\Delta_2,[e'/x]\Delta_3;\Psi_1,[e/x]\Psi_2,[e'/x]\Psi_3 =$}
 \noLine
 \UnaryInfC{$\hskip.5in = \Delta'_1, [e'_1/x]\Delta_2,[e'_2/x]\Delta′_3;\Psi′_1,[e'_1/x]\Psi'_2,[e'_2/x]\Psi'_3$}
 \DisplayProof
@@ -1345,8 +1300,8 @@ is also satisfied:
 \quad\framebox{
 \AxiomC{$\oplus - \eta$ rule}
 \noLine
-\UnaryInfC{$|\Delta| = |\Delta'| \quad|\Psi| = |\Psi'| \quad z:B \vdash_L \Delta; \Psi = \Delta'; \Psi'$}
-\UnaryInfC{$z:B \vdash_L (\mathtt{casel\, e}\oplus\mathtt{caser}\, e): A_1\oplus A_2, \Delta; \Psi = e:A_1\oplus A_2, \Delta'; \Psi'$}
+\UnaryInfC{$|\Delta| = |\Delta'| \quad|\Psi| = |\Psi'| \quad z:B \vdash_{\mathsf{L}} \Delta; \Psi = \Delta'; \Psi'$}
+\UnaryInfC{$z:B \vdash_{\mathsf{L}} (\mathtt{casel\, e}\oplus\mathtt{caser}\, e): A_1\oplus A_2, \Delta; \Psi = e:A_1\oplus A_2, \Delta'; \Psi'$}
 \noLine
 \UnaryInfC{\strut}
 \DisplayProof
@@ -1356,10 +1311,10 @@ is also satisfied:
 \subsubsection{Linear subtraction}\label{linsubtr}
 \ref{linsubtr}.1. {\em Subtraction introduction.} The introduction rule for subtraction has the form 
 \begin{center} 
-\AxiomC{$x:A\vdash_L \Delta_1, e: B; \Psi_1$}
-\AxiomC{$y:C\vdash_L \Delta_2; \Psi_2\quad |\Psi_1 | = |\Psi_2|$}
+\AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e: B; \Psi_1$}
+\AxiomC{$y:C\vdash_{\mathsf{L}} \Delta_2; \Psi_2\quad |\Psi_1 | = |\Psi_2|$}
 \RightLabel{$L sub I$}
-\BinaryInfC{$x:A\vdash_L \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, [y(e)/y]\Delta_2; \Psi_1\cdot [y(e)/y]\Psi_2$}
+\BinaryInfC{$x:A\vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, [y(e)/y]\Delta_2; \Psi_1\cdot [y(e)/y]\Psi_2$}
 \DisplayProof
 \end{center}
 This suggests a natural transformation with components
@@ -1381,15 +1336,15 @@ $\qquad\qquad = a; \Phi_{A,\Delta, J\Psi}(e, f); d_1\bullet d_2\bullet id_{B\lsu
 \end{tabular}
 \end{center}
 In particular, taking $a=id_A$, $d_1=id_{\Delta_1}$, $p_1 = id_{J\Psi_1}, p_2 = id_{J\Psi_2}$ but 
-$d_2: C\rightarrow\Delta_2\cdot J\Psi_2$ and $f= id_C$ we have:
+$d_2: C\rightarrow\Delta_2\cdot J\Psi_2$ and $f= id_{\mathsf{C}}$ we have:
 \begin{center}
 \begin{tabular}{c}
-$\Phi_{A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2}(e, d_2) = \Phi_{A,\Delta_1} (e, id_C); 
+$\Phi_{A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2}(e, d_2) = \Phi_{A,\Delta_1} (e, id_{\mathsf{C}}); 
 id_{\Delta_1}\bullet d_2 \bullet id_{A\lsub B}\bullet id_{J\Psi_1}\bullet id{J\Psi_2}; $\\
 $\hskip2in\mathtt{Join}(\Delta_1, \Delta_2, A\lsub B, J\Psi_1, J\Psi_2)$\\
 \end{tabular}
 \end{center}
-Writing $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}(e)$ for $ \Phi_{A,\Delta_1 J\Psi_1} (e, id_C)$, 
+Writing $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}(e)$ for $ \Phi_{A,\Delta_1 J\Psi_1} (e, id_{\mathsf{C}})$, 
 $\Phi_{A, \Delta, J\Psi}(e, d_2)$ can be expressed as the composition 
 $$
 \mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}(e); id_{\Delta_1}\bullet d_2\bullet id_{B\lsub C}
@@ -1402,18 +1357,18 @@ $$
 so we make the definition 
 \begin{center}
 \begin{tabular}{l}
-$[\![x:A \vdash_L \Delta_1, \mathtt{mkc}(e,y):\, B\lsub C, [y(e)/y+\Delta_2; \Psi_1\cdot [y(e)/y] \Psi_2]\!] =_{df}$\\
-\quad $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}[\![x:A\vdash_L\Delta_1, e_1:B]\!];
-id_{\Delta}\bullet [\![y:C\vdash_L\Delta_2; \Psi_2]\!]\bullet id_{B\lsub C}; $\\
+$[\![x:A \vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y):\, B\lsub C, [y(e)/y+\Delta_2; \Psi_1\cdot [y(e)/y] \Psi_2]\!] =_{df}$\\
+\quad $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}[\![x:A\vdash_{\mathsf{L}}\Delta_1, e_1:B]\!];
+id_{\Delta}\bullet [\![y:C\vdash_{\mathsf{L}}\Delta_2; \Psi_2]\!]\bullet id_{B\lsub C}; $\\
 $\hskip2in \mathtt{Join}(\Delta_1,\Delta_2, B\lsub C, J\Psi_1, J\Psi_2)$\\
 \end{tabular}
 \end{center}
 Notice that $\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}$ corresponds to the one-premise form of the 
 subtraction introduction rule
 \begin{center} 
-\AxiomC{$x:A\vdash_L \Delta_1, e: B; \Psi_1$}
+\AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e: B; \Psi_1$}
 \RightLabel{$L sub I$}
-\UnaryInfC{$x:A\vdash_L \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, y(e): C; \Psi_1$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, y(e): C; \Psi_1$}
 \DisplayProof
 \vspace{3ex}
 \end{center}
@@ -1424,10 +1379,10 @@ which is equivalent in terms of provability to the more general form considered 
 \noindent
 \ref{linsubtr}.2. {\em Subtraction elimination.} The subtraction elimination rule has the form 
 \begin{center} 
-\AxiomC{$x:A\vdash_L \Delta_1, e_1: B\lsub C; \Psi_1$}
-\AxiomC{$y:B\vdash_L e_2:C, \Delta_2; \Psi_2\quad |\Psi_1| = |\Psi_2|$}
+\AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e_1: B\lsub C; \Psi_1$}
+\AxiomC{$y:B\vdash_{\mathsf{L}} e_2:C, \Delta_2; \Psi_2\quad |\Psi_1| = |\Psi_2|$}
 \RightLabel{$\smallsetminus$ E}
-\BinaryInfC{$x:A\vdash_L  \mathtt{postp}(y\mapsto e_2, e_1), \Delta_1, [y(e_1)/y]\Delta_2; 
+\BinaryInfC{$x:A\vdash_{\mathsf{L}}  \mathtt{postp}(y\mapsto e_2, e_1), \Delta_1, [y(e_1)/y]\Delta_2; 
 \Psi_1, [y(e_1)/y]\Psi_2$} 
 \DisplayProof
 \end{center}
@@ -1451,7 +1406,7 @@ $d_2:\Delta_2\rightarrow\Delta_2'$, $p_1: J\Psi_1 \rightarrow J\Psi'_1$ $p_2: J\
 naturality yields 
 \begin{center}
 \begin{tabular}{l}
-$\Psi_{A', \Delta_1',\Delta_2', J\Psi_1', J\Psi_2'}\left((a; e; d_1\bullet id_{B\lsub C}\bullet p_1), (f; id_C\bullet d_2\bullet p_2)\right) = $\\
+$\Psi_{A', \Delta_1',\Delta_2', J\Psi_1', J\Psi_2'}\left((a; e; d_1\bullet id_{B\lsub C}\bullet p_1), (f; id_{\mathsf{C}}\bullet d_2\bullet p_2)\right) = $\\
 $a; \Psi_{A, \Delta_1,\Delta_2,J\Psi_1}(e, f);\lambda_{1,\Delta_1} \bullet d_1\bullet d_2\bullet p_1\bullet p_2; \mathtt{Join}(\Delta_1',\Delta_2', J\Psi_1,J\Psi_2)$
 \end{tabular}
 \end{center}
@@ -1464,9 +1419,9 @@ Writing $\mathbf{POSTP}(f)$ for $\Psi_{A, \Delta_1,\Delta_2,J\Psi_1, J\Psi_2}(id
 we define 
 \begin{center}
 \begin{tabular}{l}
-$[\![x:A \vdash_L \Delta_1, \mathtt{postp}(y\mapsto e_2, e_1), [y(e_1)/y]\Delta_2; \Psi_1, [y(e_1)/y], \Psi_2]\!] =_{df}$\\
-\quad $[\![x:A\vdash_L \Delta_1, e_1: B\lsub C]\!]; id_{\Delta_1}\bullet
-\mathbf{POSTP}[\![y:B \vdash_L e_2: C,\Delta_2; \Psi_2]\!]; \mathtt{Join}(\Delta_1,\Delta_2,J\Psi_1,J\Psi_2)$ 
+$[\![x:A \vdash_{\mathsf{L}} \Delta_1, \mathtt{postp}(y\mapsto e_2, e_1), [y(e_1)/y]\Delta_2; \Psi_1, [y(e_1)/y], \Psi_2]\!] =_{df}$\\
+\quad $[\![x:A\vdash_{\mathsf{L}} \Delta_1, e_1: B\lsub C]\!]; id_{\Delta_1}\bullet
+\mathbf{POSTP}[\![y:B \vdash_{\mathsf{L}} e_2: C,\Delta_2; \Psi_2]\!]; \mathtt{Join}(\Delta_1,\Delta_2,J\Psi_1,J\Psi_2)$ 
 \end{tabular}
 \end{center}
 
@@ -1480,13 +1435,13 @@ $[\![x:A \vdash_L \Delta_1, \mathtt{postp}(y\mapsto e_2, e_1), [y(e_1)/y]\Delta_
 \UnaryInfC{$e_p\equiv \mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))\quad e_z\equiv z(\mathtt{mkc}(e_1,y))\hskip1in $}
 \noLine
 \UnaryInfC{$|\Delta_1| = |\Delta'_1|\ | \Psi_1| = |\Psi'_1| \qquad
-x : B \vdash_L e_1:A_1, \Delta_1; \Psi_1 = e'_1: A_1,\Delta'_1; \Psi'_1 $}
+x : B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1 = e'_1: A_1,\Delta'_1; \Psi'_1 $}
 \noLine
-\UnaryInfC{$\quad |\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\qquad y:A_2 \vdash_L \Delta_2; \Psi_2 =\Delta'_2; \Psi'_2
+\UnaryInfC{$\quad |\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\qquad y:A_2 \vdash_{\mathsf{L}} \Delta_2; \Psi_2 =\Delta'_2; \Psi'_2
 \hskip1in$}
 \noLine
-\UnaryInfC{$\hskip1.8in z:A_1 \vdash_L e_2 :A_2, \Delta_3; \Psi_3 =e'_2 :A_2,\Delta'_3;\Psi'_3$}
-\UnaryInfC{$x: B\vdash_L \Delta_1. e_p, [y(e_1)/y]\Delta_2, [e_z/z]\Delta_3; \Psi_1, [y(e_1))y]\Psi_2, [e_z/z]\Psi_3 = $}
+\UnaryInfC{$\hskip1.8in z:A_1 \vdash_{\mathsf{L}} e_2 :A_2, \Delta_3; \Psi_3 =e'_2 :A_2,\Delta'_3;\Psi'_3$}
+\UnaryInfC{$x: B\vdash_{\mathsf{L}} \Delta_1. e_p, [y(e_1)/y]\Delta_2, [e_z/z]\Delta_3; \Psi_1, [y(e_1))y]\Psi_2, [e_z/z]\Psi_3 = $}
 \noLine
 \UnaryInfC{$\qquad = \Delta'_1, [ [e'_1/z]e'_2/y]\Delta_2, [e'_1/z]\Delta'_3; \Psi'_1, [ [e'_1/z]e'_2/y]\Psi'_2, [e'_1/z]\Psi'_3$}
 \DisplayProof
@@ -1499,10 +1454,10 @@ We repeat the derivations of the redex and of the reductum.
 \centerline{\bf Redex:}
 {\small
 \begin{center}
-\AxiomC{$x:B \vdash_L e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_L\Delta_2; \Psi_2$}
-\UnaryInfC{$x:B \vdash_L \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
-\AxiomC{$z:A_1\vdash_L e_2:A_2, \Delta_3; \Psi_3$}
-\BinaryInfC{$x:B\vdash_L \Delta_1, 
+\AxiomC{$x:B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_{\mathsf{L}}\Delta_2; \Psi_2$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
+\AxiomC{$z:A_1\vdash_{\mathsf{L}} e_2:A_2, \Delta_3; \Psi_3$}
+\BinaryInfC{$x:B\vdash_{\mathsf{L}} \Delta_1, 
 \overbrace{\mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))}^{e_p}, 
  [y(e_1)/y]\Delta_2,  [\overbrace{z(\mathtt{mkc}(e_1,y))}^{e_z}/z]\Delta_3 ;$}
 \noLine
@@ -1512,10 +1467,10 @@ We repeat the derivations of the redex and of the reductum.
 \centerline{\bf Reductum:}
 {\small
 \begin{center}
-\AxiomC{$x:B \vdash_L e'_1:A_1, \Delta'_1; \Psi'_1\qquad  z:A_1\vdash_L e'_2:A_2, \Delta'_3; \Psi'_3$}
-\UnaryInfC{$x:B \vdash_L \Delta'_1, [e'_1/z]\Delta'_3,       [e'_1/z]e'_2 : A_2; \Psi'_1,  [e'_1/z]\Psi'_3$}
-\AxiomC{$y:A_2\vdash_L \Delta_2; \Psi_2$}
-\BinaryInfC{$x:B \vdash_L\Delta'_1, [ [e'_1/z]e'_2/y]\Delta'_2,\ [e'_1/z]\Delta'_3; \Psi'_1,[ [e'_1/z]e'_2]\Psi'_2,\ [e'_1/z]\Psi'_3$}
+\AxiomC{$x:B \vdash_{\mathsf{L}} e'_1:A_1, \Delta'_1; \Psi'_1\qquad  z:A_1\vdash_{\mathsf{L}} e'_2:A_2, \Delta'_3; \Psi'_3$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta'_1, [e'_1/z]\Delta'_3,       [e'_1/z]e'_2 : A_2; \Psi'_1,  [e'_1/z]\Psi'_3$}
+\AxiomC{$y:A_2\vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
+\BinaryInfC{$x:B \vdash_{\mathsf{L}}\Delta'_1, [ [e'_1/z]e'_2/y]\Delta'_2,\ [e'_1/z]\Delta'_3; \Psi'_1,[ [e'_1/z]e'_2]\Psi'_2,\ [e'_1/z]\Psi'_3$}
 \DisplayProof
 \end{center}}
 
@@ -1540,8 +1495,8 @@ Assuming the above decomposition to be unique, we can show that the $\eta$ equat
 is also satisfied:     
 \begin{equation}\label{eta:subtr}
 \framebox{\small 
-\AxiomC{$|\Delta| = |\Delta'| \quad |\Psi| = |\Psi'|\quad z;B \vdash_L \Delta, \Psi = \Delta', \Psi'$}
-\UnaryInfC{$z:B \vdash_L \mathtt{postp}(x\mapsto y,e), \mathtt{mkc}(x(e),y): A_1\lsub A_2, \Delta, \Psi = 
+\AxiomC{$|\Delta| = |\Delta'| \quad |\Psi| = |\Psi'|\quad z;B \vdash_{\mathsf{L}} \Delta, \Psi = \Delta', \Psi'$}
+\UnaryInfC{$z:B \vdash_{\mathsf{L}} \mathtt{postp}(x\mapsto y,e), \mathtt{mkc}(x(e),y): A_1\lsub A_2, \Delta, \Psi = 
 e: A_1\lsub A_2, \Delta'; \Psi'$}
 \DisplayProof
 }
@@ -1564,16 +1519,16 @@ i.e., that $\smallsetminus$ is the left adjoint to the bifunctor $\bullet$.
 \begin{tabular}{cc} 
 \AxiomC{$\bot$ {\em introduction}}
 \noLine
-\UnaryInfC{$x:A\vdash_L \Delta; \Psi\quad r: B \in Delta,\ \hbox{or}\  r:S \in \Psi$}
-\UnaryInfC{$x:A\vdash_L \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi\quad r: B \in Delta,\ \hbox{or}\  r:S \in \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi$}
 % \noLine
 % \UnaryInfC{where $R \in \kappa$.}
 \DisplayProof \quad
 &\quad
 \AxiomC{$\bot$ {\em elimination}}
 \noLine
-\UnaryInfC{$x:A \vdash_L e:\bot,  \Delta; \Psi$}
-\UnaryInfC{$x:A \vdash_L \mathtt{postp_{\bot}}(e), \Delta; \Psi$}
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} e:\bot,  \Delta; \Psi$}
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} \mathtt{postp_{\bot}}(e), \Delta; \Psi$}
 \DisplayProof
 \end{tabular} 
 \end{center}
@@ -1597,8 +1552,8 @@ $$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
 where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
 We define 
 $$
-[\![x:A\vdash_L \Delta \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
-[\![x:A\vdash_L \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
+[\![x:A\vdash_{\mathsf{L}} \Delta \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
+[\![x:A\vdash_{\mathsf{L}} \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
 $$
 \ref{units}.2. {\em Equations in context.}
 
@@ -1607,8 +1562,8 @@ The equation in context
  \framebox{\quad
 \AxiomC{\bf $\bot - \beta$ rule}
 \noLine
- \UnaryInfC{$x:A\vdash_L \Delta; \Psi = \Delta'; \Psi'$}
-\UnaryInfC{$x:A\vdash_L \Delta, \mathtt{postp}_{\bot}(\mathtt{connect}_{\bot}\ \mathtt{to}(x)); \Psi = \Delta'; \Psi'$}
+ \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi = \Delta'; \Psi'$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, \mathtt{postp}_{\bot}(\mathtt{connect}_{\bot}\ \mathtt{to}(x)); \Psi = \Delta'; \Psi'$}
  \DisplayProof
  \quad}
  \end{equation}
@@ -1632,8 +1587,8 @@ we see that there is a natural isomorphism
 \quad\framebox{
 \AxiomC{\bf $\bot - \eta$ rule:}
 \noLine
-\UnaryInfC{$z:B \vdash_L \Delta ; \Psi = \Delta'; \Psi'$}
-\UnaryInfC{$z:B \vdash_L \mathtt{connect}_{\bot}\ \mathtt{to}(x): \bot, \mathtt{postp}_{\bot}(e) \Delta; \Psi= \bot
+\UnaryInfC{$z:B \vdash_{\mathsf{L}} \Delta ; \Psi = \Delta'; \Psi'$}
+\UnaryInfC{$z:B \vdash_{\mathsf{L}} \mathtt{connect}_{\bot}\ \mathtt{to}(x): \bot, \mathtt{postp}_{\bot}(e) \Delta; \Psi= \bot
 e: \bot,  \Delta'; \Psi'$}
 \DisplayProof
 \quad}
@@ -1657,8 +1612,8 @@ in the models and for the operators that represent them in the language.
 \framebox{
 \AxiomC{\it $J$ introduction}
 \noLine
-\UnaryInfC{$x:A \vdash_L ,\Delta; t:T, \Psi$}
-\UnaryInfC{$x:A\vdash_L \Delta, Jt: JT; \Psi$}
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
 \DisplayProof
 }
 \end{equation}
@@ -1675,8 +1630,8 @@ an application of $\alpha^{-1}$:
 \framebox{
 \AxiomC{\it $J$ elimination}
 \noLine
-\UnaryInfC{$x:A \vdash_L \Delta, e: JT;\Psi_1\qquad  y:T \vdash_C \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\UnaryInfC{$x:A\vdash_L \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} \Delta, e: JT;\Psi_1\qquad  y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
 \DisplayProof
 }
 \end{equation}
@@ -1709,8 +1664,8 @@ given by the following compositions
 \framebox{
 \AxiomC{\it $H$ intro}
 \noLine
-\UnaryInfC{$x:A\vdash_L \overline{R}: \Delta, e: B; \Psi$}
-\UnaryInfC{$x:A\vdash_L \overline{R}: \Delta;He:HB, \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta, e: B; \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta;He:HB, \Psi$}
 \DisplayProof
 }
 \end{equation}
@@ -1730,8 +1685,8 @@ Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then
 \framebox{
 \AxiomC{\it $H$ elim$_1$}
 \noLine
-\UnaryInfC{$x:B \vdash_L \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_L ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\UnaryInfC{$x:B \vdash_L \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
 \DisplayProof
 }
 \end{equation}
@@ -1740,8 +1695,8 @@ Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then
 \framebox{
 \AxiomC{\it $H$ elim$_2$}
 \noLine
-\UnaryInfC{$x:S \vdash_C t:HA, \Psi_1\qquad y:A\vdash_L ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\UnaryInfC{$x:S \vdash_C \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
 \DisplayProof
 }
 \end{equation}

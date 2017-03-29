@@ -370,7 +370,7 @@ defn
  S |-NC S
 
  S |-NC 0, P && S1 |-NC P1,...,Sn |-NC Pn
- -------------------------------------- :: zI
+ -------------------------------------- :: zE
  S |-NC P,P1,...,Pn
  
  S |-NC P,T1
@@ -395,6 +395,18 @@ defn
 
  S |-NC P1,H A && A |-NL . ; P2
  ---------------------------- :: HE
+ S |-NC P1,P2
+
+ S |-NC P
+ ---------- :: weak
+ S |-NC T,P
+
+ S |-NC T,T,P
+ ------------ :: contr
+ S |-NC T,P
+
+ S |-NC P1,T && T |-NC P2
+ ------------------------ :: cut
  S |-NC P1,P2
 
  % Non-linear side:
@@ -446,7 +458,23 @@ defn
  A |-NL D;P1,H A && A |-NL .;P2
  ----------------------------- :: HE
  A |-NL D;P1,P2
- 
+
+ A |-NL D;P
+ ------------ :: weak
+ A |-NL D;T,P
+
+ A |-NL D;T,T,P
+ -------------- :: contr
+ A |-NL D;T,P
+
+ A |-NL D;P1,T && T |-NC P2
+ -------------------------- :: Ccut
+ A |-NL D;P1,P2
+
+ A |-NL D1,B;P1 && B |-NL D2;P2
+ ------------------------------ :: cut
+ A |-NL D1,D2;P1,P2
+
 % Term Assignment:
 
 % defn
