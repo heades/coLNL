@@ -1,6 +1,6 @@
 % Input variables.
-metavar vars ,  n , a, x , y, z , w , m , o ::=  
-indexvar ivar, i , k , j , l ::= 
+metavar vars ,  a, x , y, z , w , m , o ::=  
+indexvar ivar, n , i , k , j , l ::= 
 
 grammar
 
@@ -175,6 +175,7 @@ formula :: 'formula_' ::=
   | formula1 &&&&&&& formula2 :: M :: quad7
   {{tex [[formula1]] \quad\hspace{7px} [[formula2]] }}            
   | formula1 ... formulai :: M :: vec
+  | formula1 , ... , formulai :: M :: list
   | ( formula )          :: S :: parens
   {{tex [[formula]] }}
   | s : T in P           :: M :: in
@@ -358,10 +359,94 @@ defn
  A |-L D;P,P'
 
 % Natural Deduction:
+ % Non-linear side:
+ defn
+ S |-NC P :: :: NDC :: 'NC_'
+ {{com Non-linear Natural Deduction }}
+ {{tex [[S]] \vdash_{\mathsf{C} } [[P]] }}
+ by
 
+ ------- :: id
+ S |-NC S
 
+ S |-NC 0, P && S1 |-NC P1,...,Sn |-NC Pn
+ -------------------------------------- :: zI
+ S |-NC P,P1,...,Pn
+ 
+ S |-NC P,T1
+ --------------- :: dI1
+ S |-NC P,T1 + T2
 
+ S |-NC P,T2
+ --------------- :: dI2
+ S |-NC P,T1 + T2
 
+ (S |-NC P1,T1 + T2 && T1 |-NC P2) && T2 |-NC P2
+ ----------------------------------------------- :: dE
+ S |-NC P1,P2
+
+ S |-NC P1,T1 && T2 |-NC P2
+ ------------------------ :: subI
+ S |-NC P1,P2,T1 - T2
+
+ S |-NC P1,T1 - T2 && T1 |-NC T2,P2
+ -------------------------------- :: subE
+ S |-NC P1,P2
+
+ S |-NC P1,H A && A |-NL . ; P2
+ ---------------------------- :: HE
+ S |-NC P1,P2
+
+ % Non-linear side:
+ defn
+ A |-NL D ; P :: :: NDL :: 'NL_'
+ {{com Linear Natural Deduction }}
+ {{tex [[A]] \vdash_{\mathsf{L} } [[D]];[[P]] }}
+ by
+
+ ------------- :: id
+ A |-NL A ; .
+
+ A |-NL D;P
+ ---------------- :: pI
+ A |-NL D,False;P
+
+ A |-NL False,D;.
+ ---------------- :: pE
+ A |-NL D;.
+
+ A |-NL D,B1,B2;P
+ -------------------- :: parI
+ A |-NL D,B1 (+) B2;P
+
+ (A |-NL D,B1 (+) B2;P && B1 |-NL D1;P1) && B2 |-NL D2;P2
+ -------------------------------------------------------- :: parE
+ A |-NL D,D1,D2;P,P1,P2
+
+ A |-NL D1,B1;P1 && B2 |-NL D2;P2
+ --------------------------------- :: subI
+ A |-NL B1 *- B2,D1,D2;P1,P2
+
+ A |-NL D1,B1 *- B2; P1 && B1 |-NL B1,D2;P2
+ ----------------------------------------- :: subE
+ A |-NL D1,D2;P1,P2
+
+ A |-NL D;T,P
+ -------------- :: JI
+ A |-NL D,J T;P
+
+ A |-NL D,J T;P1 && T |-NC P2
+ ---------------------------- :: JE
+ A |-NL D;P1,P2
+
+ A |-NL D,B;P
+ -------------- :: HI
+ A |-NL D;H B,P
+
+ A |-NL D;P1,H A && A |-NL .;P2
+ ----------------------------- :: HE
+ A |-NL D;P1,P2
+ 
 % Term Assignment:
 
 % defn
