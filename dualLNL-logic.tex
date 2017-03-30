@@ -1,9 +1,10 @@
 We now turn to developing the syntactic side of dual LNL models called
 dual LNL logic (DLNL).  First, we give a sequent calculus
-formalization, then a natural deduction formalization, and finally a
-term assignment to the natural deduction version.  Each of these
-systems will consistently use the same syntax and naming conventions
-for formulas, types, and contexts given by the following definition.
+formalization which we will simply refer to as DLNL logic, then a
+natural deduction formalization called DND logic, and finally a term
+assignment to the natural deduction version.  Each of these systems
+will consistently use the same syntax and naming conventions for
+formulas, types, and contexts given by the following definition.
 \begin{definition}
   \label{def:DLNL-syntax-formulas-ctx}
   The the syntax for formulas, types, and contexts are given as follows:
@@ -40,7 +41,7 @@ the same naming convention throughout.
       \DualLNLLogicdruleCXXhL{}     
     \end{mathpar}
   \end{mdframed}
-  \caption{Non-linear fragment of the DLNL sequent calculus}
+  \caption{Non-linear fragment of the DLNL logic}
   \label{fig:non-linear-sequent}
 \end{figure}
 
@@ -68,7 +69,7 @@ the same naming convention throughout.
       \DualLNLLogicdruleLXXhR{}      
     \end{mathpar}
   \end{mdframed}
-  \caption{Linear fragment of the DLNL sequent calculus}
+  \caption{Linear fragment of the DLNL logic}
   \label{fig:linear-fragment-sequent}
 \end{figure}
 
@@ -204,18 +205,25 @@ The resulting derivation $\Pi$ has cut rank $c(\Pi) = max(|B_1|+1, c(\pi_1), c(\
   By induction on $c(\Pi)$ using the previous lemma. 
 \end{proof}
 
-In DLNL logic contexts are treated multiplicatively. Some cases of the
-previous proof would be best treated with additive contexts, for
-instance non-linear disjunction elimination to match the categorical
-interpretation of disjunction as coproduct.  Of course additive
-contexts can be simulated using weakening and contraction.
+\begin{remark}
+  \label{rem:additive-contexts}
+  In DLNL logic contexts are treated multiplicatively. Some cases of
+  the previous proof would be best treated with additive contexts, for
+  instance non-linear disjunction elimination to match the categorical
+  interpretation of disjunction as coproduct.  Of course additive
+  contexts can be simulated using weakening and contraction.
+\end{remark}
 % subsection sequent_calculus (end)
 
 \subsection{Sequent-style Natural Deduction}
 \label{sec:sequent-style_natural_deduction}
 
-In Tables \ref{non-linear-coint-natded},\ref{linear-coint-natded} we give the rules of a sequent-style natural deduction system \emph{co-ND}  for linear - non linear co-intuitionistic logic, corresponding to the sequent calculus $\mathbf{co-LNL}$. 
-Some rules are formulated here \emph{additively} (see remark \ref{additive}).
+The inference rules for the non-linear and linear fragments of the
+sequent-style natural deduction formalization of DLNL (DND) can be
+found in Figure~\ref{fig:non-linear-nd} and Figure~\ref{fig:linear-nd}
+respectively.  Some of the inference rules are formulated
+\emph{additively} instead of multiplicatively as we explained in the
+previous section; see Remark~\ref{rem:additive-contexts}.
 \begin{figure}
   \begin{mdframed}
     \begin{mathpar}
@@ -229,7 +237,7 @@ Some rules are formulated here \emph{additively} (see remark \ref{additive}).
       \DualLNLLogicdruleNCXXHE{}      
     \end{mathpar}
   \end{mdframed}
-  \caption{Non-linear fragment of \textbf{co-LNL} natural deduction (\textbf{co-ND})}
+  \caption{Non-linear fragment of DND logic}
   \label{fig:non-linear-nd}
 \end{figure}
 
@@ -249,11 +257,15 @@ Some rules are formulated here \emph{additively} (see remark \ref{additive}).
       \DualLNLLogicdruleNLXXHE{}      
     \end{mathpar}
   \end{mdframed}
-  \caption{Linear fragment of \textbf{co-LNL} natural deduction (\textbf{co-ND})}
+  \caption{Linear fragment of DND logic}
   \label{fig:linear-nd}
 \end{figure}
 
-\begin{lemma}\label{admissible} The following rules are admissible in the natural deduction system \emph{co-ND}: 
+We now give a correspondence between DND and DLNL logic.  First, we
+have several admissible rules.
+\begin{lemma}[Admissible Rules in DND]
+  \label{lemma:admissible_rules_in_dnd}
+  The following rules are admissible in DND: 
   \begin{mathpar}
     \DualLNLLogicdruleNCXXweak{} \and
     \DualLNLLogicdruleNCXXcontr{} \and
@@ -264,15 +276,18 @@ Some rules are formulated here \emph{additively} (see remark \ref{additive}).
     \DualLNLLogicdruleNLXXcut{}
   \end{mathpar}
 \end{lemma}
-
-\begin{proposition}
-There are functions $\mathcal{S}: \mathit{co-ND} \rightarrow \mathbf{co-LNL}$ 
-and $\mathcal{N}:  \mathbf{co-LNL} \rightarrow \mathit{co-ND}$ from natural deduction to sequent 
-calculus derivations. 
-\end{proposition}
+Using these admissible rules we can construct a proof preserving
+translation between DND and DLNL logic.
+\begin{lemma}[Translations between DND and DLNL logic]
+  \label{lemma:translations}
+  There are functions $\mathcal{S}: DND \rightarrow DLNL$ 
+  and $\mathcal{N}: DLNL \rightarrow DND$ from natural deduction to sequent 
+  calculus derivations. 
+\end{lemma}
+\noindent
 Notice that the right rules of the sequent calculus and the introductions of natural deduction
 have the same form. Elimination rules are derivable from left rules with \emph{cut} and left 
-rules are derivable using substitutions. For instance, the $\DualLNLLogicdruleNCXXzEName$ rule 
+rules are derivable using the admissible cut rule in DND. For instance, the $\DualLNLLogicdruleNCXXzEName$ rule 
 \[ \DualLNLLogicdruleNCXXzE{} \]
 is derivable in the sequent calculus as follows: 
 \[
