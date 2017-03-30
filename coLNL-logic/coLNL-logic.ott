@@ -91,7 +91,7 @@ e, u, p :: 'cilterm_' ::= {{com linear terms }}
   {{tex [[e]] }}
   
 % Cointuitionistic Contexts:
-P {{tex \Psi}}, PI {{tex \Pi}} :: 'CG_' ::=
+P {{tex \Psi}}, PI {{tex \Theta}} :: 'CG_' ::=
   | .           ::   :: Empty
   {{tex \cdot }}
   | T           ::   :: El2

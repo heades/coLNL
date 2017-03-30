@@ -1,4 +1,26 @@
-\subsection{Sequent Calculus}
+We now turn to developing the syntactic side of dual LNL models called
+dual LNL logic (DLNL).  First, we give a sequent calculus
+formalization, then a natural deduction formalization, and finally a
+term assignment to the natural deduction version.  Each of these
+systems will consistently use the same syntax and naming conventions
+for formulas, types, and contexts given by the following definition.
+\begin{definition}
+  \label{def:DLNL-syntax-formulas-ctx}
+  The the syntax for formulas, types, and contexts are given as follows:
+  \[
+  \begin{array}{rllll}
+    \text{(non-linear formulas/types)} & [[R]],[[S]],[[T]] ::= [[0]] \mid [[S + T]] \mid [[S - T]] \mid [[H A]]\\
+    \text{(linear formulas/types)}     & [[A]],[[B]],[[C]] ::= [[False]] \mid [[A (+) B]] \mid [[A *- B]] \mid [[J S]]\\
+    \text{(non-linear contexts)}       & [[P]],[[PI]] ::= [[.]] \mid [[T]] \mid [[P,PI]]\\
+    \text{(linear contexts)}           & [[G]],[[D]]  ::= [[.]] \mid [[A]] \mid [[G,D]]\\
+  \end{array}
+  \]
+\end{definition}
+\noindent
+The term assignment will index contexts by terms, but we will maintain
+the same naming convention throughout.
+
+\subsection{The Sequent Calculus for Dual LNL Logic}
 \label{sec:sequent_calculus}
 
 \begin{figure}
@@ -18,7 +40,7 @@
       \DualLNLLogicdruleCXXhL{}     
     \end{mathpar}
   \end{mdframed}
-  \caption{Non-linear fragment of the \textbf{co-LNL} sequent calculus}
+  \caption{Non-linear fragment of the DLNL sequent calculus}
   \label{fig:non-linear-sequent}
 \end{figure}
 
@@ -46,216 +68,55 @@
       \DualLNLLogicdruleLXXhR{}      
     \end{mathpar}
   \end{mdframed}
-  \caption{Linear fragment of the \textbf{co-LNL} sequent calculus}
+  \caption{Linear fragment of the DLNL sequent calculus}
   \label{fig:linear-fragment-sequent}
 \end{figure}
 
-We follow Benton almost verbatim in our sequent calculus for {\bf co-LNL}. 
-We use $n$-ary cuts:
+In this section we take the dual of Benton's~\cite{Benton:1994}
+sequent calculus for LNL logic to obtain the sequent calculus for dual
+LNL logic.  The inference rules for the non-linear fragment can be
+found in Figure~\ref{fig:non-linear-sequent} and the linear fragment
+in Figure~\ref{fig:linear-fragment-sequent}. The remainder of this
+section is devoted to proving cut-elimination.  However, the proof is
+simply a dualization of Benton's~\cite{Benton:1994} proof of
+cut-elimination for LNL logic.
+
+Just as Benton we use $n$-ary cuts:
 \[
 \DualLNLLogicdruleCXXmcut{} \quad \DualLNLLogicdruleLXXCmcut{}
 \]
-where $S^n = S, \ldots, S$ $n$-times. We call $\mathbf{co-LNL}^+$ the system {\bf co-LNL} with $n$-cuts replacing 
-ordinary 1-cuts. Such cuts are admissible in {\bf co-LNL} and cut-elimination for $\mathbf{co-LNL}^+$ implies 
-cut-elimination for {\bf co-LNL}.
+where $S^n = S, \ldots, S$ $n$-times. We call $\DLNLP$ the system DLNL with $n$-cuts replacing 
+ordinary 1-cuts. Such cuts are admissible in DLNL and cut-elimination for $\DLNLP$ implies 
+cut-elimination for DLNL.
 
-We have the familiar definitions: 
-\begin{itemize}
-\item the \emph{rank} $|A|$ or $|S|$ of a formula $A$ or $S$ is the number of the logical symbols in it.
-\item the \emph{cut-rank} $c(\Pi)$ of a proof $\Pi$ is the maximum of the ranks of the cut formulas in $\Pi$ plus one; 
-if $\Pi$ is cut-free its cut rank is 0.
-\item the \emph{depth} $d(\Pi)$ of a proof $\Pi$ is the length of the longest path in the proof tree.
-\end{itemize}
-\begin{lemma}
-\end{lemma} ({\bf Cut Reduction}) 
-\begin{enumerate}
-\item If $\Pi_1$ is a derivation of $[[T |-C P, S^n]]$ and  $\Pi_2$ is a derivation of $[[S |-C P']]$ with 
-$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_{\mathsf{C}} \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
-\item If $\Pi_1$ is a derivation of $T \vdash_{\mathsf{L}} \Delta; \Psi, S^n$ and  $\Pi_2$ is a derivation of $S \vdash_{\mathsf{C}}\Psi'$ with 
-$c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_{\mathsf{L}} \Delta; \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
-\item If $\Pi_1$ is a derivation of $B\vdash_{\mathsf{L}} \Delta; \Psi, A^n$ and  $\Pi_2$ is a derivation of $A \vdash_{\mathsf{L}}\Delta', \Psi'$ with $c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $B\vdash_{\mathsf{C}}\Delta, \Delta', \Psi, \Psi'$ with $c(\Pi) \leq |A|$.
-\end{enumerate}
+We begin with the a few standard definitions. The \emph{rank} of a
+formula, denoted by $|A|$ or $|S|$, is the number of the logical
+symbols in the given formula.  The \emph{cut-rank} of a derivation
+$\Pi$, denoted by $c(\Pi)$, is the maximum of the ranks of the cut
+formulas in $\Pi$ plus one; if $\Pi$ is cut-free its cut rank is 0.
+Finally, the \emph{depth} of a derivation $\Pi$, denoted by $d(\Pi)$,
+is the length of the longest path in $\Pi$.  The following three
+results establishes cut elimination.
 
-\noindent
-{\bf Proof.} By induction on $d(\Pi_1) + d(\Pi_2)$.   
+\begin{lemma}[Cut Reduction]
+  \label{lemma:cut_reduction}
+  The following defines the cut reduction procedure:
+  \begin{enumerate}
+  \item If $\Pi_1$ is a derivation of $[[T |-C P, S^n]]$ and  $\Pi_2$ is a derivation of $[[S |-C P']]$ with 
+    $c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_{\mathsf{C}} \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
+  \item If $\Pi_1$ is a derivation of $T \vdash_{\mathsf{L}} \Delta; \Psi, S^n$ and  $\Pi_2$ is a derivation of $S \vdash_{\mathsf{C}}\Psi'$ with 
+    $c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $T\vdash_{\mathsf{L}} \Delta; \Psi, \Psi'$ with $c(\Pi) \leq |S|$;
+  \item If $\Pi_1$ is a derivation of $B\vdash_{\mathsf{L}} \Delta; \Psi, A^n$ and  $\Pi_2$ is a derivation of $A \vdash_{\mathsf{L}}\Delta', \Psi'$ with $c(\Pi_1), c(\Pi_2) \leq |S|$, then there exists a derivation $\Pi$ of $B\vdash_{\mathsf{C}}\Delta, \Delta', \Psi, \Psi'$ with $c(\Pi) \leq |A|$.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  By induction on $d(\Pi_1) + d(\Pi_2)$.  We consider only give one
+  cast where the last inferences of $\Pi_1$ and $\Pi_2$ are logical
+  inferences; please see
+  Appendix~\ref{subsec:proof_of_cut_reduction_lemma:cut-reduction} for
+  the complete proof.
 
-\noindent
-We consider only the case where the last inferences of $\Pi_1$ and $\Pi_2$ are logical inferences. The other cases 
-are handled mainly by permutation of inferences and use of the inductive hypothesis; we refer to Benton's text for them.  Throughout the proof we will add an asterisk to the name of an inference rule to indicate that the rule may be applied zero or more times.
-
-\vspace{1ex}
-
- \noindent
-\emph{J right / J left}. We have 
-\begin{center}
-\AxiomC{$\pi_1$}
-\noLine
-\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta, J T^n ; T, \Psi$}
-\LeftLabel{$\Pi_1 =$} 
-\RightLabel{$\DualLNLLogicdruleLXXjRName$}
-\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta, J T^{n+1}; \Psi$}
-\DisplayProof
-\qquad 
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$T \vdash_{\mathsf{C}} \Psi'$}
-\LeftLabel{$\Pi_2 =$} 
-\RightLabel{$\DualLNLLogicdruleLXXjLName$}
-\UnaryInfC{$JT \vdash_{\mathsf{L}} ; \Delta, J T^{n+1}, \Psi'$}
-\DisplayProof
-\end{center}
-By the inductive hypothesis appled to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $A \vdash_{\mathsf{L}} \Delta; T, \Psi, \Psi'$
-with $c(\Pi') \leq |J T| = |T | + 1$.  Then the following derivation 
-\begin{center}
-\AxiomC{$\Pi'$}
-\noLine
-\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta ; T, \Psi, \Psi'$}
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$T \vdash_{\mathsf{C}} \Psi'$}
-\LeftLabel{$\Pi_1 =$} 
-\RightLabel{$\DualLNLLogicdruleLXXCcutName$}
-\BinaryInfC{$A \vdash_{\mathsf{L}} \Delta, \Psi, \Psi', \Psi'$}
-\doubleLine
-\RightLabel{$\DualLNLLogicdruleCXXcrName^*$}
-\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta, \Psi, \Psi'$}
-\DisplayProof
-\end{center}
-has cut rank $\mathit{max}( |T|+1, c(\Pi'), c(\pi_2)) = |T|+1 = |J T|$. 
-
-\vspace{1ex}
-
- \noindent
-\emph{H right / H left}. We have 
-\begin{center}
-\AxiomC{$\pi_1$}
-\noLine
-\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta, A; H A^n ; \Psi$}
-\LeftLabel{$\Pi_1 =$} 
-\RightLabel{$\DualLNLLogicdruleLXXhRName$}
-\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta; H A^{n+1}, \Psi$}
-\DisplayProof
-\qquad 
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$A \vdash_{\mathsf{L}} ; \Psi'$}
-\LeftLabel{$\Pi_2 =$} 
-\RightLabel{$\DualLNLLogicdruleCXXhLName$}
-\UnaryInfC{$H A \vdash_{\mathsf{C}} ; \Psi'$}
-\DisplayProof
-\end{center}
-By the inductive hypothesis applied to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of $B \vdash_{\mathsf{L}} \Delta; A, \Psi, \Psi'$
-with $c(\Pi') \leq |H A| = |A | + 1$.  Then the following derivation 
-\begin{center}
-\AxiomC{$\Pi'$}
-\noLine
-\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta ; A, \Psi, \Psi'$}
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$A \vdash_{\mathsf{L}} ; \Psi'$}
-\LeftLabel{$\Pi_1 =$} 
-\RightLabel{$\DualLNLLogicdruleLXXcutName$}
-\BinaryInfC{$B \vdash_{\mathsf{L}} \Delta, \Psi, \Psi', \Psi'$}
-\doubleLine
-\RightLabel{$\DualLNLLogicdruleCXXcrName^*$}
-\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta, \Psi, \Psi'$}
-\DisplayProof
-\end{center}
-has cut rank $\mathit{max}( |A|+1, c(\Pi'), c(\pi_2)) = |A|+1 = |H A|$. 
-
-\vspace{1ex}
-
- \noindent
-\emph{+ right$_1$ / + left}.  We have 
-\begin{center}
-\AxiomC{$\pi_1$}
-\noLine
-\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, (T_1 + T_2)^{n}, \Psi$}
-\LeftLabel{$\Pi_1 =$} 
-\RightLabel{$\DualLNLLogicdruleCXXdROneName$}
-\UnaryInfC{$S \vdash_{\mathsf{C}} (T_1 + T_2)^{n+1}, \Psi$}
-\DisplayProof
-\qquad 
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$T_1 \vdash_{\mathsf{C}} \Psi_1$}
-\AxiomC{$\pi_3$}
-\noLine
-\UnaryInfC{$T_2 \vdash_{\mathsf{C}} \Psi_2$}
-\LeftLabel{$\Pi_2 =$} 
-\RightLabel{$\DualLNLLogicdruleCXXdLName$}
-\BinaryInfC{$T_1+ T_2 \vdash_{\mathsf{C}} ; \Psi_1, \Psi_2$}
-\DisplayProof
-\end{center}
-
-\noindent
-If $n = 0$, then the reduction is as follows:
-\begin{center}
-\begin{tabular}{c}
-\AxiomC{$\pi_1$}
-\noLine
-\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, \Psi$}
-\LeftLabel{$\Pi_1 =$} 
-\RightLabel{$\DualLNLLogicdruleCXXdROneName$}
-\UnaryInfC{$S \vdash_{\mathsf{C}} T_1 + T_2, \Psi$}
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$T_1 \vdash_{\mathsf{C}} \Psi_1$}
-\AxiomC{$\pi_3$}
-\noLine
-\UnaryInfC{$T_2 \vdash_{\mathsf{C}} \Psi_2$}
-\LeftLabel{$\Pi_2 =$} 
-\RightLabel{$\DualLNLLogicdruleCXXdLName$}
-\BinaryInfC{$T_1+ T_2 \vdash_{\mathsf{C}}  \Psi_1, \Psi_2$}
-\RightLabel{$\DualLNLLogicdruleCXXcutName$}
-\BinaryInfC{$S\vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_2$}
-\DisplayProof\\
-\\
- reduces to \\ 
-\\
-\AxiomC{$\pi_1$}
-\noLine
-\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, \Psi$}
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$T_1 \vdash_{\mathsf{C}} \Psi_1$}
-\RightLabel{$\DualLNLLogicdruleCXXcutName$}
-\BinaryInfC{$S \vdash_{\mathsf{C}} \Psi, \Psi_1$}
-\doubleLine
-\LeftLabel{$\Pi$}
-\RightLabel{$\DualLNLLogicdruleCXXwkName^*$}
-\UnaryInfC{$S\vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_2$}
-\DisplayProof
-\end{tabular}
-\end{center}
-
-\noindent
-Here $c(\Pi) = max(|T_1 + 1|, c(\pi_1), c(\pi_2)) \leq |T_1 + T_2|$.
-
-\vspace{1ex}
- 
-\noindent
-If $n > 0$, then by the inductive hypothesis applied to $\Pi_2$ and $\pi_1$ there exists a proof $\Pi'$ of 
-$S \vdash_{\mathsf{C}} T_1, \Psi, \Psi_1, \Psi_2$ with $c(\Pi') \leq |T_1+ T_2| = |T_1|+|T_2 | + 1$.  Then the following derivation 
-\begin{center}
-\AxiomC{$\Pi' $}
-\noLine
-\UnaryInfC{$S \vdash_{\mathsf{C}} T_1, \Psi, \Psi_1, \Psi_2$}
-\AxiomC{$\pi_2$}
-\noLine
-\UnaryInfC{$T_1 \vdash_{\mathsf{C}}  \Psi_1$}
-\LeftLabel{$\Pi =$} 
-\RightLabel{$\DualLNLLogicdruleCXXcutName$}
-\BinaryInfC{$S \vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_1, \Psi_2$}
-\doubleLine
-\RightLabel{$\DualLNLLogicdruleCXXcrName^*$}
-\UnaryInfC{$S \vdash_{\mathsf{C}} \Psi, \Psi_1, \Psi_2$}
-\DisplayProof
-\end{center}
-has cut rank $\mathit{max}( |T_1|+1, c(\Pi'), c(\pi_2)) \leq |T_1 + T_2|$. 
-
-\vspace{1ex}
-
+\ \\
 \noindent
 $\lsub$ right / $\lsub$ left. We have 
 \begin{center}
@@ -300,46 +161,54 @@ reduces to $\Pi$
 \DisplayProof
 \end{tabular}
 \end{center}
-The resulting derivation $\Pi$ has cut rank $c(\Pi) = max(|B_1|+1, c(\pi_1), c(\pi_2), |B_2|+1, c(\pi_3)) \leq |B_1\lsub B_2|$.
-\begin{lemma}
-Let $\Pi$ be a {\bf co-}$\mathbf{LNL}^+$ proof of a sequent  $S \vdash_{\mathsf{C}} \Psi$ or $A \vdash_{\mathsf{L}} \Delta; \Psi$ with 
-$c(\Pi)>0$. Then there exists a proof $\Pi'$ of the same sequent with $c(\Pi') < c(\Pi)$. 
-\end{lemma} 
+The resulting derivation $\Pi$ has cut rank $c(\Pi) = max(|B_1|+1, c(\pi_1), c(\pi_2), |B_2|+1, c(\pi_3)) \leq |B_1\lsub B_2|$.  
+\end{proof}
 
-\noindent
-{\bf Proof.} By induction on $d(\Pi)$. If the last inference is not a cut, then we apply the 
-inductive hypothesis. If it the last inference is a cut on a formula $A$, but $A$ is not of maximal rank
-among the cut formulas, so that $c(\Pi) > |A|+1$, then we apply the induction hypothesis. Finally,  
-if the last inference is a cut on $A$ and $c(\Pi) = |A| + 1$ we have 
-\begin{center}
-\AxiomC{$\Pi_1$}
-\noLine
-\UnaryInfC{$B \vdash_{\mathsf{L}} \Delta, A ; \Psi$}
-\AxiomC{$\Pi_2$}
-\noLine
-\UnaryInfC{$A \vdash_{\mathsf{L}} \Delta' ; \Psi'$}
-\LeftLabel{$\Pi =$}
-\RightLabel{$\DualLNLLogicdruleLXXcutName$}
-\BinaryInfC{$B \vdash_{\mathsf{L}} \Delta, \Delta'; \Psi, \Psi'$}
-\DisplayProof
-\end{center}
-Since $c(\Pi_1), c(\Pi_2) \leq |A| + 1$ by induction we can construct derivations $\Pi'_1$, $\Pi'_2$ of the sequent premises of the cut with $c(\Pi'_1), c(\Pi'_2) \leq |A|$. Then by the Cut-reduction Lemma we can construct a $\Pi'$ 
-proving $B \vdash_{\mathsf{L}} \Delta, \Delta'; \Psi, \Psi'$ with $c(\Pi') \leq |A|$ as required. 
-\begin{theorem}
-Let $\Pi$ be a proof of a sequent $S \vdash_{\mathsf{C}} \Psi$ or $A\vdash_{\mathsf{L}} \Delta ; \Psi$ such that $c(\Pi)> 0$. There is an 
-algorithm  which yields a cut free proof of the same sequent. 
+\begin{lemma}[Decrease in Cut-Rank]
+  \label{lemma:decrease-cut-rank}
+  Let $\Pi$ be a $\DLNLP$ proof of a sequent  $S \vdash_{\mathsf{C}} \Psi$ or $A \vdash_{\mathsf{L}} \Delta; \Psi$ with 
+  $c(\Pi)>0$. Then there exists a proof $\Pi'$ of the same sequent with $c(\Pi') < c(\Pi)$. 
+\end{lemma}
+\begin{proof} 
+  By induction on $d(\Pi)$. If the last inference is not a cut, then we apply the 
+  induction hypothesis. If the last inference is a cut on a formula $A$, but $A$ is not of maximal rank
+  among the cut formulas, so that $c(\Pi) > |A|+1$, then we apply the induction hypothesis. Finally,  
+  if the last inference is a cut on $A$ and $c(\Pi) = |A| + 1$ we have the following situation:
+  \begin{center}
+    \AxiomC{$\Pi_1$}
+    \noLine
+    \UnaryInfC{$B \vdash_{\mathsf{L}} \Delta, A ; \Psi$}
+    \AxiomC{$\Pi_2$}
+    \noLine
+    \UnaryInfC{$A \vdash_{\mathsf{L}} \Delta' ; \Psi'$}
+    \LeftLabel{$\Pi =$}
+    \RightLabel{$\DualLNLLogicdruleLXXcutName$}
+    \BinaryInfC{$B \vdash_{\mathsf{L}} \Delta, \Delta'; \Psi, \Psi'$}
+    \DisplayProof
+  \end{center}
+  Now since $c(\Pi_1), c(\Pi_2) \leq |A| + 1$ then by applying the
+  induction hypothesis to the premises of the previous derivation we
+  can construct derivations $\Pi'_1$ and $\Pi'_2$ with $c(\Pi'_1) \leq
+  |A|$ and $c(\Pi'_2) \leq |A|$. Then by cut reduction we can
+  construct a derivation $\Pi'$ proving $B \vdash_{\mathsf{L}} \Delta,
+  \Delta'; \Psi, \Psi'$ with $c(\Pi') \leq |A|$ as required.
+\end{proof}
+
+\begin{theorem}[Cut Elimination]
+  \label{thm:cut_elimination}
+  Let $\Pi$ be a proof of a sequent $[[S |-C P]]$ or
+  $[[A |-L D ; P]]$ such that $c(\Pi)> 0$. There is
+  an algorithm which yields a cut free proof of the same sequent.
 \end{theorem}
+\begin{proof}
+  By induction on $c(\Pi)$ using the previous lemma. 
+\end{proof}
 
-\noindent
-{\bf Proof} By induction on $c(\Pi)$ using the previous lemma. 
-
-\begin{remark}\label{additive}
-Contexts are treated multiplicatively. Some cases would be best treated with additive contexts, for instance non-linear disjunction elimination to match  the categorical interpretation of disjunction as coproduct. 
-Of course additive contexts can be simulated using weakening and contraction.  
-\[
-\DualLNLLogicdruleCXXadL{}
-\]
-\end{remark}
+In DLNL logic contexts are treated multiplicatively. Some cases of the
+previous proof would be best treated with additive contexts, for
+instance non-linear disjunction elimination to match the categorical
+interpretation of disjunction as coproduct.  Of course additive
+contexts can be simulated using weakening and contraction.
 % subsection sequent_calculus (end)
 
 \subsection{Sequent-style Natural Deduction}
@@ -1561,3 +1430,4 @@ Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we
 %%% mode: latex
 %%% TeX-master: main.tex
 %%% End: 
+
