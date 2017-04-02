@@ -407,7 +407,41 @@ inference rules.  The typing rules for the non-linear fragment of TND
 can be found in Figure~\ref{fig:non-linear-ta}, and the typing rules
 for the linear fragment of TND can be found in
 Figure~\ref{fig:linear-ta}.
-
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \DualLNLLogicdruleTCXXid{} \and
+      \DualLNLLogicdruleTCXXzI{} \and
+      \DualLNLLogicdruleTCXXdIOne{} \and
+      \DualLNLLogicdruleTCXXdITwo{} \and
+      \DualLNLLogicdruleTCXXdE{} \and
+      \DualLNLLogicdruleTCXXsubI{} \and
+      \DualLNLLogicdruleTCXXsubE{} \and
+      \DualLNLLogicdruleTCXXHE{} \and      
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Non-linear fragment of the term assignment for TND}
+  \label{fig:non-linear-ta}
+\end{figure}
+\begin{figure}
+  \begin{mdframed}
+    \begin{mathpar}
+      \DualLNLLogicdruleTLXXid{} \and
+      \DualLNLLogicdruleTLXXpI{} \and
+      \DualLNLLogicdruleTLXXpE{} \and
+      \DualLNLLogicdruleTLXXparI{} \and
+      \DualLNLLogicdruleTLXXparE{} \and
+      \DualLNLLogicdruleTLXXsubI{} \and
+      \DualLNLLogicdruleTLXXsubE{} \and
+      \DualLNLLogicdruleTLXXJI{} \and
+      \DualLNLLogicdruleTLXXJE{} \and
+      \DualLNLLogicdruleTLXXHI{} \and
+      \DualLNLLogicdruleTLXXHE{} \and      
+    \end{mathpar}
+  \end{mdframed}
+  \caption{Linear fragment of the term assignment for TND}
+  \label{fig:linear-ta}
+\end{figure}
 \begin{remark}
   Let us call terms of the form $[[postp(x -> t1,t2)]]$, $[[postp (x
       -> e1,e2)]]$, and $[[postpP e]]$ $p$-\emph{terms}. Let us say
@@ -445,12 +479,27 @@ let expressions to contexts is given as follows:
 where $p = [[H y]]$ or $p = [[J y]]$.
 Case expressions are handled similarly.
 
-The admissible rule of contraction on the non-linear side is also
-generalized to contexts. Let $m_1$ and $m_2$ be multisets of terms,
-then we denote by $m_1 \cdot m_2$ the sum of multisets; if multisets are
+Similarly to DND logic we have the following admissible rules.
+\begin{lemma}[Admissible Typing Rules]
+  The term assignment for the admissible rules of the calculus is as follows:
+  \begin{mathpar}
+    \DualLNLLogicdruleTCXXweak{} \and
+      \DualLNLLogicdruleTCXXcontr{} \and
+      \DualLNLLogicdruleTCXXcut{} \and     
+      \DualLNLLogicdruleTLXXweak{} \and
+      \DualLNLLogicdruleTLXXcontr{} \and
+      \DualLNLLogicdruleTLXXCcut{} \and
+      \DualLNLLogicdruleTLXXcut{}      
+  \end{mathpar}
+\end{lemma}
+\noindent
+We generalize the admissible rule of contraction on the non-linear
+side to contexts. Let $m_1$ and $m_2$ be multisets of terms, then we
+denote by $m_1 \cdot m_2$ the sum of multisets; if multisets are
 represented as lists, then the sum is representable as the appending
-of the lists. We extend this to contexts, $\Psi_1 \cdot \Psi_2$, 
-recursively as follows:
+of the lists. We denote singleton multisets, $\{[[t]]\}$, by the term that inhabits
+it, e.g. $[[t]]$.  We extend this to contexts, $\Psi_1 \cdot \Psi_2$, recursively as
+follows:
 \begin{center}
 \begin{tabular}{rcl}
 $(\cdot) \cdot (\cdot)$ &\ =\ & $(\cdot)$\\
@@ -554,55 +603,6 @@ the other terms of the context are globally bound, and such binding is represent
 \noindent
 In tables \ref{non-linear-coint-TA}, \ref{Linear-coint-TA} we give the term assignment to {\it co-ND}.
 
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \DualLNLLogicdruleTCXXid{} \and
-      \DualLNLLogicdruleTCXXzI{} \and
-      \DualLNLLogicdruleTCXXdIOne{} \and
-      \DualLNLLogicdruleTCXXdITwo{} \and
-      \DualLNLLogicdruleTCXXdE{} \and
-      \DualLNLLogicdruleTCXXsubI{} \and
-      \DualLNLLogicdruleTCXXsubE{} \and
-      \DualLNLLogicdruleTCXXHE{} \and      
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Non-linear fragment of the term assignment for TND}
-  \label{fig:non-linear-ta}
-\end{figure}
-\begin{figure}
-  \begin{mdframed}
-    \begin{mathpar}
-      \DualLNLLogicdruleTLXXid{} \and
-      \DualLNLLogicdruleTLXXpI{} \and
-      \DualLNLLogicdruleTLXXpE{} \and
-      \DualLNLLogicdruleTLXXparI{} \and
-      \DualLNLLogicdruleTLXXparE{} \and
-      \DualLNLLogicdruleTLXXsubI{} \and
-      \DualLNLLogicdruleTLXXsubE{} \and
-      \DualLNLLogicdruleTLXXJI{} \and
-      \DualLNLLogicdruleTLXXJE{} \and
-      \DualLNLLogicdruleTLXXHI{} \and
-      \DualLNLLogicdruleTLXXHE{} \and      
-    \end{mathpar}
-  \end{mdframed}
-  \caption{Linear fragment of the term assignment for TND}
-  \label{fig:linear-ta}
-\end{figure}
-
-
-\begin{definition}
-  The term assignment for the admissible rules of the calculus is as follows:
-  \begin{mathpar}
-    \DualLNLLogicdruleTCXXweak{} \and
-      \DualLNLLogicdruleTCXXcontr{} \and
-      \DualLNLLogicdruleTCXXcut{}      
-      \DualLNLLogicdruleTLXXweak{} \and
-      \DualLNLLogicdruleTLXXcontr{} \and
-      \DualLNLLogicdruleTLXXCcut{} \and
-      \DualLNLLogicdruleTLXXcut{}      
-  \end{mathpar}
-\end{definition}
 \subsubsection{$\beta$ reductions}
 \textbf{Non-linear terms}
 \begin{center}
