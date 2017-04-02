@@ -55,10 +55,10 @@ s, t, r :: 'citerm_' ::= {{com non-linear terms }}
   {{tex \mathsf{case}\,[[t1]]\,\mathsf{of}\,[[x]].[[t2]],[[y]].[[t3]] }}
   | H e                        :: :: H
   {{tex \mathsf{H}\,[[e]] }}
-  | let J x = e in t2         :: :: letJ
-  {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[e]]\,\mathsf{in}\,[[t2]] }}
+  | let J x = e in t         :: :: letJ
+  {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[e]]\,\mathsf{in}\,[[t]] }}
   | let H x = t1 in t2 :: :: letH
-  {{tex \mathsf{let}\,\mathsf{H}\,[[x]] = [[t1]]\,\mathsf{in}\,[[t2]] }}  
+  {{tex \mathsf{let}\,\mathsf{H}\,[[x]] = [[t1]]\,\mathsf{in}\,[[t2]] }}      
   | [ t / x ] t'               :: M :: subst
   | ( t )                      :: S :: parens
   | h( t )                     :: M :: hparens
@@ -82,7 +82,7 @@ e, u, p :: 'cilterm_' ::= {{com linear terms }}
   | casel e                :: :: casel
   {{tex \mathsf{casel}\,[[e]] }}
   | caser e                :: :: caser
-  {{tex \mathsf{caser}\,[[e]] }}
+  {{tex \mathsf{caser}\,[[e]] }}  
   | J t                    :: :: J
   {{tex \mathsf{J}\,[[t]] }}
   | [ e / x ] e'               :: M :: subst
