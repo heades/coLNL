@@ -2,12 +2,13 @@ PDFLATEX = pdflatex
 BIBTEX = bibtex
 OTT = ott
 OTT_FLAGS := -tex_wrap false -tex_show_meta true -picky_multiple_parses false
-SKIM = skim_revert.sh
+SKIM := skim_revert.sh
+SKIMRevinPath := $(shell command -v $(SKIM) 2> /dev/null)
 
 all: pdf
   # This is for my private machine.  It forces my PDF reader to reload.
   # It should not run unless "skim_revert.sh" is in your PATH.
-  ifeq ($(SKIM), skim_revert.sh)
+  ifdef SKIMRevinPath
 	$(SKIM) $(CURDIR)/main.pdf
 	$(SKIM) $(CURDIR)/main.pdf
 	$(SKIM) $(CURDIR)/main.pdf
@@ -19,7 +20,7 @@ quick : main-output.tex ref.bib Makefile
 	$(PDFLATEX) -jobname=main main-output.tex
         # This is for my private machine.  It forces my PDF reader to reload.
         # It should not run unless "skim_revert.sh" is in your PATH.
-ifeq ($(SKIM), skim_revert.sh)
+ifdef SKIMRevinPath
 	$(SKIM) $(CURDIR)/main.pdf
 	$(SKIM) $(CURDIR)/main.pdf
 	$(SKIM) $(CURDIR)/main.pdf

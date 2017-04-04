@@ -510,37 +510,27 @@ $(t_1: S)\cdot (t_2:S)$ &\ =\ & $t_1\cdot t_2 : S$\\
 \noindent
 where $|\Psi_1|=|\Psi_3|$ and $|\Psi_2|=|\Psi_4|$.
 
-\subsubsection{Bound variables and substitution.}
+\subsubsection{$\beta$-Reduction in TND}
 
+We now turn to computing in TND by specifying the reduction relation.
+First, we give the definition of capture-avoiding substitution.
 \begin{definition}
-A context $\Psi$ or $\Gamma$ is \emph{correct} if 
-\begin{enumerate}
-\item every expression $e:A$ or $t: S$ in it contains exactly one free variable;
-\item in every term of the form $\mathtt{mkc}(e, y)$ the variable $y$ does not occur free in $e$; 
-similarly for terms $\mathtt{mkc}(t, y)$;
-\item in every term of the form $\mathtt{postp}(y\mapsto e_1, e_2)$ the term 
-$e_1$ contains exactly one free variable $y$ and $y \notin e_2$; similarly, for terms 
-$\mathtt{postp}(y\mapsto t_1, t_2)$.  
-\end{enumerate}
-\end{definition}
-We may leave the type notation implicit in contexts and write $\mathcal{S}_x$ for a correct untyped context whose only free
-variable is $x$.
-
-
-\begin{definition}
- We define the substitution of an $e$ term for a free variable in an $e$ term and in a $p$ term of a correct context as follows.  
+ We define the substitution of a linear term for a free variable in a
+ linear term, and in a $p$-term as follows:
  \begin{itemize}
-\item $[e/x]y = e$ if $x = y$, $[e/x]y = y$ otherwise;
+\item $[e/x]y = e$ if $x = y$, $[e/x]y = y$ otherwise
 \item $[e'/x]\mathtt{connect}_{\bot} \mathtt{to}\; e = \mathtt{connect}_{\bot} \mathtt{to}\; [e'/x]e$;  
-\item $[e'/x]\mathtt{mkc}(e,y) = \mathtt{mkc}([e'/x]e,y)$;
-\item $[e'/x]y(e) = y([e'/x]e)$;
-\item $[e'/x](e_1\oplus e_2) = ([e'/x]e_1)\oplus ([e'/x]e_2)$;
-\item $[e'/x]\mathtt{casel}\;e = \mathtt{casel}\;[e'/x]e;\quad [e'/x]\mathtt{caser}\;e = \mathtt{caser}\;[e'/x]e$;  
-\item $[t'/x] J(t) = J[t'/x]t; $
-\item $[e'/x]\mathtt{postp}_{\bot}\; e = \mathtt{postp}_{\bot}\; e [e'/x]$; 
+\item $[e'/x]\mathtt{mkc}(e,y) = \mathtt{mkc}([e'/x]e,y)$
+\item $[e'/x]y(e) = y([e'/x]e)$
+\item $[e'/x](e_1\oplus e_2) = ([e'/x]e_1)\oplus ([e'/x]e_2)$
+\item $[e'/x]\mathtt{casel}\;e = \mathtt{casel}\;[e'/x]e$
+\item $[e'/x]\mathtt{caser}\;e = \mathtt{caser}\;[e'/x]e$  
+\item $[e'/x] J(t) = J[e'/x]t$
+\item $[e'/x]\mathtt{postp}_{\bot}\; e = \mathtt{postp}_{\bot}\; e [e'/x]$ 
 \item $[e'/x]\mathtt{postp}(x\mapsto e_1, e_2) = \mathtt{postp}(x\mapsto e_1,  [e'/x]e_2$
 \end{itemize}
- \end{definition}
+\end{definition}
+\noindent
 Substitution in a $t$ term is defined similarly, but here we have to define substitution of a multiset of terms in a term:
 \begin{enumerate}
 \item $[t_1\cdot\ldots\cdot t_n/ z]s = [t_1]s\cdot\ldots\cdot [t_n/ z]s;$
@@ -552,58 +542,7 @@ The operation of substitution is generalized to contexts in the obvious way:
 \item $[t/x](s_1 \,\|\, \ldots \,\|\, s_n) = ([t/x]s_1 \,\|\, \ldots \,\|\, [t/x]s_n)$;
 \item $[t_1\cdot \ldots \cdot t_n/x]s = [t_1/x]s \,\|\, \ldots \,\|\, [t_n]s$.
 \end{itemize}
-Variable binding is of two kinds, local and global.
-\begin{definition}
-\begin{enumerate}
-\item The variable $y$ is locally bound in $\mathtt{mkc}(e,y)$, $\mathtt{mkc}(t,y)$; 
-$y$ is locally bound in $\mathtt{postp}(y\mapsto e_1, e_2)$ and in $\mathtt{postp}(y\mapsto t_1, t_2)$.
-\item the variable $x$ is locally bound in $\mathtt{let}\; Jx = e_1\; \mathtt{in}\; e_2$, $\mathtt{let}\; Hx = t_1\; \mathtt{in}\; t_2$.
-\item $x$ is bound in $t_2$ and $y$ in $t_3$ in the term $\mathtt{case}\; t_1\; \mathtt{of}\; x.t_2, y.t_3$.
-\end{enumerate}
-\end{definition}
-Global binding occurs when two contexts are merged at a subtraction introduction with term  $\mathtt{mkc}(e,y)$, or at a subtraction elimination, with term $\mathtt{postp}(y\mapsto e_1, e)$ for the occurrences of $y$ in the context outside the term $\mathtt{mkc}(e,y)$ or $\mathtt{postp}(y\mapsto e_1, e)$ where $y$ is locally bounded. All occurrences of $y$ in 
-the other terms of the context are globally bound, and such binding is represented by substituting $y(e)$ for $y$. 
-%  It is possible to define substitution for globally bound variables and $\alpha$-reduction with respect to it 
-% \cite{BellinTranchini}.
-% It seems that in a sequent style natural deduction the following should suffice: 
-% % We give it here for completeness, altough in a sequent style version of natural deduction it may not be needed. 
-% % \begin{definition}\label{boundvar-subst} (substitution for globally bounded variables) 
-% % \begin{enumerate}
-% % \item $[s/z(r)]y = y$; 
-% % \item $[s/z(r)]\mathtt{mkc}(t,y) = \mathtt{mkc}([s/z(r)]t, y)$;
-% % \item $[s/z(r)]y(t) = s$ if $z(r) = y(t)$, $[s/z(r)]y(t) = y(t)$ otherwise; 
-% % \item $[s/z(r)](t_1\cdot \ldots \cdot t_n) = [s/z(r)]t_1\cdot \ldots\cdot [s/z(r)]t_n$; 
-% % \item $[s/z(r)]\mathtt{postp}(y\mapsto t_1, t) =   \mathtt{postp}(y\mapsto [\; [y/y(t)]s/ [y/y(t)] z(r)\;] t_1$ if $y(t)$ 
-% % occurs in $s$;
-% % $[s/z(r)]\mathtt{postp}(y\mapsto t_1, t) = \mathtt{postp}(y\mapsto t_1, [s/z(r)]t)$ otherwise. 
-% % \end{enumerate}
-% % and similarly for other terms. 
-% % \end{definition}
-% \begin{definition} The relation of $\alpha$ equivalence is the smallest reflexive, symmetric and transitive relation on 
-% contexts satisfying the following conditions: 
-% \begin{enumerate}
-% \item $\mathcal{S}_x \,\|\, \mathtt{mkc}(t,y) \,\|\, [y(t)/y] \mathcal{S}_y \quad \equiv_{\alpha} \quad 
-% \mathcal{S}_x \,\|\, [\mathtt{mkc}(t,w) \,\|\, w(t)/w] \mathcal{S}_w$, where $\mathcal{S}_x\,\|\, t$ is a correct context and 
-% $\mathcal{S}_w = [w/y]\mathcal{S}_y$;
-% \item $\mathcal{S}_x\,\|\, \mathtt{postp}(y\mapsto t',t) \,\|\, [y(t)/y] \mathcal{S}_y \quad \equiv_{\alpha} \quad 
-% \mathcal{S}_x\,\|\, \mathtt{postp}(w\mapsto t',t) \,\|\, [w(t)/w] \mathcal{S}_w$  where $\mathcal{S}_x\,\|\, t$ is a correct context
-% and $\mathcal{S}_w = [w/y]\mathcal{S}_y$.
-% \end{enumerate}
-% \end{definition}
-% For other terms the definition of $\alpha$ equivalence is standard.
-% The intuition is the following. The linear terms $\mathtt{postp}_{\bot}\ e\ |\ \mathtt{postp} (x 􏰀\mapsto e_1, e_2)$ 
-% may be given type $\bot$, which is also the type of $\mathtt{connect}_{\bot}\ \mathtt{to}\  x$.
-% However it is possible to define a term $t$ as \emph{$p$-normal}  if in $t$ no $p$-term is a subterm of another term.
-% Then to any term $t$ it is possible to associate a list of $p$-normal terms which are equivalent in terms of their 
-% behaviour (operational semantics). Let $t$ contain a subterm $\mathtt{postp} (x 􏰀\mapsto t_1, t_2)$ which is in 
-% $p$-normal form.  
 
-\vspace{1ex}
-
-\noindent
-In tables \ref{non-linear-coint-TA}, \ref{Linear-coint-TA} we give the term assignment to {\it co-ND}.
-
-\subsubsection{$\beta$ reductions}
 \textbf{Non-linear terms}
 \begin{center}
 {\small
