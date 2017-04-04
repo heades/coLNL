@@ -60,6 +60,7 @@ s, t, r :: 'citerm_' ::= {{com non-linear terms }}
   | let H x = t1 in t2 :: :: letH
   {{tex \mathsf{let}\,\mathsf{H}\,[[x]] = [[t1]]\,\mathsf{in}\,[[t2]] }}      
   | [ t / x ] t'               :: M :: subst
+  | [ e /x ] t                 :: M :: subst2
   | ( t )                      :: S :: parens
   | h( t )                     :: M :: hparens
   {{tex [[t]] }}
@@ -86,6 +87,7 @@ e, u, p :: 'cilterm_' ::= {{com linear terms }}
   | J t                    :: :: J
   {{tex \mathsf{J}\,[[t]] }}
   | [ e / x ] e'               :: M :: subst
+  | [ t / x ] e                :: M :: subst2
   | ( e )                      :: S :: parens
   | h( e )                     :: M :: hparens
   {{tex [[e]] }}

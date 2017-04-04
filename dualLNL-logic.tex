@@ -513,35 +513,16 @@ where $|\Psi_1|=|\Psi_3|$ and $|\Psi_2|=|\Psi_4|$.
 \subsubsection{$\beta$-Reduction in TND}
 
 We now turn to computing in TND by specifying the reduction relation.
-First, we give the definition of capture-avoiding substitution.
-\begin{definition}
- We define the substitution of a linear term for a free variable in a
- linear term, and in a $p$-term as follows:
- \begin{itemize}
-\item $[e/x]y = e$ if $x = y$, $[e/x]y = y$ otherwise
-\item $[e'/x]\mathtt{connect}_{\bot} \mathtt{to}\; e = \mathtt{connect}_{\bot} \mathtt{to}\; [e'/x]e$;  
-\item $[e'/x]\mathtt{mkc}(e,y) = \mathtt{mkc}([e'/x]e,y)$
-\item $[e'/x]y(e) = y([e'/x]e)$
-\item $[e'/x](e_1\oplus e_2) = ([e'/x]e_1)\oplus ([e'/x]e_2)$
-\item $[e'/x]\mathtt{casel}\;e = \mathtt{casel}\;[e'/x]e$
-\item $[e'/x]\mathtt{caser}\;e = \mathtt{caser}\;[e'/x]e$  
-\item $[e'/x] J(t) = J[e'/x]t$
-\item $[e'/x]\mathtt{postp}_{\bot}\; e = \mathtt{postp}_{\bot}\; e [e'/x]$ 
-\item $[e'/x]\mathtt{postp}(x\mapsto e_1, e_2) = \mathtt{postp}(x\mapsto e_1,  [e'/x]e_2$
-\end{itemize}
-\end{definition}
-\noindent
-Substitution in a $t$ term is defined similarly, but here we have to define substitution of a multiset of terms in a term:
-\begin{enumerate}
-\item $[t_1\cdot\ldots\cdot t_n/ z]s = [t_1]s\cdot\ldots\cdot [t_n/ z]s;$
-\item $[t_1\cdot\ldots\cdot t_n/ z]p = [t_1]p\,\|\, \ldots\,\|\, [t_n/ z]p,$ where $p$ is a $p$-term.
- \end{enumerate}
-The operation of substitution is generalized to contexts in the obvious way: 
+Capture-avoiding substitution, denoted by $[[ [t1/x]t2]]$, $[[
+    [e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, is defined in the
+usual way.  We extend capture-avoiding substitution to multisets in
+the following way:
 \begin{itemize}
-\item $[e'/x](e_1 \,\|\, \ldots \,\|\, e_n) = ([e'/x]e_1 \,\|\, \ldots \,\|\, [e'/x]e_n)$;
-\item $[t/x](s_1 \,\|\, \ldots \,\|\, s_n) = ([t/x]s_1 \,\|\, \ldots \,\|\, [t/x]s_n)$;
-\item $[t_1\cdot \ldots \cdot t_n/x]s = [t_1/x]s \,\|\, \ldots \,\|\, [t_n]s$.
+\item $[t_1\cdot\ldots\cdot t_n/ z]s = [t_1/z]s\cdot\ldots\cdot [t_n/ z]s$
+\item $[t_1\cdot\ldots\cdot t_n/ z]p = [t_1/z]p\,\|\, \ldots\,\|\, [t_n/ z]p,$ where $p$ is a $p$-term
 \end{itemize}
+We will use the standard extension of substitution to contexts
+throughout this section.
 
 \textbf{Non-linear terms}
 \begin{center}
