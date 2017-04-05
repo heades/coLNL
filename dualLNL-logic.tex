@@ -525,252 +525,120 @@ The extension of the other flavors of substitution to multisets are
 similar.  We will use the standard extension of substitution to
 contexts throughout this section.
 
-\textbf{Non-linear terms}
-\begin{center}
-{\small
-\AxiomC{\small{\bf $-$ Redex:}}
-\noLine
-\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, t: T_1 \qquad y:T_2\vdash_{\mathsf{C}} \Psi_2$}
-\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, \mathtt{mkc}(t, y): T_1 - T_2, \Psi_1,  [y(t)/y]\Psi_2$}
-\AxiomC{$ z:T_1\vdash_{\mathsf{L}} t_2:T_2, \Psi_3$}
-\BinaryInfC{$x:S\vdash_{\mathsf{C}} \Psi_1, \mathtt{postp}(z\mapsto t_2, \mathtt{mkc}(t_1,y)), 
- [y(e_1)/y]\Psi_2, z(\mathtt{mkc}(e_1,y))]:\Psi_3  $}
-\DisplayProof}
-\end{center}
-\begin{center}
-{\small
-\AxiomC{\small{\bf $-$ Reductum:}}
-\noLine
-\UnaryInfC{$x:S \vdash_{\mathsf{C}}  \Psi_1, t: T_1 \qquad  z: T_1\vdash_{\mathsf{C}} t_2: T_2, \Psi_3$}
-\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1,       [t/z]t_2 : T_2; \Psi_1,  [t/z]\Psi_3$}
-\AxiomC{$T_2\vdash_{\mathsf{C}}  \Psi_2$}
-\BinaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1, [ [t/z]t_2/y]\Psi_2,\ [t/z]\Psi_3$}
-\DisplayProof}
-\end{center}
+\begin{figure}
+  \begin{mdframed}    
+  \begin{center}
+  \begin{math}
+    \begin{array}{c}
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{Subtraction:}}\\
+        \hline
+            [[x : S |-TC P1,{postp(z -> t2,mkc(t1,y))},[y(t1)/y]P2,[mkc(t1,y)/z]P3]]\\
+            \rightsquigarrow\\
+                [[x : S |-TC P1,[ [t1/z]t2/y]P2,[t1/x]P3]]\\
+                \hline
+      \end{array}\\
+      \\
+      \begin{array}{lll}
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{Coproduct Left:}}\\
+          \hline
+              [[x : S |-TC P1,case (inl t1) of y.P2,z.P3]]\\
+              \rightsquigarrow\\
+                  [[x : S |-TC P1,[t1/y]P2]]\\
+                  \hline
+        \end{array}
+        & \quad &
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{Coproduct Right:}}\\
+          \hline
+              [[x : S |-TC P1,case (inr t1) of y.P2,z.P3]]\\
+              \rightsquigarrow\\
+                  [[x : S |-TC P1,[t1/z]P3]]\\
+                  \hline
+        \end{array}
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{$\mathsf{H}$:}}\\
+        \hline        
+        [[x : H B |-TC (let H x = y in P1) * let H z = (let H x = y in H e) in P2]]\\
+        \rightsquigarrow\\
+        [[x : H B |-TC (let H x = y in P1) * (let H x = y in [e/z]P2)]]\\
+        \hline
+      \end{array}
+    \end{array}
+  \end{math}
+  \end{center}
+  \end{mdframed}
+  \caption{Reductions for Non-linear Terms}
+  \label{fig:red-non-linear}
+\end{figure}
 
-\vspace{3ex}
-
-\centerline{\small {\bf $+_1$ Redex:}}
-\begin{center}
-{\small
-\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t_1: T_1$}
-\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{inl}\; t_1: T_1 + T_2$}
-\AxiomC{$y: T_1 \vdash_{\mathsf{C}} \Psi_1 \quad z: T_2 \vdash_{\mathsf{C}} \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
-\BinaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{case\ inl}\ t_1\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
-\DisplayProof}
-\end{center}
-\centerline{\small {\bf $+_1$ Reductum:}}
-\begin{center}
-{\small
-\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t: T_1$}
-\AxiomC{$y: T_1 \vdash_{\mathsf{C}} \Psi_1$}
-\BinaryInfC{$x: S \vdash_{\mathsf{C}} \Delta,  [t_1/y]\Psi_1$}
-\DisplayProof}
-\end{center}
-
-\vspace{3ex}
-
-\centerline{\small {\bf $+_2$ Redex:}}
-\begin{center}
-{\small
-\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t_2: T_2$}
-\UnaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{inr}\; t_2: T_1 + T_2$}
-\AxiomC{$y: T_1 \vdash_{\mathsf{C}} \Psi_1 \quad z: T_2 \vdash_{\mathsf{C}} \Psi_2 \qquad |\Psi_1| = |\Psi_2| $}
-\BinaryInfC{$x: S \vdash_{\mathsf{C}} \Psi, \mathtt{case\ inr}\ t_2\; \mathtt{of}\; y.\Psi_1, z.\Psi_2$}
-\DisplayProof}
-\end{center}
-\centerline{\small {\bf $+_2$ Reductum:}}
-\begin{center}
-{\small
-\AxiomC{$x: S \vdash_{\mathsf{C}} \Psi, t_2: T_2$}
-\AxiomC{$z: T_2 \vdash_{\mathsf{C}} \Psi_2$}
-\BinaryInfC{$x: S \vdash_{\mathsf{C}}  [t_2/z]\Psi_2$}
-\DisplayProof}
-\end{center}
-
-\vspace{3ex}
-
-\begin{center}
-{\small
-\AxiomC{$y:HB \vdash_{\mathsf{C}} y: HB$}
-% 
-\AxiomC{\bf $H_2$ Redex}
-\noLine
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} e:A ; \Psi_1$}
-\RightLabel{$H$ {\em intro}}
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} ; He: HA, \Psi_1 $}
-\RightLabel{$H$ {\em elim}$_2$}
-\BinaryInfC{$y:HB \vdash_{\mathsf{C}} (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1),  (\mathtt{let} Hx = y\ \mathtt{in}\ He): HA $}
-\AxiomC{$z:A \vdash_{\mathsf{L}} ; \Psi_2$}
-\RightLabel{$H$ {\em elim}$_2$}
-\BinaryInfC{$x:B \vdash_{\mathsf{C}} ; (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let}\ Hz = (\mathtt{let} Hx = y\ \mathtt{in}\ He ) 
-\ \mathtt{in}\ \Psi_2)$}
-\DisplayProof}
-\end{center}
- 
-\begin{center}
-\AxiomC{$y:HB \vdash_{\mathsf{C}} y: HB$}
-\AxiomC{\bf $H_2$ Reductum}
-\noLine
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} e:A ; \Psi_1\qquad z:A \vdash_{\mathsf{L}} ; \Psi_2 $}
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Psi_1\cdot [e/z]\Psi_2 $}
-\RightLabel{$H$ {\em elim}$_2$}
-\BinaryInfC{$y:HB \vdash_{\mathsf{C}} (\mathtt{let} Hx = y\ \mathtt{in}\ \Psi_1)\cdot (\mathtt{let} Hx = y\ \mathtt{in}\ [e/z]\Psi_2$}
-\DisplayProof
-\end{center}
-
-\textbf{Linear terms}
-
-\begin{center}
-{\small
-\AxiomC{\bf $\bot$ Redex}
-\noLine
-\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi\qquad e:B \in \Delta$}
-\UnaryInfC{$x: A \vdash_{\mathsf{L}} \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi$} 
-\UnaryInfC{$x:A \vdash_{\mathsf{L}} \mathtt{postp}_{\bot} \mathtt{connect}_{\bot}\; \mathtt{to}\; e, \Delta ; \Psi$}
-\DisplayProof}
-\end{center}
-
-\begin{center}
-{\small
-\AxiomC{\bf $\bot$ Reductum}
-\noLine
-\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta ; \Psi$}
-\DisplayProof}
-\end{center}
-
-\vspace{3ex}
-
-\begin{center}
-{\small
-\AxiomC{\bf $\lsub$ Redex:}
-\noLine
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_{\mathsf{L}}\Delta_2; \Psi_2$}
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
-\UnaryInfC{$\hskip2in z:A_1\vdash_{\mathsf{L}} e_2:A_2, \Delta_3; \Psi_3$}
-\UnaryInfC{$x:B\vdash_{\mathsf{L}} \Delta_1, 
-\mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y)) 
- [y(e_1)/y]\Delta_2,  [z(\mathtt{mkc}(e_1,y))/z]\Delta_3 ;$}
-\noLine
-\UnaryInfC{$\hskip2in \Psi_1,  [y(e_1)/y]\Psi_2, z(\mathtt{mkc}(e_1,y))]:\Psi_3  $}
-\DisplayProof}
-\end{center}
-\begin{center}
-{\small
-\AxiomC{\bf $\lsub$ Reductum:}
-\noLine
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1\qquad  z:A_1\vdash_{\mathsf{L}} e_2:A_2, \Delta_3; \Psi_3$}
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta_1, [e_1/z]\Delta_3,       [e_1/z]e_2 : A_2; \Psi_1,  [e_1/z]\Psi_3$}
-\UnaryInfC{$\hskip2in y:A_2\vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
-\UnaryInfC{$x:B \vdash_{\mathsf{L}}\Delta_1, [ [e_1/z]e_2/y]\Delta_2,\ [e_1/z]\Delta_3; \Psi_1,[ [e_1/z]e_2]\Psi_2,\ [e_1/z]\Psi_3$}
-\DisplayProof}
-\end{center}
-
-\vspace{3ex}
-
-\centerline{\small {\bf $\oplus$ Redex:}}
-\begin{center}
-{\small
-\AxiomC{$x: A \vdash_{\mathsf{L}} \Delta, e_1: B_1, e_2: B_2;  \Psi$}
-\UnaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, e_1\oplus e_2: B_1\oplus B_2;  \Psi$}
-\AxiomC{$y: B_1 \vdash_{\mathsf{L}} \Delta_1; \Psi_1 \quad z: B_2 \vdash_{\mathsf{L}}  \Delta_2; \Psi_2$}
-\BinaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, [\mathtt{casel}(e_1\oplus e_2)/y]\Delta_1, [\mathtt{caser}(e_1\oplus e_2)/z]\Delta_2 ;$}
-\noLine
-\UnaryInfC{$\hskip1in  \Psi, [\mathtt{casel}(e_1\oplus e_2)/y]\Psi_1, [\mathtt{caser}(e_1\oplus e_2)/z]\Psi_2$}
-\DisplayProof}
-\end{center}
-\centerline{\small {\bf $\oplus$ Reductum:}}
-\begin{center}
-{\small
-\AxiomC{$x: A \vdash_{\mathsf{L}} \Delta, e_1: B_1, e_2: B_2;  \Psi$}
-\AxiomC{$y: B_1 \vdash_{\mathsf{L}} \Delta_1; \Psi_1$}
-\BinaryInfC{$x: A \vdash_{\mathsf{L}} \Delta,  [e_1/y]\Delta_1, e_2: B_2;  \Psi, [e_1/y]\Psi_1$}
-\AxiomC{$z: B_2 \vdash_{\mathsf{L}}  \Delta_2; \Psi_2$}
-\BinaryInfC{$x: A \vdash_{\mathsf{L}} \Delta, [e_1/y] \Delta_1, [e_2/z]\Delta_2 ;\Psi,  [e_1/y]\Psi_1, [e_2/z]\Psi_2$}
-\DisplayProof}
-\end{center}
-
-\vspace{3ex}
-
-\begin{center}
-{\small
-\begin{tabular}{c}
-{\bf $J$ Redex:}\\
-\AxiomC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
-\RightLabel{\emph{J-intro}}
-\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
-\AxiomC{$ y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\RightLabel{\emph{J-elim}}
-\BinaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = Jt\  \mathtt{in}\ \Psi_2$}
-\DisplayProof\\
-\\
-{\bf $J$ Reductum:}\\
-\AxiomC{$x:A \vdash_{\mathsf{L}} \Delta; t:T, \Psi$}
-\AxiomC{$y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\BinaryInfC{$x:A \vdash_{\mathsf{L}} \Delta;\Psi_1, [t/y]\Psi_2$}
-\DisplayProof
-\end{tabular}}
-\end{center}
-
-\vspace{3ex}
-
-\centerline{\small{\bf $H_1$ Redex}}
-\begin{center}
-\AxiomC{$x:B \vdash_{\mathsf{L}} \Delta, e:A ; \Psi_1$}
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; He: HA, \Psi_1 $}
-\AxiomC{$y:A \vdash_{\mathsf{L}} ; \Psi_2$}
-\BinaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1\cdot (\mathtt{let} Hy = He\ \mathtt{in}\ \Psi_2)$}
-\DisplayProof
-\end{center}
-\centerline{\small{\bf $H_1$ Reductum}}
-
-\begin{center}
-\AxiomC{$x:B \vdash_{\mathsf{L}} \Delta, e:A ; \Psi_1$}
-\AxiomC{$y:A \vdash_{\mathsf{L}} ; \Psi_2$}
-\BinaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1\cdot [e/y] \Psi_2$}
-\DisplayProof
-\end{center}
-
-\vspace{3ex}
-
-\centerline{\small{\bf weakening commutations}}
-
-\begin{center}
-\AxiomC{$x: S \vdash_{\mathsf{C}} \mathtt{connect}_w\; \mathtt{to}\; t: T,  \Psi\qquad t \in \Psi$} 
-\doubleLine
-\UnaryInfC{$y:S \vdash C \mathtt{connect}_w\; \mathtt{to}\; t': T',  \Psi'\qquad t' \in \Psi'$}
-\DisplayProof
-\end{center}
-where the double line stands for any $n$-ary inference, $n = 1,2,3$ or no inference (it is possible to ``rewire''  the attachment
-within the same context).
-
-\vspace{1ex}
-
-\begin{center}
-\AxiomC{$x: B \vdash_{\mathsf{L}} \Delta ; \mathtt{connect}_w\; \mathtt{to}\; e: T,  \Psi\qquad e \in \Delta$} 
-\doubleLine
-\UnaryInfC{$y:S \vdash C \Delta' ; \mathtt{connect}_w\; \mathtt{to}\; e': T',  \Psi'\qquad e' \in \Delta'$}
-\DisplayProof
-\end{center}
-where the double line stands for any  $n$-ary inference, $n = 1,2,3$ or no inference. The weakening formula could be 
-attached also to a term in the non-linear part. 
-
-\vspace{3ex}
-
-\centerline{\small{\bf $\bot$ commutations}}
-\begin{center}
-\AxiomC{$x: A \vdash_{\mathsf{L}} \mathtt{connect}_{\bot}\; \mathtt{to}\; e: \bot, \Delta ; \Psi\qquad e \in \Delta$} 
-\doubleLine
-\UnaryInfC{$y:B \vdash L \mathtt{connect}_{\bot}\; \mathtt{to}\; e': \bot, \Delta' ; \Psi'\qquad e \in \Delta'$}
-\DisplayProof
-\end{center}
-where the double line stands for any $n$-ary inference, $n = 1,2,3$.
- 
-\vspace{1ex}
-
-\noindent
-There is also a zero commutation rule, which we omit here. 
-
+\begin{figure}
+  \begin{mdframed}     
+  \begin{center}
+    \begin{math}
+      \begin{array}{c}
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{Bottom:}}\\
+          \hline
+          [[x : A |-TL postpP (connectP to e),D;P]]\\
+          \rightsquigarrow\\
+          [[x : A |-TL D;P]]\\
+          \hline
+        \end{array}\\
+        \\
+        \begin{array}{lll}
+          \begin{array}{|c|}
+            \multicolumn{1}{l}{\textbf{$\mathsf{H}$:}}\\
+            \hline
+            [[x : B |-TL D;P1 * (let H y = H e in P2)]]\\
+            \rightsquigarrow\\
+            [[x : B |-TL D;P1 * [e/y]P2]]\\
+            \hline
+          \end{array}
+          & \quad &
+          \begin{array}{|c|}
+            \multicolumn{1}{l}{\textbf{$\mathsf{J}$:}}\\
+            \hline
+            [[x : A |-TL D;P1 * let J y = J t in P2]]\\
+            \rightsquigarrow\\
+            [[x : A |-TL D;P1 * [t/y]P2]]\\
+            \hline
+          \end{array}
+        \end{array}\\
+        \\
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{Linear Subtraction:}}\\
+          \hline
+          \multicolumn{1}{|l|}{[[P'2]] = [[ [y(e1)/y]P2,[z(mkc(e1,y))/z]P3]]}\\[5px]
+          \multicolumn{1}{|l|}{[[P''2]] = [[ [ [e1/z]e2/y]P2,[e1/z]P3]]}\\
+          \\[-10px]
+          [[x : B |-TL D1,postp(z -> e2,mkc(e1,y)),[y(e1)/y]D2,[z(mkc(e1,y))/z]D3;P1,P'2]]\\
+          \rightsquigarrow\\
+          [[x : B |-TL D1,[ [e1/z]e2/y]D2,[e1/z]D3;P1,P2'']]\\
+          \hline
+        \end{array}\\
+        \\
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{Par:}}\\
+          \hline
+          \multicolumn{1}{|l|}{[[P']] = [[ [casel(e1 (+) e2)/y]P1,[caser(e1 (+) e2)/z]P2]]}\\[5px]
+          \multicolumn{1}{|l|}{[[P'']] = [[ [e1/y]P1,[e2/x]P2 ]]}\\
+          \\[-10px]
+          [[x : A |-TL D,[casel(e1 (+) e2)/y]D1,[caser(e1 (+) e2)/z]D2;P,P']]\\
+          \rightsquigarrow\\
+          [[x : A |-TL D,[e1/y]D1,[e2/x]D2;P,P'']]\\
+          \hline
+        \end{array}
+      \end{array}
+    \end{math}
+  \end{center}
+  \end{mdframed}
+  \caption{Reductions for Linear Terms}
+  \label{fig:red-linear-terms}
+\end{figure}
 % subsection term_assignment (end)
 
 \subsection{Categorical interpretation of rules}

@@ -103,16 +103,17 @@ P {{tex \Psi}}, PI {{tex \Theta}} :: 'CG_' ::=
   | h( P )      :: M :: HiddenParens 
   {{ tex [[P]] }}
   | P1 , ... , Pi :: M :: vec
-  | [ t ]         :: M :: el2
+  | { t }         :: M :: el2
   {{tex [[t]] }}
   | [ t / x ] P   :: M :: subst
   | [ e / x ] P   :: M :: subst2
-  | postp(y -> t,s) :: M :: postp
   | let H y = t in P :: M :: letH
   {{tex \mathsf{let}\,\mathsf{H}\,[[y]] = [[t]]\,\mathsf{in}\,[[P]] }}
   | P1 * P2          :: M :: comp
-  | let J x = e in P         :: :: letJ
-  {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[e]]\,\mathsf{in}\,[[P]] }}  
+  | let J x = e in P         :: M :: letJ
+  {{tex \mathsf{let}\,\mathsf{J}\,[[x]] = [[e]]\,\mathsf{in}\,[[P]] }}
+  | case t of x . P1 , y . P2 :: M :: case
+  {{tex \mathsf{case}\,[[t]]\,\mathsf{of}\,[[x]].[[P1]], [[y]].[[P2]] }}
 
 % Cointuitionistic Contexts:
 G {{tex \Gamma}}, D {{tex \Delta}} :: 'BG_' ::=
@@ -511,9 +512,9 @@ by
  ------------------------ :: dI2
  x : S |-TC P,inr t : T1 + T2
 
- ((x : S |-TC P1,t : T1 + T2 && y : T1 |-TC P2) && z : T2 |-TC P2) && |P1| = |P2|
+ ((x : S |-TC P1,t : T1 + T2 && y : T1 |-TC P2) && z : T2 |-TC P3) && |P2| = |P3|
  -------------------------------------------------------------------------------- :: dE
- x : S |-TC P1,P2
+ x : S |-TC P1,case t of y.P2,z.P3
 
  x : S |-TC P1,t : T1 && y : T2 |-TC P2
  -------------------------------------------- :: subI
@@ -521,7 +522,7 @@ by
 
  x : S |-TC P1,s : T1 - T2 && y : T1 |-TC t : T2,P2
  -------------------------------------------------- :: subE
- x : S |-TC P1,postp(y -> t,s), [y(s)/y]P2
+ x : S |-TC P1,{postp(y -> t,s)}, [y(s)/y]P2
 
  (x : S |-TC P1,t : H A && y : A |-TL . ; P2) && |P1| = |P2|
  ----------------------------------------------------------- :: HE
