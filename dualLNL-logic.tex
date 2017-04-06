@@ -510,71 +510,20 @@ $(t_1: S)\cdot (t_2:S)$ &\ =\ & $t_1\cdot t_2 : S$\\
 \noindent
 where $|\Psi_1|=|\Psi_3|$ and $|\Psi_2|=|\Psi_4|$.
 
-\subsubsection{$\beta$-Reduction in TND}
+At this point we are now ready to turn to computing in TND by
+specifying the reduction relation.  This definition is perhaps the
+most interesting aspect of the theory, because reducing one term may
+affect others.
 
-We now turn to computing in TND by specifying the reduction relation.
-Capture-avoiding substitution, denoted by $[[ [t1/x]t2]]$, $[[
-    [e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, is defined in the
-usual way.  We extend capture-avoiding substitution to multisets in
-the following way:
-\begin{itemize}
-\item $[t_1\cdot\ldots\cdot t_n/ z]s = [t_1/z]s\cdot\ldots\cdot [t_n/ z]s$
-\item $[t_1\cdot\ldots\cdot t_n/ z]p = [t_1/z]p\,\|\, \ldots\,\|\, [t_n/ z]p,$ where $p$ is a $p$-term
-\end{itemize}
-The extension of the other flavors of substitution to multisets are
-similar.  We will use the standard extension of substitution to
-contexts throughout this section.
-
-\begin{figure}
-  \begin{mdframed}    
-  \begin{center}
-  \begin{math}
-    \begin{array}{c}
-      \begin{array}{|c|}
-        \multicolumn{1}{l}{\textbf{Subtraction:}}\\
-        \hline
-            [[x : S |-TC P1,{postp(z -> t2,mkc(t1,y))},[y(t1)/y]P2,[mkc(t1,y)/z]P3]]\\
-            \rightsquigarrow\\
-                [[x : S |-TC P1,[ [t1/z]t2/y]P2,[t1/x]P3]]\\
-                \hline
-      \end{array}\\
-      \\
-      \begin{array}{lll}
-        \begin{array}{|c|}
-          \multicolumn{1}{l}{\textbf{Coproduct Left:}}\\
-          \hline
-              [[x : S |-TC P1,case (inl t1) of y.P2,z.P3]]\\
-              \rightsquigarrow\\
-                  [[x : S |-TC P1,[t1/y]P2]]\\
-                  \hline
-        \end{array}
-        & \quad &
-        \begin{array}{|c|}
-          \multicolumn{1}{l}{\textbf{Coproduct Right:}}\\
-          \hline
-              [[x : S |-TC P1,case (inr t1) of y.P2,z.P3]]\\
-              \rightsquigarrow\\
-                  [[x : S |-TC P1,[t1/z]P3]]\\
-                  \hline
-        \end{array}
-      \end{array}\\
-      \\
-      \begin{array}{|c|}
-        \multicolumn{1}{l}{\textbf{$\mathsf{H}$:}}\\
-        \hline        
-        [[x : H B |-TC (let H x = y in P1) * let H z = (let H x = y in H e) in P2]]\\
-        \rightsquigarrow\\
-        [[x : H B |-TC (let H x = y in P1) * (let H x = y in [e/z]P2)]]\\
-        \hline
-      \end{array}
-    \end{array}
-  \end{math}
-  \end{center}
-  \end{mdframed}
-  \caption{Reductions for Non-linear Terms}
-  \label{fig:red-non-linear}
-\end{figure}
-
+\textbf{$\beta$-Reduction in TND.} As we discussed above
+cointuitionistic logic corresponds to the theory of coroutines that
+manipulate local context.  Thus, reducing one term in a typing context
+could affect other terms in the context.  This implies that the
+definition of the reduction relation for TND must account for more
+than a single term. We accomplish this by defining the reduction
+relation of terms in context, $[[x : S |-TC P1,t : T,P2]]$ and $[[x :
+    A |-TL D1,e : B,D2;P]]$, so that the manipulation of the context
+is made explicit.
 \begin{figure}
   \begin{mdframed}     
   \begin{center}
@@ -639,6 +588,78 @@ contexts throughout this section.
   \caption{Reductions for Linear Terms}
   \label{fig:red-linear-terms}
 \end{figure}
+\begin{figure}
+  \begin{mdframed}    
+  \begin{center}
+  \begin{math}
+    \begin{array}{c}
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{Subtraction:}}\\
+        \hline
+            [[x : S |-TC P1,{postp(z -> t2,mkc(t1,y))},[y(t1)/y]P2,[mkc(t1,y)/z]P3]]\\
+            \rightsquigarrow\\
+                [[x : S |-TC P1,[ [t1/z]t2/y]P2,[t1/x]P3]]\\
+                \hline
+      \end{array}\\
+      \\
+      \begin{array}{lll}
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{Coproduct Left:}}\\
+          \hline
+              [[x : S |-TC P1,case (inl t1) of y.P2,z.P3]]\\
+              \rightsquigarrow\\
+                  [[x : S |-TC P1,[t1/y]P2]]\\
+                  \hline
+        \end{array}
+        & \quad &
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{Coproduct Right:}}\\
+          \hline
+              [[x : S |-TC P1,case (inr t1) of y.P2,z.P3]]\\
+              \rightsquigarrow\\
+                  [[x : S |-TC P1,[t1/z]P3]]\\
+                  \hline
+        \end{array}
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{$\mathsf{H}$:}}\\
+        \hline        
+        [[x : H B |-TC (let H x = y in P1) * let H z = (let H x = y in H e) in P2]]\\
+        \rightsquigarrow\\
+        [[x : H B |-TC (let H x = y in P1) * (let H x = y in [e/z]P2)]]\\
+        \hline
+      \end{array}
+    \end{array}
+  \end{math}
+  \end{center}
+  \end{mdframed}
+  \caption{Reductions for Non-linear Terms}
+  \label{fig:red-non-linear}
+\end{figure}
+
+The reduction rules for the linear and non-linear fragments can be
+found in Figure~\ref{fig:red-linear-terms} and
+Figure~\ref{fig:red-non-linear} respectively.  We denote a reduction
+rule by $[[x : S |-TC P1]] \rightsquigarrow [[x : S |-TC P2]]$ and
+$[[x : A |-TL D1;P1]] \rightsquigarrow [[x : A |-TL D2;P2]]$.  In the
+interest of readability we do not show full derivations, but it should
+be noted that it is assumed that every term mentioned in a reduction
+rule is typable with the expected type given where it occurs in the
+judgment.  Furthermore, the reduction relation depends on a few
+standard definitions.
+
+Capture-avoiding substitution, denoted by $[[ [t1/x]t2]]$, $[[
+    [e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, is defined in the
+usual way.  We extend capture-avoiding substitution to multisets in
+the following way:
+\begin{itemize}
+\item $[t_1\cdot\ldots\cdot t_n/ z]s = [t_1/z]s\cdot\ldots\cdot [t_n/ z]s$
+\item $[t_1\cdot\ldots\cdot t_n/ z]p = [t_1/z]p\,\|\, \ldots\,\|\, [t_n/ z]p,$ where $p$ is a $p$-term
+\end{itemize}
+The extension of the other flavors of substitution to multisets are
+similar.  Standard extension of substitution to contexts was also
+necessary.
 % subsection term_assignment (end)
 
 \subsection{Categorical interpretation of rules}
