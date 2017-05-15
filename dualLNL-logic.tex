@@ -312,13 +312,21 @@ is derivable in the sequent calculus as follows:
 \label{sec:term_assignment}
 We now turn to giving a term assignment to DND logic called TND.  The
 most interesting aspect of this system is that there are multiple
-conclusions, but only a single hypothesis.  TND is greatly influenced
+conclusions, but only a single hypothesis.  [TND is greatly influenced
 by Crolard's~\cite{Crolard:2001} term assignment for subtractive logic
 which is based on Parigot's~\cite{Parigot:1992} $\lambda\mu$-calculus.
 Crolard shows that the theory of coroutines can be modeled by
 co-intuitionistic logic, and it is this result we pull inspiration
-from. In fact, this result shows that the reduction of a term in the
-context may impact other terms in the context.
+from.  In fact, this result shows that the reduction of a term in the
+context may impact other terms in the context.]
+TND takes off from Crolard~s paper \emph{A formulae-as-types interpretation of subtractive logic}
+JLC 2004, where he gives a term assignment to bi-intuitionisitc logic within a variant of 
+Parigot's~\cite{Parigot:1992} classical $\lambda\mu$-calculus and interprets the term assigned to 
+subtraction rules in terms of coroutines. He then restricts the calculus He then restricts the calculus
+to provide a constructive version of it ( \emph{safe coroutines}).. The second author has then used 
+a variant of Crolard's calculus as a term assignment to co-intuitionistic logic and to linear 
+co-intuitionistic logic \cite{Bellin:2012} without using  the $\lambda\mu$-calculus. In this formulation, 
+the reduction of a term in context may impact other terms in the context.
 
 The syntax of TND terms is defined by the following definition.
 \begin{definition}
