@@ -33,6 +33,12 @@ DLNL-proofs-output.tex : coLNL-logic/coLNL-logic.ott DLNL-proofs.tex
 	@$(OTT) $(OTT_FLAGS) -i coLNL-logic/coLNL-logic.ott  -o DualLNLLogic-inc.tex -tex_name_prefix DualLNLLogic \
 		-tex_filter DLNL-proofs.tex DLNL-proofs-output.tex
 
+commuting-conv-output.tex : coLNL-logic/coLNL-logic.ott commuting-conv.tex
+	@echo "\n\n***OTT: Preprocessing coLNL-logic/coLNL-logic.ott in commuting-conv.tex.***"
+	@$(OTT) $(OTT_FLAGS) -i coLNL-logic/coLNL-logic.ott  -o DualLNLLogic-inc.tex -tex_name_prefix DualLNLLogic \
+		-tex_filter commuting-conv.tex commuting-conv-output.tex
+
+
 dualLNL-logic-output.tex : coLNL-logic/coLNL-logic.ott dualLNL-logic.tex
 	@echo "\n\n***OTT: Preprocessing coLNL-logic/coLNL-logic.ott in dualLNL-logic.tex.***"
 	@$(OTT) $(OTT_FLAGS) -i coLNL-logic/coLNL-logic.ott  -o DualLNLLogic-inc.tex -tex_name_prefix DualLNLLogic \
@@ -45,7 +51,8 @@ main-output.tex : main.tex coLNL-logic/coLNL-logic.ott dualLNL-logic-output.tex 
 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
-main.pdf : main-output.tex ref.bib Makefile dualLNL-logic-output.tex introduction.tex DLNL-proofs-output.tex
+main.pdf : main-output.tex ref.bib Makefile dualLNL-logic-output.tex introduction.tex DLNL-proofs-output.tex \
+	   commuting-conv-output.tex
 	$(PDFLATEX) -jobname=main main-output.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main-output.tex

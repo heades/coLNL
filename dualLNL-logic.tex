@@ -310,23 +310,27 @@ is derivable in the sequent calculus as follows:
 
 \subsection{Term Assignment}
 \label{sec:term_assignment}
-We now turn to giving a term assignment to DND logic called TND.  The
-most interesting aspect of this system is that there are multiple
-conclusions, but only a single hypothesis.  [TND is greatly influenced
-by Crolard's~\cite{Crolard:2001} term assignment for subtractive logic
-which is based on Parigot's~\cite{Parigot:1992} $\lambda\mu$-calculus.
-Crolard shows that the theory of coroutines can be modeled by
-co-intuitionistic logic, and it is this result we pull inspiration
-from.  In fact, this result shows that the reduction of a term in the
-context may impact other terms in the context.]
-TND takes off from Crolard~s paper \emph{A formulae-as-types interpretation of subtractive logic}
-JLC 2004, where he gives a term assignment to bi-intuitionisitc logic within a variant of 
-Parigot's~\cite{Parigot:1992} classical $\lambda\mu$-calculus and interprets the term assigned to 
-subtraction rules in terms of coroutines. He then restricts the calculus He then restricts the calculus
-to provide a constructive version of it ( \emph{safe coroutines}).. The second author has then used 
-a variant of Crolard's calculus as a term assignment to co-intuitionistic logic and to linear 
-co-intuitionistic logic \cite{Bellin:2012} without using  the $\lambda\mu$-calculus. In this formulation, 
-the reduction of a term in context may impact other terms in the context.
+We now turn to giving a term assignment to DND logic called TND, which
+is greatly influenced by Crolard's~\cite{Crolard:2001} term assignment
+for subtractive logic. Crolard based his term assignment on
+Parigot's~\cite{Parigot:1992} $\lambda\mu$-calculus.  He then shows
+that the theory of coroutines can be modeled by co-intuitionistic
+logic, and it is this result we pull inspiration from.  In fact, this
+result shows that the reduction of a term in the context may impact
+other terms in the context.
+
+TND pushes beyond Crolard's paper \emph{A formulae-as-types
+  interpretation of subtractive logic} JLC 2004, where he gives a term
+assignment to bi-intuitionisitc logic within a variant of
+Parigot's~\cite{Parigot:1992} classical $\lambda\mu$-calculus and
+interprets the term assigned to subtraction in terms of coroutines. He
+then restricts the calculus to provide a constructive version of
+subtraction called \emph{safe coroutines}. The second author used a
+variant of his constructive calculus as a term assignment to
+co-intuitionistic logic and to linear co-intuitionistic logic
+\cite{Bellin:2012} without using the $\lambda\mu$-calculus. In this
+formulation, the reduction of a term in context may impact other terms
+in the context.
 
 The syntax of TND terms is defined by the following definition.
 \begin{definition}
@@ -452,19 +456,19 @@ Figure~\ref{fig:linear-ta}.
 \end{figure}
 \begin{remark}
   Let us call terms of the form $[[postp(x -> t1,t2)]]$, $[[postp (x
-      -> e1,e2)]]$, and $[[postpP e]]$ $p$-\emph{terms}. Let us say
-  that a term $t$ is \emph{$p$-normal} if $t$ does not contain any
-  $p$-term as a proper subterm. We denote this class of
-  \emph{$p$-normal} terms by $r$.  When the calculus is typed, linear
-  $p$-terms can be typed with $\bot$, non-linear $p$ terms can be
-  typed with $0$.  In presence of the $\bot$ rule and of the
+      -> e1,e2)]]$, and $[[postpP e]]$ $p$-\emph{terms}. Then say that
+  a term $t$ is \emph{$p$-normal} if $t$ does not contain any $p$-term
+  as a proper subterm. We denote this class of \emph{$p$-normal} terms
+  by $r$.  When the calculus is typed, linear $p$-terms can be typed
+  with $\bot$, non-linear $p$ terms can be typed with $0$.  In
+  presence of the $\bot$ rule and of the
   $\DualLNLLogicdruleTCXXzIName$ rule it is possible to replace a
   non-$p$-normal $p$-term removed by a $\beta$-reduction with a $\bot$
   or $\DualLNLLogicdruleTCXXzIName$ rule. However, this creates an
   anomaly in the proof theory since the newly introduced unit rule is
-  unnecessary and could be eliminated in the case of $p$-normal  terms. 
- Hence, we choose to leave the typing of $p$ terms implicit in
-  the syntax and enforce the requirement of $p$-normality.
+  unnecessary and could be eliminated in the case of $p$-normal terms.
+  Hence, we choose to leave the typing of $p$ terms implicit in the
+  syntax and enforce the requirement of $p$-normality.
 \end{remark}
 
 The typing rules depend on the extension of let and case expressions
@@ -648,14 +652,14 @@ is made explicit.
 
 The reduction rules for the linear and non-linear fragments can be
 found in Figure~\ref{fig:red-linear-terms} and
-Figure~\ref{fig:red-non-linear} respectively.  We denote a reduction
-rule by $[[x : S |-TC P1]] \rightsquigarrow [[x : S |-TC P2]]$ and
-$[[x : A |-TL D1;P1]] \rightsquigarrow [[x : A |-TL D2;P2]]$.  In the
-interest of readability we do not show full derivations, but it should
-be noted that it is assumed that every term mentioned in a reduction
-rule is typable with the expected type given where it occurs in the
-judgment.  Furthermore, the reduction relation depends on a few
-standard definitions.
+Figure~\ref{fig:red-non-linear} respectively.  We denote the judgments
+for reduction by $[[x : S |-TC P1]] \rightsquigarrow [[x : S |-TC
+    P2]]$ and $[[x : A |-TL D1;P1]] \rightsquigarrow [[x : A |-TL
+    D2;P2]]$.  In the interest of readability we do not show full
+derivations, but it should be noted that it is assumed that every term
+mentioned in a reduction rule is typable with the expected type given
+where it occurs in the judgment.  Furthermore, the reduction relation
+depends on a few standard definitions.
 
 Capture-avoiding substitution, denoted by $[[ [t1/x]t2]]$, $[[
     [e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, is defined in the
@@ -668,6 +672,55 @@ the following way:
 The extension of the other flavors of substitution to multisets are
 similar.  Standard extension of substitution to contexts was also
 necessary.
+
+Finally, there are several commutating conversions that are required
+for reduction, for example, the following is one:
+\[
+\AxiomC{$\hskip1.6in [[y:T_2 |-TC P2, t1: T4 + T5]]$}
+\noLine
+\UnaryInfC{$[[x:S |-TC P1, t:T_2 + T_3]]\quad [[z:T_3 |-TC P3, t2: T4 + T5]]$}
+\UnaryInfC{$[[x:S |-TC P1, case t of y.t1, z.t2 : T4 + T5]]$}
+\AxiomC{$[[v1:T4 |-TC P4]] \quad [[v2:T5 |-TC P5]]$}
+\BinaryInfC{$[[x:S |-TC P1, h(case (case t of y.t1, z.t2) of v1.P4, v2.P5)]]$}
+\DisplayProof
+\]
+commutes to
+\[
+\inferrule* [right=] {
+  [[x: S |-TC P1, t:T_2 + T_3]] \\ \Pi_1 \\ \Pi_2
+}{[[x:S |-TC P1,  case t of y2.(P2,case t1 of v1.P4, v2.P5),y_3.(P3, case t2 of v_1.P4, v2.P5)]]}
+\]
+where
+\[
+\begin{array}{lll}
+  \Pi_1:\\
+  & \inferrule* [right=] {
+    [[y2:T2 |-TC P2, t1: T4 + T5]] \\ [[v1:T4 |-TC P4]] \\ [[v2:T5 |-TC P5]]
+  }{[[y2:T2 |-TC P2, case t1 of v1.P4, v2.P5]]}\\
+  \\
+  \Pi_2:\\
+  & \inferrule* [right=] {
+    [[y3:T3 |-TC P3, t2: T_4 + T_5]] \\ [[v1:T4 |-TC P4]] \\ [[v2:T5 |-TC P5]]
+  }{[[y3:T3 |-TC P3, case t2 of v1.P4, v2.P5]]}
+\end{array}
+\]
+If $[[t1]] = [[inl s1]]$ and $[[t2]] = [[inr s2]]$ then after commutation 
+\[
+[[y2:T_2 |-TC P2, case (inl s1) of v1.P4, v2.P5]] \rightsquigarrow_{\beta}
+[[y2:T2 |-TC P2, [s1/v1]P4]] 
+\]
+and
+\[
+[[y3:T3 |-TC P3, case (inr s2) of v1.P4, v2.P5]] \rightsquigarrow_{\beta}
+[[y2:T2 |-TC P3, [s2/v2]P5]]
+\]
+There are other commuting conversions as well, but as one can see, due
+to the complexities introduced in reduction arising from the fact that
+multiple terms in the context are affected during reduction results in
+the commuting conversions from being very compact.  The remainder of
+the commuting conversions can be found in
+Appendix~\ref{sec:commuting_conversions}.  In the next section we give
+the interpretation of TND into the categorical model.
 % subsection term_assignment (end)
 
 \subsection{Categorical interpretation of rules}
