@@ -204,6 +204,8 @@ formula :: 'formula_' ::=
   {{tex \hspace{1px} }}
   | r1 : T' in P or r2 : B in D :: M :: InOr
   {{tex [[r1]] : [[T']] \in [[P]] \text{ or } [[r2]] : [[B]] \in [[D]] }}
+  | x : A |-TL D :: M :: TLNNL
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]] }}  
 
 defns
   Jtype :: '' ::=

@@ -26,7 +26,8 @@ ifdef SKIMRevinPath
 	$(SKIM) $(CURDIR)/main.pdf
 endif
 
-ott: main-output.tex
+ott: main-output.tex ref.bib Makefile dualLNL-logic-output.tex introduction.tex DLNL-proofs-output.tex \
+     commuting-conv-output.tex
 
 DLNL-proofs-output.tex : coLNL-logic/coLNL-logic.ott DLNL-proofs.tex
 	@echo "\n\n***OTT: Preprocessing coLNL-logic/coLNL-logic.ott in DLNL-proofs.tex.***"
