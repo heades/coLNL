@@ -790,7 +790,7 @@ $$
 \AxiomC{$x:B\vdash_{\mathsf{L}} \Delta_2;\Psi_2$}
 \AxiomC{$y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3$}
 \RightLabel{$\oplus$ E}
-\TrinaryInfC{$z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel} z/x] \Delta_2, [\mathtt{caser} z/y]\Delta_3; \Psi_1 \cdot \Psi_2\cdot \Psi_3$}
+\TrinaryInfC{$z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel} e/x] \Delta_2, [\mathtt{caser} e/y]\Delta_3; \Psi_1 \cdot \Psi_2\cdot \Psi_3$}
 \DisplayProof
 \end{center}
 This suggests an operation on Hom-sets of the form 
@@ -800,7 +800,7 @@ $$
 \mathcal{L}(A, \Delta\,\bullet\, J\Psi)
 $$
 {\em natural in} $A,\Delta, J\Psi$ where we write $\Delta = \Delta_1, \Delta_2, \Delta_3$, $J\Psi = J\Psi_1,J\Psi_2, J\Psi_3$. Given morphisms 
-$$g:A\rightarrow \Delta_1\bullet J\Psi_1\bullet B\wp C, \quad e: B\rightarrow\Delta_2\bullet J\Psi_2 \quad
+$$g:A\rightarrow B\oplus C \bullet \Delta_1\bullet J\Psi_1, \quad e: B\rightarrow\Delta_2\bullet J\Psi_2 \quad
  \hbox{ and } f: C\rightarrow \Delta_3\bullet J\Psi_3$$ and also $a: A'\rightarrow A$, 
 $d_1:\Delta_1\rightarrow \Delta_1'$, 
 $d_2: \Delta_2 \rightarrow \Delta_2'$ and $d_3: \Delta_3 \rightarrow \Delta_3'$,  $p_1: J\Psi_1\rightarrow J\Psi_1'$, 
@@ -808,7 +808,8 @@ $p_2: J\Psi_2 \rightarrow J\Psi_2'$ and $p_3: J\Psi_3 \rightarrow J\Psi_3'$
 naturality yields
 \begin{center}
 \begin{tabular}{rl}
-$\Psi_{A',\Delta',\Gamma',J\Psi'}\bigl((a;g;d_1\bullet id_{B\oplus C}), (e;d_2\bullet p_2),$ & $(f;d_3\bullet p_3)\bigr)$ =\\ 
+$\Psi_{A',\Delta',\Gamma',J\Psi'}\bigl((a;g; id_{B\oplus C} \bullet d_1 \bullet p_1 ), (e;d_2\bullet p_2),$ & 
+$(f;d_3\bullet p_3)\bigr)$ =\\ 
 $a; \Psi_{A,\Delta,J\Psi}(g,e,f);$ & 
 $d_1 \bullet d_2\bullet d_3\bullet p_1\bullet p_2\bullet p_3; \mathtt{Join}(\Delta',J\Psi').$
 \end{tabular}
@@ -818,11 +819,11 @@ $$
 \Psi_{A,\Delta J\Psi}(g, e, f) = \Psi_{A,\Delta, J\Psi}(g, id_B, id_{\mathsf{C}}); 
 id_{\Delta}\bullet c\bullet d; \mathtt{Join}(\Delta, J\Psi) 
 $$
-where the operation $\mathtt{Join}$ establishes left associativity.
+where the operation $\mathtt{Join}$ implements associativity.
 Writing $(g)^{\ast}$ for $\Psi_{D,\Delta}(g, id_B, id_{\mathsf{C}})$ we define
 \begin{center}
 \begin{tabular}{l}
-$[\![z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel}\ e/x]\Delta_2, [\mathtt{caser}\ e/y] \Delta_3; \Psi_2, \Psi_3]\!]=_{df}$\\
+$[\![z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel}\ e/x]\Delta_2, [\mathtt{caser}\ e/y] \Delta_3; \Psi_1, \Psi_2, \Psi_3]\!]=_{df}$\\
 $[\![z:A\vdash_{\mathsf{L}} \Delta_1, e, B\,\oplus\, C; \Psi_1]\!]^*; 
 id_{\Delta_1}\bullet [\![x:B\vdash_{\mathsf{L}} \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3]\!];
 \mathtt{Join}(\Delta,J\Psi)$.\\
