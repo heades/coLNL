@@ -1,5 +1,5 @@
 % Input variables.
-metavar vars ,  a, x , y, z , w , m , o ::=  
+metavar vars ,  a, x , y, z , w , m , o, v ::=  
 indexvar ivar, n , i , k , j , l ::= 
 
 grammar
@@ -98,7 +98,6 @@ P {{tex \Psi}}, PI {{tex \Theta}} :: 'CG_' ::=
   {{tex \cdot }}
   | T           ::   :: El2
   | t : T       ::   :: El
-  | P , PI      ::   :: Ext
   | ( P )       :: S :: Paren
   | h( P )      :: M :: HiddenParens 
   {{ tex [[P]] }}
@@ -205,6 +204,8 @@ formula :: 'formula_' ::=
   {{tex \hspace{1px} }}
   | r1 : T' in P or r2 : B in D :: M :: InOr
   {{tex [[r1]] : [[T']] \in [[P]] \text{ or } [[r2]] : [[B]] \in [[D]] }}
+  | x : A |-TL D :: M :: TLNNL
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]] }}  
 
 defns
   Jtype :: '' ::=

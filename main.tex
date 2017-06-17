@@ -1024,7 +1024,7 @@ closed categories by $A \to B$.
 The dual of a cartesian category is a cocartesian category.  They are
 a model of intuitionistic logic with disjunction and its unit.
 \begin{definition}
-  \label{def:CC}
+  \label{def:coCC}
   A \textbf{cocartesian category} is a category, $(\cat{C}, 0, +)$,
   with an object, $0$, and a bi-functor,
   $+ : \cat{C} \times \cat{C} \mto \cat{C}$, such that for any object $A$ there is exactly
@@ -1059,8 +1059,8 @@ we mentioned above bi-linear categories \cite{Cockett:1997a} are
 models of bi-linear logic where the left adjoint to the cotensor
 models coimplication.  Similarly, cocartesian coclosed categories
 model cointuitionistic logic with disjunction and intuitionistic
-coimplication \cite{Crolard:2001,Bellin:2012}. \todo[inline]{Put more
-  examples in here.}
+coimplication
+% \cite{Crolard:2001,Bellin:2012}. \todo[inline]{Put more  examples in here.}
 
 We might now ask if a category can be both cartesian closed and
 cocartesian coclosed just as bi-linear categories, but this turns out
@@ -1579,8 +1579,9 @@ logic is the key.
 % section dual_lnl_logic (end)
 
 
-\section{Related Work}
+\section{Related and Future Work}
 \label{sec:related_work}
+<<<<<<< HEAD
 TODO
 The most comprehensive treatment of ILL is in Gavin Bierman's thesis  \cite{Bierman:1994}. 
 There one finds the Proof Theory (Chapter 2), i..e, the sequent calculus with cut-eliminaton, natural deduction and 
@@ -1600,23 +1601,7 @@ assignment and the categorical interpretaiton of a fragment of the natural deduc
 and commuting conversions are presented.
 The present work follows Benton's paper aiming at a (non-trivial) dualization of it. 
 
-Bi-intuitionistic logic was introduced by C.Rauszer \cite{Rauszer:1974},  \cite{Rauszer:1974a}, \cite{Rauszer:1977} with 
-an algebraic and Kripke semantics.  Tristan Crolard \cite{Crolard:2001} showed that models of Rauszer logic (called 
-``subtractive loigc'') based on bi-cartedian closed categories (with co-exponents) collapse to preorders. 
-Crolard then studies models of subtractive logic and shows that its first order theory is constant-domain logic. 
-Crolard \cite{Crolard:2004} develops the type theory for subtractive logic, extending a system of multiple conclusion 
-classical natural deduction with a connective of subtraction and then decorating proofs with a system of \cite{annotations 
-of dependencies} that allow to identify ``constructive proofs'': these are derivations where only the premise of an implication 
-introduction depends on the discharged assumption and only the premise of a subtraction elimination depends on the 
-discharged conclusion. The type theory is Parigot $\lambda\mu$-calculus extended with operators for sums, products 
-and subtraction. where the operators for subtraction introduction and elimination are understood as a calculus of co-routines. 
-A constructive system of co-routines is then obtained by imposing restrictions on terms corresponding to the restricions
- on constructive proofs. 
-
-Rauszer  \cite{Rauszer:1974a} gave a Gentzen style sequent calculus for bi-intuitionistic logic, but Dragalin's restrictions that only one formula occures in the succedent [antecedent] of the premise of an implication right [subtraction left] yields a calculus that does not satisfies cut-elimination. As a counterexample, consider the sequent $p \Rightarrow q, r \rightarrow ((p - q) \wedge r)$ given by Pinto and Uusatlu around 2003 \cite{Pinto-Uustalu:2010}, which is  provable wih cut but not cut-free with Dragalin's restrictions. Crolard annotated calculus is not affected 
-by the counterexample.  Annotation-free formalizations use the display calclus \cite{Gore:2000}, nested sequents \cite{GorePostnieceTiu:2008} and deep inference \cite{Postniece:2009}. 
-Analogue work has been done on the proof theory of fragments of linear bi-intuitionistic logic, in particular, FILL (\emph{Full Intuitionistic Logic}, intuitionistic liner logic with the cotensor (\emph{par}) \cite{CloustonDawsonGoreTiu:2013}: here the proof theoretic work has a direct connection with categorical models of FILL.
- 
+  
 % section related_work (end)
 
 \section{Conclusion}
@@ -1624,6 +1609,11 @@ Analogue work has been done on the proof theory of fragments of linear bi-intuit
 TODO
 % section conclusion (end)
 
+=======
+\input{related-work}
+% section related_work (end)
+
+>>>>>>> 1c4a205f5d8612f5d836c6fc3e2736971161f0b5
 \bibliographystyle{plainurl} \bibliography{ref}
 
 \appendix
