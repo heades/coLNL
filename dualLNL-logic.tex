@@ -726,123 +726,110 @@ the interpretation of TND into the categorical model.
 \subsection{Categorical interpretation of rules}
 \label{sec:categorical_interpretation_of_rules}
 
-\noindent
-Given a {\em signature} $Sg$, consisting of a collection of types $\sigma_i$, where $\sigma_i = A\ \hbox{or}\ S$, 
+We now turn to the interpretation of Dual LNL Logic into our
+categorical model given in Section~\ref{sec:adjoint_model}.  We
+structure the proof similarly to Bierman~\cite{Bierman:1994}, but the
+proof itself follows similarly to Benton's~\cite{Benton:1994} proof
+for LNL Logic.
+
+Given a {\em signature} $\mathsf{Sg}$, consisting of a collection of types $\sigma_i$, where $\sigma_i = A\ \hbox{or}\ S$, 
 and a collection of {\em sorted function symbols} $f_j : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ and given 
 a Symmetric Monoidal Category (SMC) $(\mathbb{C}, \bullet, 1, \alpha, \lambda, \rho, \gamma)$,  a {\em structure} 
-$\mathcal{M}$ for $Sg$ is an assignment of an object $[\![\sigma]\!]$ of $\mathcal{L}$ for each type $\sigma$ and of 
-a morphism $[\![f]\!] : [\![\sigma_1]\!]\bullet\ldots\bullet[\![\sigma_n]\!]\rightarrow [\![\tau]\!]$ for each function $f : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ of $Sg$.\footnote{ In this subsection only we use the symbol $\bullet$ and 1 for the monoidal binary operation and its unit in the categorical structure, distinguished from the $\oplus$ and $\bot$ symbols 
-in the formal language. We shall show that the interpretation of $\oplus$ is isomorphic to the operation $\bullet$, 
-so we shall be able to identify them ( and similarly for $\bot$ and 1).}
-
-\vspace{1ex}
-
-\noindent
-The types of terms in context $\Delta = [e_1: A_1, \ldots, e_n: A_n]$ or $\Delta = [t_1: T_1, \ldots, t_n: T_n]$ are 
-interpreted as $[\![\sigma_1, \sigma_2, \ldots, \sigma_n]\!]$ =   
+$\mathcal{M}$ for $\mathsf{Sg}$ is an assignment of an object $[\![\sigma]\!]$ of $\mathcal{L}$ for each type $\sigma$ and of 
+a morphism $[\![f]\!] : [\![\sigma_1]\!]\bullet\ldots\bullet[\![\sigma_n]\!]\rightarrow [\![\tau]\!]$ for each function
+$f : \sigma_1, \ldots, \sigma_n \rightarrow \tau$ of $\mathsf{Sg}$.\footnote{ In this subsection only we use the symbol $\bullet$
+  and 1 for the monoidal binary operation and its unit in the categorical structure, distinguished from the $\oplus$ and
+  $\bot$ symbols in the formal language. We shall show that the interpretation of $\oplus$ is isomorphic to the operation
+  $\bullet$, so we shall be able to identify them ( and similarly for $\bot$ and 1).}  The types of terms in context $\Delta = [e_1: A_1, \ldots, e_n: A_n]$ or $\Delta = [t_1: T_1, \ldots, t_n: T_n]$ are 
+interpreted into the SMC as $[\![\sigma_1, \sigma_2, \ldots, \sigma_n]\!]$ =   
 $(\ldots ([\![\sigma_1]\!]\bullet[\![\sigma_2]\!])\ldots ) \bullet [\![\sigma_n]\!]$; left associativity is also 
-intended for concatenations of type sequences $\Gamma, \Delta$. Thus we need the ``book-keeping'' functions 
+intended for concatenations of type sequences $\Gamma, \Delta$. Thus, we need the ``book-keeping'' functions 
 $\mathtt{Split}(\Gamma, \Delta): [\![\Gamma, \Delta]\!] \rightarrow [\![\Gamma]\!]\bullet [\![\Delta]\!]$ and 
 $\mathtt{Join}(\Gamma, \Delta): [\![\Gamma]\!] \bullet  [\![\Delta]\!] \rightarrow [\![\Gamma, \Delta]\!]$ inductively defined 
-using the associativity laws $\alpha$ and their inverse $\alpha^{-1}$ (cfr Bierman 1994, Bellin 2015).  
+using the associativity laws $\alpha$ and its inverse $\alpha^{-1}$ (cfr Bierman 1994, Bellin 2015).  
 
-\vspace{1ex}
-
-\noindent
 The semantics of terms in context is then specified by induction on terms: 
 \begin{center}
-\begin{tabular}{c}
-$[\![x: A\vdash_{\mathsf{L}} x: A]\!] =_{df} id_{[\![\sigma]\!]}$\\
-\\
-$[\![x: A\vdash_{\mathsf{L}}  f(e_1,\ldots, e_n): B]\!] =_{df} [\![x: A\vdash e_1: A_1]\!]\bullet
-\ldots\bullet [\![x:\sigma\triangleright e_n: A_n]\!]; [\![ f ]\!]$
-\end{tabular}
+  \begin{tabular}{c}
+    $[\![x: A\vdash_{\mathsf{L}} x: A]\!] =_{df} id_{[\![\sigma]\!]}$\\
+    \\
+    $[\![x: A\vdash_{\mathsf{L}}  f(e_1,\ldots, e_n): B]\!] =_{df} [\![x: A\vdash e_1: A_1]\!]\bullet
+    \ldots\bullet [\![x:\sigma\triangleright e_n: A_n]\!]; [\![ f ]\!]$
+  \end{tabular}
 \end{center}   
 and similarly with non-linear types. 
-Next one proves by induction on the type derivation that substitution in the term calculus 
-corresponds to composition in the category (\cite{Bierman94}, Lemma 13). 
+Following this one then proves by induction on the type derivation that substitution in the term calculus 
+corresponds to composition in the category (\cite{Bierman:1994}, Lemma 13). 
 
-\vspace{1ex}
-
-\noindent
-In a Linear Non-Linear Co-intuitionistic logic sequent, mixed sequents $x:A \vdash_{\mathsf{L}} \Delta ; \Psi, t:T$ 
-non-linear terms are interpreted through the functor $J : \mathcal{C} \rightarrow \mathcal{L}$. Here we use 
-the same symbol for the functor $J$ in the structure and the name of the functor in the syntax of the langage. 
-Thus we have 
+In the mixed sequents $x:A \vdash_{\mathsf{L}} \Delta ; \Psi, t:T$ of TND non-linear terms are interpreted through the functor $J :
+\mathcal{C} \rightarrow \mathcal{L}$. Thus, we have the following:
 \[
-[\![ x:A \vdash_{\mathsf{L}} \Delta ; \Psi, t:T]\!]  \quad = \quad [\![ x:A \vdash_{\mathsf{L}} \Delta, J \Psi, Jt: J(T) ]\!] 
+  [[ x:A |-TL D ; P, t:T]]  = [[ x:A |-TL D, [ J P ] , J t : J T ; . ]]
 \]  
-
-\vspace{1ex}
-
-
-\noindent
-Let $\mathcal{M}$ be a structure for a signature $Sg$ in a SMC $\mathcal{L}$. Given an equation in
-context for $Sg$ 
+Let $\mathcal{M}$ be a structure for a signature $\mathsf{Sg}$ in a
+SMC $\mathcal{L}$. Equations in context will be denoted by $[[x: A
+    |-TL G, e1 = e2 : B; P]]$ and $[[x: S |-TC P, t1 = t2 : T]]$, and
+are both defined to be the reflexive, symmetric, and transitive
+closure of the reduction relations defined by the rules in
+Figure~\ref{fig:red-linear-terms} and Figure~\ref{fig:red-non-linear}
+respectively.  Given such an equation:
 $$
-x: A \vdash_{\mathsf{L}} \overline{e}:\Gamma, e_1 = e_2 : B; \Psi
+[[x: A |-TL G, e1 = e2 : B; P]]
 $$
 we say that the structure \emph{satisfies} the equation if it assigns the same morphisms to  
-$x: A \vdash_{\mathsf{L}} \overline{e}:\Gamma, e_1 : B; \Psi$.  and to $A\vdash \overline{e}:\Gamma, e_2: B;\Psi$.
-Similarly, $\mathcal{M}$ satisfies $x: S \vdash_{\mathsf{L}} \overline{t}:\Psi, t_1 = t_2$ if it assigns the same morphism
-to $x: S \vdash_{\mathsf{L}} \overline{t}:\Psi, t_1 : T$ and to $x: S \vdash_{\mathsf{L}} \overline{t}:\Psi,  t_2 : Y$.
+$[[x: A |-TL G, e_1 : B; P]]$.  and to $[[x : A |-TL G, e2 : B;P]]$.
+Similarly, $\mathcal{M}$ satisfies $[[x: S |-TC P, t1 = t2 : T]]$ if it assigns the same morphism
+to $[[x: S |-TC P, t1 : T]]$ and to $[[x: S |-TC P,  t2 : T]]$.
 Then given an algebraic theory 
-$Th = (Sg, Ax)$, a structure $\mathcal{M}$ for $Sg$ is a {\em model} for $Th$ if it satisfies all the 
-axioms in $Ax$. 
+$\mathsf{Th} = (\mathsf{Sg}, \mathsf{Ax})$, a structure $\mathcal{M}$ for $\mathsf{Sg}$ is a {\em model} for $\mathsf{Th}$ if it satisfies all the 
+axioms in $\mathsf{Ax}$. 
 
-
-\vspace{1ex}
-
-We now go through some cases of the rules in the sequent-style Natural Deduction calculus to specify 
-their categorical interpretation so as to satify the equations in context and to prove consistency of the 
-LNL co-intuitionistic logic in the model thus defined. We analyze the linear connectives, giving an argument 
-for co-ILL that is analogue to Bierman's for ILL. We conclude that as expected
+We now go through some cases of the rules in TND to specify their
+categorical interpretation so as to satisfy the equations in context
+and to prove consistency of TND, and hence, DLNL logic in the
+model. We analyze the linear connectives, giving an
+argument for co-ILL that is analogue to Bierman's for ILL. We conclude
+that as expected:
 \begin{itemize}
- \item the cotensor \emph{par} can be identified with the bifunctor $\bullet$ of the structure; 
- \item linear subtraction $\lsub$ is the left adjoint to the bifunctor $\bullet$; 
- \item the unit $\bot$ can be identified with $1$.
+\item the cotensor \emph{par} can be identified with the bifunctor $\bullet$ of the structure; 
+\item linear subtraction $\lsub$ is the left adjoint to the bifunctor $\bullet$; 
+\item the unit $\bot$ can be identified with $1$.
 \end{itemize}
 
-\subsubsection{Linear disjunction Par}\label{lindisj} 
 
+\subsubsection{Linear Disjunction}\label{lindisj} 
 
-\ref{lindisj}.1. 
-{\em Par introduction.} 
 The introduction rule for Par is of the form 
-\begin{center} 
-\AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e_1:B, e_2:C; \Psi$}
-\RightLabel{$\oplus$ I}
-\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta_1, e_1\oplus e_2: B\oplus C, \Psi$}
-\DisplayProof
-\end{center}
+\[
+\inferrule* [right=$\DualLNLLogicdruleTLXXparIName{}$] {
+  [[x : A |-TL D,e1 : B,e2 : C;P]]
+}{[[x : A |-TL D,e1 (+) e2 : B (+) C;P]]}
+\]
 This suggests an operation on Hom-sets of the form 
 $$
-\Phi_{A, \Delta J\Psi}: \mathcal{L}(A, \Delta\bullet B\bullet C \bullet J\Psi) \rightarrow 
+\Phi_{A, \Delta J\Psi}: \mathcal{L}(A, \Delta \bullet (B \bullet C) \bullet J\Psi) \rightarrow 
 \mathcal{L}(A, \Delta\bullet B\oplus C \bullet J\Psi)
 $$
 {\em natural in} $\Delta$, $A$ and $J\Psi$. Given 
-$$e: A\rightarrow \Delta \bullet B\bullet C\bullet J\Psi,$$ 
-and $d: A' \rightarrow A$
- $h: \Delta\rightarrow\Delta'$ and  $p: J\Psi\rightarrow J\Psi'$, naturality yields 
+$e: A\rightarrow \Delta \bullet (B\bullet C)\bullet J\Psi,$ $a: A' \rightarrow A$
+ $h: \Delta\rightarrow\Delta'$, and  $p: J\Psi\rightarrow J\Psi'$, naturality yields:
 $$
-\Phi_{A', \Delta',J\Psi'}(d; e; h\bullet id_B\bullet id_{\mathsf{C}}\bullet p) = d; \Phi_{A, \Delta, J\Psi}(e); h\bullet id_{B\oplus C}\bullet p
+\Phi_{A', \Delta',J\Psi'}(a; e; h\bullet (id_B\bullet id_{\mathsf{C}}) \bullet p) = a; \Phi_{A, \Delta, J\Psi}(e); h\bullet id_{B\oplus C}\bullet p
 $$
-In particular, letting $$e = id_{\Delta} \bullet id_B \bullet id_{\mathsf{C}},\quad d: A \rightarrow \Delta\bullet B\bullet C,$$ 
-$h = id_{\Delta}$ and $p = id_{J\Psi}$ we have 
+In particular, suppose we have $d: A \rightarrow \Delta\bullet (B\bullet C) \bullet [[J P]]$,
+and let $e = id_{\Delta} \bullet (id_B \bullet id_{\mathsf{C}}) \bullet \id_{[[J P]]}$,
+$h = id_{\Delta}$, and $p = id_{J\Psi}$. Then we have
+$\Phi_{A, \Delta, [[J P]]}(d) = d; \Phi_{(\Delta \bullet (B \bullet C) \bullet [[J P]]),\Delta,[[J P]]} (id_{\Delta}\bullet id_B \bullet id_{\mathsf{C}} \bullet id_{J\Psi})$.
+By functorality of $\bullet$ we have $id_{B}\bullet id_{C} = id_{B\bullet C}$. Hence, writing  
+$\bigoplus$ for $\Phi_{(\Delta \bullet (B \bullet C) \bullet [[J P]]),\Delta,[[J P]]} (id_{\Delta}\bullet id_{B \bullet C} \bullet id_{J\Psi})$ we have 
+$\Phi_{A, \Delta,[[J P]]}(d) = d; \bigoplus$. Finally, given the morphism $\psi_{\Delta,B,C,P} : ((\Delta \bullet B) \bullet C) \bullet [[J P]] \rightarrow \Delta \bullet (B \bullet C) \bullet [[J P]]$, which is natural in all arguments and is definable using $\mathsf{Split}$ and $\mathsf{Join}$, we define:
 $$
-\Phi_{A, \Delta}(d) = d; \Phi_{\Delta} (id_{\Delta}\bullet id_B \bullet id_{\mathsf{C}})
-$$
-By functoriality of $\bullet$ we have $id_{B}\bullet id_{C} = id_{B\bullet C}$. Hence, writing  
-$\bigoplus$ for $\Phi_{\Delta} (id_{\Delta}\bullet id_{B \bullet C})$ we have 
-$\Phi_{A, \Delta}(d) = d; \bigoplus$. We define
-$$
-[\![x:A \vdash_{\mathsf{L}}  :\Delta, e_1 \oplus e_2: B\oplus C]\!] =_{df} 
-     [\![x:A \vdash_{\mathsf{L}} \Delta, e_1:B, e_2:C, ]\!]; \bigoplus.
+\interp{[[x:A |-TL  D, e1 (+) e2 : B (+) C, [ J P ];. ]]} =_{df} \interp{[[x:A |-TL  D, e1 : B, e2 : C, [ J P ];. ]]};\psi;\bigoplus.
 $$
 
 \vspace{3ex}
 
-\noindent
+
 \ref{lindisj}.2. {\em Par elimination}. The Par elimination rule has the form 
 \begin{center} 
 \AxiomC{$z:A\vdash_{\mathsf{L}} e: B\oplus C, \Delta_1;\Psi_1$}
@@ -891,7 +878,7 @@ id_{\Delta_1}\bullet [\![x:B\vdash_{\mathsf{L}} \Delta_2; \Psi_2]\!]\bullet[\![y
 
 \vspace{3ex}
 
-\noindent
+
 \ref{lindisj}.3. {\em Equations in context.} We have equations in context of the form
 \begin{equation}\label{context:par}
 %\framebox{\quad
@@ -1015,7 +1002,7 @@ which is equivalent in terms of provability to the more general form considered 
 
 \vspace{1ex}
 
-\noindent
+
 \ref{linsubtr}.2. {\em Subtraction elimination.} The subtraction elimination rule has the form 
 \begin{center} 
 \AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e_1: B\lsub C; \Psi_1$}
@@ -1036,7 +1023,7 @@ type $1$ and an application of left identity $\lambda_{1,\Delta_2}$ is assumed i
 
 \vspace{1ex}
 
-\noindent 
+ 
 Given 
 $$e: A\rightarrow \Delta_1\bullet (B\lsub C) \bullet J\Psi_1,\qquad  
 f: B\rightarrow C\bullet \Delta_2\bullet J\Psi_2
@@ -1066,7 +1053,7 @@ $[\![x:A \vdash_{\mathsf{L}} \Delta_1, \mathtt{postp}(y\mapsto e_2, e_1), [y(e_1
 
 \vspace{1ex}
 
-\noindent
+
 \ref{linsubtr}.3. {\em Equations in context.}  We have equations in context of the form 
 \begin{equation}\label{context:sub}
 \framebox{\AxiomC{$\mathbf \lsub - \beta$ rules:}
@@ -1116,7 +1103,7 @@ We repeat the derivations of the redex and of the reductum.
 
 \vspace{1ex}
 
-\noindent
+
 Given morphisms $n: B\rightarrow \Delta_1\bullet A_1$ and $m: A_1\rightarrow \Delta_3\bullet A_2$, for these equations to be satisfied we need the following diagram to commute (omitting non-linear terms):
 \begin{center}
 $\xymatrix@R=.4in{B\ar[d]_{\mathbf{MKC}^{A_2}(n)} \ar[rr]^n &\qquad & 
@@ -1183,7 +1170,7 @@ the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle
 
 \vspace{1ex}
 
-\noindent 
+ 
 The introduction rule requires a natural transformation with components
 \begin{center}
 $\Phi_{A,\Delta\bullet J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
@@ -1303,7 +1290,7 @@ given by the following compositions
 
 \vspace{3ex}
 
-\noindent
+
 \ref{functors}.2 {\em rules for $H: \mathcal{L} \rightarrow \mathcal{C}$.} 
 \begin{equation}
 \framebox{
