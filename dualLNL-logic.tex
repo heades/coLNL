@@ -805,7 +805,7 @@ The introduction rule for Par is of the form
   [[x : A |-TL D,e1 : B,e2 : C;P]]
 }{[[x : A |-TL D,e1 (+) e2 : B (+) C;P]]}
 \]
-This suggests an operation on Hom-sets of the form 
+This suggests an operation on Hom-sets of the form:
 $$
 \Phi_{A, \Delta J\Psi}: \mathcal{L}(A, \Delta \bullet (B \bullet C) \bullet J\Psi) \rightarrow 
 \mathcal{L}(A, \Delta\bullet B\oplus C \bullet J\Psi)
@@ -819,7 +819,7 @@ $$
 In particular, suppose we have $d: A \rightarrow \Delta\bullet (B\bullet C) \bullet [[J P]]$,
 and let $e = id_{\Delta} \bullet (id_B \bullet id_{\mathsf{C}}) \bullet \id_{[[J P]]}$,
 $h = id_{\Delta}$, and $p = id_{J\Psi}$. Then we have
-$\Phi_{A, \Delta, [[J P]]}(d) = d; \Phi_{(\Delta \bullet (B \bullet C) \bullet [[J P]]),\Delta,[[J P]]} (id_{\Delta}\bullet id_B \bullet id_{\mathsf{C}} \bullet id_{J\Psi})$.
+$\Phi_{A, \Delta, [[J P]]}(d) = d; \Phi_{(\Delta \bullet (B \bullet C) \bullet [[J P]]),\Delta,[[J P]]} (id_{\Delta}\bullet (id_B \bullet id_{\mathsf{C}}) \bullet id_{J\Psi})$.
 By functorality of $\bullet$ we have $id_{B}\bullet id_{C} = id_{B\bullet C}$. Hence, writing  
 $\bigoplus$ for $\Phi_{(\Delta \bullet (B \bullet C) \bullet [[J P]]),\Delta,[[J P]]} (id_{\Delta}\bullet id_{B \bullet C} \bullet id_{J\Psi})$ we have 
 $\Phi_{A, \Delta,[[J P]]}(d) = d; \bigoplus$. Finally, given the morphism $\psi_{\Delta,B,C,P} : ((\Delta \bullet B) \bullet C) \bullet [[J P]] \rightarrow \Delta \bullet (B \bullet C) \bullet [[J P]]$, which is natural in all arguments and is definable using $\mathsf{Split}$ and $\mathsf{Join}$, we define:
