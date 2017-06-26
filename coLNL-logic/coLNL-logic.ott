@@ -205,7 +205,11 @@ formula :: 'formula_' ::=
   | r1 : T' in P or r2 : B in D :: M :: InOr
   {{tex [[r1]] : [[T']] \in [[P]] \text{ or } [[r2]] : [[B]] \in [[D]] }}
   | x : A |-TL D :: M :: TLNNL
-  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]] }}  
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]] }}
+  | x : A |-TL D , e1 = e2 : B ; P :: M :: TLEqCtx
+  {{tex [[x]] : [[A]] \vdash_{\mathsf{L} } [[D]] , [[e1]] = [[e2]] : [[B]] ; [[P]] }}
+  | x : S |-TC P , t1 = t2 : T :: M :: TCEqCtx
+  {{tex [[x]] : [[S]] \vdash_{\mathsf{C} } [[P]], [[t1]] = [[t2]] : [[T]] }}
 
 defns
   Jtype :: '' ::=

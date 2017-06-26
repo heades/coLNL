@@ -53,7 +53,7 @@ main-output.tex : main.tex coLNL-logic/coLNL-logic.ott dualLNL-logic-output.tex 
 # Now this takes the full LaTex translation and compiles it using
 # pdflatex.
 main.pdf : main-output.tex ref.bib Makefile dualLNL-logic-output.tex introduction.tex DLNL-proofs-output.tex \
-	   commuting-conv-output.tex
+	   commuting-conv-output.tex related-work.tex
 	$(PDFLATEX) -jobname=main main-output.tex
 	$(BIBTEX) main
 	$(PDFLATEX) -jobname=main main-output.tex

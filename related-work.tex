@@ -1,5 +1,19 @@
-TODO
+The most comprehensive treatment of ILL is in Gavin Bierman's thesis
+\cite{Bierman:1994}.  There one finds the Proof Theory (Chapter 2),
+i..e, the sequent calculus with cut-elimination, natural deduction and
+axiomatic versions of ILL. Then (Chapter 3) a term assignment to the
+natural deduction and to the sequent calculus versions are presented
+with $\beta$-reductions and commutative conversions, and strong
+normalization and confluence are proved for the resulting calculus. A
+painstaking analysis of the rules of the labeled calculus leads to
+the construction of a categorical model of ILL, in particular of the
+exponential part, a main contribution of Bierman and of the Cambridge
+school of the 1990s with respect to previous models by Seely and
+Lafont.  Bellin \cite{Bellin:2014} presents a categorical model of
+co-intuitionistic linear logic based on a dualization of Bierman
+\cite{Bierman:1994} construction for ILL..
 
+<<<<<<< HEAD
 The most comprehensive treatment of ILL is in Gavin Bierman's thesis  \cite{Bierman:1994}.
 There one finds the Proof Theory (Chapter 2), i.e, the sequent calculus with cut-eliminaton, natural deduction and
 axiomatic versions of ILL. Then (Chapter 3) a term assignment to the natural deduction and to the sequent calculus
@@ -23,6 +37,32 @@ an algebraic and Kripke semantics and  \cite{Rauszer:1974a} a Gentzen style sequ
 between subtraction and conjunction. Maheara and Deagalin's restriction  
  that only one formula occures in the succedent [antecedent] of the premise of an implication right [subtraction left] yields a calculus that does not satisfies cut-elimination already in the logic FILL that extends ILL with the cotensor \emph{par} 
 as noticed by Schellinx \cite{Schellinx:1991}.
+=======
+Benton's work \cite{Benton:1994} on LNL logic, which we read in a TeX
+report, presents the categorical model for Linear-Non-Linear
+Intuitionistic logic LNL. Chapter 2 shows how to obtain a LNL model
+from a Linear Category and vice versa. Versions of the sequent calculus
+for LNL are considered and cut-elimination is proved for one
+calculus. Then Natural Deduction is given with term assignment and the
+categorical interpretation of a fragment of the natural deduction
+system. $\beta$ reductions and commuting conversions are presented.
+The present work follows Benton's paper aiming at a (non-trivial)
+dualization of it.
+
+Bi-intuitionistic logic was introduced by C.Rauszer
+\cite{Rauszer:1974}, \cite{Rauszer:1974a}, \cite{Rauszer:1977} with an
+algebraic and Kripke semantics and \cite{Rauszer:1974a} a Gentzen
+style sequent calculus. Co-intuitionistic logic requires a multiple
+conclusion system, because of the tìco-tensor in the linear case and
+of contraction right in the non-linear one. This raises the problem of
+the relations between intuitionistic implication and disjunction, and,
+dually, between subtraction and conjunction. Maheara and Deagalin's
+restriction that only one formula occurs in the succedent
+[antecedent] of the premise of an implication right [subtraction left]
+yields a calculus that does not satisfies cut-elimination already in
+the logic FILL that extends ILL with the cotensor \emph{par} as
+noticed by Schellinx \cite{Schellinx:1991}.
+>>>>>>> 9fbc5b8c7473d9b3d8c55af93a8f19afad83c78d
 \begin{center}
 \begin{tabular}{ccc}
 \AxiomC{$\Gamma, A \vdash B$}
@@ -35,11 +75,13 @@ as noticed by Schellinx \cite{Schellinx:1991}.
 \DisplayProof 
 \end{tabular}
 \end{center}
- As a counterexample, consider the
-sequent $p \Rightarrow q, r \rightarrow ((p - q) \wedge r)$ given by Pinto and Uusatlu around 2003 \cite{Pinto-Uustalu:2010},
-which is  provable wih cut but not cut-free with Dragalin's restrictions.
+As a counterexample, consider the sequent $p \Rightarrow q, r
+\rightarrow ((p - q) \wedge r)$ given by Pinto and Uusatlu around 2003
+\cite{Pinto-Uustalu:2010}, which is provable with cut but not cut-free
+with Dragalin's restrictions.
 
-Hyland and De Paiva introduced a sequent calculus for FILL labelled with terms 
+Hyland and De Paiva introduced a sequent calculus for FILL labeled
+with terms
 \begin{center}
 \begin{tabular}{c}
 \AxiomC{$\overline{y}:\Gamma, x:A \vdash t:B, \overline{u}:\Delta$}
@@ -48,11 +90,22 @@ Hyland and De Paiva introduced a sequent calculus for FILL labelled with terms
 \DisplayProof
 \end{tabular} 
 \end{center}
+<<<<<<< HEAD
 where $x: A$ occurs in $t:B$ if and only if there is an ``essential dependency'' of $B$ from $A$. 
 The restriction on the $\limp$ I is that $x$ does not occur in the terms  $\overline{u}:\Delta$.
 The original term assignment did not guarantee cut-elimination, as noticed by Bierman \cite{Bierman:1996}; 
 the assignment to \emph{par left} ($\oplus$ L)  had to be fine tuned, as indicated by Bellin \cite{Bellin:1997} 
 \footnote{For \emph{par} left ($\oplus L$) we need the following, :
+=======
+where $x: A$ occurs in $t:B$ if and only if there is an ``essential
+dependency'' of $B$ from $A$.  The restriction on the $\limp$ I is
+that $x$ does not occur in the terms $\overline{u}:\Delta$.  The
+original term assignment did no guarantee cut-elimination, as noticed
+by Bierman \cite{Bierman:1996}; the assignment to \emph{par left}
+($\oplus$ L) had to be fine tuned, as indicated by Bellin
+\cite{Bellin:1997}
+\footnote{For \emph{par} left ($\oplus L$) we need the following:
+>>>>>>> 9fbc5b8c7473d9b3d8c55af93a8f19afad83c78d
 \[
 \AxiomC{$x:A, \overline{x}:\Gamma\vdash \overline{r}: \Delta\qquad y:B, \overline{y}:\Pi\vdash \overline{s}: \Lambda$}
 \UnaryInfC{$z: A \oplus B, \overline{x}:\Gamma, \overline{y}:\Pi\vdash  \overline{r'}: \Delta, 
@@ -68,21 +121,43 @@ $s'_j =$ & $\mathtt{let}\ z\ \mathtt{be}\ -y\ \mathtt{in}\ s_j, \qquad$ & if $y$
              & $s_j$                                                                              & otherwise.\\
 \end{tabular}
 \]
-We may introduce non-existent dependencies if we define always $r'_i = \mathtt{let}\ z\ \mathtt{be}\ x-\ \mathtt{in}\ r_i.$
+We may introduce non-existent dependencies if we define always $r'_i =
+\mathtt{let}\ z\ \mathtt{be}\ x-\ \mathtt{in}\ r_i.$
 }
+<<<<<<< HEAD
 A detailed presentation of the term calculus for FILL with a full proof of cut elimination, is in \cite{EadesDePaiva2016}, 
 where the correctness for a categorical semantics for FILL is also proved.
 Another correct formalization of FILL, a sequent calculus with a relational annotation, was given by Bra\"uner and De Paiva \cite{BraunedDePaiva:1997}, with a proof of cut-elimination.
 The second author \cite{Bellin:1997} gave a system of proof nets for FILL which sequentialize in the sequent calculus
 with term assignment; the essential fact here is that $x:A$ occurs in $t:B$ if and only if there is a ``directed chain''
 between $A$ and $B$ in the proof structure. Here cut elimination is proved by reduction to cut-elimination for proof nets.  
+=======
+A detailed presentation of the term calculus for FILL with a full
+proof of cut elimination, is in \cite{EadesDePaiva2016}, where the
+correctness for a categorical semantics for FILL is also proved.
+Another correct formalization of FILL, a sequent calculus with a
+relational annotation, was given by Bra\"uner and De Paiva
+\cite{BraunedDePaiva:1997}, with a proof of cut-elimination.  The
+second author \cite{Bellin1997} gave a system of proof nets for FILL
+which sequentialize in the sequent calculus with term assignment; the
+essential fact here is that $x:A$ occurs in $t:B$ if and only if there
+is a ``directed chain'' between $A$ and $B$ in the proof
+structure. Here cut elimination is proved by reduction to
+cut-elimination for proof nets.
+>>>>>>> 9fbc5b8c7473d9b3d8c55af93a8f19afad83c78d
 
-A system of two-sided proof nets (in the style of natural deduction) was given by Cockett and Seely \cite{Cockett:1997}.
-For Bi-Intuitionistic Linear Logic, they gave also a system of proof nets, corresponding to a sequent calculus without 
-annotations and restrictions that therefore collapses into classical MLL. 
-Recently, Clouston, Dawson, Goré and Tiu cite{Clouston} gave an annotation-free formalization for BILL, alternative to sequent calculi, in the form of deep-inference and display calculi for BILL. This calculus enjoys cut-elimination and is 
-relevant to the categorical semantics bi-intuitionistic linear logic.
+A system of two-sided proof nets (in the style of natural deduction)
+was given by Cockett and Seely \cite{Cockett:1997}.  For
+Bi-Intuitionistic Linear Logic, they gave also a system of proof nets,
+corresponding to a sequent calculus without annotations and
+restrictions that therefore collapses into classical MLL.  Recently,
+Clouston, Dawson, Goré and Tiu cite{Clouston} gave an annotation-free
+formalization for BILL, alternative to sequent calculi, in the form of
+deep-inference and display calculi for BILL. This calculus enjoys
+cut-elimination and is relevant to the categorical semantics
+bi-intuitionistic linear logic.
  
+<<<<<<< HEAD
 Tristan Crolard \cite{Crolard:2001,Crolard:2004} made an in-depth study of Rauszer's logic. In \cite{Crolard:2001} he showed that models of Rauszer logic (called ``subtractive logic'') based on bi-cartesian closed categories (with co-exponents) collapse to preorders.
 He also studied models of subtractive logic and showed that its first order theory is constant-domain logic, thus it is not 
 a conservative extension of intuitionistic logic.
@@ -97,16 +172,66 @@ where the operators for subtraction introduction and elimination are understood 
 A constructive system of co-routines is then obtained by imposing restrictions on terms corresponding to the restrictions
  on constructive proofs.  Annotation-free formalizations use the display calculus \cite{Gore:2000}, nested sequents
 \cite{GorePostnieceTiu:2008} and deep inference \cite{Postniece:2009}.
+=======
+Tristan Crolard \cite{Crolard:2001,Crolard:2004} made an in-depth
+study of Rauszer's logic. In \cite{Crolard:2001} he showed that models
+of Rauszer logic (called ``subtractive logic'') based on bi-cartesian
+closed categories (with co-exponents) collapse to prerders.  He than
+studied models of subtractive logic and showed that its first order
+theory is constant-domain logic, thus it is not a conservative
+extension of intuitionistic logic.  Crolard \cite{Crolard:2004}
+develops the type theory for subtractive logic, extending a system of
+multiple conclusion classical natural deduction with a connective of
+subtraction and then decorating proofs with a system of
+\cite{annotationsofdependencies} that allow to identify ``constructive
+proofs'': these are derivations where only the premise of an
+implication introduction depends on the discharged assumption and only
+the premise of a subtraction elimination depends on the discharged
+conclusion. Therefore Crolard's sequent calculus with annotations is
+not affected by the counterexamples to cut-eliminations.
 
-In a series of papers the second author gave a ``pragmatic'' interpretation interpretation of bi-intuitionism, where intuitionistic and co-intuitionistic logic are interpreted as logics of the acts of assertion and making a hypothesis, 
-respectively, the interactions between the two sides depending on negations (see, e.g, \cite{Bellin:2014} 
-Assertions, hypotheses, conjectures, expectations: Rough-sets semantics and proof-theory.)
-Here a term assignment for co-intuitionistic logic has been derived from Crolard's definition but independently 
-from the $\lambda\mu$ framework. This calculus was used here as a term assignment of Dual LNL logic.  
+The type theory is Parigot $\lambda\mu$-calculus extended with
+operators for sums, products and subtraction.  where the operators for
+subtraction introduction and elimination are understood as a calculus
+of co-routines.  A constructive system of co-routines is then obtained
+by imposing restrictions on terms corresponding to the restrictions on
+constructive proofs.  Annotation-free formalizations use the display
+calculus \cite{Gore:2000}, nested sequents \cite{GorePostnieceTiu:2008}
+and deep inference \cite{Postniece:2009}.
 
+In a series of papers the second author gave a ``pragmatic''
+interpretation interpretation of bi-intuitionism, where intuitionistic
+and co-intuitionistic logic are interpreted as logics of the acts of
+assertion and making a hypothesis, respectively, the interactions
+between the two sides depending on negations (see, e.g,
+\cite{Bellin:2014} Assertions, hypotheses, conjectures, expectations:
+Rough-sets semantics and proof-theory.)  Here a term assignment for
+co-intuitionistic logic has been derived from Crolard's definition but
+independently from the $\lambda\mu$ framework. This calculus was used
+here as a term assignment of Dual LNL logic.
+>>>>>>> 9fbc5b8c7473d9b3d8c55af93a8f19afad83c78d
+
+To achieve the project outlined in the introduction of putting
+together intuitionistic and co-intuitionistic adjoint logic in the
+environment of BILL the definition of a suitable syntax for BILL will
+play a role.
+
+<<<<<<< HEAD
 To achieve the project outlined in the introduction of putting together intuitionistic and cointuitionistic adjoint logic 
 in the environment of BILL the definition of a suitable syntax for BILL will play a role. 
 
 % More generally, notice also that co-intuitionistic logic also arises as a logic of refutations of intuitionistic sequents,
 % dual to an intuitionistic logic of proofs \cite{Tranchini}.
 % However, co-intuitionistic logic could also be regarded as \emph{opposite} to intuitionistic logic, rather than its dual.
+=======
+More generally, notice also that co-intuitionistic logic also arises
+as a logic of refutations of intuitionistic sequents, dual to an
+intuitionistic logic of proofs \cite{Tranchini}.  However,
+co-intuitionistic logic could also be regarded as \emph{opposite} to
+intuitionistic logic, rather than its dual.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: main.tex
+%%% End: 
+>>>>>>> 9fbc5b8c7473d9b3d8c55af93a8f19afad83c78d
