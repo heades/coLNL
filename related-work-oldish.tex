@@ -1,0 +1,43 @@
+TODO
+
+The most comprehensive treatment of ILL is in Gavin Bierman's thesis  \cite{Bierman:1994}.
+There one finds the Proof Theory (Chapter 2), i..e, the sequent calculus with cut-eliminaton, natural deduction and
+axiomatic versions of ILL. Then (Chapter 3) a term assignment to the natural deduction and to the sequent calculus
+versions are presented with $\beta$-reductions and commutative conversions, and strong normalization and confluence
+are proved for the resulting calculus. A painstaking analysis of the rules of the labelled calculus leads to the construction
+of a categorical model of ILL, in particular of the exponential part, a main contribution of Bierman and of the
+Cambridge school of the 1990s with respect to previous models by Seely and Lafont.
+Bellin \cite{Bellin:2014} presents a categorical model of co-intuitionistic linear logic based on a dualization of
+Bierman \cite{Bierman:1994} construction for ILL..
+
+Benton's work \cite{Benton:1994} on LNL logic, which we read in a TeX report, presents the categorical model 
+for Linear-Non-Linear Intuitionistic logic LNL. Chapter 2 shows
+how to obtain a LNL model from a Linear Category and viceversa. Versions of the sequent calculus for LNL
+are considered  and cut-elimination is proved for one calculus. Then Natural Deduction is given with term
+assignment and the categorical interpretaiton of a fragment of the natural deduction system. $\beta$ reductions
+and commuting conversions are presented.
+The present work follows Benton's paper aiming at a (non-trivial) dualization of it.
+
+Bi-intuitionistic logic was introduced by C.Rauszer \cite{Rauszer:1974},  \cite{Rauszer:1974a}, \cite{Rauszer:1977} with
+an algebraic and Kripke semantics.  Tristan Crolard \cite{Crolard:2001} showed that models of Rauszer logic (called
+``subtractive loigc'') based on bi-cartedian closed categories (with co-exponents) collapse to preorders.
+Crolard then studies models of subtractive logic and shows that its first order theory is constant-domain logic.
+Crolard \cite{Crolard:2004} develops the type theory for subtractive logic, extending a system of multiple conclusion
+classical natural deduction with a connective of subtraction and then decorating proofs with a system of \cite{annotations
+of dependencies} that allow to identify ``constructive proofs'': these are derivations where only the premise of an implication
+introduction depends on the discharged assumption and only the premise of a subtraction elimination depends on the
+discharged conclusion. The type theory is Parigot $\lambda\mu$-calculus extended with operators for sums, products
+and subtraction. where the operators for subtraction introduction and elimination are understood as a calculus of co-routines.
+A constructive system of co-routines is then obtained by imposing restrictions on terms corresponding to the restricions
+ on constructive proofs.
+
+Rauszer  \cite{Rauszer:1974a} gave a Gentzen style sequent calculus for bi-intuitionistic logic, but Dragalin's
+restrictions that only one formula occures in the succedent [antecedent] of the premise of an implication right
+[subtraction left] yields a calculus that does not satisfies cut-elimination. As a counterexample, consider the
+sequent $p \Rightarrow q, r \rightarrow ((p - q) \wedge r)$ given by Pinto and Uusatlu around 2003 \cite{Pinto-Uustalu:2010},
+which is  provable wih cut but not cut-free with Dragalin's restrictions. Crolard annotated calculus is not affected
+by the counterexample.  Annotation-free formalizations use the display calclus \cite{Gore:2000}, nested sequents
+\cite{GorePostnieceTiu:2008} and deep inference \cite{Postniece:2009}.
+Analogue work has been done on the proof theory of fragments of linear bi-intuitionistic logic, in particular,
+FILL (\emph{Full Intuitionistic Logic}, intuitionistic liner logic with the cotensor (\emph{par})
+\cite{CloustonDawsonGoreTiu:2013}: here the proof theoretic work has a direct connection with categorical models of FILL.
