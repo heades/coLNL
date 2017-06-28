@@ -829,17 +829,27 @@ $$
 \interp{[[x:A |-TL  D, e1 (+) e2 : B (+) C, [ J P ];. ]]} =_{df} \interp{[[x:A |-TL  D, e1 : B, e2 : C, [ J P ];. ]]};\psi;\bigoplus.
 $$
 
-\vspace{3ex}
-
-
-\ref{lindisj}.2. {\em Par elimination}. The Par elimination rule has the form 
+\ \\
+\noindent
+The Par elimination rule has the form 
 \begin{center} 
-\AxiomC{$z:A\vdash_{\mathsf{L}} e: B\oplus C, \Delta_1;\Psi_1$}
-\AxiomC{$x:B\vdash_{\mathsf{L}} \Delta_2;\Psi_2$}
-\AxiomC{$y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3$}
-\RightLabel{$\oplus$ E}
-\TrinaryInfC{$z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel} e/x] \Delta_2, [\mathtt{caser} e/y]\Delta_3; \Psi_1 \cdot \Psi_2\cdot \Psi_3$}
-\DisplayProof
+%% \AxiomC{$z:A\vdash_{\mathsf{L}} e: B\oplus C, \Delta_1;\Psi_1$}
+%% \AxiomC{$x:B\vdash_{\mathsf{L}} \Delta_2;\Psi_2$}
+%% \AxiomC{$y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3$}
+%% \RightLabel{$\oplus$ E}
+%% \TrinaryInfC{$z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel} e/x] \Delta_2, [\mathtt{caser} e/y]\Delta_3; \Psi_1 \cdot \Psi_2\cdot \Psi_3$}
+%% \DisplayProof
+  
+  \begin{math}
+    $$\mprset{flushleft}
+    \inferrule* [right=$\DualLNLLogicdruleTLXXparEName{}$] {
+      [[z : A |-TL D1,e : B (+) C;P]]
+      \\
+      [[x : B |-TL D2;P1]]
+      \\
+      [[y : C |-TL D3;P2]]
+    }{[[z : A |-TL D1,[casel(e)/x]D2,[caser(e)/y]D3;P1,[casel(e)/y]P2,[caser(e)/z]P3]]}  
+  \end{math}
 \end{center}
 This suggests an operation on Hom-sets of the form 
 $$
@@ -847,13 +857,36 @@ $$
 \mathcal{L}(B, \Delta_2\bullet J\Psi_2)\times\mathcal{L}(C, \Delta_3\bullet J\Psi_3)\rightarrow 
 \mathcal{L}(A, \Delta\,\bullet\, J\Psi)
 $$
-{\em natural in} $A,\Delta, J\Psi$ where we write $\Delta = \Delta_1, \Delta_2, \Delta_3$, $J\Psi = J\Psi_1,J\Psi_2, J\Psi_3$. Given morphisms 
-$$g:A\rightarrow B\oplus C \bullet \Delta_1\bullet J\Psi_1, \quad e: B\rightarrow\Delta_2\bullet J\Psi_2 \quad
- \hbox{ and } f: C\rightarrow \Delta_3\bullet J\Psi_3$$ and also $a: A'\rightarrow A$, 
-$d_1:\Delta_1\rightarrow \Delta_1'$, 
-$d_2: \Delta_2 \rightarrow \Delta_2'$ and $d_3: \Delta_3 \rightarrow \Delta_3'$,  $p_1: J\Psi_1\rightarrow J\Psi_1'$, 
-$p_2: J\Psi_2 \rightarrow J\Psi_2'$ and $p_3: J\Psi_3 \rightarrow J\Psi_3'$
-naturality yields
+{\em natural in} $A,\Delta, J\Psi$ where we write
+$\Delta = \Delta_1 \bullet \Delta_2 \bullet \Delta_3$ and $J\Psi = J\Psi_1 \bullet J\Psi_2 \bullet J\Psi_3$.
+Given the following morphisms:
+\begin{center}
+  \begin{math}
+    \begin{array}{lll}
+      \begin{array}{lll}
+        g:A\rightarrow B\oplus C \bullet \Delta_1\bullet J\Psi_1\\
+        e: B\rightarrow\Delta_2\bullet J\Psi_2\\
+        f: C\rightarrow \Delta_3\bullet J\Psi_3\\
+        a: A'\rightarrow A\\
+      \end{array}
+      &
+      \begin{array}{lll}
+        d_1:\Delta_1\rightarrow \Delta_1'\\
+        d_2: \Delta_2 \rightarrow \Delta'_2\\
+        d_3: \Delta_3 \rightarrow \Delta_3'\\
+        \\
+      \end{array}
+      &
+      \begin{array}{lll}
+        p_1: J\Psi_1\rightarrow J\Psi_1'\\
+        p_2: J\Psi_2 \rightarrow J\Psi_2'\\
+        p_3: J\Psi_3 \rightarrow J\Psi_3'\\
+        \\
+      \end{array}
+    \end{array}
+  \end{math}
+\end{center}
+naturality yields:
 \begin{center}
 \begin{tabular}{rl}
 $\Psi_{A',\Delta',\Gamma',J\Psi'}\bigl((a;g; id_{B\oplus C} \bullet d_1 \bullet p_1 ), (e;d_2\bullet p_2),$ & 
@@ -862,18 +895,18 @@ $a; \Psi_{A,\Delta,J\Psi}(g,e,f);$ &
 $d_1 \bullet d_2\bullet d_3\bullet p_1\bullet p_2\bullet p_3; \mathtt{Join}(\Delta',J\Psi').$
 \end{tabular}
 \end{center}
-In particular, set $$e = id_B, \quad f = id_{\mathsf{C}}$$ and also $a = id_A$, $d_i = id_{\Delta_i}$, $p_i = id_{J\Psi_i}$ we get 
+In particular, set $e = id_B, f = id_{\mathsf{C}}, a = id_A, d_i = id_{\Delta_i}$, and $p_i = id_{J\Psi_i}$, and we get 
 $$
 \Psi_{A,\Delta J\Psi}(g, e, f) = \Psi_{A,\Delta, J\Psi}(g, id_B, id_{\mathsf{C}}); 
 id_{\Delta}\bullet c\bullet d; \mathtt{Join}(\Delta, J\Psi) 
 $$
-where the operation $\mathtt{Join}$ implements associativity.
-Writing $(g)^{\ast}$ for $\Psi_{D,\Delta}(g, id_B, id_{\mathsf{C}})$ we define
+where the operation $\mathtt{Join}$ implements the required associativity.
+Writing $(x)^{\ast}$ for $\Psi_{D,\Delta}(x, id_B, id_{\mathsf{C}})$ we define
 \begin{center}
 \begin{tabular}{l}
 $[\![z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel}\ e/x]\Delta_2, [\mathtt{caser}\ e/y] \Delta_3; \Psi_1, \Psi_2, \Psi_3]\!]=_{df}$\\
 $[\![z:A\vdash_{\mathsf{L}} \Delta_1, e, B\,\oplus\, C; \Psi_1]\!]^*; 
-id_{\Delta_1}\bullet [\![x:B\vdash_{\mathsf{L}} \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3]\!];
+(id_{\Delta_1}\bullet [\![x:B\vdash_{\mathsf{L}} \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3]\!]);
 \mathtt{Join}(\Delta,J\Psi)$.\\
 \end{tabular}
 \end{center}
