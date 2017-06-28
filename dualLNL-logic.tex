@@ -843,11 +843,11 @@ The Par elimination rule has the form
   \begin{math}
     $$\mprset{flushleft}
     \inferrule* [right=$\DualLNLLogicdruleTLXXparEName{}$] {
-      [[z : A |-TL D1,e : B (+) C;P]]
+      [[z : A |-TL D1,e : B (+) C;P1]]
       \\
-      [[x : B |-TL D2;P1]]
+      [[x : B |-TL D2;P2]]
       \\
-      [[y : C |-TL D3;P2]]
+      [[y : C |-TL D3;P3]]
     }{[[z : A |-TL D1,[casel(e)/x]D2,[caser(e)/y]D3;P1,[casel(e)/y]P2,[caser(e)/z]P3]]}  
   \end{math}
 \end{center}
@@ -905,8 +905,8 @@ Writing $(x)^{\ast}$ for $\Psi_{D,\Delta}(x, id_B, id_{\mathsf{C}})$ we define
 \begin{center}
 \begin{tabular}{l}
 $[\![z:A\vdash_{\mathsf{L}} \Delta_1, [\mathtt{casel}\ e/x]\Delta_2, [\mathtt{caser}\ e/y] \Delta_3; \Psi_1, \Psi_2, \Psi_3]\!]=_{df}$\\
-$[\![z:A\vdash_{\mathsf{L}} \Delta_1, e, B\,\oplus\, C; \Psi_1]\!]^*; 
-(id_{\Delta_1}\bullet [\![x:B\vdash_{\mathsf{L}} \Delta_2; \Psi_2]\!]\bullet[\![y:C\vdash_{\mathsf{L}} \Delta_3; \Psi_3]\!]);
+$[\![ [[z : A |-TL D1,e : B (+) C;P1]] ]\!]^*; 
+(id_{\Delta_1}\bullet [\![ [[x : B |-TL D2;P2]] ]\!]\bullet[\![ [[y : C |-TL D3;P3]]  ]\!]);
 \mathtt{Join}(\Delta,J\Psi)$.\\
 \end{tabular}
 \end{center}
