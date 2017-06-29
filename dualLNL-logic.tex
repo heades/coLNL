@@ -458,19 +458,22 @@ Figure~\ref{fig:linear-ta}.
 \end{figure}
 \begin{remark}
   Let us call terms of the form $[[postp(x -> t1,t2)]]$, $[[postp (x
-      -> e1,e2)]]$, and $[[postpP e]]$ $p$-\emph{terms}. Then say that
+      -> e1,e2)]]$, and $[[postpp e]]$ $p$-\emph{terms}. Then say that
   a term $t$ is \emph{$p$-normal} if $t$ does not contain any $p$-term
-  as a proper subterm. We denote this class of \emph{$p$-normal} terms
-  by $r$.  When the calculus is typed, linear $p$-terms can be typed
-  with $\bot$, non-linear $p$ terms can be typed with $0$.  In
-  presence of the $\bot$ rule and of the
-  $\DualLNLLogicdruleTCXXzIName$ rule it is possible to replace a
-  non-$p$-normal $p$-term removed by a $\beta$-reduction with a $\bot$
-  or $\DualLNLLogicdruleTCXXzIName$ rule. However, this creates an
-  anomaly in the proof theory since the newly introduced unit rule is
-  unnecessary and could be eliminated in the case of $p$-normal terms.
-  Hence, we choose to leave the typing of $p$ terms implicit in the
-  syntax and enforce the requirement of $p$-normality.
+  as a proper subterm.  In a typed calculus, linear $p$-terms can be typed
+  with $\bot$.  Non-linear $p$ terms can be typed with $0$:  in
+  presence of the $\DualLNLLogicdruleTCXXzIName$ rule this yieds
+instances of the \emph{ex falso} rule. This is what happens in Crolard's 
+calculus, where the analogue of the $[[postp(x -> t1,t2)]]$, namely, 
+$\mathtt{resume}\ t_2\ \mathtt{with}\ x\mapsto t_1$, always goes with a 
+\emph{weakening} operation. 
+
+$However when a term of the form $[[postp(x -> t1,t2)]]$ is eliminated
+as a $\beta$ redex, one should replaced with a $0$ introduction rule, 
+which we do not have. In absence of a more detailed analysis of the matter, 
+we prefer to leave the typing of $p$ terms implicit in the syntax, to enforce 
+the requirement of $p$-normality and to use the admissible rule of weakening
+in place of the  $\DualLNLLogicdruleTCXXzIName$ rule in this context. 
 \end{remark}
 
 The typing rules depend on the extension of let and case expressions
@@ -1200,7 +1203,7 @@ rule can be interpreted by a map $a: A \rightarrow 1$.
 % , if we give the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
 % in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
 The elimination rule can also be interpreted as a map $\langle \rangle: A \rightarrow \bot$ if we give the 
-term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. in presence of a nonempty linear context $Delta$ one can compose with  
+term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. In presence of a nonempty linear context $\Delta$ one can compose with  
 the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle\rangle;\lambda_{\Delta}$.
 
 \vspace{1ex}
