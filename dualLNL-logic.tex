@@ -916,324 +916,307 @@ $[\![ [[z : A |-TL D1,e : B (+) C;P1]] ]\!]^*;
 \end{center}
 
 We now turn to the equations in context. Consider the following case:
-%% \begin{center}
-%%   \begin{math}
-%%     $$\mprset{flushleft}
-%%     \inferrule* [right=$\mathbf \oplus\text{-}\beta$] {
-%%       e\equiv\mathtt{casel}(e_1 \oplus e_2)
-%%       \\\\
-%%       \quad e' \equiv \mathtt{caser}(e_1 \oplus e_2
-%%       \\\\\
-%%       |\Delta_1| = |\Delta'_1|\ | \Psi_1| = |\Psi'_1|
-%%       \\\\
-%%       x : A_1 \vdash_{\mathsf{L}} \Delta_2; J\Psi_2 = \Delta'_2; J\Psi'_2
-%%       \\\\
-%%       |\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\hskip{1in} y:A_2 \vdash_{\mathsf{L}} \Delta_3; J\Psi_3 =\Delta'_3; J\Psi'_3
-%%     }{}
-%%   \end{math}
-%% \end{center}
-%% \begin{equation}\label{context:par}
-%% \UnaryInfC{$ \hskip1in
-%%  \hskip1in$}
-%% \noLine
-%% \UnaryInfC{$\hskip1in$}
-%% \noLine
-%%  \UnaryInfC{$|\Delta_3|=|\Delta_3'|\ |\Psi_3|=|\Psi'_3| \quad
-%% z:B \vdash_{\mathsf{L}} e_1 :A_1,e_2 :A_2, \Delta_1; J\Psi_1 = e'_1 :A_1,e'_2 :A_2,\Delta'_1;J\Psi'_1$}
-%% \UnaryInfC{$z:B\vdash_{\mathsf{L}} \Delta_1,[e/x]\Delta_2,[e'/x]\Delta_3;\Psi_1,[e/x]\Psi_2,[e'/x]\Psi_3 =$}
-%% \noLine
-%% \UnaryInfC{$\hskip.5in = \Delta'_1, [e'_1/x]\Delta_2,[e'_2/x]\Delta′_3;\Psi′_1,[e'_1/x]\Psi'_2,[e'_2/x]\Psi'_3$}
-%% \DisplayProof
-%% \end{equation}
-%% Let 
-%% $$
-%% q: B\rightarrow A_1\bullet A_2 \bullet \Delta_1\bullet J\Psi,\qquad m:A_1\rightarrow\Delta_2\bullet J\Psi_2 \quad
-%% \hbox{ and }\quad  
-%% n: A_2\rightarrow\Delta_3\bullet J\Psi_3.
-%% $$
-%% Then to satisfy the above equations in context we need that the following diagram commutes:
-%% \begin{center}
-%% $\xymatrix@R=.4in{B\ar[r]^(.25){q} & \Delta_1\bullet J\Psi_1\bullet (A_1\bullet A_2) \ar[d]_{\oplus} \ar[rr]^(.4){id_{\Delta_1}\bullet m\bullet n} &
-%% &\Delta_1\bullet J\Psi_1\bullet\Delta_2\bullet J\Psi_2\bullet \Delta_3\bullet J\Psi_3\\
-%% &\Delta_1\bullet  J\Psi_1\bullet A\oplus B \ar[rr]_{\ast} & &\Delta_1\bullet  J\Psi_1\bullet A\bullet B \ar[u]_{id_{\Delta_1}\bullet m\bullet n}\\}$
-%% \end{center}   
-%% We make the assumption that the above decomposition is unique. 
-%% Moreover, supposing $\Delta_1$ to be empty and $m = id_A$, $n = id_B$, $q = id_A\bullet id_B = id_{A\bullet B}$ 
-%% we obtain $(id_A\bullet id_B; \mathbf{\bigoplus})^{\ast} = id_A\bullet id_B$ and similarly 
-%% $(id_{A \oplus B})^*; \mathbf{\bigoplus} = id_{A \oplus B}$; hence we may conclude that there is a natural isomorphism 
-%% \begin{center}
-%% \AxiomC{$D \rightarrow \Gamma\bullet A\bullet B$}
-%% \doubleLine
-%% \UnaryInfC{$D \rightarrow \Gamma\bullet A\oplus B$}
-%% \DisplayProof
-%% \end{center}
-%% so we can identify $\bullet$ and $\oplus$. Finally we see that the following $\eta$ equation in context 
-%% is also satisfied:  
-%% \begin{equation}\label{eta:par}
-%% \quad\framebox{
-%% \AxiomC{$\oplus - \eta$ rule}
-%% \noLine
-%% \UnaryInfC{$|\Delta| = |\Delta'| \quad|\Psi| = |\Psi'| \quad z:B \vdash_{\mathsf{L}} \Delta; \Psi = \Delta'; \Psi'$}
-%% \UnaryInfC{$z:B \vdash_{\mathsf{L}} (\mathtt{casel\, e}\oplus\mathtt{caser}\, e): A_1\oplus A_2, \Delta; \Psi = e:A_1\oplus A_2, \Delta'; \Psi'$}
-%% \noLine
-%% \UnaryInfC{\strut}
-%% \DisplayProof
-%% }
-%% \end{equation}
+\begin{center} \footnotesize
+  \begin{math} 
+    $$\mprset{flushleft}
+    \inferrule* [right=$\mathbf \oplus\text{-}\beta$] {
+      { \setlength{\tabcolsep}{15px}
+        \begin{tabular}{lll}          
+          & & $e\equiv\mathtt{casel}(e_1 \oplus e_2)$\\          
+          & & $e' \equiv \mathtt{caser}(e_1 \oplus e_2)$\\
+          $|\Delta_1| = |\Delta'_1|$ & $| \Psi_1| = |\Psi'_1|$ & $y:A_2 \vdash_{\mathsf{L}} \Delta_3; J\Psi_3 =\Delta'_3; J\Psi'_3$\\
+          $|\Delta_2|=|\Delta'_2|$   & $|\Psi_2|=|\Psi'_2|$    & $x : A_1 \vdash_{\mathsf{L}} \Delta_2; J\Psi_2 = \Delta'_2; J\Psi'_2$\\
+          $|\Delta_3|=|\Delta_3'|$   & $|\Psi_3|=|\Psi'_3|$    & $z:B \vdash_{\mathsf{L}} e_1 :A_1,e_2 :A_2, \Delta_1; J\Psi_1 = e'_1 :A_1,e'_2 :A_2,\Delta'_1;J\Psi'_1$
+      \end{tabular}}
+    }{z:B\vdash_{\mathsf{L}} \Delta_1,[e/x]\Delta_2,[e'/x]\Delta_3;\Psi_1,[e/x]\Psi_2,[e'/x]\Psi_3 = \Delta'_1, [e'_1/x]\Delta_2,[e'_2/x]\Delta′_3;\Psi′_1,[e'_1/x]\Psi'_2,[e'_2/x]\Psi'_3}
+  \end{math}
+\end{center}
+Let 
+$$
+q: B\rightarrow A_1\bullet A_2 \bullet \Delta_1\bullet J\Psi,\qquad m:A_1\rightarrow\Delta_2\bullet J\Psi_2 \quad
+\hbox{ and }\quad  
+n: A_2\rightarrow\Delta_3\bullet J\Psi_3.
+$$
+Then to satisfy the above equations in context we need that the following diagram commutes:
+\begin{center}
+$\xymatrix@R=.4in{B\ar[r]^(.25){q} & \Delta_1\bullet J\Psi_1\bullet (A_1\bullet A_2) \ar[d]_{\oplus} \ar[rr]^(.4){id_{\Delta_1}\bullet m\bullet n} &
+&\Delta_1\bullet J\Psi_1\bullet\Delta_2\bullet J\Psi_2\bullet \Delta_3\bullet J\Psi_3\\
+&\Delta_1\bullet  J\Psi_1\bullet A\oplus B \ar[rr]_{\ast} & &\Delta_1\bullet  J\Psi_1\bullet A\bullet B \ar[u]_{id_{\Delta_1}\bullet m\bullet n}\\}$
+\end{center}   
+We make the assumption that the above decomposition is unique. 
+Moreover, supposing $\Delta_1$ to be empty and $m = id_A$, $n = id_B$, $q = id_A\bullet id_B = id_{A\bullet B}$ 
+we obtain $(id_A\bullet id_B; \mathbf{\bigoplus})^{\ast} = id_A\bullet id_B$ and similarly 
+$(id_{A \oplus B})^*; \mathbf{\bigoplus} = id_{A \oplus B}$; hence we may conclude that there is a natural isomorphism 
+\begin{center}
+\AxiomC{$D \rightarrow \Gamma\bullet A\bullet B$}
+\doubleLine
+\UnaryInfC{$D \rightarrow \Gamma\bullet A\oplus B$}
+\DisplayProof
+\end{center}
+so we can identify $\bullet$ and $\oplus$. Finally we see that the following $\eta$ equation in context 
+is also satisfied:  
+\begin{equation}\label{eta:par}
+\quad\framebox{
+\AxiomC{$\oplus - \eta$ rule}
+\noLine
+\UnaryInfC{$|\Delta| = |\Delta'| \quad|\Psi| = |\Psi'| \quad z:B \vdash_{\mathsf{L}} \Delta; \Psi = \Delta'; \Psi'$}
+\UnaryInfC{$z:B \vdash_{\mathsf{L}} (\mathtt{casel\, e}\oplus\mathtt{caser}\, e): A_1\oplus A_2, \Delta; \Psi = e:A_1\oplus A_2, \Delta'; \Psi'$}
+\noLine
+\UnaryInfC{\strut}
+\DisplayProof
+}
+\end{equation}
 
-%% \subsubsection{Linear subtraction}\label{linsubtr}
-%% \ref{linsubtr}.1. {\em Subtraction introduction.} The introduction rule for subtraction has the form 
-%% \begin{center} 
-%% \AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e: B; \Psi_1$}
-%% \AxiomC{$y:C\vdash_{\mathsf{L}} \Delta_2; \Psi_2\quad |\Psi_1 | = |\Psi_2|$}
-%% \RightLabel{$L sub I$}
-%% \BinaryInfC{$x:A\vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, [y(e)/y]\Delta_2; \Psi_1\cdot [y(e)/y]\Psi_2$}
-%% \DisplayProof
-%% \end{center}
-%% This suggests a natural transformation with components
-%% $$
-%% \Phi_{A, \Delta,J\Psi}: \mathcal{L}(A, \Delta_1\bullet B\bullet J\Psi_1)\times\mathcal{L}(C, \Delta_2\bullet J\Psi_2) \rightarrow 
-%% \mathcal{L}(A, \Delta_1\bullet (B\lsub C)\bullet \Delta_2\bullet J\Psi_1\bullet J\Psi_2)
-%% $$
-%% natural in $A, \Delta_1, \Delta_2, J \Psi_1, J\Psi_2$.
-%% Taking morphisms 
-%% $$e: A\rightarrow \Delta_1\bullet B \bullet J\Psi_1, \quad  f:C\rightarrow \Delta_2 \bullet J\Psi_2$$ 
-%% and also $a: A'\rightarrow A$, $d_1:\Delta_1\rightarrow \Delta_1'$, 
-%% $d_2: \Delta_2\rightarrow \Delta_2'$, $p_1: J\Psi_1\rightarrow J\Psi_1'$, $p_2: J\Psi_2\rightarrow J\Psi_2'$, 
-%% by naturality we have
-%% \begin{center}
-%% \begin{tabular}{c}
-%% $\Phi_{A', \Delta_1',\Delta'_2, J\Psi'_1J\Psi'_2}\left((a; e; d_1\bullet id_B\bullet p_1), (f;d_2;p_2)\right) =\qquad\qquad $\\
-%% $\qquad\qquad = a; \Phi_{A,\Delta, J\Psi}(e, f); d_1\bullet d_2\bullet id_{B\lsub C}; 
-%% \mathtt{Join}(\Delta_1',\Delta_2', B\lsub C, J\Psi_1', J\Psi_2')$
-%% \end{tabular}
-%% \end{center}
-%% In particular, taking $a=id_A$, $d_1=id_{\Delta_1}$, $p_1 = id_{J\Psi_1}, p_2 = id_{J\Psi_2}$ but 
-%% $d_2: C\rightarrow\Delta_2\cdot J\Psi_2$ and $f= id_{\mathsf{C}}$ we have:
-%% \begin{center}
-%% \begin{tabular}{c}
-%% $\Phi_{A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2}(e, d_2) = \Phi_{A,\Delta_1} (e, id_{\mathsf{C}}); 
-%% id_{\Delta_1}\bullet d_2 \bullet id_{A\lsub B}\bullet id_{J\Psi_1}\bullet id{J\Psi_2}; $\\
-%% $\hskip2in\mathtt{Join}(\Delta_1, \Delta_2, A\lsub B, J\Psi_1, J\Psi_2)$\\
-%% \end{tabular}
-%% \end{center}
-%% Writing $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}(e)$ for $ \Phi_{A,\Delta_1 J\Psi_1} (e, id_{\mathsf{C}})$, 
-%% $\Phi_{A, \Delta, J\Psi}(e, d_2)$ can be expressed as the composition 
-%% $$
-%% \mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}(e); id_{\Delta_1}\bullet d_2\bullet id_{B\lsub C}
-%% $$ 
-%% where $\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}$ is a natural transformation with components 
-%% $$
-%% \mathcal{L}(A, \Delta_1\bullet B\bullet J\Psi)\times\mathcal{L}(C, C) \rightarrow 
-%% \mathcal{L}(A, \Delta_1\bullet C \bullet C\lsub C)
-%% $$
-%% so we make the definition 
-%% \begin{center}
-%% \begin{tabular}{l}
-%% $[\![x:A \vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y):\, B\lsub C, [y(e)/y+\Delta_2; \Psi_1\cdot [y(e)/y] \Psi_2]\!] =_{df}$\\
-%% \quad $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}[\![x:A\vdash_{\mathsf{L}}\Delta_1, e_1:B]\!];
-%% id_{\Delta}\bullet [\![y:C\vdash_{\mathsf{L}}\Delta_2; \Psi_2]\!]\bullet id_{B\lsub C}; $\\
-%% $\hskip2in \mathtt{Join}(\Delta_1,\Delta_2, B\lsub C, J\Psi_1, J\Psi_2)$\\
-%% \end{tabular}
-%% \end{center}
-%% Notice that $\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}$ corresponds to the one-premise form of the 
-%% subtraction introduction rule
-%% \begin{center} 
-%% \AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e: B; \Psi_1$}
-%% \RightLabel{$L sub I$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, y(e): C; \Psi_1$}
-%% \DisplayProof
-%% \vspace{3ex}
-%% \end{center}
-%% which is equivalent in terms of provability to the more general form considered here (cfr Crolard 2004).
+\subsubsection{Linear subtraction}\label{linsubtr}
+\noindent
+\ref{linsubtr}.1. {\em Subtraction introduction.} The introduction rule for subtraction has the form:
+\begin{center}
+  \begin{math}
+    $$\mprset{flushleft}
+    \inferrule* [right=$\DualLNLLogicdruleTLXXsubIName{}$] {
+      [[x:A |-TL D1, e : B; P1]]
+      \\
+      [[y:C |-TL D2; P2]]
+      \\
+      [[ |P1| = |P2| ]]
+    }{[[x:A |-TL D1, mkc(e,y) : B *- C, [y(e)/y]D2;P1,[y(e)/y]P2]]}
+  \end{math}
+\end{center}
+This suggests a natural transformation with components:
+$$
+\Phi_{A, \Delta,J\Psi}: \mathcal{L}(A, \Delta_1\bullet B\bullet J\Psi_1)\times\mathcal{L}(C, \Delta_2\bullet J\Psi_2) \rightarrow 
+\mathcal{L}(A, \Delta_1\bullet (B\lsub C)\bullet \Delta_2\bullet J\Psi_1\bullet J\Psi_2)
+$$
+natural in $A, \Delta_1, \Delta_2, J \Psi_1, J\Psi_2$.
+Taking morphisms 
+$$e: A\rightarrow \Delta_1\bullet B \bullet J\Psi_1, \quad  f:C\rightarrow \Delta_2 \bullet J\Psi_2$$ 
+and also $a: A'\rightarrow A$, $d_1:\Delta_1\rightarrow \Delta_1'$, 
+$d_2: \Delta_2\rightarrow \Delta_2'$, $p_1: J\Psi_1\rightarrow J\Psi_1'$, $p_2: J\Psi_2\rightarrow J\Psi_2'$, 
+by naturality we have
+\begin{center}
+\begin{tabular}{c}
+$\Phi_{A', \Delta_1',\Delta'_2, J\Psi'_1J\Psi'_2}\left((a; e; d_1\bullet id_B\bullet p_1), (f;d_2;p_2)\right) =\qquad\qquad $\\
+$\qquad\qquad = a; \Phi_{A,\Delta, J\Psi}(e, f); d_1\bullet d_2\bullet id_{B\lsub C}; 
+\mathtt{Join}(\Delta_1',\Delta_2', B\lsub C, J\Psi_1', J\Psi_2')$
+\end{tabular}
+\end{center}
+In particular, taking $a=id_A$, $d_1=id_{\Delta_1}$, $p_1 = id_{J\Psi_1}, p_2 = id_{J\Psi_2}$ but 
+$d_2: C\rightarrow\Delta_2\cdot J\Psi_2$ and $f= id_{\mathsf{C}}$ we have:
+\begin{center}
+\begin{tabular}{c}
+$\Phi_{A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2}(e, d_2) = \Phi_{A,\Delta_1} (e, id_{\mathsf{C}}); 
+id_{\Delta_1}\bullet d_2 \bullet id_{A\lsub B}\bullet id_{J\Psi_1}\bullet id{J\Psi_2}; $\\
+$\hskip2in\mathtt{Join}(\Delta_1, \Delta_2, A\lsub B, J\Psi_1, J\Psi_2)$\\
+\end{tabular}
+\end{center}
+Writing $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}(e)$ for $ \Phi_{A,\Delta_1 J\Psi_1} (e, id_{\mathsf{C}})$, 
+$\Phi_{A, \Delta, J\Psi}(e, d_2)$ can be expressed as the composition 
+$$
+\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}(e); id_{\Delta_1}\bullet d_2\bullet id_{B\lsub C}
+$$ 
+where $\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}$ is a natural transformation with components 
+$$
+\mathcal{L}(A, \Delta_1\bullet B\bullet J\Psi)\times\mathcal{L}(C, C) \rightarrow 
+\mathcal{L}(A, \Delta_1\bullet C \bullet C\lsub C)
+$$
+so we make the definition 
+\begin{center}
+\begin{tabular}{l}
+$[\![x:A \vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y):\, B\lsub C, [y(e)/y+\Delta_2; \Psi_1\cdot [y(e)/y] \Psi_2]\!] =_{df}$\\
+\quad $\mathbf{MKC}^C_{A,\Delta_1,J\Psi_1}[\![x:A\vdash_{\mathsf{L}}\Delta_1, e_1:B]\!];
+id_{\Delta}\bullet [\![y:C\vdash_{\mathsf{L}}\Delta_2; \Psi_2]\!]\bullet id_{B\lsub C}; $\\
+$\hskip2in \mathtt{Join}(\Delta_1,\Delta_2, B\lsub C, J\Psi_1, J\Psi_2)$\\
+\end{tabular}
+\end{center}
+Notice that $\mathbf{MKC}^C_{A,\Delta_1, J\Psi_1}$ corresponds to the one-premise form of the 
+subtraction introduction rule
+\begin{center} 
+\AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e: B; \Psi_1$}
+\RightLabel{$\DualLNLLogicdruleTLXXsubIName{}$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta_1, \mathtt{mkc}(e,y) : B \lsub C, y(e): C; \Psi_1$}
+\DisplayProof
+\vspace{3ex}
+\end{center}
+which is equivalent in terms of provability to the more general form
+considered here \cite{Crolard:2004}.
 
-%% \vspace{1ex}
+The subtraction elimination rule has the form:
+\begin{center}
+  \begin{math}
+    $$\mprset{flushleft}
+    \inferrule* [right=$\DualLNLLogicdruleTLXXsubEName{}$] {
+      [[x:A |-TL D1, e1 : B *- C; P1]]
+      \\
+      [[y:B |-TL e2:C, D2; P2]]
+      \\
+      [[ |P1| = |P2| ]]            
+    }{[[x:A |-TL  postp(y -> e2, e1), D1, [y(e1)/y]D2;P1, [y(e1)/y]P2]]}
+  \end{math}
+\end{center}
+This suggests a natural transformation with components
+$$
+\Psi_{A,\Delta_1, \Delta_2, J\Psi_1, J\Psi_2}: \mathcal{L}(A, \Delta_1\bullet (B\lsub C)\bullet J\Psi_1)\times
+\mathcal{L}(B, C\bullet\Delta_2\bullet J\Psi_2) \rightarrow 
+\mathcal{L}(A,  \Delta_1\bullet \Delta_2\bullet J\Psi_1\bullet J\Psi_2)
+$$
+natural in $A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2$. Here $\mathtt{postp}(y\mapsto e_2, e_1)$ is given 
+type $1$ and an application of left identity $\lambda_{1,\Delta_2}$ is assumed implicitly. 
 
+Given 
+$$e: A\rightarrow \Delta_1\bullet (B\lsub C) \bullet J\Psi_1,\qquad  
+f: B\rightarrow C\bullet \Delta_2\bullet J\Psi_2
+$$ and also $a: A'\rightarrow A$, $d_1: \Delta_1\rightarrow\Delta_1'$, 
+$d_2:\Delta_2\rightarrow\Delta_2'$, $p_1: J\Psi_1 \rightarrow J\Psi'_1$ $p_2: J\Psi_2 \rightarrow J\Psi'_2$
+naturality yields 
+\begin{center}
+\begin{tabular}{l}
+$\Psi_{A', \Delta_1',\Delta_2', J\Psi_1', J\Psi_2'}\left((a; e; d_1\bullet id_{B\lsub C}\bullet p_1), (f; id_{\mathsf{C}}\bullet d_2\bullet p_2)\right) = $\\
+$a; \Psi_{A, \Delta_1,\Delta_2,J\Psi_1}(e, f);\lambda_{1,\Delta_1} \bullet d_1\bullet d_2\bullet p_1\bullet p_2; \mathtt{Join}(\Delta_1',\Delta_2', J\Psi_1,J\Psi_2)$
+\end{tabular}
+\end{center}
+In particular, taking $a: A\rightarrow \Delta_1\bullet(B\lsub C)$, 
+$e = id_{\Delta_1\bullet(B\lsub C)}$, $d_1= id_{\Delta_1}$, $d_2: id_{\Delta_2}$, $p_1 = id_{J\Psi_1}$, $p_2 = id{J\Psi_2}$ we obtain
+$$
+\Psi_{A, \Delta_1,\Delta_2}(a, f) = a; \Psi_{A, \Delta_1,\Delta_2}(id_{\Delta_1\bullet(C\lsub D)\bullet id_{J\Psi_1}}, f); \mathtt{Join}(\Delta_1,\Delta_2, J\Psi_1, J\Psi_2)
+$$
+Writing $\mathbf{POSTP}(f)$ for $\Psi_{A, \Delta_1,\Delta_2,J\Psi_1, J\Psi_2}(id_{\Delta_1\bullet(B\lsub C)\bullet J\Psi_1}, f)$
+we define 
+\begin{center}
+\begin{tabular}{l}
+  $[\![x:A \vdash_{\mathsf{L}} \Delta_1, \mathtt{postp}(y\mapsto e_2, e_1), [y(e_1)/y]\Delta_2; \Psi_1, [y(e_1)/y], \Psi_2]\!] =_{df}$\\
+\quad $[\![x:A\vdash_{\mathsf{L}} \Delta_1, e_1: B\lsub C]\!]; id_{\Delta_1}\bullet
+\mathbf{POSTP}[\![y:B \vdash_{\mathsf{L}} e_2: C,\Delta_2; \Psi_2]\!]; \mathtt{Join}(\Delta_1,\Delta_2,J\Psi_1,J\Psi_2)$ 
+\end{tabular}
+\end{center}
 
-%% \ref{linsubtr}.2. {\em Subtraction elimination.} The subtraction elimination rule has the form 
-%% \begin{center} 
-%% \AxiomC{$x:A\vdash_{\mathsf{L}} \Delta_1, e_1: B\lsub C; \Psi_1$}
-%% \AxiomC{$y:B\vdash_{\mathsf{L}} e_2:C, \Delta_2; \Psi_2\quad |\Psi_1| = |\Psi_2|$}
-%% \RightLabel{$\smallsetminus$ E}
-%% \BinaryInfC{$x:A\vdash_{\mathsf{L}}  \mathtt{postp}(y\mapsto e_2, e_1), \Delta_1, [y(e_1)/y]\Delta_2; 
-%% \Psi_1, [y(e_1)/y]\Psi_2$} 
-%% \DisplayProof
-%% \end{center}
-%% This suggests a natural transformation with components
-%% $$
-%% \Psi_{A,\Delta_1, \Delta_2, J\Psi_1, J\Psi_2}: \mathcal{L}(A, \Delta_1\bullet (B\lsub C)\bullet J\Psi_1)\times
-%% \mathcal{L}(B, C\bullet\Delta_2\bullet J\Psi_2) \rightarrow 
-%% \mathcal{L}(A,  \Delta_1\bullet \Delta_2\bullet J\Psi_1\bullet J\Psi_2)
-%% $$
-%% natural in $A, \Delta_1, \Delta_2, J\Psi_1, J\Psi_2$. Here $\mathtt{postp}(y\mapsto e_2, e_1)$ is given 
-%% type $1$ and an application of left identity $\lambda_{1,\Delta_2}$ is assumed implicitly. 
+\ \\
+\noindent
+\ref{linsubtr}.3. {\em Equations in context.}  We have equations in context of the form 
+\begin{center}
+  \framebox{ \footnotesize
+      \begin{math}
+    $$\mprset{flushleft}
+    \inferrule* [right={\scriptsize $\mathbf \lsub - \beta$}] {
+      { \setlength{\tabcolsep}{15px}
+        \begin{tabular}{lll}
+                                     & $e_z\equiv z(\mathtt{mkc}(e_1,y))$\\
+          $|\Delta_1| = |\Delta'_1|$ & $e_p\equiv \mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))$\\
+          $|\Delta_2|=|\Delta'_2|$   & $x : B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1 = e'_1: A_1,\Delta'_1; \Psi'_1$\\
+          $| \Psi_1| = |\Psi'_1|$    & $y:A_2 \vdash_{\mathsf{L}} \Delta_2; \Psi_2 =\Delta'_2; \Psi'_2$\\
+          $|\Psi_2|=|\Psi'_2|$       & $z:A_1 \vdash_{\mathsf{L}} e_2 :A_2, \Delta_3; \Psi_3 =e'_2 :A_2,\Delta'_3;\Psi'_3$\\
+        \end{tabular}
+      }
+    }{x: B\vdash_{\mathsf{L}} \Delta_1, e_p, [y(e_1)/y]\Delta_2, [e_z/z]\Delta_3; \Psi_1, [y(e_1)/y]\Psi_2, [e_z/z]\Psi_3 = \\
+      \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,
+      \Delta'_1, [ [e'_1/z]e'_2/y]\Delta_2, [e'_1/z]\Delta'_3; \Psi'_1, [ [e'_1/z]e'_2/y]\Psi'_2, [e'_1/z]\Psi'_3}
+      \end{math}
+      }
+\end{center}
 
-%% \vspace{1ex}
+We repeat the derivations of the redex and of the reductum.
 
- 
-%% Given 
-%% $$e: A\rightarrow \Delta_1\bullet (B\lsub C) \bullet J\Psi_1,\qquad  
-%% f: B\rightarrow C\bullet \Delta_2\bullet J\Psi_2
-%% $$ and also $a: A'\rightarrow A$, $d_1: \Delta_1\rightarrow\Delta_1'$, 
-%% $d_2:\Delta_2\rightarrow\Delta_2'$, $p_1: J\Psi_1 \rightarrow J\Psi'_1$ $p_2: J\Psi_2 \rightarrow J\Psi'_2$
-%% naturality yields 
-%% \begin{center}
-%% \begin{tabular}{l}
-%% $\Psi_{A', \Delta_1',\Delta_2', J\Psi_1', J\Psi_2'}\left((a; e; d_1\bullet id_{B\lsub C}\bullet p_1), (f; id_{\mathsf{C}}\bullet d_2\bullet p_2)\right) = $\\
-%% $a; \Psi_{A, \Delta_1,\Delta_2,J\Psi_1}(e, f);\lambda_{1,\Delta_1} \bullet d_1\bullet d_2\bullet p_1\bullet p_2; \mathtt{Join}(\Delta_1',\Delta_2', J\Psi_1,J\Psi_2)$
-%% \end{tabular}
-%% \end{center}
-%% In particular, taking $a: A\rightarrow \Delta_1\bullet(B\lsub C)$, 
-%% $e = id_{\Delta_1\bullet(B\lsub C)}$, $d_1= id_{\Delta_1}$, $d_2: id_{\Delta_2}$, $p_1 = id_{J\Psi_1}$, $p_2 = id{J\Psi_2}$ we obtain
-%% $$
-%% \Psi_{A, \Delta_1,\Delta_2}(a, f) = a; \Psi_{A, \Delta_1,\Delta_2}(id_{\Delta_1\bullet(C\lsub D)\bullet id_{J\Psi_1}}, f); \mathtt{Join}(\Delta_1,\Delta_2, J\Psi_1, J\Psi_2)
-%% $$
-%% Writing $\mathbf{POSTP}(f)$ for $\Psi_{A, \Delta_1,\Delta_2,J\Psi_1, J\Psi_2}(id_{\Delta_1\bullet(B\lsub C)\bullet J\Psi_1}, f)$
-%% we define 
-%% \begin{center}
-%% \begin{tabular}{l}
-%% $[\![x:A \vdash_{\mathsf{L}} \Delta_1, \mathtt{postp}(y\mapsto e_2, e_1), [y(e_1)/y]\Delta_2; \Psi_1, [y(e_1)/y], \Psi_2]\!] =_{df}$\\
-%% \quad $[\![x:A\vdash_{\mathsf{L}} \Delta_1, e_1: B\lsub C]\!]; id_{\Delta_1}\bullet
-%% \mathbf{POSTP}[\![y:B \vdash_{\mathsf{L}} e_2: C,\Delta_2; \Psi_2]\!]; \mathtt{Join}(\Delta_1,\Delta_2,J\Psi_1,J\Psi_2)$ 
-%% \end{tabular}
-%% \end{center}
+\centerline{\bf Redex:}
+{\small
+\begin{center}
+\AxiomC{$x:B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_{\mathsf{L}}\Delta_2; \Psi_2$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
+\AxiomC{$z:A_1\vdash_{\mathsf{L}} e_2:A_2, \Delta_3; \Psi_3$}
+\BinaryInfC{$x:B\vdash_{\mathsf{L}} \Delta_1, 
+\overbrace{\mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))}^{e_p}, 
+ [y(e_1)/y]\Delta_2,  [\overbrace{z(\mathtt{mkc}(e_1,y))}^{e_z}/z]\Delta_3 ;$}
+\noLine
+\UnaryInfC{$\hskip2in \Psi_1,  [y(e_1)/y]\Psi_2, [z(\mathtt{mkc}(e_1,y)/z)]:\Psi_3 $}
+\DisplayProof
+\end{center}}
+\centerline{\bf Reductum:}
+{\small
+\begin{center}
+\AxiomC{$x:B \vdash_{\mathsf{L}} e'_1:A_1, \Delta'_1; \Psi'_1\qquad  z:A_1\vdash_{\mathsf{L}} e'_2:A_2, \Delta'_3; \Psi'_3$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta'_1, [e'_1/z]\Delta'_3,       [e'_1/z]e'_2 : A_2; \Psi'_1,  [e'_1/z]\Psi'_3$}
+\AxiomC{$y:A_2\vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
+\BinaryInfC{$x:B \vdash_{\mathsf{L}}\Delta'_1, [ [e'_1/z]e'_2/y]\Delta'_2,\ [e'_1/z]\Delta'_3; \Psi'_1,[ [e'_1/z]e'_2]\Psi'_2,\ [e'_1/z]\Psi'_3$}
+\DisplayProof
+\end{center}}
 
-%% \vspace{1ex}
+Given morphisms $n: B\rightarrow \Delta_1\bullet A_1$ and $m: A_1\rightarrow \Delta_3\bullet A_2$, for these equations to be satisfied we need the following diagram to commute (omitting non-linear terms):
+\begin{center}
+$\xymatrix@R=.4in{B\ar[d]_{\mathbf{MKC}^{A_2}(n)} \ar[rr]^n &\qquad & 
+\Delta_1\bullet A_1\ar[d]^{id_{\Delta_1}\bullet m}\\
+\Delta_1\bullet(A_1\lsub A_2)\bullet A_2\ar[rr]_{\mathbf{POSTP}(m)\bullet id_{A_2}} &&\Delta_1\bullet\Delta_3\bullet A_2\\
+}$
+\end{center}
+in particular, taking $n = id_{A_1}$ we have 
+\begin{center}
+$\xymatrix@R=.4in{A_1 \ar[d]_{\mathbf{MKC}^A_2(id_{A_1})}\ar[r]^m&\Delta_3\bullet A_2\\
+(A_1\lsub A_2)\bullet A_2 \ar[ur]|{\mathbf{POSTP}(m)\bullet id_{A_2}} &\\
+}$
+\end{center}
+Assuming the above decomposition to be unique, we can show that the $\eta$ equation in context
+is also satisfied:     
+\begin{equation}\label{eta:subtr}
+\framebox{\small 
+\AxiomC{$|\Delta| = |\Delta'| \quad |\Psi| = |\Psi'|\quad z;B \vdash_{\mathsf{L}} \Delta, \Psi = \Delta', \Psi'$}
+\UnaryInfC{$z:B \vdash_{\mathsf{L}} \mathtt{postp}(x\mapsto y,e), \mathtt{mkc}(x(e),y): A_1\lsub A_2, \Delta, \Psi = 
+e: A_1\lsub A_2, \Delta'; \Psi'$}
+\DisplayProof
+}
+\end{equation}
+and conclude that there is a natural isomorphism between the maps 
+\begin{center}
+\AxiomC{$A \rightarrow \Delta\bullet B$}
+\doubleLine
+\UnaryInfC{$A\lsub B\rightarrow \Delta$}
+\DisplayProof
+\end{center}
+i.e., that $\lsub$ is the left adjoint to the bifunctor $\bullet$.  
 
-
-%% \ref{linsubtr}.3. {\em Equations in context.}  We have equations in context of the form 
-%% \begin{equation}\label{context:sub}
-%% \framebox{\AxiomC{$\mathbf \lsub - \beta$ rules:}
-%% \noLine
-%% \UnaryInfC{$e_p\equiv \mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))\quad e_z\equiv z(\mathtt{mkc}(e_1,y))\hskip1in $}
-%% \noLine
-%% \UnaryInfC{$|\Delta_1| = |\Delta'_1|\ | \Psi_1| = |\Psi'_1| \qquad
-%% x : B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1 = e'_1: A_1,\Delta'_1; \Psi'_1 $}
-%% \noLine
-%% \UnaryInfC{$\quad |\Delta_2|=|\Delta'_2|\ |\Psi_2|=|\Psi'_2|\qquad y:A_2 \vdash_{\mathsf{L}} \Delta_2; \Psi_2 =\Delta'_2; \Psi'_2
-%% \hskip1in$}
-%% \noLine
-%% \UnaryInfC{$\hskip1.8in z:A_1 \vdash_{\mathsf{L}} e_2 :A_2, \Delta_3; \Psi_3 =e'_2 :A_2,\Delta'_3;\Psi'_3$}
-%% \UnaryInfC{$x: B\vdash_{\mathsf{L}} \Delta_1. e_p, [y(e_1)/y]\Delta_2, [e_z/z]\Delta_3; \Psi_1, [y(e_1))y]\Psi_2, [e_z/z]\Psi_3 = $}
-%% \noLine
-%% \UnaryInfC{$\qquad = \Delta'_1, [ [e'_1/z]e'_2/y]\Delta_2, [e'_1/z]\Delta'_3; \Psi'_1, [ [e'_1/z]e'_2/y]\Psi'_2, [e'_1/z]\Psi'_3$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-
-
-%% We repeat the derivations of the redex and of the reductum.
-
-%% \centerline{\bf Redex:}
-%% {\small
-%% \begin{center}
-%% \AxiomC{$x:B \vdash_{\mathsf{L}} e_1:A_1, \Delta_1; \Psi_1\qquad y:A_2\vdash_{\mathsf{L}}\Delta_2; \Psi_2$}
-%% \UnaryInfC{$x:B \vdash_{\mathsf{L}} \mathtt{mkc}(e_1, y): A_1\lsub A_2, \Delta_1, [y(e_1)/y]\Delta_2; \Psi_1,  [y(e_1)/y]\Psi_2$}
-%% \AxiomC{$z:A_1\vdash_{\mathsf{L}} e_2:A_2, \Delta_3; \Psi_3$}
-%% \BinaryInfC{$x:B\vdash_{\mathsf{L}} \Delta_1, 
-%% \overbrace{\mathtt{postp}(z\mapsto e_2, \mathtt{mkc}(e_1,y))}^{e_p}, 
-%%  [y(e_1)/y]\Delta_2,  [\overbrace{z(\mathtt{mkc}(e_1,y))}^{e_z}/z]\Delta_3 ;$}
-%% \noLine
-%% \UnaryInfC{$\hskip2in \Psi_1,  [y(e_1)/y]\Psi_2, [z(\mathtt{mkc}(e_1,y)/z)]:\Psi_3 $}
-%% \DisplayProof
-%% \end{center}}
-%% \centerline{\bf Reductum:}
-%% {\small
-%% \begin{center}
-%% \AxiomC{$x:B \vdash_{\mathsf{L}} e'_1:A_1, \Delta'_1; \Psi'_1\qquad  z:A_1\vdash_{\mathsf{L}} e'_2:A_2, \Delta'_3; \Psi'_3$}
-%% \UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta'_1, [e'_1/z]\Delta'_3,       [e'_1/z]e'_2 : A_2; \Psi'_1,  [e'_1/z]\Psi'_3$}
-%% \AxiomC{$y:A_2\vdash_{\mathsf{L}} \Delta_2; \Psi_2$}
-%% \BinaryInfC{$x:B \vdash_{\mathsf{L}}\Delta'_1, [ [e'_1/z]e'_2/y]\Delta'_2,\ [e'_1/z]\Delta'_3; \Psi'_1,[ [e'_1/z]e'_2]\Psi'_2,\ [e'_1/z]\Psi'_3$}
-%% \DisplayProof
-%% \end{center}}
-
-
-%% \vspace{1ex}
-
-
-%% Given morphisms $n: B\rightarrow \Delta_1\bullet A_1$ and $m: A_1\rightarrow \Delta_3\bullet A_2$, for these equations to be satisfied we need the following diagram to commute (omitting non-linear terms):
-%% \begin{center}
-%% $\xymatrix@R=.4in{B\ar[d]_{\mathbf{MKC}^{A_2}(n)} \ar[rr]^n &\qquad & 
-%% \Delta_1\bullet A_1\ar[d]^{id_{\Delta_1}\bullet m}\\
-%% \Delta_1\bullet(A_1\lsub A_2)\bullet A_2\ar[rr]_{\mathbf{POSTP}(m)\bullet id_{A_2}} &&\Delta_1\bullet\Delta_3\bullet A_2\\
-%% }$
-%% \end{center}
-%% in particular, taking $n = id_{A_1}$ we have 
-%% \begin{center}
-%% $\xymatrix@R=.4in{A_1 \ar[d]_{\mathbf{MKC}^A_2(id_{A_1})}\ar[r]^m&\Delta_3\bullet A_2\\
-%% (A_1\lsub A_2)\bullet A_2 \ar[ur]|{\mathbf{POSTP}(m)\bullet id_{A_2}} &\\
-%% }$
-%% \end{center}
-%% Assuming the above decomposition to be unique, we can show that the $\eta$ equation in context
-%% is also satisfied:     
-%% \begin{equation}\label{eta:subtr}
-%% \framebox{\small 
-%% \AxiomC{$|\Delta| = |\Delta'| \quad |\Psi| = |\Psi'|\quad z;B \vdash_{\mathsf{L}} \Delta, \Psi = \Delta', \Psi'$}
-%% \UnaryInfC{$z:B \vdash_{\mathsf{L}} \mathtt{postp}(x\mapsto y,e), \mathtt{mkc}(x(e),y): A_1\lsub A_2, \Delta, \Psi = 
-%% e: A_1\lsub A_2, \Delta'; \Psi'$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% and conclude that there is a natural isomorphism between the maps 
-%% \begin{center}
-%% \AxiomC{$A \rightarrow \Delta\bullet B$}
-%% \doubleLine
-%% \UnaryInfC{$A\lsub B\rightarrow \Delta$}
-%% \DisplayProof
-%% \end{center}
-%% i.e., that $\lsub$ is the left adjoint to the bifunctor $\bullet$.  
-%% %
-%% %
-%% %
-%% %
-%% \subsubsection{Unit rules}
-%% \label{units}  The introduction and elimination rules for the unit $\bot$ are
-%% \begin{center}
-%% \begin{tabular}{cc} 
-%% \\
-%% \AxiomC{$\bot$ {\em introduction}}
-%% \noLine
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi\quad r: B \in \Delta,\ \hbox{or}\  r:S \in \Psi$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi$}
-%% % \noLine
-%% % \UnaryInfC{where $R \in \kappa$.}
-%% \DisplayProof \quad
-%% &\quad
-%% \AxiomC{$\bot$ {\em elimination}}
-%% \noLine
-%% \UnaryInfC{$x:A \vdash_{\mathsf{L}}  \Delta,  e:\bot; \Psi$}
-%% \UnaryInfC{$x:A \vdash_{\mathsf{L}} \Delta, \mathtt{postp_{\bot}}(e); \Psi$}
-%% \DisplayProof
-%% \\
-%% \end{tabular} 
-%% \end{center}
-%% The introduction % and the elimination rules
-%% rule can be interpreted by a map $a: A \rightarrow 1$.
-%% % , if we give the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
-%% % in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
-%% The elimination rule can also be interpreted as a map $\langle \rangle: A \rightarrow \bot$ if we give the 
-%% term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. In presence of a nonempty linear context $\Delta$ one can compose with  
-%% the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle\rangle;\lambda_{\Delta}$.
+\subsubsection{Unit rules}
+\label{units}  The introduction and elimination rules for the unit $\bot$ are stated as follows:
+\begin{center}
+  \begin{math}
+    \setlength{\arraycolsep}{10px}
+    \begin{array}{lll}
+      $$\mprset{flushleft}
+      \inferrule* [right=$\DualLNLLogicdruleTLXXpIName{}$] {
+        [[x:A |-TL D; P]]
+        \\
+        r : B \in [[D]],\ \hbox{or}\  r:S \in \Psi    
+      }{x:A\vdash_{\mathsf{L}} \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi}
+      &
+      $$\mprset{flushleft}
+      \inferrule* [right=$\DualLNLLogicdruleTLXXpEName{}$] {
+        x:A \vdash_{\mathsf{L}}  \Delta,  e:\bot; \Psi
+      }{x:A \vdash_{\mathsf{L}} \Delta, \mathtt{postp_{\bot}}(e); \Psi}
+    \end{array}
+  \end{math}
+\end{center}
+The introduction % and the elimination rules
+rule can be interpreted by a map $a: A \rightarrow 1$.
+% , if we give the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
+% in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
+The elimination rule can also be interpreted as a map $\langle \rangle: A \rightarrow \bot$ if we give the 
+term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. In presence of a nonempty linear context $\Delta$ one can compose with  
+the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle\rangle;\lambda_{\Delta}$.
 
 %% \vspace{1ex}
 
  
-%% The introduction rule requires a natural transformation with components
-%% \begin{center}
-%% $\Phi_{A,\Delta\bullet J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
-%% \end{center}
-%% natural in $A$, $\Delta$, $J\Psi$. Given morphisms $e:A\rightarrow \Delta\bullet J\Psi$, $d:A'\rightarrow A$, $c:\Delta\rightarrow\Delta'$ and $p:J\Psi\rightarrow J\Psi'$, naturality yields
-%% \begin{center}
-%% $\Phi_{A', \Delta',J\Psi'}(d;e;c\bullet p) = d;\Phi_{A, \Delta, J\Psi}(e);c\bullet p$.
-%% \end{center} 
-%% Letting $d:A\rightarrow\Delta\bullet J\Psi$ and $e = id_{\Delta\bullet J\Psi}$, $c = id_{\Delta\bullet\bot}$, $p = id_{J\Psi}$ we have 
-%% $$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
-%% where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
-%% We define 
-%% $$
-%% [\![x:A\vdash_{\mathsf{L}} \Delta, \/ \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
-%% [\![x:A\vdash_{\mathsf{L}} \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
-%% $$
+The introduction rule requires a natural transformation with components
+\begin{center}
+$\Phi_{A,\Delta\bullet J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
+\end{center}
+natural in $A$, $\Delta$, $J\Psi$. Given morphisms $e:A\rightarrow \Delta\bullet J\Psi$, $d:A'\rightarrow A$, $c:\Delta\rightarrow\Delta'$ and $p:J\Psi\rightarrow J\Psi'$, naturality yields
+\begin{center}
+$\Phi_{A', \Delta',J\Psi'}(d;e;c\bullet p) = d;\Phi_{A, \Delta, J\Psi}(e);c\bullet p$.
+\end{center} 
+Letting $d:A\rightarrow\Delta\bullet J\Psi$ and $e = id_{\Delta\bullet J\Psi}$, $c = id_{\Delta\bullet\bot}$, $p = id_{J\Psi}$ we have 
+$$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
+where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
+We define 
+$$
+[\![x:A\vdash_{\mathsf{L}} \Delta, \/ \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
+[\![x:A\vdash_{\mathsf{L}} \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
+$$
 %% \ref{units}.2. {\em Equations in context.}
 
 %% The equation in context        
