@@ -111,7 +111,7 @@ was given by Cockett and Seely \cite{Cockett:1997}.  For
 Bi-Intuitionistic Linear Logic, they gave also a system of proof nets,
 corresponding to a sequent calculus without annotations and
 restrictions that therefore collapses into classical MLL.  Recently,
-Clouston, Dawson, Goré and Tiu cite{CloustonDTG:2013} gave an 
+Clouston, Dawson, Goré and Tiu \cite{CloustonDTG:2013} gave an 
 annotation-free formalization for BILL, alternative to sequent calculi, 
 in the form of deep-inference and display calculi for BILL. This calculus 
 enjoys cut-elimination and is relevant to the categorical semantics
@@ -154,8 +154,25 @@ between the two sides depending on negations (see, e.g,
 \cite{Bellin:2014} Assertions, hypotheses, conjectures, expectations:
 Rough-sets semantics and proof-theory.)  Here the separation between 
 intuitionistic and co-intuitionistic logic and their models is given a 
-linguistic motivation. Thus a term assignment for co-intuitionistic 
-logic has been derived from Crolard's definition which is independent
+linguistic motivation. Writing  $vdash p$ for the type of assertions that $p$ 
+is true and using intuitionistic connectives with the BHK interpretation, one gives 
+a ``pragmatic interpretatiion'' of ILL, where an expression $A$ is \emph{justified} 
+or \emph{unjustified} (Dalla Pozza and Garola,  
+A pragmatic interpretation of intuitionistic propositional logic, Erkenntnis, 43, 1995, pp.81-109.), 
+Similarly, writing $\mathcal{H}\;  p$ for the type of hypotheses that $p$ is true,  and  
+using co-intuitionistic connectives one builds a co-intuitionistic language, for which 
+an analogue ``pragmatic interpretation'' has been attempted.  Both languages may 
+be given a modal interpretattion in S4, with $(\vdash p)^M = \Box p$
+and  $(\mathcal{H}\;  p)^M = \Diamond p$. Notice that  here thee is a semantic duality between
+an assertion t$\vdash p$  and a hypothesis $\mathcal{H}\; \neg p$, as $\Box p$ and 
+$\Diamond \neg p$ are contradictory, Similarly there is a semantic duality between 
+$\mathcal{H}\;  p$ and $\vdash \neg p$, but not between $\assert p$ 
+and the hypothesis that $p$ ($\mathcal{H}\, p$). A useful direction of research in the 
+proof theory of bi-intuitionism may be the investigation the relations between co-intuitionistic
+proofs and intuitionistic refutations. 
+
+It is in this context that a term assignment for co-intuitionistic  logic 
+has been developed, starting from Crolard's definition but independently
 of the $\lambda\mu$ framework. This calculus was used
 here as a term assignment of Dual LNL logic.
 
@@ -163,7 +180,7 @@ here as a term assignment of Dual LNL logic.
 To achieve the project outlined in the introduction of putting
 together intuitionistic and co-intuitionistic adjoint logic in the
 environment of BILL the definition of a suitable syntax for BILL will
-play a role.
+play a key role.
 
 
 % More generally, notice also that co-intuitionistic logic also arises as a logic of refutations of intuitionistic sequents,
