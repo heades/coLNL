@@ -1,0 +1,1325 @@
+****short section intro*****
+
+\subsection{Symmetric (co)Monoidal Categories}
+\label{subsec:symmetric_monoidal_categories}
+We now introduce the necessary definitions related to symmetric
+monoidal categories that our model will depend on.  Most of these
+definitions are equivalent to the ones given by Benton
+\cite{Benton:1994}, but we give a lesser known definition of symmetric
+comonoidal functors due to Bellin \cite{Bellin:2012}.  In this
+section we also introduce distributive categories, the notion of
+coclosure, and finally, the definition of bilinear categories.  The
+reader may wish to simply skim this section, but refer back to it when
+they encounter a definition or result they do not know.
+
+\begin{definition}
+  \label{def:monoidal-category}
+  A \textbf{symmetric monoidal category (SMC)} is a category, $\cat{M}$,
+  with the following data:
+  \begin{itemize}
+  \item An object $\top$ of $\cat{M}$,
+  \item A bi-functor $\otimes : \cat{M} \times \cat{M} \mto \cat{M}$,
+  \item The following natural isomorphisms:
+    \[
+    \begin{array}{lll}
+      \lambda_A : \top \otimes A \mto A\\
+      \rho_A : A \otimes \top \mto A\\      
+      \alpha_{A,B,C} : (A \otimes B) \otimes C \mto A \otimes (B \otimes C)\\
+    \end{array}
+    \]
+  \item A symmetry natural transformation:
+    \[
+    \beta_{A,B} : A \otimes B \mto B \otimes A
+    \]
+  \item Subject to the following coherence diagrams:
+    \begin{mathpar}
+      \bfig
+      \vSquares|ammmmma|/->`->```->``<-/[
+        ((A \otimes B) \otimes C) \otimes D`
+        (A \otimes (B \otimes C)) \otimes D`
+        (A \otimes B) \otimes (C \otimes D)``
+        A \otimes (B \otimes (C \otimes D))`
+        A \otimes ((B \otimes C) \otimes D);
+        \alpha_{A,B,C} \otimes \id_D`
+        \alpha_{A \otimes B,C,D}```
+        \alpha_{A,B,C \otimes D}``
+        \id_A \otimes \alpha_{B,C,D}]      
+      
+      \morphism(1206,1000)|m|<0,-1000>[
+        (A \otimes (B \otimes C)) \otimes D`
+        A \otimes ((B \otimes C) \otimes D);
+        \alpha_{A,B \otimes C,D}]
+      \efig
+      \and
+      \bfig
+      \hSquares|aammmaa|/->`->`->``->`->`->/[
+        (A \otimes B) \otimes C`
+        A \otimes (B \otimes C)`
+        (B \otimes C) \otimes A`
+        (B \otimes A) \otimes C`
+        B \otimes (A \otimes C)`
+        B \otimes (C \otimes A);
+        \alpha_{A,B,C}`
+        \beta_{A,B \otimes C}`
+        \beta_{A,B} \otimes \id_C``
+        \alpha_{B,C,A}`
+        \alpha_{B,A,C}`
+        \id_B \otimes \beta_{A,C}]
+      \efig      
+    \end{mathpar}
+    \begin{mathpar}
+      \bfig
+      \Vtriangle[
+        (A \otimes \top) \otimes B`
+        A \otimes (\top \otimes B)`
+        A \otimes B;
+        \alpha_{A,\top,B}`
+        \rho_{A}`
+        \lambda_{B}]
+      \efig
+      \and
+      \bfig
+      \btriangle[
+        A \otimes B`
+        B \otimes A`
+        A \otimes B;
+        \beta_{A,B}`
+        \id_{A \otimes B}`
+        \beta_{B,A}]
+      \efig
+      \and
+      \bfig
+      \Vtriangle[
+        \top \otimes A`
+        A \otimes \top`
+        A;
+        \beta_{\top,A}`
+        \lambda_A`
+        \rho_A]
+      \efig
+    \end{mathpar}    
+  \end{itemize}
+\end{definition}
+
+Categorical modeling implication requires that the model be closed;
+which can be seen as an internalization of the notion of a morphism.
+\begin{definition}
+  \label{def:SMCC}
+  A \textbf{symmetric monoidal closed category (SMCC)} is a symmetric
+  monoidal category, $(\cat{M},\top,\otimes)$, such that, for any object
+  $B$ of $\cat{M}$, the functor $- \otimes B : \cat{M} \mto \cat{M}$
+  has a specified right adjoint.  Hence, for any objects $A$ and $C$
+  of $\cat{M}$ there is an object $B \limp C$ of $\cat{M}$ and a
+  natural bijection:
+  \[
+  \Hom{\cat{M}}{A \otimes B}{C} \cong \Hom{\cat{M}}{A}{B \limp C}
+  \]
+  We call the functor $\limp : \cat{M} \times \cat{M} \mto \cat{M}$
+  the internal hom of $\cat{M}$.
+\end{definition}
+
+Symmetric monoidal closed categories can be seen as a model of
+intuitionistic linear logic with a tensor product and implication.
+What happens when we take the dual?  First, we have the following
+result:
+\begin{lemma}[Dual of Symmetric Monoidal Categories]
+  \label{lemma:dual_of_symmetric_monoidal_categories}
+  If $(\cat{M},\top,\otimes)$ is a symmetric monoidal category, then
+  $\catop{M}$ is also a symmetric monoidal category.
+\end{lemma}
+The previous result follows from the fact that the structures making
+up symmetric monoidal categories are isomorphisms, and so naturally
+taking their opposite will yield another symmetric monoidal category.
+To emphasize when we are thinking about a symmetric monoidal category
+in the opposite we use the notation $(\cat{M},\perp,\oplus)$ which gives
+the suggestion of $\oplus$ corresponding to a disjunctive tensor
+product which we call the \textit{cotensor} of $\cat{M}$. The next
+definition describes when a symmetric monoidal category is coclosed.
+\begin{definition}
+  \label{def:SMCCC}
+  A \textbf{symmetric monoidal coclosed category (SMCCC)} is a symmetric
+  monoidal category, $(\cat{M},\perp,\oplus)$, such that, for any object
+  $B$ of $\cat{M}$, the functor $- \oplus B : \cat{M} \mto \cat{M}$
+  has a specified left adjoint.  Hence, for any objects $A$ and $C$
+  of $\cat{M}$ there is an object $C \colimp B$ of $\cat{M}$ and a
+  natural bijection:
+  \[
+  \Hom{\cat{M}}{C}{A \oplus B} \cong \Hom{\cat{M}}{C \colimp B}{A}
+  \]
+  We call the functor $\colimp : \cat{M} \times \cat{M} \mto \cat{M}$
+  the internal cohom of $\cat{M}$.
+\end{definition}
+
+We combine a symmetric monoidal closed category with a symmetric
+monoidal coclosed category in a single category.  First, we define the
+notion of a distributive category due to Cockett and Seely \cite{Cockett:1997}.
+\begin{definition}
+  \label{def:dist-cat}
+  We call a symmetric monoidal category, $(\cat{M}, \top, \otimes,
+  \perp, \oplus)$ equipped with the structure of a cotensor $(\cat{M},
+  \perp, \oplus)$, a \textbf{distributive category} if there are
+  natural transformations:
+  \[
+  \begin{array}{lll}
+    \delta^L_{A,B,C} : A \otimes (B \oplus C) \mto (A \otimes B) \oplus C\\
+    \delta^R_{A,B,C} : (B \oplus C) \otimes A \mto B \oplus (C \otimes A)
+  \end{array}
+  \]
+  subject to several coherence diagrams.  Due to the large number of
+  coherence diagrams we do not list them here, but they all can be
+  found in Cockett and Seely's paper \cite{Cockett:1997}.
+\end{definition}
+\noindent
+Requiring that the tensor and cotensor products have the corresponding
+right and left adjoints results in the following definition.
+\begin{definition}
+  \label{def:bilinear-cat}
+  A \textbf{bilinear category} is a distributive category $(\cat{M},
+  \top, \otimes, \perp, \oplus)$ such that $(\cat{M}, \top, \otimes)$
+  is closed, and $(\cat{M}, \perp, \oplus)$ is coclosed.  We will
+  denote bi-linear categories by $(\cat{M}, \top, \otimes, \limp, \perp,
+  \oplus, \colimp)$.
+\end{definition}
+Originally, Lambek defined bilinear categories to be similar to the
+previous definition, but the tensor and cotensor were non-commutative
+\cite{Cockett:1997a}, however, the bilinear categories given here
+are. We retain the name in homage to his original work.  As we will
+see below bilinear categories form the core of a categorical model for
+bi-intuitionism.
+
+A symmetric monoidal category is a category with additional structure
+subject to several coherence diagrams.  Thus, an ordinary functor is
+not enough to capture this structure, and hence, the introduction of
+symmetric monoidal functors.
+\begin{definition}
+  \label{def:SMCFUN}
+  Suppose we are given two symmetric monoidal
+  categories\\ $(\cat{M}_1,\top_1,\otimes_1,\alpha_1,\lambda_1,\rho_1,\beta_1)$
+  and
+  $(\cat{M}_2,\top_2,\otimes_2,\alpha_2,\lambda_2,\rho_2,\beta_2)$.
+  Then a \textbf{symmetric monoidal functor} is a functor $F :
+  \cat{M}_1 \mto \cat{M}_2$, a map $m_{\top_1} : \top_2 \mto F\top_1$
+  and a natural transformation $m_{A,B} : FA \otimes_2 FB \mto F(A
+  \otimes_1 B)$ subject to the following coherence conditions:
+  \begin{mathpar}
+    \bfig
+    \vSquares|ammmmma|/->`->`->``->`->`->/[
+      (FA \otimes_2 FB) \otimes_2 FC`
+      FA \otimes_2 (FB \otimes_2 FC)`
+      F(A \otimes_1 B) \otimes_2 FC`
+      FA \otimes_2 F(B \otimes_1 C)`
+      F((A \otimes_1 B) \otimes_1 C)`
+      F(A \otimes_1 (B \otimes_1 C));
+      {\alpha_2}_{FA,FB,FC}`
+      m_{A,B} \otimes \id_{FC}`
+      \id_{FA} \otimes m_{B,C}``
+      m_{A \otimes_1 B,C}`
+      m_{A,B \otimes_1 C}`
+      F{\alpha_1}_{A,B,C}]
+    \efig
+    \end{mathpar}
+%    \and
+\begin{mathpar}
+    \bfig
+    \square|amma|/->`->`<-`->/<1000,500>[
+      \top_2 \otimes_2 FA`
+      FA`
+      F\top_1 \otimes_2 FA`
+      F(\top_1 \otimes_1 A);
+      {\lambda_2}_{FA}`
+      m_{\top_1} \otimes \id_{FA}`
+      F{\lambda_1}_{A}`
+      m_{\top_1,A}]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`<-`->/<1000,500>[
+      FA \otimes_2 \top_2`
+      FA`
+      FA \otimes_2 F\top_1`
+      F(A \otimes_1 \top_1);
+      {\rho_2}_{FA}`
+      \id_{FA} \otimes m_{\top_1}`
+      F{\rho_1}_{A}`
+      m_{A,\top_1}]
+    \efig
+     \end{mathpar}
+     
+      \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      FA \otimes_2 FB`
+      FB \otimes_2 FA`
+      F(A \otimes_1 B)`
+      F(B \otimes_1 A);
+      {\beta_2}_{FA,FB}`
+      m_{A,B}`
+      m_{B,A}`
+      F{\beta_1}_{A,B}]
+    \efig
+  \end{mathpar}
+\end{definition}
+\noindent
+The following is dual to the previous definition.
+\begin{definition}
+  \label{def:coSMCFUN}
+  Suppose we are given two symmetric monoidal
+  categories\\ $(\cat{M}_1,\perp_1,\oplus_1,\alpha_1,\lambda_1,\rho_1,\beta_1)$
+  and
+  $(\cat{M}_2,\perp_2,\oplus_2,\alpha_2,\lambda_2,\rho_2,\beta_2)$.
+  Then a \textbf{symmetric comonoidal functor} is a functor $F :
+  \cat{M}_1 \mto \cat{M}_2$, a map $m_{\perp_1} : F\perp_1 \mto
+  \perp_2$ and a natural transformation $m_{A,B} : F(A \oplus_1 B)
+  \mto FA \oplus_2 FB$ subject to the following coherence conditions:
+  \begin{mathpar}
+    \bfig
+    \vSquares|ammmmma|/->`->`->``->`->`->/[
+      F((A \oplus_1 B) \oplus_1 C)`
+      F(A \oplus_1 B) \oplus_2 FC`
+      F(A \oplus_1 (B \oplus_1 C))`
+      (FA \oplus_2 FB) \oplus_2 FC`
+      FA \oplus_2 F(B \oplus_1 C))`
+      FA \oplus_2 (FB \oplus_2 FC);
+      m_{A \oplus_1 B,C}`
+      F\alpha_{A,B,C}`
+      m_{A,B} \oplus_2 \id_{FC}``
+      m_{A,B \oplus_1 C}`
+      \alpha_{FA,FB,FC}`
+      \id_{FA} \oplus_2 m_{B,C}]    
+    \efig
+  \end{mathpar}
+%    \and
+  \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      F(\perp_1 \oplus_1 A)`
+      F\perp_1 \oplus_2 FA`
+      FA`
+      \perp_2 \oplus_2 FA;
+      m_{\perp_1,A}`
+      F{\lambda_1}_{A}`
+      m_{\perp_1} \oplus \id_{FA}`
+      {\lambda^{-1}_2}_{FA}]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`->`->/<1000,500>[
+      F(A \oplus_1 \perp_1)`
+      FA \oplus_2 F\perp_1`
+      FA`
+      FA \oplus_2 \perp_2;
+      m_{A,\perp_1}`
+      F{\rho_1}_{A}`
+      \id_{FA} \oplus m_{\perp_1}`
+      {\rho^{-1}_2}_{FA}]
+    \efig
+  \end{mathpar}
+      
+  \begin{diagram}
+    \square|amma|/->`->`->`->/<1000,500>[
+      F(A \oplus_1 B)`
+      FA \oplus_2 FB`
+      F(B \oplus_1 A)`
+      FB \oplus_2 FA;
+      m_{A,B}`
+      F{\beta_1}_{A,B}`
+      {\beta_2}_{FA,FB}`
+      m_{B,A}]
+  \end{diagram}
+\end{definition}
+
+Naturally, since functors are enhanced to handle the additional
+structure found in a symmetric monoidal category we must also extend
+natural transformations, and adjunctions.
+\begin{definition}
+  \label{def:SMCNAT}
+  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
+  are SMCs, and $(F,m)$ and $(G,n)$ are a symmetric monoidal functors
+  between $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{symmetric
+    monoidal natural transformation} is a natural transformation,
+  $f : F \mto G$, subject to the following coherence diagrams:
+  \begin{mathpar}
+    \bfig
+    \square<1000,500>[
+      FA \otimes_2 FB`
+      F(A \otimes_1 B)`
+      GA \otimes_2 GB`
+      G(A \otimes_1 B);
+      m_{A,B}`
+      f_A \otimes_2 f_B`
+      f_{A \otimes_1 B}`
+      n_{A,B}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle/->`<-`<-/[
+      F\top_1`
+      G\top_1`
+      \top_2;
+      f_{\top_1}`
+      m_{\top_1}`
+      n_{\top_1}]
+    \efig
+  \end{mathpar}  
+\end{definition}
+\begin{definition}
+  \label{def:coSMCNAT}
+  Suppose $(\cat{M}_1,\perp_1,\oplus_1)$ and $(\cat{M}_2,\perp_2,\oplus_2)$
+  are SMCs, and $(F,m)$ and $(G,n)$ are a symmetric comonoidal functors
+  between $\cat{M}_1$ and $\cat{M}_2$.  Then a \textbf{symmetric
+    comonoidal natural transformation} is a natural transformation,
+  $f : F \mto G$, subject to the following coherence diagrams:
+  \begin{mathpar}
+    \bfig
+    \square<1000,500>[
+      F(A \oplus_1 B)`
+      FA \oplus_2 FB`
+      G(A \oplus_1 B)`
+      GA \oplus_2 GB;
+      m_{A,B}`
+      f_{A \oplus_1 B}`
+      f_A \oplus_2 f_B`
+      n_{A,B}]
+    \efig
+    \and
+    \bfig
+    \Vtriangle/<-`<-`<-/[
+      \perp_2`
+      G\perp_1`
+      F\perp_1;
+      n_{\perp_1}`
+      m_{\perp_1}`
+      f_{\perp_1}]
+    \efig
+  \end{mathpar}  
+\end{definition}  
+\begin{definition}
+  \label{def:SMCADJ}
+  Suppose $(\cat{M}_1,\top_1,\otimes_1)$ and $(\cat{M}_2,\top_2,\otimes_2)$
+  are SMCs, and $(F,m)$ is a symmetric monoidal functor between
+  $\cat{M}_1$ and $\cat{M}_2$ and $(G,n)$ is a symmetric monoidal
+  functor between $\cat{M}_2$ and $\cat{M}_1$.  Then a
+  \textbf{symmetric monoidal adjunction} is an ordinary adjunction
+  $\cat{M}_1 : F \dashv G : \cat{M}_2$ such that the unit,
+  $\eta_A : A \to GFA$, and the counit, $\varepsilon_A : FGA \to A$, are
+  symmetric monoidal natural transformations.  Thus, the following
+  diagrams must commute:
+  \begin{mathpar}
+    \bfig
+    \square|amma|/->`->`->`<-/<1000,500>[
+      FGA \otimes_2 FGB`
+      F(GA \otimes_1 GB)`
+      A \otimes_2 B`
+      FGA \otimes_2 FGB;
+      m_{GA,GB}`
+      \varepsilon_A \otimes_1 \varepsilon_B`
+      Fn_{A,B}`
+      \varepsilon_{A \otimes_1 B}]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`<-`=/[
+    %%   FG\top_1`
+    %%   \top_1`
+    %%   \top_1;
+    %%   \varepsilon_{\top_1}`
+    %%   \q{\top_1}`]
+    \square|amma|/->`<-`->`=/<1000,500>[
+      F\top_1`
+      FG\top_2`
+      \top_2`
+      \top_2;
+      Fn_{\top_2}`
+      m_{\top_1}`
+      \varepsilon_{\top_1}`]    
+    \efig
+    \and
+    \bfig
+    %% \dtriangle|mmb|<1000,500>[
+    %%   A \otimes_2 B`
+    %%   GFA \otimes_2 GFB`
+    %%   GF(A \otimes_2 B);
+    %%   \eta_A \otimes_2 \eta_B`
+    %%   \eta_{A \otimes_2 B}`
+    %%   \p{A,B}]
+    \square|amma|/<-`->`->`->/<1000,500>[
+      GFA \otimes_1 GFB`
+      A \otimes_1 B`
+      G(FA \otimes_2 FB)`
+      GF(A \otimes_1 B);
+      \eta_A \otimes_1 \eta_B`
+      n_{FA,FB}`
+      \eta_{A \otimes_1 B}`
+      m_{A,B}]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`=`<-/[
+    %%   \top_1`
+    %%   GF\top_1`
+    %%   \top_1;
+    %%   \eta_{\top_1}``
+    %%   p_{\top_1}]
+    \square|amma|/->`<-`<-`=/<1000,500>[
+      G\top_2`
+      GF\top_1`
+      \top_1`
+      \top_1;
+      Gm_{\top_1}`
+      n_{\top_2}`
+      \eta_{\top_1}`]      
+    \efig
+  \end{mathpar} 
+\end{definition}
+\begin{definition}
+  \label{def:coSMCADJ}
+  Suppose $(\cat{M}_1,\perp_1,\oplus_1)$ and $(\cat{M}_2,\perp_2,\oplus_2)$
+  are SMCs, and $(F,m)$ is a symmetric comonoidal functor between
+  $\cat{M}_1$ and $\cat{M}_2$ and $(G,n)$ is a symmetric comonoidal
+  functor between $\cat{M}_2$ and $\cat{M}_1$.  Then a
+  \textbf{symmetric comonoidal adjunction} is an ordinary adjunction
+  $\cat{M}_1 : F \dashv G : \cat{M}_2$ such that the unit,
+  $\eta_A : A \to GFA$, and the counit, $\varepsilon_A : FGA \to A$, are
+  symmetric comonoidal natural transformations.  Thus, the following
+  diagrams must commute:
+  \begin{mathpar}
+    \bfig
+    %% \ptriangle|amm|<1000,500>[
+    %%   A \oplus_1 B`
+    %%   GF(A \oplus_1 B)`
+    %%   GFA \oplus_1 GFB;
+    %%   \eta_{A \oplus_1 B}`
+    %%   \eta_A \oplus_1 \eta_B`
+    %%   \p{A,B}]
+    \square|amma|/->`->`->`<-/<1000,500>[
+      A \oplus_1 B`
+      GF(A \oplus_1 B)`
+      GFA \oplus_1 GFB`
+      G(FA \oplus_2 FB);
+      \eta_{A \oplus_1 B}`
+      \eta_A \oplus_1 \eta_B`
+      Gm_{A,B}`
+      m_{FA,FB}]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`<-`=/[
+    %%   GF\perp_1`
+    %%   \perp_1`
+    %%   \perp_1;
+    %%   \p{\perp_1}`
+    %%   \eta_{\perp_1}`]
+    \square|amma|/->`<-`->`=/<1000,500>[
+      GF \perp_1`
+      G \perp_2`
+      \perp_1`
+      \perp_1;
+      Gm_{\perp_1}`
+      \eta_{\perp_1}`
+      n_{\perp_2}`]
+    \efig
+    \and
+    \bfig
+    %% \qtriangle|mmb|<1000,500>[
+    %%   FG(A \oplus_2 B)`
+    %%   FGA \oplus_2 FGB`
+    %%   A \oplus_2 B;
+    %%   \q{A,B}`
+    %%   \varepsilon_{A \oplus_2 B}`
+    %%   \varepsilon_A \oplus_2 \varepsilon_B]
+    \square|amma|/->`->`->`<-/<1000,500>[
+      FG(A \oplus_2 B)`
+      F(GA \oplus_1 GB)`
+      A \oplus_2 B`
+      FGA \oplus_2 FGB;
+      Fn_{A,B}`
+      \varepsilon_{A \oplus_2 B}`
+      m_{GA,GB}`
+      \varepsilon_A \oplus_2 \varepsilon_B]
+    \efig
+    \and
+    \bfig
+    %% \Vtriangle|amm|/->`=`<-/[
+    %%   FG\perp_2`
+    %%   \perp_2`
+    %%   FG\perp_2;
+    %%   \varepsilon_{\perp_2}``
+    %%   \q{\perp_2}]
+    \square|amma|/->`=`<-`->/<1000,500>[
+      FG\perp_2`
+      \perp_2`
+      FG\perp_2`
+      F\perp_1;
+      \varepsilon_{\perp_2}``
+      m_{\perp_1}`
+      Fn_{\perp_2}]
+    \efig
+  \end{mathpar}  
+\end{definition}
+We will be defining, and making use of the why-not exponentials from
+linear logic, but these correspond to a symmetric comonoidal monad.
+In addition, whenever we have a symmetric comonoidal adjunction, we
+immediately obtain a symmetric comonoidal comonad on the left, and a
+symmetric comonoidal monad on the right.
+\begin{definition}
+  \label{def:symm-comonoidal-monad}
+  A \textbf{symmetric comonoidal monad} on a symmetric monoidal
+  category $\cat{C}$ is a triple $(T,\eta, \mu)$, where
+  $(T,\n{})$ is a symmetric comonoidal endofunctor on $\cat{C}$,
+  $\eta_A : A \mto TA$ and $\mu_A : T^2A \to TA$ are
+  symmetric comonoidal natural transformations, which make the following
+  diagrams commute:
+  \begin{mathpar}
+    \bfig
+    \square|ammb|<600,600>[
+      T^3 A`
+      T^2A`
+      T^2A`
+      TA;
+      \mu_{TA}`
+      T\mu_A`
+      \mu_A`
+      \mu_A]
+    \efig
+    \and
+    \bfig
+    \Atrianglepair/=`<-`=`->`<-/<600,600>[
+      TA`
+      TA`
+      T^2 A`
+      TA;`
+      \mu_A``
+      \eta_{TA}`
+      T\eta_A]
+    \efig
+  \end{mathpar}
+  The assumption that $\eta$ and $\mu$ are symmetric
+  comonoidal natural transformations amount to the following diagrams
+  commuting:
+  \begin{mathpar}
+    \bfig
+    \ptriangle|amm|/->`->`<-/<1000,600>[
+      A \oplus B`
+      TA \oplus TB`
+      T(A \oplus B);
+      \eta_A \oplus \eta_B`
+      \eta_A`
+      \n{A,B}]    
+    \efig
+    \and
+    \bfig
+    \Vtriangle/->`=`->/<600,600>[
+      \perp`
+      T\perp`
+      \perp;
+      \eta_\perp``
+      \n{\perp}]
+    \efig
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \square|ammm|/->`->``/<1050,600>[
+      T^2(A \oplus B)`
+      T(TA \oplus TB)`
+      T(A \oplus B)`;
+      T\n{A,B}`
+      \mu_{A \oplus B}``]
+
+    \square(850,0)|ammm|/->``->`/<1050,600>[
+      T(TA \oplus TB)`
+      T^2 A \oplus T^2 B``
+      TA \oplus TB;
+      \n{TA,TB}``
+      \mu_A \oplus \mu_B`]
+    \morphism(-200,0)<2100,0>[T(A \oplus B)`TA \oplus TB;\n{A,B}]
+    \efig
+    \and
+    \bfig
+    \square|ammb|/->`->`->`->/<600,600>[
+      T^2\perp`
+      T\perp`
+      T\perp`
+      \perp;
+      T\n{\perp}`
+      \mu_\perp`
+      \n{\perp}`
+      \n{\perp}]
+    \efig
+  \end{mathpar}
+\end{definition}
+\noindent
+Finally, the dual concept of a symmetric comonoidal comonad.
+\begin{definition}
+  \label{def:symm-comonoidal-comonad}
+  A \textbf{symmetric comonoidal comonad} on a symmetric monoidal
+  category $\cat{C}$ is a triple $(T,\varepsilon, \delta)$, where
+  $(T,\m{})$ is a symmetric comonoidal endofunctor on $\cat{C}$,
+  $\varepsilon_A : TA \mto A$ and $\delta_A : TA \to T^2 A$ are
+  symmetric comonoidal natural transformations, which make the
+  following diagrams commute:
+  \begin{mathpar}
+    \bfig
+    \square|amma|<600,600>[
+      TA`
+      T^2A`
+      T^2A`
+      T^3A;
+      \delta_A`
+      \delta_A`
+      T\delta_A`
+      \delta_{TA}]
+    \efig
+    \and
+    \bfig
+    \Atrianglepair/=`->`=`<-`->/<600,600>[
+      TA`
+      TA`
+      T^2 A`
+      TA;`
+      \delta_A``
+      \varepsilon_{TA}`
+      T\varepsilon_A]
+    \efig
+  \end{mathpar}
+  The assumption that $\varepsilon$ and $\delta$ are symmetric
+  monoidal natural transformations amount to the following diagrams
+  commuting:
+  \begin{mathpar}
+    \bfig
+    \qtriangle|mmb|<1000,500>[
+      T(A \oplus B)`
+      TA \oplus TB`
+      A \oplus B;
+      \m{A,B}`
+      \varepsilon_{A \oplus B}`
+      \varepsilon_A \oplus \varepsilon_B]
+    \efig
+    \and
+    \bfig
+    \Vtriangle|amm|/->`=`<-/[
+      T\perp`
+      \perp`
+      T\perp;
+      \varepsilon_{\perp}``
+      \m{\perp}]
+    \efig    
+  \end{mathpar}
+  \begin{mathpar}
+    \bfig
+    \square|amab|/`->``->/<1050,600>[
+      T(A \oplus B)``
+      T^2(A \oplus B)`
+      T(TA \oplus TB);`
+      \delta_{A \oplus B}``
+      T\m{A,B}]
+    \square(1050,0)|mmmb|/``->`->/<1050,600>[`
+      TA \oplus TB`
+      T(TA \oplus TB)`
+      T^2A \oplus T^2B;``
+      \delta_A \oplus \delta_B`
+      \m{TA,TB}]
+    \morphism(0,600)<2100,0>[T(A \oplus B)`TA \oplus TB;\m{A,B}]
+    \efig
+    \and
+    \bfig
+    \square|amma|/->`->`<-`->/<600,600>[
+      T\perp`
+      \perp`
+      T^2 \perp`
+      T\perp;
+      \m{\perp}`
+      \delta_\perp`
+      \m{\perp}`
+      T\m{\perp}]
+    \efig
+  \end{mathpar}
+\end{definition}
+% subsection symmetric_monoidal_categories (end)
+
+\subsection{Cartesian Closed and Cocartesian Coclosed Categories}
+\label{subsec:cartesian_closed_and_cocartesian_coclosed_categories}
+The notion of a cartesian closed category is well-known, but for
+completeness we define them here.  However, their dual is lesser
+known, especially in computer science, and so we given their full
+definition.  We also review some know results concerning cocartesian
+coclosed categories and categories that are both cartesian closed and
+cocartesian coclosed.
+\begin{definition}
+  \label{def:CC}
+  A \textbf{cartesian category} is a category, $(\cat{C}, 1, \times)$,
+  with an object, $1$, and a bi-functor, $\times : \cat{C} \times
+  \cat{C} \mto \cat{C}$, such that for any object $A$ there is exactly
+  one morphism $\diamond : A \to 1$, and for any morphisms $f : C \mto
+  A$ and $g : C \mto B$ there is a morphism $\langle f , g \rangle : C
+  \to A \times B$ subject to the following diagram:
+  \[
+  \bfig
+  \Atrianglepair/->`->`->`<-`->/[C`A`A\times B`B;
+    f`
+    \langle f , g \rangle`
+    g`
+    \pi_1`
+    \pi_2]
+  \efig
+  \]
+\end{definition}
+A cartesian category models conjunction by the product functor,
+$\times : \cat{C} \times \cat{C} \mto \cat{C}$ , and the unit of
+conjunction by the terminal object.  As we mention above modeling
+implication requires closure, and since it is well-known that any
+cartesian category is also a symmetric monoidal category the
+definition of closure for a cartesian category is the same as the
+definition of closure for a symmetric monoidal category
+(Definition~\ref{def:SMCC}).  We denote the internal hom for cartesian
+closed categories by $A \to B$.
+
+The dual of a cartesian category is a cocartesian category.  They are
+a model of intuitionistic logic with disjunction and its unit.
+\begin{definition}
+  \label{def:coCC}
+  A \textbf{cocartesian category} is a category, $(\cat{C}, 0, +)$,
+  with an object, $0$, and a bi-functor,
+  $+ : \cat{C} \times \cat{C} \mto \cat{C}$, such that for any object $A$ there is exactly
+  one morphism $\Box : 0 \to A$, and for any morphisms $f : A \mto C$ and $g : B \mto C$
+  there is a morphism $\lbrack f , g \rbrack : A + B \mto C$
+  subject to the following diagram:
+  \[
+  \bfig
+  \Atrianglepair/<-`<-`<-`->`<-/[C`A`A+B`B;
+    f`
+    \lbrack f, g \rbrack`
+    g`
+    \iota_1`
+    \iota_2]
+  \efig
+  \]  
+\end{definition}
+Coclosure, just like closure for cartesian categories, is defined in
+the same way that coclosure is defined for symmetric monoidal
+categories, because cocartesian categories are also symmetric
+monoidal categories.  Thus, a cocartesian category is coclosed if
+there is a specified left-adjoint, which we denote $S - T$, to the
+coproduct.
+
+There are many examples of cocartesian coclosed categories.
+Basically, any interesting cartesian category has an interesting dual,
+and hence, induces an interesting cocartesian coclosed category.
+The opposite of the category of sets and functions between them is
+isomorphic to the category of complete atomic boolean algebras, and
+both of which, are examples of cocartesian coclosed categories.  As
+we mentioned above bi-linear categories \cite{Cockett:1997a} are
+models of bi-linear logic where the left adjoint to the cotensor
+models coimplication.  Similarly, cocartesian coclosed categories
+model cointuitionistic logic with disjunction and intuitionistic
+coimplication
+% \cite{Crolard:2001,Bellin:2012}. \todo[inline]{Put more  examples in here.}
+
+We might now ask if a category can be both cartesian closed and
+cocartesian coclosed just as bi-linear categories, but this turns out
+to be where the matter meets antimatter in such away that the category
+degenerates to a preorder.  That is, every homspace contains at most
+one morphism.  We recall this proof here, which is due to Crolard
+\cite{Crolard:2001}. We need a couple basic facts about cartesian
+closed categories with initial objects.
+\begin{lemma}
+  \label{lemma:iso-prod-initial}
+  In any cartesian category $\cat{C}$, if $0$ is an initial object in
+  $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A \cong A \times 0$.
+\end{lemma}
+\begin{proof}
+  This follows easily from the universial mapping property for products.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:products-of-initial-gives-initial}
+  In any cartesian closed category $C$, if $0$ is an initial
+  object in $\cat{C}$, then so is $0 \times A$ for any object $A$
+  of $\cat{C}$.
+\end{lemma}
+\begin{proof}
+    We know that the universal morphism for the initial object is
+    unique, and hence, the homspace $\Hom{C}{0}{A \Rightarrow B}$ for
+    any object $B$ of $\cat{C}$ contains exactly one morphism.  Then
+    using the right adjoint to the product functor we know that
+    $\Hom{C}{0}{A \Rightarrow B} \cong \Hom{C}{0 \times A}{B}$, and
+    hence, there is only one arrow between $0 \times A$ and $B$.
+\end{proof}
+\noindent
+The following lemma is due to Joyal \cite{?}, and is key to the next
+theorem.
+\begin{lemma}[Joyal's]
+  \label{lemma:joyals}
+  In any cartesian closed category $\cat{C}$, if $0$ is an initial
+  object in $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A$ is an
+  initial object in $\cat{C}$.
+\end{lemma}
+\begin{proof}
+  Suppose $\cat{C}$ is a cartesian closed category, such that, $0$ is
+  an initial object in $\cat{C}$, and $A$ is an arbitrary object in
+  $\cat{C}$.  Furthermore, suppose $\Hom{C}{A}{0}$ is non-empty.  By
+  the first basic lemma above we know that $A \cong A \times 0$, and
+  by the second $A \times 0$ is initial, thus $A$ is initial.
+\end{proof}
+Finally, the following theorem shows that any category that is both
+cartesian closed and cocartesian coclosed is a preorder.
+\begin{theorem}[(co)Cartesian (co)Closed Categories are Preorders (Crolard\cite{Crolard:2001})]
+  \label{thm:dengerate-to-preorder}
+  If $\cat{C}$ is both cartesian closed and cocartesian coclosed, then
+  for any two objects $A$ and $B$ of $\cat{C}$, $\Hom{C}{A}{B}$ has at
+  most one element.
+\end{theorem}
+\begin{proof}
+  Suppose $\cat{C}$ is both cartesian closed and cocartesian coclosed,
+  and $A$ and $B$ are objects of $\cat{C}$.  Then by using the basic
+  fact that the initial object is the unit to the coproduct, and the
+  coproducts left adjoint we know the following:
+  \[\Hom{C}{A}{B} \cong \Hom{C}{A}{0 + B} \cong \Hom{C}{B - A}{0}\]
+  Therefore, by Joyal's theorem above $\Hom{C}{A}{B}$ has at most one
+  element.
+\end{proof}
+\noindent
+Notice that the previous result hinges on the fact that there are
+initial and terminal objects, and thus, this result does not hold for
+bi-linear categories, because the units to the tensor and cotensor are
+not initial nor terminal.
+
+The repercussions of this result are that if we do not want to work
+with preorders, but do want to work with all of the structure, then we
+must separate the two worlds.  Thus, this result can be seen as the
+motivation for the current work.  We enforce the separation using
+linear logic, but through the power of linear logic this separation is
+not far.
+% subsection cartesian_closed_and_cocartesian_coclosed_categories (end)
+
+
+\subsection{A Mixed Linear/Non-Linear Model for Co-Intuitionistic Logic}
+\label{subsec:a_mixed_linear/non-linear_model_for_co-intuitionistic_logic}
+
+Benton \cite{Benton:1994} showed that from a LNL model it is possible
+to construct a linear category, and vice versa.  Bellin
+\cite{Bellin:2012} showed that the dual to linear categories are
+sufficient to model co-intuitionistic linear logic. We show that from
+the dual to a LNL model we can construct the dual to a linear
+category, and vice versa, thus, carrying out the same program for
+co-intuitionistic linear logic as Benton did for intuitionistic linear
+logic.
+
+Combining a symmetric monoidal coclosed category with a cocartesian
+coclosed category via a symmetric comonoidal adjunction defines a
+dual LNL model.
+\begin{definition}
+  \label{def:dual LNL-model}
+  A
+  \textbf{mixed linear/non-linear model for co-intuitionistic logic (dual LNL model)},
+  $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$, consists of the following:
+  \begin{itemize}
+  \item[i.] a symmetric monoidal coclosed category $(\cat{L},\perp,\oplus,\colimp)$,
+  \item[ii.] a cocartesian coclosed category $(\cat{C},0,+,-)$, and
+  \item[iv.] a symmetric comonoidal adjunction $\cat{L} : \func{H}
+    \dashv \func{J} : \cat{C}$, where $\eta_A : A \mto
+    \func{JH}A$ and $\varepsilon_R : \func{HJ}R \mto R$
+    are the unit and counit of the adjunction respectively.
+  \end{itemize}
+\end{definition}
+It is well-known that an adjunction $\cat{L} : \func{H} \dashv
+\func{J} : \cat{C}$ induces a monad $\func{H};\func{J} : \cat{L} \mto
+\cat{L}$, but when the adjunction is symmetric comonoidal we obtain a
+symmetric comonoidal monad, in fact, $\func{H};\func{J}$ defines the
+linear exponential why-not denoted $\wn A = \func{JH}A$.
+By the definition of dual LNL models we know that both $\func{H}$ and
+$\func{J}$ are symmetric comonoidal functors, and hence, are equipped
+with natural transformations $\h{A,B} : \func{H}(A \oplus B) \mto
+\func{H}A + \func{H}B$ and $\j{R,S} : \func{J}(R + S) \mto \func{J}R
+\oplus \func{J}S$, and maps $\h{\perp} : \func{H}\perp \mto 0$ and
+$\j{0} : \func{J}0 \mto \perp$.  We will make heavy use of these
+maps throughout the sequel.
+
+Compare this definition with that of Bellin's dual linear category from
+\cite{Bellin:2012}, and we can easily see that the definition of dual
+LNL models -- much like LNL models -- is more succinct.
+\begin{definition}
+  \label{def:dual-linear-cat}
+  A \textbf{dual linear category}, $\cat{L}$, consists of the
+  following data:
+  \begin{enumerate}[label=\roman*.]
+  \item A symmetric monoidal coclosed category $(\cat{L}, \oplus, \perp, \colimp)$ with
+  \item a symmetric co-monoidal monad $(\wn,\eta, \mu)$ on $\cat{L}$
+    such that
+  \begin{enumerate}[label=\alph*.]
+  \item each free $\wn$-algebra carries naturally the structure of a
+    commutative $\oplus$-monoid.  This implies that there are
+    distinguished symmetric monoidal natural transformations $\w{A} :
+    \perp \mto \wn A$ and $\c{A} : \wn A \oplus \wn A \mto \wn A$
+    which form a commutative monoid and are $\wn$-algebra morphisms.
+
+  \item whenever $f : (\wn A, \mu_A) \mto (\wn B, \mu_B)$ is a
+    morphism of free $\wn$-algebras, then it is also a monoid
+    morphism.
+  \end{enumerate}
+  \end{enumerate}
+\end{definition}
+
+\subsubsection{A Useful Isomorphism}
+\label{subsec:a_useful_isomorphism}
+One useful property of Benton's LNL model is that the maps associated
+with the symmetric monoidal left adjoint in the model are
+isomorphisms.  Since dual LNL models are dual we obtain similar
+isomorphisms with respect to the right adjoint.
+\begin{lemma}[Symmetric Comonoidal Isomorphisms]
+  \label{lemma:symmetric_comonoidal_isomorphisms}
+  Given any dual LNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$, then there are the following isomorphisms:
+  \[
+  \begin{array}{lll}
+    \func{J}(R + S) \cong \func{J}R \oplus \func{J}S & \text{ and } & \func{J}0 \cong \perp\\
+  \end{array}
+  \]
+  Furthermore, the former is natural in $R$ and $S$.  
+\end{lemma}
+\begin{proof}
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a dual LNL
+  model.  Then we can define the following family of maps:
+  \[
+  \begin{array}{lll}
+    \jinv{R,S} := \func{J}R \oplus \func{J}S \mto^{\eta} \func{JH}(\func{J}R \oplus \func{J}S) \mto^{\func{J}\h{A,B}} \func{J}(\func{HJ}R + \func{HJ}S) \mto^{\J(\varepsilon_R + \varepsilon_S)} \func{J}(R + S)\\
+  \\
+  \jinv{0} := \perp \mto^{\eta} \func{JH}\perp \mto^{\func{J}\h{\perp}} \func{J}0
+  \end{array}
+  \]
+  It is easy to see that $\jinv{R,S}$ is natural, because it is
+  defined in terms of a composition of natural transformations.  All
+  that is left to be shown is that $\jinv{R,s}$ and $\jinv{0}$ are
+  mutual inverses with $\j{R,S}$ and $\j{0}$; for the details see
+  Appendix~\ref{subsec:proof_of_lemma:symmetric_comonoidal_isomorphisms}.
+\end{proof}
+\noindent
+Just as Benton we also do not have similar isomorphisms with respect
+to the functor $\H$.  One fact that we can point out, that Benton did
+not make explicit -- because he did not use the notion of symmetric
+comonoidal functor -- is that $\jinv{}$ makes $\J$ also a symmetric
+monoidal functor.
+
+\begin{corollary}
+  \label{corollary:J-SMMF}
+  Given any dual LNL model $\cat{L} : \func{H} \dashv \func{J} :
+  \cat{C}$, the functor $(\J, \jinv{})$ is symmetric monoidal.
+\end{corollary}
+\begin{proof}
+  This holds by straightforwardly reducing the diagrams defining a
+  symmetric monoidal functor, Definition~\ref{def:SMCFUN}, to the
+  diagrams defining a symmetric comonoidal functor,
+  Definition~\ref{def:coSMCFUN}, using the fact that $\jinv{}$ is an
+  isomorphism.
+\end{proof}
+% subsubsection a_useful_isomorphism (end)
+
+\subsubsection{Dual LNL Model Implies Dual Linear Category}
+\label{subsec:dual_lnl_model_implies_dual_category}
+
+The next result shows that any dual LNL model induces a symmetric
+comonoidal monad.
+\begin{lemma}[Symmetric Comonoidal Monad]
+  \label{lemma:symmetric_comonoidal_monad}
+  Given a dual LNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
+  the functor, $\wn = H;J$, defines a symmetric comonoidal monad.
+\end{lemma}
+\begin{proof}
+  Suppose $(\func{H},\h{})$ and $(\func{J},\j{})$ are two symmetric
+  comonoidal functors, such that, $\cat{L} : \func{H} \dashv \func{J}
+  : \cat{C}$ is a dual LNL model.  We can easily show that $\wn A = \J\H
+  A$ is symmetric monoidal by defining the following maps:
+  \[
+  \begin{array}{lll}
+    \r{\perp} := \wn \perp \mto/=/ \func{JH}\perp \mto^{\func{J}\h{\perp}} \func{J}0 \mto^{\j{\perp}} \perp\\
+    \r{A,B} := \wn (A \oplus B) \mto/=/ \func{JH}(A \oplus B) \mto^{\func{J}\h{A,B}} \func{J}(\func{H}A + \func{H}B) \mto^{\j{\func{H}A,\func{H}B}} \func{JH}A \oplus \func{JH}B \mto/=/ \wn A \oplus \wn B\\
+  \end{array}
+  \]
+  The fact that these maps satisfy the appropriate symmetric
+  comonoidal functor diagrams from Definition~\ref{def:coSMCFUN} is
+  obvious, because symmetric comonoidal functors are closed under
+  composition.  
+
+  We have a dual LNL model, and hence, we have the symmetric comonoidal
+  natural transformations $\eta_A : A \mto \J\H A$ and $\varepsilon_R
+  : \H\J R \mto R$ which correspond to the unit and counit of the
+  adjunction respectively.  Define $\mu_A := \J\varepsilon_{\H A} :
+  \J\H\J\H A \mto \J\H A$.  This implies that we have maps $\eta_A : A
+  \mto \wn A$ and $\mu_A : \wn\wn A \mto \wn A$, and thus, we can show
+  that $(\wn, \eta, \mu)$ is a symmetric comonoidal monad.  All
+  the diagrams defining a symmetric comonoidal monad hold by the
+  structure given by the adjunction.  For the complete proof see
+  Appendix~\ref{subsec:proof_of_lemma:symmetric_comonoidal_monad}.
+\end{proof}
+
+The monad from the previous result must be equipped with the
+additional structure to model the right weakening and contraction
+structural rules.
+
+\begin{lemma}[Right Weakening and Contraction]
+  \label{lemma:right_weakening_and_contraction}
+  Given a dual LNL model $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$,
+  then for any $\wn A$ there are distinguished symmetric comonoidal
+  natural transformations $\w{A} : \perp \mto \wn A$ and $\c{A} : \wn
+  A \oplus \wn A \mto \wn A$ that form a commutative monoid, and are
+  $\wn\text{-algebra}$ morphisms with respect to the canonical
+  definitions of the algebras $\wn A$, $\perp$, $\wn A \oplus \wn A$.
+\end{lemma}
+\begin{proof}
+  Suppose $(\func{H},\h{})$ and $(\func{J},\j{})$ are two symmetric
+  comonoidal functors, such that, $\cat{L} : \func{H} \dashv \func{J}
+  : \cat{C}$ is a dual LNL model.  Again, we know $\wn A = H;J : \cat{L}
+  \mto \cat{L}$ is a symmetric comonoidal monad by
+  Lemma~\ref{lemma:symmetric_comonoidal_monad}.  
+  
+  We define the following morphisms:
+  \[
+  \begin{array}{lll}
+    \w{A} := \perp \mto^{\jinv{\perp}} \func{J} 0 \mto^{\func{J}\diamond_{\func{H} A}} \func{JH}A \mto/=/ \wn A\\
+    \c{A} := \wn A \oplus \wn A \mto/=/ \func{JH}A \oplus \func{JH}A \mto^{\jinv{\func{H}A,\func{H}A}} \func{J}(\func{H}A + \func{H}A) \mto^{\func{J}\codiag{\func{H}A}} \func{JHA} \mto/=/ \wn A
+  \end{array}
+  \]
+  The remainder of the proof is by carefully checking all of the
+  required diagrams.  Please see
+  Appendix~\ref{subsec:proof_of_lemma:right_weakening_and_contraction}
+  for the complete proof.
+\end{proof}
+
+\begin{lemma}[$\wn$-Monoid Morphisms]
+  \label{lemma:monoid-morphism}
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a dual LNL
+  model.  Then if $f : (\wn A, \mu_A) \mto (\wn B, \mu_B)$ is a
+  morphism of free $\wn$-algebras, then it is a monoid morphism.
+\end{lemma}
+\begin{proof}
+  Suppose $\cat{L} : \func{H} \dashv \func{J} : \cat{C}$ is a dual LNL
+  model.  Then we know $\wn A = \J\H A$ is a symmetric comonoidal
+  monad by Lemma~\ref{lemma:symmetric_comonoidal_monad}.  Bellin
+  \cite{Bellin:2012} remarks that by Maietti, Maneggia de Paiva and
+  Ritter's Proposition~25 \cite{Maietti2005}, it suffices to show that
+  $\mu_A : \wn\wn A \mto \wn A$ is a monoid morphism.  For the details
+  see the complete proof in
+  Appendix~\ref{sec:proof_of_lemma:monoid-morphism}.
+\end{proof}
+
+\noindent
+Finally, we may now conclude the following corollary.
+\begin{corollary}
+  \label{corollary:dual_lnl_model_implies_dual_category}
+  Every dual LNL model is a dual linear category.
+\end{corollary}
+% subsubsection dual_lnl_model_implies_dual_category (end)
+
+\subsubsection{Dual Linear Category implies Dual LNL Model}
+\label{subsec:dual_category_implies_dual_lnl_model}
+This section shows essentially the inverse to the result from the
+previous section.  That is, that from any dual linear category we may
+construct a dual LNL model.  By exploiting the duality between LNL
+models and dual LNL models this result follows straightforwardly from
+Benton's result. The proof of this result must first find a symmetric
+monoid coclosed category, a cocartesian coclosed category, and
+finally, a symmetric comonoidal adjunction between them.  Take the
+symmetric monoid coclosed category to be an arbitrary dual linear
+category $\cat{L}$.  Then we may define the following categories.
+\begin{itemize}
+\item The Eilenberg-Moore category, $\cat{L}^{\wn}$, has as objects
+  all $\wn$-algebras, $(A, h_A : \wn A \mto A)$, and as morphisms all
+  $\wn$-algebra morphisms.
+\item The Kleisli category, $\cat{L}_{\wn}$, is the full subcategory
+  of $\cat{L}^{\wn}$ of all free $\wn$-algebras $(\wn A, \mu_A :
+  \wn\wn A \mto \wn A)$.
+\end{itemize}
+\noindent
+The previous three categories are related by a pair of adjunctions:
+\begin{diagram}
+  \morphism(0,0)|m|/{@{->}@/^1em/}/<800,0>[\cat{L}`\cat{L}^{\wn};F]
+  \morphism(0,0)|m|/{@{<-}@/_1em/}/<800,0>[\cat{L}`\cat{L}^{\wn};U]
+
+  \morphism(0,-500)|m|/{@{->}@/^1em/}/<800,0>[\cat{L}`\cat{L}_{\wn};F]
+  \morphism(0,-500)|m|/{@{<-}@/_1em/}/<800,0>[\cat{L}`\cat{L}_{\wn};U]
+
+  \square|amma|/`=`->`/<800,-500>[
+    \cat{L}`
+    \cat{L}_{\wn}`
+    \cat{L}`
+    \cat{L}^{\wn};``
+    i`]
+\end{diagram}
+The functor $F(A) = (\wn A, \mu_A)$ is the free functor, and the
+functor $U(A, h_A) = A$ is the forgetful functor.  Note that we, just
+as Benton did, are overloading the symbols $F$ and $U$.  Lastly, the
+functor $i : \cat{L}_{\wn} \mto \cat{L}^{\wn}$ is the injection of the
+subcategory of free $\wn$-algebras into its parent category.  
+
+We are now going to show that both $\cat{L}^{\wn}$ and $\cat{L}_{\wn}$
+are induce two cocartesian coclosed categories.  Then we could take
+either of those when constructing a dual LNL model from a dual linear
+category.  First, we show $\cat{C}^{\wn}$ is cocartesian.
+\begin{lemma}
+  \label{lemma:EM-has-coproducts}
+  If $\cat{L}$ is a dual linear category, then $\cat{L}^{\wn}$ has finite coproducts.
+\end{lemma}
+\begin{proof}
+  We give a proof sketch of this result, because the proof is
+  essentially by duality of Benton's corresponding proof for LNL
+  models (see Lemma~9, \cite{Benton:1994}). Suppose $\cat{L}$ is a
+  dual linear category.  Then we first need to identify the initial object
+  which is defined by the $\wn$-algebra $(\perp, \r{\perp} : \wn \perp
+  \mto \perp)$.  The unique map between the initial map and any other
+  $\wn$-algebra $(A, h_A : \wn A \mto A)$ is defined by $\perp
+  \mto^{\w{A}} \wn A \mto^{h_A} A$.  The coproduct of the
+  $\wn$-algebras $(A, h_A : \wn A \mto A)$ and $(B, h_B : \wn B \mto
+  B)$ is $(A \oplus B, \r{A,B};(h_A \oplus h_B))$.  Injections and the
+  codiagonal map are defined as follows:
+  \begin{itemize}
+  \item Injections:
+    \[
+    \begin{array}{lll}
+      \iota_1 := A \mto^{\rho_A} A \oplus \perp \mto^{\id_A \oplus \w{B}} A \oplus \wn B \mto^{\id \oplus h_b} A \oplus B\\
+      \iota_2 := B \mto^{\lambda_A} \perp \oplus B \mto^{\w{A} \oplus \id_B} \wn A \oplus B \mto^{h_A \oplus \id_B} A \oplus B\\
+    \end{array}
+    \]
+  \item Codiagonal map:
+    \[
+    \codiag{} := A \oplus A \mto^{\eta_A \oplus \eta_A} \wn A \oplus \wn A \mto^{\c{A}} \wn A \mto^{h_A} A
+    \]
+  \end{itemize}
+  Showing that these respect the appropriate diagrams is
+  straightforward.
+\end{proof}
+\noindent
+Notice as a direct consequence of the previous result we know the following.
+\begin{corollary}
+  \label{corollary:Kleisli-has-coproducts}
+  The Kleisli category, $\cat{L}_{\wn}$, has finite coproducts.
+\end{corollary}
+
+Thus, both $\cat{L}^{\wn}$ and $\cat{L}_{\wn}$ are cocartesian, but we
+need a cocartesian coclosed category, and in general these are not
+coclosed, and so we follow Benton's lead and show that there are
+actually two subcategories of $\cat{L}^{\wn}$ that are coclosed.
+\begin{definition}
+  \label{def:subtractable}
+  We call an object, $A$, of a category, $\cat{L}$,
+  \textbf{subtractable} if for any object $B$ of $\cat{L}$, the
+  internal cohom $[[A *- B]]$ exists.
+\end{definition}
+\noindent
+We now have the following results:
+\begin{lemma}
+  \label{lemma:free-algebras-are-subtractable}
+  In $\cat{L}^{\wn}$, all the free $\wn$-algebras are subtractable, and the
+  internal cohom is a free $\wn$-algebra.
+\end{lemma}
+\begin{proof}
+  The internal cohom is defined as follows:
+  \[
+  (\wn A, \delta_A) [[*-]] (B, h_B) := (\wn ([[A *- B]]), \delta_{[[A *- B]]})
+  \]
+  We can capitalize on the adjunctions involving $F$ and $U$ from
+  above to lift the internal cohom of $\cat{L}$ into $\cat{L}^{\wn}$:
+  \[
+  \begin{array}{lll}
+    \mathsf{Hom}_{\cat{L}^{\wn}}((\wn ([[A *- B]]), \delta_{[[A *- B]]}), (C, h_C))
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}([[A *- B]]), (C, h_C))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}([[A *- B]], \func{U}(C, h_C))\\
+    & =  & \mathsf{Hom}_{\cat{L}}([[A *- B]], C)\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}([[A]], [[C (+) B]])\\
+    & =  & \mathsf{Hom}_{\cat{L}}([[A]], \func{U}([[C (+) B]],h_{[[C (+) B]]}))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}[[A]], ([[C (+) B]],h_{[[C (+) B]]}))\\
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), ([[C (+) B]],h_{[[C (+) B]]}))\\    
+  \end{array}
+  \]
+  The previous equation holds for any $h_{[[C (+) B]]}$ making $[[C
+      (+) B]]$ a $\wn$-algebra, in particular, the co-product in
+  $\cat{L}^{\wn}$ (Lemma~\ref{lemma:EM-has-coproducts}), and hence, we
+  may instantiate the final line of the previous equation with the following:
+  \[
+  \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), (C, h_c) + (B,\delta_A))
+  \]
+  Thus, we obtain our result.
+\end{proof}
+
+\begin{lemma}
+  \label{lemma:subtractable-subcats}
+  We have the following cocartesian coclosed categories:
+  \begin{enumerate}[label=\roman*.]
+  \item The full subcategory, $\mathsf{Sub}(\cat{L}^{\wn})$, of
+    $\cat{L}^{\wn}$ consisting of objects the subtractable
+    $\wn$-algebras is cocartesian coclosed, and contains the Kleisli
+    category.
+
+  \item The full subcategory, $\cat{L}^*_{\wn}$, of
+    $\mathsf{Sub}(\cat{L}^{\wn})$ consisting of finite coproducts of
+    free $\wn$-algebras is cocartesian coclosed.
+  \end{enumerate}
+\end{lemma}
+\noindent
+Let $\cat{C}$ be either of the previous two categories.  Then we must
+exhibit a adjunction between $\cat{C}$ and $\cat{L}$, but this is
+easily done.
+\begin{lemma}
+  \label{lemma:dual-LNL-model}
+  The adjunction $\cat{L} : \func{F} \vdash \func{U} : \cat{C}$, with
+  the free functor, $\func{F}$, and the forgetful functor, $\func{U}$,
+  is symmetric comonoidal.
+\end{lemma}
+\begin{proof}
+  Showing that $\func{F}$ and $\func{U}$ are symmetric comonoidal
+  follows similar reasoning to Benton's result, but in the opposite;
+  see Lemma~13 and Lemma~14 of \cite{Benton:1994}.  Lastly, showing
+  that the unit and the counit of the adjunction are comonoidal
+  natural transformations is straightforward, and we leave it to the
+  reader. The reasoning is similar to Benton's, but in the opposite;
+  see Lemma~15 and Lemma~16 of \cite{Benton:1994}.
+\end{proof}
+
+\begin{corollary}
+  \label{corollary:dual-categories-implies-LNL-models}
+  Any dual linear category gives rise to a dual LNL model.
+\end{corollary}
+
+% subsubsection dual_category_implies_dual_lnl_model (end)
+
+% subsection a_mixed_linear/non-linear_model_for_co-intuitionistic_logic (end)
+
+\subsection{A Mixed Bilinear/Non-Linear Model}
+\label{subsec:a_mixed_bi-linear_non-linear_model}
+
+The main goal of our research program is to give a non-trivial
+categorical model of bi-intuitionistic logic.  In this section we give
+a introduction of the model we have in mind, but leave the details and
+the study of the logical and programmatic sides to future work.
+
+The naive approach would be to try and define a LNL-style model of
+bi-intuitionistic logic as an adjunction between a bilinear category
+and a bi-cartesian bi-closed category, but this results in a few
+problems.  First, should the adjunction be monoidal or comonoidal?
+Furthermore, we know bi-cartesian bi-closed categories are trivial
+(Theorem~\ref{thm:dengerate-to-preorder}), and hence, this model is
+not very interesting nor incorrect.  We must separate the two
+worlds using two dual adjunctions, and hence, we arrive at the
+following definition.
+\begin{definition}
+  \label{def:biLNL-model}
+  A \textbf{mixed bilinear/non-linear model} consists of the
+  following:
+  \begin{enumerate}[label=\roman*.]
+  \item a bilinear category $(\cat{L},
+    \top,\otimes,\limp,\perp,\oplus,\colimp)$,
+  \item a cartesian closed category $(\cat{I},1,\times,\to)$,
+  \item a cocartesian coclosed category $(\cat{C},0,+,-)$, 
+  \item a LNL model $\cat{I} : F \dashv G : \cat{L}$, and
+  \item a dual LNL model $\cat{L} : H \dashv J : \cat{C}$.
+  \end{enumerate}
+\end{definition}
+Since $\cat{L}$ is a bilinear category then it is also a linear
+category, and a dual linear category.  Thus, the LNL model intuitively
+corresponds to an adjunction between $\cat{I}$ and the linear
+subcategory of $\cat{L}$, and the dual LNL model corresponds to an
+adjunction between the dual linear subcategory of $\cat{L}$ and
+$\cat{C}$.  In addition, both intuitionistic logic and
+cointuitionistic logic can be embedded into $\cat{L}$ via the linear
+modalities of-course, $!A$, and why-not, $\wn A$, using the well-known
+Girard embeddings.  This implies that we have a very controlled way of
+mixing $\cat{I}$ and $\cat{C}$ within $\cat{L}$, and hence, linear
+logic is the key.
+% subsection a_mixed_bi-linear_non-linear_model (end)
