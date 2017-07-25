@@ -341,7 +341,7 @@ The syntax of TND terms is defined by the following definition.
   \[
   \begin{array}{l}
     \begin{array}{cllllll}
-    \text{(non-linear terms)} & [[s]],[[t]] & ::= & [[x]] \mid [[connectW to t]] \mid [[t1 * t2]] \mid
+    \text{(non-linear terms)} & [[s]],[[t]] & ::= & [[x]] \mid [[t1 * t2]] \mid
          [[false t]] \mid [[x(t)]] \mid [[mkc(t,x)]] \mid [[inl t]] \mid [[inr t]] \mid \\
          & & & [[case t of x.t1,y.t2]] \mid
          [[H e]] \mid [[let J x = e in t]] \mid [[postp(x -> t1,t2)]] \mid \\
@@ -391,7 +391,7 @@ follows:
   \begin{array}{lll}
     \textbf{non-linear terms:}\\
     \,\,FV(x) = \{ x\}\\
-    \,\,FV([[connectW to t]]) = FV(t) \\ 
+    %% \,\,FV(connectW to t) = FV(t) \\ 
     \,\,FV([[t1 * t2]])  = FV(t_1)\cup FV(t_2) \\
     \,\,FV([[false t]])  = FV(t) \\
     \,\,FV([[x(t)]]) = FV(t)\\
@@ -501,13 +501,13 @@ Similarly to DND logic we have the following admissible rules.
 \begin{lemma}[Admissible Typing Rules]
   The term assignment for the admissible rules of the calculus is as follows:
   \begin{mathpar}
-    \DualLNLLogicdruleTCXXweak{} \and
-      \DualLNLLogicdruleTCXXcontr{} \and
-      \DualLNLLogicdruleTCXXcut{} \and     
-      \DualLNLLogicdruleTLXXweak{} \and
-      \DualLNLLogicdruleTLXXcontr{} \and
-      \DualLNLLogicdruleTLXXCcut{} \and
-      \DualLNLLogicdruleTLXXcut{}      
+    %% \DualLNLLogicdruleTCXXweak{} \and
+    \DualLNLLogicdruleTCXXcontr{} \and
+    \DualLNLLogicdruleTCXXcut{} \and     
+    %% \DualLNLLogicdruleTLXXweak{} \and
+    \DualLNLLogicdruleTLXXcontr{} \and
+    \DualLNLLogicdruleTLXXCcut{} \and
+    \DualLNLLogicdruleTLXXcut{}      
   \end{mathpar}
 \end{lemma}
 \noindent
