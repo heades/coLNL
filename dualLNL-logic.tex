@@ -650,6 +650,68 @@ is made explicit.
         \rightsquigarrow\\
         [[x : H B |-TC (let H x = y in P1) * (let H x = y in [e/z]P2)]]\\
         \hline
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXdEName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,case (t1 * t2) of y.P2,z.P3]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC P1,(case t1 of y.P2,z.P3) * (case t2 of y.P2,z.P3)]]\\
+        \hline
+      \end{array}\\
+      \\
+      \begin{array}{cc}
+        \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXdIOneName{}$}:}}\\
+        \hline
+        [[x : S |-TC inl (t1 * t2) : S1 + S2,P]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC (inl t1) * (inl t2) : S1 + S2,P]]\\
+        \hline
+        \end{array}
+        &
+        \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXdITwoName{}$}:}}\\
+        \hline
+        [[x : S |-TC inr (t1 * t2) : S1 + S2,P]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC (inr t1) * (inr t2) : S1 + S2,P]]\\
+        \hline
+      \end{array}
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXsubIName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,mkc(t1 * t2,y) : T1 - T2,[y(t1 * t2)/y]P2]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC P1,(mkc(t1,y) * mkc(t2,y)) : T1 - T2,([y(t1)/y]P2 * [y(t2)/y]P2)]]\\
+        \hline
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXsubEName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,{postp(z -> s,t1 * t2)},[y(t1 * t2)/y]P2]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC (P1,{postp(z -> s,t1)},[y(t1)/y]P2) * (P1,{postp(z -> s,t2)},[y(t2)/y]P2)]]\\
+        \hline
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXHEName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,let H y = t1 * t2 in P2]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC P1,(let H y = t1 in P2) * (let H y = t2 in P2)]]\\
+        \hline
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Weakening}:}}\\
+        \hline
+        
       \end{array}
     \end{array}
   \end{math}
@@ -801,11 +863,12 @@ the ones given here. We analyze the linear connectives, giving an
 argument for co-ILL that is analogue to Bierman's for ILL. We conclude
 that as expected:
 \begin{itemize}
-\item the cotensor \emph{par} can be identified with the bifunctor $\bullet$ of the structure; 
-\item linear subtraction $\lsub$ is the left adjoint to the bifunctor $\bullet$; 
+\item the cotensor \emph{par} can be identified with the bifunctor
+  $\bullet$ of the structure;
+\item linear subtraction $\lsub$ is the left adjoint to the bifunctor
+  $\bullet$;
 \item the unit $\bot$ can be identified with $1$.
 \end{itemize}
-
 
 \subsubsection{Linear Disjunction}\label{lindisj} 
 
