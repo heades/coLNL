@@ -37,7 +37,7 @@ A, B, C :: 'Bform_' ::=
 s, t, r :: 'citerm_' ::= {{com non-linear terms }}
   | x                          :: :: Var
   | id                         :: :: Id
-  {{tex I }}
+  {{tex \varepsilon }}
   | t1 * t2                    :: :: contra
   {{tex [[t1]] \cdot [[t2]] }}
   | false t                    :: :: Zero

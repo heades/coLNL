@@ -706,13 +706,7 @@ is made explicit.
         \rightsquigarrow\\
         [[x : S |-TC P1,(let H y = t1 in P2) * (let H y = t2 in P2)]]\\
         \hline
-      \end{array}\\
-      \\
-      \begin{array}{|c|}
-        \multicolumn{1}{l}{\textbf{\textbf{Weakening}:}}\\
-        \hline
-        
-      \end{array}
+      \end{array}\\      
     \end{array}
   \end{math}
   \end{center}
@@ -720,6 +714,77 @@ is made explicit.
   \caption{Reductions for Non-linear Terms}
   \label{fig:red-non-linear}
 \end{figure}
+\begin{figure}
+  \begin{mdframed}
+    \begin{center}
+    \begin{math}
+      \begin{array}{c}    
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXdEName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,case(id) of y.P2,z.P3]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,id : S1,...,id : Si]]\\
+           \text{where } [[|P2| = |P3|]] \text{ and } |[[P2]]| = [[S1,...,Si]]\\    
+          \hline
+        \end{array}\\
+        \\
+        \begin{array}{cc}
+          \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXdIOneName{}$}:}}\\
+          \hline
+           [[x : S |-TC P,inl id : S1 + S2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P,id : S1 + S2]]\\               
+          \hline
+        \end{array}
+        &
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXdITwoName{}$}:}}\\
+          \hline
+           [[x : S |-TC P,inr id : S1 + S2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P,id : S1 + S2]]\\               
+          \hline
+        \end{array}
+        \end{array}\\
+        \\
+        \begin{array}{cc}
+          \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXsubEName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,{postp(z -> s,id)},[y(id)/y]P2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,[id/y]P2]]\\               
+          \hline
+        \end{array}
+        &
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXsubIName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,mkc(id,y) : T1 - T2,[y(id)/y]P2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,id : T1 - T2,[id/y]P2]]\\               
+          \hline
+        \end{array}
+        \end{array}\\
+        \\
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXHEName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,let H y = id in P2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,[id/y]P2]]\\               
+          \hline
+        \end{array}
+      \end{array}
+    \end{math}
+  \end{center}
+  \end{mdframed}
+  \caption{Reductions for Non-linear Terms Continued}
+  \label{fig:red-non-linear-cont}
+\end{figure}
+
 
 The reduction rules for the linear and non-linear fragments can be
 found in Figure~\ref{fig:red-linear-terms} and
