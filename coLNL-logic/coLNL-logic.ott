@@ -36,6 +36,8 @@ A, B, C :: 'Bform_' ::=
 % Co-intuitionistic terms:
 s, t, r :: 'citerm_' ::= {{com non-linear terms }}
   | x                          :: :: Var
+  | id                         :: :: Id
+  {{tex I }}
   | t1 * t2                    :: :: contra
   {{tex [[t1]] \cdot [[t2]] }}
   | false t                    :: :: Zero
@@ -531,9 +533,9 @@ by
  ----------------------------------------------------------- :: HE
  x : S |-TC P1 * (let H y = t in P2)
 
- % x : S |-TC P && s : T' in P
- % --------------------------- :: weak
- % x : S |-TC P
+ x:S |-TC P   
+ ------------------ :: weak
+ x:S |-TC P, id : T
 
  x : S |-TC t1 : T,t2 : T,P
  -------------------------- :: contr
@@ -591,9 +593,9 @@ by
  ------------------------------------------ :: HE
  x : A |-TL D;P1,let H y = t in P2
 
- % x : A |-TL D;P && r : T' in P or r : B in D
- % ------------------------------------------- :: weak
- % x : A |-TL D;P
+ x:A |-TL D; P
+ --------------------- :: weak
+ x:A |-TL D; P, id : T
 
  x : A |-TL D;t1 : T,t2 : T,P
  ---------------------------- :: contr

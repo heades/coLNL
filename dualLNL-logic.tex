@@ -1170,53 +1170,53 @@ and conclude that there is a natural isomorphism between the maps
 \end{center}
 i.e., that $\lsub$ is the left adjoint to the bifunctor $\bullet$.  
 
-\subsubsection{Unit rules}
-\label{units}  The introduction and elimination rules for the unit $\bot$ are stated as follows:
-\begin{center}
-  \begin{math}
-    \setlength{\arraycolsep}{10px}
-    \begin{array}{lll}
-      $$\mprset{flushleft}
-      \inferrule* [right=$\DualLNLLogicdruleTLXXpIName{}$] {
-        [[x:A |-TL D; P]]
-        \\
-        r : B \in [[D]],\ \hbox{or}\  r:S \in \Psi    
-      }{x:A\vdash_{\mathsf{L}} \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi}
-      &
-      $$\mprset{flushleft}
-      \inferrule* [right=$\DualLNLLogicdruleTLXXpEName{}$] {
-        x:A \vdash_{\mathsf{L}}  \Delta,  e:\bot; \Psi
-      }{x:A \vdash_{\mathsf{L}} \Delta, \mathtt{postp_{\bot}}(e); \Psi}
-    \end{array}
-  \end{math}
-\end{center}
-The introduction % and the elimination rules
-rule can be interpreted by a map $a: A \rightarrow 1$.
-% , if we give the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
-% in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
-The elimination rule can also be interpreted as a map $\langle \rangle: A \rightarrow \bot$ if we give the 
-term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. In presence of a nonempty linear context $\Delta$ one can compose with  
-the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle\rangle;\lambda_{\Delta}$.
+%% \subsubsection{Unit rules}
+%% \label{units}  The introduction and elimination rules for the unit $\bot$ are stated as follows:
+%% \begin{center}
+%%   \begin{math}
+%%     \setlength{\arraycolsep}{10px}
+%%     \begin{array}{lll}
+%%       $$\mprset{flushleft}
+%%       \inferrule* [right=$\DualLNLLogicdruleTLXXpIName{}$] {
+%%         [[x:A |-TL D; P]]
+%%         \\
+%%         r : B \in [[D]],\ \hbox{or}\  r:S \in \Psi    
+%%       }{x:A\vdash_{\mathsf{L}} \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi}
+%%       &
+%%       $$\mprset{flushleft}
+%%       \inferrule* [right=$\DualLNLLogicdruleTLXXpEName{}$] {
+%%         x:A \vdash_{\mathsf{L}}  \Delta,  e:\bot; \Psi
+%%       }{x:A \vdash_{\mathsf{L}} \Delta, \mathtt{postp_{\bot}}(e); \Psi}
+%%     \end{array}
+%%   \end{math}
+%% \end{center}
+%% The introduction % and the elimination rules
+%% rule can be interpreted by a map $a: A \rightarrow 1$.
+%% % , if we give the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
+%% % in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
+%% The elimination rule can also be interpreted as a map $\langle \rangle: A \rightarrow \bot$ if we give the 
+%% term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. In presence of a nonempty linear context $\Delta$ one can compose with  
+%% the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle\rangle;\lambda_{\Delta}$.
 
-%% \vspace{1ex}
+%% %% \vspace{1ex}
 
  
-The introduction rule requires a natural transformation with components
-\begin{center}
-$\Phi_{A,\Delta\bullet J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
-\end{center}
-natural in $A$, $\Delta$, $J\Psi$. Given morphisms $e:A\rightarrow \Delta\bullet J\Psi$, $d:A'\rightarrow A$, $c:\Delta\rightarrow\Delta'$ and $p:J\Psi\rightarrow J\Psi'$, naturality yields
-\begin{center}
-$\Phi_{A', \Delta',J\Psi'}(d;e;c\bullet p) = d;\Phi_{A, \Delta, J\Psi}(e);c\bullet p$.
-\end{center} 
-Letting $d:A\rightarrow\Delta\bullet J\Psi$ and $e = id_{\Delta\bullet J\Psi}$, $c = id_{\Delta\bullet\bot}$, $p = id_{J\Psi}$ we have 
-$$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
-where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
-We define 
-$$
-[\![x:A\vdash_{\mathsf{L}} \Delta, \/ \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
-[\![x:A\vdash_{\mathsf{L}} \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
-$$
+%% The introduction rule requires a natural transformation with components
+%% \begin{center}
+%% $\Phi_{A,\Delta\bullet J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
+%% \end{center}
+%% natural in $A$, $\Delta$, $J\Psi$. Given morphisms $e:A\rightarrow \Delta\bullet J\Psi$, $d:A'\rightarrow A$, $c:\Delta\rightarrow\Delta'$ and $p:J\Psi\rightarrow J\Psi'$, naturality yields
+%% \begin{center}
+%% $\Phi_{A', \Delta',J\Psi'}(d;e;c\bullet p) = d;\Phi_{A, \Delta, J\Psi}(e);c\bullet p$.
+%% \end{center} 
+%% Letting $d:A\rightarrow\Delta\bullet J\Psi$ and $e = id_{\Delta\bullet J\Psi}$, $c = id_{\Delta\bullet\bot}$, $p = id_{J\Psi}$ we have 
+%% $$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
+%% where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
+%% We define 
+%% $$
+%% [\![x:A\vdash_{\mathsf{L}} \Delta, \/ \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
+%% [\![x:A\vdash_{\mathsf{L}} \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
+%% $$
 %% \ref{units}.2. {\em Equations in context.}
 
 %% The equation in context        
@@ -1256,126 +1256,126 @@ $$
 %% \quad}
 %% \end{equation} 
 
-%% \subsubsection{Functors}\label{functors}
+\subsubsection{Functors}\label{functors}
 
-%% Recall that a model of Linear-Non Linear co-intuitionistic logic consists of  a symmetric comonoidal adjunction 
-%% $\mathcal{L} : H \dashv  J : \mathcal{C}$ where $\mathcal{L} = (\mathcal{L}, \bot, \oplus, \limp)$ 
-%% is a symmetric monoidal coclosed category and $\mathcal{C} = (\mathcal{C}, 0, +, -)$
-%%  is a cocartesian coclosed category.
+Recall that a model of Linear-Non Linear co-intuitionistic logic consists of  a symmetric comonoidal adjunction 
+$\mathcal{L} : H \dashv  J : \mathcal{C}$ where $\mathcal{L} = (\mathcal{L}, \bot, \oplus, \limp)$ 
+is a symmetric monoidal coclosed category and $\mathcal{C} = (\mathcal{C}, 0, +, -)$
+ is a cocartesian coclosed category.
 
-%% We use the same symbols for the functors
-%% $J: \mathcal{C} \rightarrow \mathcal{L}$ and $\mathcal{H}: \mathcal{L} \rightarrow  \mathcal{C}$ 
-%% in the models and for the operators that represent them in the language.
+We use the same symbols for the functors
+$J: \mathcal{C} \rightarrow \mathcal{L}$ and $\mathcal{H}: \mathcal{L} \rightarrow  \mathcal{C}$ 
+in the models and for the operators that represent them in the language.
 
-%% \vspace{1ex}
+\vspace{1ex}
 
-%% \ref{functors}.1 {\em rules for $J: \mathcal{C} \rightarrow \mathcal{L}$.} 
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $J$ introduction}
-%% \noLine
-%% \UnaryInfC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% If $\Delta = \overline{R}: \Delta$ and $\Psi = \overline{S}: \Psi$, then the categorical interpetation of the rule is 
-%% an application of $\alpha^{-1}$: 
-%% \begin{center}
-%% \AxiomC{$\xymatrix@R=.4in{A\ar[rr]^{\overline{R} \bullet Jt \bullet J\overline{S}} & &\Delta\bullet JT \bullet J\Psi}$}
-%% \UnaryInfC{$\xymatrix@R=.4in{A\ar[rr]^{(\overline{R} \bullet Jt )\bullet J\overline{S}} & &(\Delta\bullet JT) \bullet J\Psi}$}
-%% \DisplayProof
-%% \end{center}
-
-
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $J$ elimination}
-%% \noLine
-%% \UnaryInfC{$x:A \vdash_{\mathsf{L}} \Delta, e: JT;\Psi_1\qquad  y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% If $\Delta = \overline{R}: \Delta$,  $\Psi_1 = \overline{R'}: \Psi_1$, $\Psi_2 = \overline{S}:\Psi_2$, 
-%% then the categorical interpretation of the rule is given by an operation of the form 
-%% \[
-%% \mathcal{L}(A, \Delta\bullet JT\bullet J\Psi_1) \times \mathcal{C}(T, \Psi_2)\rightarrow 
-%% \mathcal{L}(A, \Delta\bullet J\Psi_1\bullet J\Psi_2) 
-%% \]
-%% given by the following compositions
-%% \begin{center}
-%% \AxiomC{$\xymatrix@R=.4in{A \ar[rr]^{\overline{R}\bullet e \bullet J\overline{R}'} && \Delta\bullet JT\bullet J\Psi_1}$}
-%% \AxiomC{$\xymatrix@R=.4in{T \ar[r]^{\overline{S}} & \Psi_2} \quad \hbox{in} \  \mathcal{C}$}
-%% \UnaryInfC{$\xymatrix@R=.4in{JT \ar[r]^{\overline{JS}}& J\Psi_2} \quad \hbox{in} \  \mathcal{L}$}
-%% \BinaryInfC{$\xymatrix@R=.1in@C=.6cm{A \ar[rr]^{\overline{R}\bullet e \bullet J(\overline{R}')\quad} &
-%% & \Delta\bullet J(T) \bullet J(\Psi_1) 
-%% \ar[rrr]^{id_{\Delta}\bullet J(\overline{S}) \bullet id_{J(\Psi_1)}}&&&\Delta\bullet J(\Psi_1)\bullet J(\Psi_2)
-%% \ar[rr]^{id_{\Delta} \bullet j^{-1}_{\Psi_1\Psi_2}} &&\Delta\bullet J(\Psi_1+\Psi_2)}$}
-%% \noLine
-%% \UnaryInfC{\hskip3in since $|\Psi_1| = |\Psi_2|, \quad \xymatrix@R=.1in@C=.6cm{ 
-%% \ar[rr]^{id_{\Delta}\bullet\nabla_{\Psi_1}} &&\Delta \bullet J(\Psi_1)}$}
-%% \DisplayProof
-%% \end{center}
-
-%% \vspace{3ex}
+\ref{functors}.1 {\em rules for $J: \mathcal{C} \rightarrow \mathcal{L}$.} 
+\begin{equation}
+\framebox{
+\AxiomC{\it $J$ introduction}
+\noLine
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
+\DisplayProof
+}
+\end{equation}
+If $\Delta = \overline{R}: \Delta$ and $\Psi = \overline{S}: \Psi$, then the categorical interpetation of the rule is 
+an application of $\alpha^{-1}$: 
+\begin{center}
+\AxiomC{$\xymatrix@R=.4in{A\ar[rr]^{\overline{R} \bullet Jt \bullet J\overline{S}} & &\Delta\bullet JT \bullet J\Psi}$}
+\UnaryInfC{$\xymatrix@R=.4in{A\ar[rr]^{(\overline{R} \bullet Jt )\bullet J\overline{S}} & &(\Delta\bullet JT) \bullet J\Psi}$}
+\DisplayProof
+\end{center}
 
 
-%% \ref{functors}.2 {\em rules for $H: \mathcal{L} \rightarrow \mathcal{C}$.} 
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $H$ intro}
-%% \noLine
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta, e: B; \Psi$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta;He:HB, \Psi$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then 
-%% \begin{center}
-%% \AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{\overline{R}\wp e\wp J(\overline{S})\quad}&&
-%% \Delta \bullet B \bullet  J(\Psi)}$}
-%% \RightLabel{using $\eta_B: B \rightarrow JHB$}
-%% \UnaryInfC{$\xymatrix@R=.1in@C.5cm{A \ar[rrr]^{\overline{R}\wp JH(e) \bullet J(\overline{S})\quad}&&
-%% & \Delta\bullet JH(B)\bullet J(\Psi)}$}
-%% \DisplayProof
-%% \end{center}
+\begin{equation}
+\framebox{
+\AxiomC{\it $J$ elimination}
+\noLine
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} \Delta, e: JT;\Psi_1\qquad  y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
+\DisplayProof
+}
+\end{equation}
+If $\Delta = \overline{R}: \Delta$,  $\Psi_1 = \overline{R'}: \Psi_1$, $\Psi_2 = \overline{S}:\Psi_2$, 
+then the categorical interpretation of the rule is given by an operation of the form 
+\[
+\mathcal{L}(A, \Delta\bullet JT\bullet J\Psi_1) \times \mathcal{C}(T, \Psi_2)\rightarrow 
+\mathcal{L}(A, \Delta\bullet J\Psi_1\bullet J\Psi_2) 
+\]
+given by the following compositions
+\begin{center}
+\AxiomC{$\xymatrix@R=.4in{A \ar[rr]^{\overline{R}\bullet e \bullet J\overline{R}'} && \Delta\bullet JT\bullet J\Psi_1}$}
+\AxiomC{$\xymatrix@R=.4in{T \ar[r]^{\overline{S}} & \Psi_2} \quad \hbox{in} \  \mathcal{C}$}
+\UnaryInfC{$\xymatrix@R=.4in{JT \ar[r]^{\overline{JS}}& J\Psi_2} \quad \hbox{in} \  \mathcal{L}$}
+\BinaryInfC{$\xymatrix@R=.1in@C=.6cm{A \ar[rr]^{\overline{R}\bullet e \bullet J(\overline{R}')\quad} &
+& \Delta\bullet J(T) \bullet J(\Psi_1) 
+\ar[rrr]^{id_{\Delta}\bullet J(\overline{S}) \bullet id_{J(\Psi_1)}}&&&\Delta\bullet J(\Psi_1)\bullet J(\Psi_2)
+\ar[rr]^{id_{\Delta} \bullet j^{-1}_{\Psi_1\Psi_2}} &&\Delta\bullet J(\Psi_1+\Psi_2)}$}
+\noLine
+\UnaryInfC{\hskip3in since $|\Psi_1| = |\Psi_2|, \quad \xymatrix@R=.1in@C=.6cm{ 
+\ar[rr]^{id_{\Delta}\bullet\nabla_{\Psi_1}} &&\Delta \bullet J(\Psi_1)}$}
+\DisplayProof
+\end{center}
 
-%% \vspace{3ex}
+\vspace{3ex}
+
+
+\ref{functors}.2 {\em rules for $H: \mathcal{L} \rightarrow \mathcal{C}$.} 
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ intro}
+\noLine
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta, e: B; \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta;He:HB, \Psi$}
+\DisplayProof
+}
+\end{equation}
+Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then 
+\begin{center}
+\AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{\overline{R}\wp e\wp J(\overline{S})\quad}&&
+\Delta \bullet B \bullet  J(\Psi)}$}
+\RightLabel{using $\eta_B: B \rightarrow JHB$}
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{A \ar[rrr]^{\overline{R}\wp JH(e) \bullet J(\overline{S})\quad}&&
+& \Delta\bullet JH(B)\bullet J(\Psi)}$}
+\DisplayProof
+\end{center}
+
+\vspace{3ex}
  
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $H$ elim$_1$}
-%% \noLine
-%% \UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-%% \UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
-%% \DisplayProof
-%% }
-%% \end{equation}
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ elim$_1$}
+\noLine
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof
+}
+\end{equation}
 
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $H$ elim$_2$}
-%% \noLine
-%% \UnaryInfC{$x:S \vdash_{\mathsf{C}} t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-%% \UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% The categorical interpretation of $H$ elim$_2$ is as follows:
-%% Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we have the following compositions: 
-%% \begin{center}
-%% \AxiomC{$\strut\quad$}
-%% \noLine
-%% \UnaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi}$}
-%% \AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{J(\overline{S})} && J(\Psi)}\quad \hbox{in}\ \mathcal{L}$}
-%% \UnaryInfC{$\xymatrix@R=.1in@C.5cm{HA \ar[rr]^{HJ(\overline{S})} && HJ(\Psi) 
-%% \ar[r]^{\quad\epsilon_{\Psi}} &\Psi}\quad \hbox{in}\ \mathcal{C}$}
-%% \BinaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi
-%% \ar[rrr]^{HJ(\overline{S}) + id_{\Psi}} &&& \Psi + \Psi \ar[r]^{\quad\nabla_{\Psi}}& \Psi }$}
-%% \DisplayProof\\
-%% \end{center}
-%% % subsection categorical_interpretation_of_rules (end)
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ elim$_2$}
+\noLine
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof
+}
+\end{equation}
+The categorical interpretation of $H$ elim$_2$ is as follows:
+Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we have the following compositions: 
+\begin{center}
+\AxiomC{$\strut\quad$}
+\noLine
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi}$}
+\AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{J(\overline{S})} && J(\Psi)}\quad \hbox{in}\ \mathcal{L}$}
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{HA \ar[rr]^{HJ(\overline{S})} && HJ(\Psi) 
+\ar[r]^{\quad\epsilon_{\Psi}} &\Psi}\quad \hbox{in}\ \mathcal{C}$}
+\BinaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi
+\ar[rrr]^{HJ(\overline{S}) + id_{\Psi}} &&& \Psi + \Psi \ar[r]^{\quad\nabla_{\Psi}}& \Psi }$}
+\DisplayProof\\
+\end{center}
+% subsection categorical_interpretation_of_rules (end)
 
 %% %%% Local Variables: 
 %% %%% mode: latex
