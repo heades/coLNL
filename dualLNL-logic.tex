@@ -341,7 +341,7 @@ The syntax of TND terms is defined by the following definition.
   \[
   \begin{array}{l}
     \begin{array}{cllllll}
-    \text{(non-linear terms)} & [[s]],[[t]] & ::= & [[x]] \mid [[t1 * t2]] \mid
+    \text{(non-linear terms)} & [[s]],[[t]] & ::= & [[x]] \mid [[id]] \mid [[t1 * t2]] \mid
          [[false t]] \mid [[x(t)]] \mid [[mkc(t,x)]] \mid [[inl t]] \mid [[inr t]] \mid \\
          & & & [[case t of x.t1,y.t2]] \mid
          [[H e]] \mid [[let J x = e in t]] \mid [[postp(x -> t1,t2)]] \mid \\
@@ -391,7 +391,7 @@ follows:
   \begin{array}{lll}
     \textbf{non-linear terms:}\\
     \,\,FV(x) = \{ x\}\\
-    %% \,\,FV(connectW to t) = FV(t) \\ 
+    \,\,FV([[id]]) = \emptyset \\ 
     \,\,FV([[t1 * t2]])  = FV(t_1)\cup FV(t_2) \\
     \,\,FV([[false t]])  = FV(t) \\
     \,\,FV([[x(t)]]) = FV(t)\\
@@ -426,6 +426,7 @@ Figure~\ref{fig:linear-ta}.
     \begin{mathpar}
       \DualLNLLogicdruleTCXXid{} \and
       \DualLNLLogicdruleTCXXzI{} \and
+      \DualLNLLogicdruleTCXXweak{} \and
       \DualLNLLogicdruleTCXXdIOne{} \and
       \DualLNLLogicdruleTCXXdITwo{} \and
       \DualLNLLogicdruleTCXXdE{} \and
@@ -443,6 +444,7 @@ Figure~\ref{fig:linear-ta}.
       \DualLNLLogicdruleTLXXid{} \and
       \DualLNLLogicdruleTLXXpI{} \and
       \DualLNLLogicdruleTLXXpE{} \and
+      \DualLNLLogicdruleTLXXweak{} \and
       \DualLNLLogicdruleTLXXparI{} \and
       \DualLNLLogicdruleTLXXparE{} \and
       \DualLNLLogicdruleTLXXsubI{} \and
@@ -466,7 +468,8 @@ Figure~\ref{fig:linear-ta}.
 instances of the \emph{ex falso} rule. This is what happens in Crolard's 
 calculus, where the analogue of the $[[postp(x -> t1,t2)]]$, namely, 
 $\mathtt{resume}\ t_2\ \mathtt{with}\ x\mapsto t_1$, always goes with a 
-\emph{weakening} operation. 
+\emph{weakening} operation. The term $[[id]]$ is the identity of the
+contraction binary operator $[[t1 * t2]]$.
 
 However when within a non-$p$-normal term an expression of the form 
 $[[postp(x -> t1,t2)]]$ is eliminated as a $\beta$ redex, there is a choice
@@ -792,8 +795,9 @@ axioms in $\mathsf{Ax}$.
 
 We now go through some cases of the rules in TND to specify their
 categorical interpretation so as to satisfy the equations in context
-and to prove consistency of TND, and hence, DLNL logic in the
-model. We analyze the linear connectives, giving an
+and to prove consistency of TND, and hence, DLNL logic in the model.
+We do not give every case, but the ones we do not give are similar to
+the ones given here. We analyze the linear connectives, giving an
 argument for co-ILL that is analogue to Bierman's for ILL. We conclude
 that as expected:
 \begin{itemize}
