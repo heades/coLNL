@@ -341,7 +341,7 @@ The syntax of TND terms is defined by the following definition.
   \[
   \begin{array}{l}
     \begin{array}{cllllll}
-    \text{(non-linear terms)} & [[s]],[[t]] & ::= & [[x]] \mid [[connectW to t]] \mid [[t1 * t2]] \mid
+    \text{(non-linear terms)} & [[s]],[[t]] & ::= & [[x]] \mid [[id]] \mid [[t1 * t2]] \mid
          [[false t]] \mid [[x(t)]] \mid [[mkc(t,x)]] \mid [[inl t]] \mid [[inr t]] \mid \\
          & & & [[case t of x.t1,y.t2]] \mid
          [[H e]] \mid [[let J x = e in t]] \mid [[postp(x -> t1,t2)]] \mid \\
@@ -391,7 +391,7 @@ follows:
   \begin{array}{lll}
     \textbf{non-linear terms:}\\
     \,\,FV(x) = \{ x\}\\
-    \,\,FV([[connectW to t]]) = FV(t) \\ 
+    \,\,FV([[id]]) = \emptyset \\ 
     \,\,FV([[t1 * t2]])  = FV(t_1)\cup FV(t_2) \\
     \,\,FV([[false t]])  = FV(t) \\
     \,\,FV([[x(t)]]) = FV(t)\\
@@ -426,6 +426,7 @@ Figure~\ref{fig:linear-ta}.
     \begin{mathpar}
       \DualLNLLogicdruleTCXXid{} \and
       \DualLNLLogicdruleTCXXzI{} \and
+      \DualLNLLogicdruleTCXXweak{} \and
       \DualLNLLogicdruleTCXXdIOne{} \and
       \DualLNLLogicdruleTCXXdITwo{} \and
       \DualLNLLogicdruleTCXXdE{} \and
@@ -443,6 +444,7 @@ Figure~\ref{fig:linear-ta}.
       \DualLNLLogicdruleTLXXid{} \and
       \DualLNLLogicdruleTLXXpI{} \and
       \DualLNLLogicdruleTLXXpE{} \and
+      \DualLNLLogicdruleTLXXweak{} \and
       \DualLNLLogicdruleTLXXparI{} \and
       \DualLNLLogicdruleTLXXparE{} \and
       \DualLNLLogicdruleTLXXsubI{} \and
@@ -466,7 +468,8 @@ Figure~\ref{fig:linear-ta}.
 instances of the \emph{ex falso} rule. This is what happens in Crolard's 
 calculus, where the analogue of the $[[postp(x -> t1,t2)]]$, namely, 
 $\mathtt{resume}\ t_2\ \mathtt{with}\ x\mapsto t_1$, always goes with a 
-\emph{weakening} operation. 
+\emph{weakening} operation. The term $[[id]]$ is the identity of the
+contraction binary operator $[[t1 * t2]]$.
 
 However when within a non-$p$-normal term an expression of the form 
 $[[postp(x -> t1,t2)]]$ is eliminated as a $\beta$ redex, there is a choice
@@ -501,13 +504,13 @@ Similarly to DND logic we have the following admissible rules.
 \begin{lemma}[Admissible Typing Rules]
   The term assignment for the admissible rules of the calculus is as follows:
   \begin{mathpar}
-    \DualLNLLogicdruleTCXXweak{} \and
-      \DualLNLLogicdruleTCXXcontr{} \and
-      \DualLNLLogicdruleTCXXcut{} \and     
-      \DualLNLLogicdruleTLXXweak{} \and
-      \DualLNLLogicdruleTLXXcontr{} \and
-      \DualLNLLogicdruleTLXXCcut{} \and
-      \DualLNLLogicdruleTLXXcut{}      
+    %% \DualLNLLogicdruleTCXXweak{} \and
+    \DualLNLLogicdruleTCXXcontr{} \and
+    \DualLNLLogicdruleTCXXcut{} \and     
+    %% \DualLNLLogicdruleTLXXweak{} \and
+    \DualLNLLogicdruleTLXXcontr{} \and
+    \DualLNLLogicdruleTLXXCcut{} \and
+    \DualLNLLogicdruleTLXXcut{}      
   \end{mathpar}
 \end{lemma}
 \noindent
@@ -647,7 +650,63 @@ is made explicit.
         \rightsquigarrow\\
         [[x : H B |-TC (let H x = y in P1) * (let H x = y in [e/z]P2)]]\\
         \hline
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXdEName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,case (t1 * t2) of y.P2,z.P3]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC P1,(case t1 of y.P2,z.P3) * (case t2 of y.P2,z.P3)]]\\
+        \hline
+      \end{array}\\
+      \\
+      \begin{array}{cc}
+        \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXdIOneName{}$}:}}\\
+        \hline
+        [[x : S |-TC inl (t1 * t2) : S1 + S2,P]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC (inl t1) * (inl t2) : S1 + S2,P]]\\
+        \hline
+        \end{array}
+        &
+        \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXdITwoName{}$}:}}\\
+        \hline
+        [[x : S |-TC inr (t1 * t2) : S1 + S2,P]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC (inr t1) * (inr t2) : S1 + S2,P]]\\
+        \hline
       \end{array}
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXsubIName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,mkc(t1 * t2,y) : T1 - T2,[y(t1 * t2)/y]P2]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC P1,(mkc(t1,y) * mkc(t2,y)) : T1 - T2,([y(t1)/y]P2 * [y(t2)/y]P2)]]\\
+        \hline
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXsubEName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,{postp(z -> s,t1 * t2)},[y(t1 * t2)/y]P2]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC (P1,{postp(z -> s,t1)},[y(t1)/y]P2) * (P1,{postp(z -> s,t2)},[y(t2)/y]P2)]]\\
+        \hline
+      \end{array}\\
+      \\
+      \begin{array}{|c|}
+        \multicolumn{1}{l}{\textbf{\textbf{Contraction with $\DualLNLLogicdruleTCXXHEName{}$}:}}\\
+        \hline
+        [[x : S |-TC P1,let H y = t1 * t2 in P2]]\\
+        \rightsquigarrow\\
+        [[x : S |-TC P1,(let H y = t1 in P2) * (let H y = t2 in P2)]]\\
+        \hline
+      \end{array}\\      
     \end{array}
   \end{math}
   \end{center}
@@ -655,6 +714,77 @@ is made explicit.
   \caption{Reductions for Non-linear Terms}
   \label{fig:red-non-linear}
 \end{figure}
+\begin{figure}
+  \begin{mdframed}
+    \begin{center}
+    \begin{math}
+      \begin{array}{c}    
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXdEName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,case(id) of y.P2,z.P3]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,id : S1,...,id : Si]]\\
+           \text{where } [[|P2| = |P3|]] \text{ and } |[[P2]]| = [[S1,...,Si]]\\    
+          \hline
+        \end{array}\\
+        \\
+        \begin{array}{cc}
+          \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXdIOneName{}$}:}}\\
+          \hline
+           [[x : S |-TC P,inl id : S1 + S2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P,id : S1 + S2]]\\               
+          \hline
+        \end{array}
+        &
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXdITwoName{}$}:}}\\
+          \hline
+           [[x : S |-TC P,inr id : S1 + S2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P,id : S1 + S2]]\\               
+          \hline
+        \end{array}
+        \end{array}\\
+        \\
+        \begin{array}{cc}
+          \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXsubEName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,{postp(z -> s,id)},[y(id)/y]P2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,[id/y]P2]]\\               
+          \hline
+        \end{array}
+        &
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXsubIName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,mkc(id,y) : T1 - T2,[y(id)/y]P2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,id : T1 - T2,[id/y]P2]]\\               
+          \hline
+        \end{array}
+        \end{array}\\
+        \\
+        \begin{array}{|c|}
+          \multicolumn{1}{l}{\textbf{\textbf{Weakening with $\DualLNLLogicdruleTCXXHEName{}$}:}}\\
+          \hline
+           [[x : S |-TC P1,let H y = id in P2]]\\
+           \rightsquigarrow\\
+           [[x : S |-TC P1,[id/y]P2]]\\               
+          \hline
+        \end{array}
+      \end{array}
+    \end{math}
+  \end{center}
+  \end{mdframed}
+  \caption{Reductions for Non-linear Terms Continued}
+  \label{fig:red-non-linear-cont}
+\end{figure}
+
 
 The reduction rules for the linear and non-linear fragments can be
 found in Figure~\ref{fig:red-linear-terms} and
@@ -792,16 +922,18 @@ axioms in $\mathsf{Ax}$.
 
 We now go through some cases of the rules in TND to specify their
 categorical interpretation so as to satisfy the equations in context
-and to prove consistency of TND, and hence, DLNL logic in the
-model. We analyze the linear connectives, giving an
+and to prove consistency of TND, and hence, DLNL logic in the model.
+We do not give every case, but the ones we do not give are similar to
+the ones given here. We analyze the linear connectives, giving an
 argument for co-ILL that is analogue to Bierman's for ILL. We conclude
 that as expected:
 \begin{itemize}
-\item the cotensor \emph{par} can be identified with the bifunctor $\bullet$ of the structure; 
-\item linear subtraction $\lsub$ is the left adjoint to the bifunctor $\bullet$; 
+\item the cotensor \emph{par} can be identified with the bifunctor
+  $\bullet$ of the structure;
+\item linear subtraction $\lsub$ is the left adjoint to the bifunctor
+  $\bullet$;
 \item the unit $\bot$ can be identified with $1$.
 \end{itemize}
-
 
 \subsubsection{Linear Disjunction}\label{lindisj} 
 
@@ -1170,53 +1302,53 @@ and conclude that there is a natural isomorphism between the maps
 \end{center}
 i.e., that $\lsub$ is the left adjoint to the bifunctor $\bullet$.  
 
-\subsubsection{Unit rules}
-\label{units}  The introduction and elimination rules for the unit $\bot$ are stated as follows:
-\begin{center}
-  \begin{math}
-    \setlength{\arraycolsep}{10px}
-    \begin{array}{lll}
-      $$\mprset{flushleft}
-      \inferrule* [right=$\DualLNLLogicdruleTLXXpIName{}$] {
-        [[x:A |-TL D; P]]
-        \\
-        r : B \in [[D]],\ \hbox{or}\  r:S \in \Psi    
-      }{x:A\vdash_{\mathsf{L}} \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi}
-      &
-      $$\mprset{flushleft}
-      \inferrule* [right=$\DualLNLLogicdruleTLXXpEName{}$] {
-        x:A \vdash_{\mathsf{L}}  \Delta,  e:\bot; \Psi
-      }{x:A \vdash_{\mathsf{L}} \Delta, \mathtt{postp_{\bot}}(e); \Psi}
-    \end{array}
-  \end{math}
-\end{center}
-The introduction % and the elimination rules
-rule can be interpreted by a map $a: A \rightarrow 1$.
-% , if we give the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
-% in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
-The elimination rule can also be interpreted as a map $\langle \rangle: A \rightarrow \bot$ if we give the 
-term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. In presence of a nonempty linear context $\Delta$ one can compose with  
-the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle\rangle;\lambda_{\Delta}$.
+%% \subsubsection{Unit rules}
+%% \label{units}  The introduction and elimination rules for the unit $\bot$ are stated as follows:
+%% \begin{center}
+%%   \begin{math}
+%%     \setlength{\arraycolsep}{10px}
+%%     \begin{array}{lll}
+%%       $$\mprset{flushleft}
+%%       \inferrule* [right=$\DualLNLLogicdruleTLXXpIName{}$] {
+%%         [[x:A |-TL D; P]]
+%%         \\
+%%         r : B \in [[D]],\ \hbox{or}\  r:S \in \Psi    
+%%       }{x:A\vdash_{\mathsf{L}} \Delta, \mathtt{connect}_{\bot}\ \mathtt{to}(r):\,\bot; \Psi}
+%%       &
+%%       $$\mprset{flushleft}
+%%       \inferrule* [right=$\DualLNLLogicdruleTLXXpEName{}$] {
+%%         x:A \vdash_{\mathsf{L}}  \Delta,  e:\bot; \Psi
+%%       }{x:A \vdash_{\mathsf{L}} \Delta, \mathtt{postp_{\bot}}(e); \Psi}
+%%     \end{array}
+%%   \end{math}
+%% \end{center}
+%% The introduction % and the elimination rules
+%% rule can be interpreted by a map $a: A \rightarrow 1$.
+%% % , if we give the term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. However, it is a syntactic requirement that 
+%% % in the case of an elimination the type $\bot$ cannot be a subtype of another type. 
+%% The elimination rule can also be interpreted as a map $\langle \rangle: A \rightarrow \bot$ if we give the 
+%% term $\mathtt{postp_{\bot}}(e)$ the type $\bot$. In presence of a nonempty linear context $\Delta$ one can compose with  
+%% the natural isomorphism  $\lambda_{\Delta}$ yielding $id_{\Delta}\bullet \langle\rangle;\lambda_{\Delta}$.
 
-%% \vspace{1ex}
+%% %% \vspace{1ex}
 
  
-The introduction rule requires a natural transformation with components
-\begin{center}
-$\Phi_{A,\Delta\bullet J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
-\end{center}
-natural in $A$, $\Delta$, $J\Psi$. Given morphisms $e:A\rightarrow \Delta\bullet J\Psi$, $d:A'\rightarrow A$, $c:\Delta\rightarrow\Delta'$ and $p:J\Psi\rightarrow J\Psi'$, naturality yields
-\begin{center}
-$\Phi_{A', \Delta',J\Psi'}(d;e;c\bullet p) = d;\Phi_{A, \Delta, J\Psi}(e);c\bullet p$.
-\end{center} 
-Letting $d:A\rightarrow\Delta\bullet J\Psi$ and $e = id_{\Delta\bullet J\Psi}$, $c = id_{\Delta\bullet\bot}$, $p = id_{J\Psi}$ we have 
-$$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
-where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
-We define 
-$$
-[\![x:A\vdash_{\mathsf{L}} \Delta, \/ \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
-[\![x:A\vdash_{\mathsf{L}} \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
-$$
+%% The introduction rule requires a natural transformation with components
+%% \begin{center}
+%% $\Phi_{A,\Delta\bullet J\Psi}: \mathcal{L}(A, \Delta, J\Psi)\rightarrow \mathcal{L}(A, \Delta\bullet \bot\bullet J\Psi)$
+%% \end{center}
+%% natural in $A$, $\Delta$, $J\Psi$. Given morphisms $e:A\rightarrow \Delta\bullet J\Psi$, $d:A'\rightarrow A$, $c:\Delta\rightarrow\Delta'$ and $p:J\Psi\rightarrow J\Psi'$, naturality yields
+%% \begin{center}
+%% $\Phi_{A', \Delta',J\Psi'}(d;e;c\bullet p) = d;\Phi_{A, \Delta, J\Psi}(e);c\bullet p$.
+%% \end{center} 
+%% Letting $d:A\rightarrow\Delta\bullet J\Psi$ and $e = id_{\Delta\bullet J\Psi}$, $c = id_{\Delta\bullet\bot}$, $p = id_{J\Psi}$ we have 
+%% $$\Phi_{A, \Delta,J\Psi}(d) = d;\mathbf{Bot}_{\Delta,J\Psi}$$
+%% where we write $\mathbf{Bot}_{\Delta,J\Psi}$ for $\Phi_{\Delta,J\Psi}(id_{\Delta},id_{J\Psi})$.
+%% We define 
+%% $$
+%% [\![x:A\vdash_{\mathsf{L}} \Delta, \/ \mathtt{connect\ to}(x):\bot; J\Psi]\!] =_{df} 
+%% [\![x:A\vdash_{\mathsf{L}} \Delta, J\Psi]\!];\mathbf{Bot}_{\Delta,J\Psi}. 
+%% $$
 %% \ref{units}.2. {\em Equations in context.}
 
 %% The equation in context        
@@ -1256,126 +1388,126 @@ $$
 %% \quad}
 %% \end{equation} 
 
-%% \subsubsection{Functors}\label{functors}
+\subsubsection{Functors}\label{functors}
 
-%% Recall that a model of Linear-Non Linear co-intuitionistic logic consists of  a symmetric comonoidal adjunction 
-%% $\mathcal{L} : H \dashv  J : \mathcal{C}$ where $\mathcal{L} = (\mathcal{L}, \bot, \oplus, \limp)$ 
-%% is a symmetric monoidal coclosed category and $\mathcal{C} = (\mathcal{C}, 0, +, -)$
-%%  is a cocartesian coclosed category.
+Recall that a model of Linear-Non Linear co-intuitionistic logic consists of  a symmetric comonoidal adjunction 
+$\mathcal{L} : H \dashv  J : \mathcal{C}$ where $\mathcal{L} = (\mathcal{L}, \bot, \oplus, \limp)$ 
+is a symmetric monoidal coclosed category and $\mathcal{C} = (\mathcal{C}, 0, +, -)$
+ is a cocartesian coclosed category.
 
-%% We use the same symbols for the functors
-%% $J: \mathcal{C} \rightarrow \mathcal{L}$ and $\mathcal{H}: \mathcal{L} \rightarrow  \mathcal{C}$ 
-%% in the models and for the operators that represent them in the language.
+We use the same symbols for the functors
+$J: \mathcal{C} \rightarrow \mathcal{L}$ and $\mathcal{H}: \mathcal{L} \rightarrow  \mathcal{C}$ 
+in the models and for the operators that represent them in the language.
 
-%% \vspace{1ex}
+\vspace{1ex}
 
-%% \ref{functors}.1 {\em rules for $J: \mathcal{C} \rightarrow \mathcal{L}$.} 
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $J$ introduction}
-%% \noLine
-%% \UnaryInfC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% If $\Delta = \overline{R}: \Delta$ and $\Psi = \overline{S}: \Psi$, then the categorical interpetation of the rule is 
-%% an application of $\alpha^{-1}$: 
-%% \begin{center}
-%% \AxiomC{$\xymatrix@R=.4in{A\ar[rr]^{\overline{R} \bullet Jt \bullet J\overline{S}} & &\Delta\bullet JT \bullet J\Psi}$}
-%% \UnaryInfC{$\xymatrix@R=.4in{A\ar[rr]^{(\overline{R} \bullet Jt )\bullet J\overline{S}} & &(\Delta\bullet JT) \bullet J\Psi}$}
-%% \DisplayProof
-%% \end{center}
-
-
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $J$ elimination}
-%% \noLine
-%% \UnaryInfC{$x:A \vdash_{\mathsf{L}} \Delta, e: JT;\Psi_1\qquad  y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% If $\Delta = \overline{R}: \Delta$,  $\Psi_1 = \overline{R'}: \Psi_1$, $\Psi_2 = \overline{S}:\Psi_2$, 
-%% then the categorical interpretation of the rule is given by an operation of the form 
-%% \[
-%% \mathcal{L}(A, \Delta\bullet JT\bullet J\Psi_1) \times \mathcal{C}(T, \Psi_2)\rightarrow 
-%% \mathcal{L}(A, \Delta\bullet J\Psi_1\bullet J\Psi_2) 
-%% \]
-%% given by the following compositions
-%% \begin{center}
-%% \AxiomC{$\xymatrix@R=.4in{A \ar[rr]^{\overline{R}\bullet e \bullet J\overline{R}'} && \Delta\bullet JT\bullet J\Psi_1}$}
-%% \AxiomC{$\xymatrix@R=.4in{T \ar[r]^{\overline{S}} & \Psi_2} \quad \hbox{in} \  \mathcal{C}$}
-%% \UnaryInfC{$\xymatrix@R=.4in{JT \ar[r]^{\overline{JS}}& J\Psi_2} \quad \hbox{in} \  \mathcal{L}$}
-%% \BinaryInfC{$\xymatrix@R=.1in@C=.6cm{A \ar[rr]^{\overline{R}\bullet e \bullet J(\overline{R}')\quad} &
-%% & \Delta\bullet J(T) \bullet J(\Psi_1) 
-%% \ar[rrr]^{id_{\Delta}\bullet J(\overline{S}) \bullet id_{J(\Psi_1)}}&&&\Delta\bullet J(\Psi_1)\bullet J(\Psi_2)
-%% \ar[rr]^{id_{\Delta} \bullet j^{-1}_{\Psi_1\Psi_2}} &&\Delta\bullet J(\Psi_1+\Psi_2)}$}
-%% \noLine
-%% \UnaryInfC{\hskip3in since $|\Psi_1| = |\Psi_2|, \quad \xymatrix@R=.1in@C=.6cm{ 
-%% \ar[rr]^{id_{\Delta}\bullet\nabla_{\Psi_1}} &&\Delta \bullet J(\Psi_1)}$}
-%% \DisplayProof
-%% \end{center}
-
-%% \vspace{3ex}
+\ref{functors}.1 {\em rules for $J: \mathcal{C} \rightarrow \mathcal{L}$.} 
+\begin{equation}
+\framebox{
+\AxiomC{\it $J$ introduction}
+\noLine
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
+\DisplayProof
+}
+\end{equation}
+If $\Delta = \overline{R}: \Delta$ and $\Psi = \overline{S}: \Psi$, then the categorical interpetation of the rule is 
+an application of $\alpha^{-1}$: 
+\begin{center}
+\AxiomC{$\xymatrix@R=.4in{A\ar[rr]^{\overline{R} \bullet Jt \bullet J\overline{S}} & &\Delta\bullet JT \bullet J\Psi}$}
+\UnaryInfC{$\xymatrix@R=.4in{A\ar[rr]^{(\overline{R} \bullet Jt )\bullet J\overline{S}} & &(\Delta\bullet JT) \bullet J\Psi}$}
+\DisplayProof
+\end{center}
 
 
-%% \ref{functors}.2 {\em rules for $H: \mathcal{L} \rightarrow \mathcal{C}$.} 
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $H$ intro}
-%% \noLine
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta, e: B; \Psi$}
-%% \UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta;He:HB, \Psi$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then 
-%% \begin{center}
-%% \AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{\overline{R}\wp e\wp J(\overline{S})\quad}&&
-%% \Delta \bullet B \bullet  J(\Psi)}$}
-%% \RightLabel{using $\eta_B: B \rightarrow JHB$}
-%% \UnaryInfC{$\xymatrix@R=.1in@C.5cm{A \ar[rrr]^{\overline{R}\wp JH(e) \bullet J(\overline{S})\quad}&&
-%% & \Delta\bullet JH(B)\bullet J(\Psi)}$}
-%% \DisplayProof
-%% \end{center}
+\begin{equation}
+\framebox{
+\AxiomC{\it $J$ elimination}
+\noLine
+\UnaryInfC{$x:A \vdash_{\mathsf{L}} \Delta, e: JT;\Psi_1\qquad  y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
+\DisplayProof
+}
+\end{equation}
+If $\Delta = \overline{R}: \Delta$,  $\Psi_1 = \overline{R'}: \Psi_1$, $\Psi_2 = \overline{S}:\Psi_2$, 
+then the categorical interpretation of the rule is given by an operation of the form 
+\[
+\mathcal{L}(A, \Delta\bullet JT\bullet J\Psi_1) \times \mathcal{C}(T, \Psi_2)\rightarrow 
+\mathcal{L}(A, \Delta\bullet J\Psi_1\bullet J\Psi_2) 
+\]
+given by the following compositions
+\begin{center}
+\AxiomC{$\xymatrix@R=.4in{A \ar[rr]^{\overline{R}\bullet e \bullet J\overline{R}'} && \Delta\bullet JT\bullet J\Psi_1}$}
+\AxiomC{$\xymatrix@R=.4in{T \ar[r]^{\overline{S}} & \Psi_2} \quad \hbox{in} \  \mathcal{C}$}
+\UnaryInfC{$\xymatrix@R=.4in{JT \ar[r]^{\overline{JS}}& J\Psi_2} \quad \hbox{in} \  \mathcal{L}$}
+\BinaryInfC{$\xymatrix@R=.1in@C=.6cm{A \ar[rr]^{\overline{R}\bullet e \bullet J(\overline{R}')\quad} &
+& \Delta\bullet J(T) \bullet J(\Psi_1) 
+\ar[rrr]^{id_{\Delta}\bullet J(\overline{S}) \bullet id_{J(\Psi_1)}}&&&\Delta\bullet J(\Psi_1)\bullet J(\Psi_2)
+\ar[rr]^{id_{\Delta} \bullet j^{-1}_{\Psi_1\Psi_2}} &&\Delta\bullet J(\Psi_1+\Psi_2)}$}
+\noLine
+\UnaryInfC{\hskip3in since $|\Psi_1| = |\Psi_2|, \quad \xymatrix@R=.1in@C=.6cm{ 
+\ar[rr]^{id_{\Delta}\bullet\nabla_{\Psi_1}} &&\Delta \bullet J(\Psi_1)}$}
+\DisplayProof
+\end{center}
 
-%% \vspace{3ex}
+\vspace{3ex}
+
+
+\ref{functors}.2 {\em rules for $H: \mathcal{L} \rightarrow \mathcal{C}$.} 
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ intro}
+\noLine
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta, e: B; \Psi$}
+\UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta;He:HB, \Psi$}
+\DisplayProof
+}
+\end{equation}
+Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then 
+\begin{center}
+\AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{\overline{R}\oplus e\oplus J(\overline{S})\quad}&&
+\Delta \bullet B \bullet  J(\Psi)}$}
+\RightLabel{using $\eta_B: B \rightarrow JHB$}
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{A \ar[rrr]^{\overline{R}\oplus JH(e) \bullet J(\overline{S})\quad}&&
+& \Delta\bullet JH(B)\bullet J(\Psi)}$}
+\DisplayProof
+\end{center}
+
+\vspace{3ex}
  
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $H$ elim$_1$}
-%% \noLine
-%% \UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-%% \UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
-%% \DisplayProof
-%% }
-%% \end{equation}
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ elim$_1$}
+\noLine
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof
+}
+\end{equation}
 
-%% \begin{equation}
-%% \framebox{
-%% \AxiomC{\it $H$ elim$_2$}
-%% \noLine
-%% \UnaryInfC{$x:S \vdash_{\mathsf{C}} t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-%% \UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
-%% \DisplayProof
-%% }
-%% \end{equation}
-%% The categorical interpretation of $H$ elim$_2$ is as follows:
-%% Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we have the following compositions: 
-%% \begin{center}
-%% \AxiomC{$\strut\quad$}
-%% \noLine
-%% \UnaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi}$}
-%% \AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{J(\overline{S})} && J(\Psi)}\quad \hbox{in}\ \mathcal{L}$}
-%% \UnaryInfC{$\xymatrix@R=.1in@C.5cm{HA \ar[rr]^{HJ(\overline{S})} && HJ(\Psi) 
-%% \ar[r]^{\quad\epsilon_{\Psi}} &\Psi}\quad \hbox{in}\ \mathcal{C}$}
-%% \BinaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi
-%% \ar[rrr]^{HJ(\overline{S}) + id_{\Psi}} &&& \Psi + \Psi \ar[r]^{\quad\nabla_{\Psi}}& \Psi }$}
-%% \DisplayProof\\
-%% \end{center}
-%% % subsection categorical_interpretation_of_rules (end)
+\begin{equation}
+\framebox{
+\AxiomC{\it $H$ elim$_2$}
+\noLine
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\DisplayProof
+}
+\end{equation}
+The categorical interpretation of $H$ elim$_2$ is as follows:
+Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we have the following compositions: 
+\begin{center}
+\AxiomC{$\strut\quad$}
+\noLine
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi}$}
+\AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{J(\overline{S})} && J(\Psi)}\quad \hbox{in}\ \mathcal{L}$}
+\UnaryInfC{$\xymatrix@R=.1in@C.5cm{HA \ar[rr]^{HJ(\overline{S})} && HJ(\Psi) 
+\ar[r]^{\quad\epsilon_{\Psi}} &\Psi}\quad \hbox{in}\ \mathcal{C}$}
+\BinaryInfC{$\xymatrix@R=.1in@C.5cm{S \ar[rr]^{t + \overline{R}\quad}&& H(A) + \Psi
+\ar[rrr]^{HJ(\overline{S}) + id_{\Psi}} &&& \Psi + \Psi \ar[r]^{\quad\nabla_{\Psi}}& \Psi }$}
+\DisplayProof\\
+\end{center}
+% subsection categorical_interpretation_of_rules (end)
 
 %% %%% Local Variables: 
 %% %%% mode: latex

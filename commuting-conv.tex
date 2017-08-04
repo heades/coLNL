@@ -2,142 +2,159 @@
 \item[] {\bf Non linear rules. }
 \item \emph{disjunction intro} TC$_{+_{I_1} }$ and TC$_{+_{I_2} }$ commute upwards with every inference and the terms obtained are the same. 
 \item \emph{disjunction  elim} TC$_{+_E }$ commutes upwrds with inferences in the derivation of the major premise, 
-the terms assigned to the resulting subderivations are equated. For instance
-\[
-\AxiomC{$\hskip1.6in [[y:T2 |-TC P2, t1 : T4 + T5]]\hskip.4in$}
-\noLine
-\UnaryInfC{$[[x:S |-TC P1, t:T2 + T3]] \quad [[z:T3 |-TC P3, t2: T4 + T5]] \quad [[|P2| = |P3|]]$}
-\UnaryInfC{$[[x:S |-TC P1, case t  of y.P2, z.P3]]\hskip.5in$}
-\noLine
-\UnaryInfC{$\hskip.8in [[case t of y.t1, z.t2]] : [[T4 + T5]]$}
-\AxiomC{$[[v1:T4 |-TC P4]] \quad [[v2:T5 |-TC P5]], [[|P4| = |P5|]]$}
-\BinaryInfC{$[[x:S |-TC P1, h(case t of y.P2, z.P3), case (case t of y.t1, z.t2) of v1.P4, v2.P5]]$}
-\DisplayProof
-\]
-commmutes to 
-\[
-\AxiomC{$[[x:S |-TC P1, t:T2 + T3]]$} 
-\AxiomC{$[[y:T2 |-TC P2, t1 : T4 + T5]] \quad [[v1:T4 |-TC P4]] \quad [[v2:T5 |-TC P5]] \quad [[|P4| = |P5|]]$}
-\UnaryInfC{$[[y:T2 |-TC P2, case t1 of v1.P4, v2.P5]] \quad [[|P4| = |P5|]]$}
-\noLine
-\UnaryInfC{$[[z:T3 |-TC P3, t2: T4 + T5]] \quad [[v1:T4 |-TC P4]] \quad [[v2:T5 |-TC P5]]$}
-\UnaryInfC{$[[z:T3 |-TC P3, case t2 of v1.P4, v2.P5]]$}
-\BinaryInfC{$[[x:S |-TC P1,  case t of y.(P2,case t1 of v1.P4, v2.P5), z.(P3,case t2 of v1.P4, v2.P5)]]$}
-\DisplayProof
-\]
-\begin{remark}If $[[t1]] = [[inl s1]]$ and $[[u2]] = [[inr s2]]$
- then after commutation 
-\[
-[[y:T2 |-TC P2, case inl s1 of v1.P4, v2.P5]] \rightsquigarrow_{\beta} [[y:T2 |-TC P2, [s1/v1]P4]] 
-\]
-\[
-[[y:T3 |-TC P3, case inr s2 of v1.P4, v2.P5]] \rightsquigarrow_{\beta} [[y:T2 |-TC P3, [s1/v2]P5]]
-\]
-\end{remark}
-% \end{enumerate}
+  the terms assigned to the resulting subderivations are equated. For instance
+  \begin{center} \scriptsize
+    \begin{math} 
+      $$\mprset{flushleft}
+      \inferrule* [right=] {
+        $$\mprset{flushleft}
+        \inferrule* [right=] {
+          [[y:T2 |-TC P2, t1 : T4 + T5]]
+          \\\\                        
+              [[z:T3 |-TC P3, t2: T4 + T5]] \\ [[x:S |-TC P1, t:T2 + T3]] \\ [[|P2| = |P3|]]
+        }{[[x:S |-TC P1, h(case t  of y.P2, z.P3),case t of y.t1, z.t2 : T4 + T5]]}
+        \\
+        %% {\begin{tabular}{c}
+          [[v1:T4 |-TC P4]] \\
+          [[v2:T5 |-TC P5]] \\
+          %% \end{tabular} }
+          \\
+            [[|P4| = |P5|]]
+      }{[[x:S |-TC P1, h(case t of y.P2, z.P3), case (case t of y.t1, z.t2) of v1.P4, v2.P5]]}
+    \end{math}
+  \end{center}
+  commutes to
+  \begin{center} \scriptsize
+    \begin{math} 
+      $$\mprset{flushleft}
+      \inferrule* [right=] {
+        [[x:S |-TC P1, t:T2 + T3]]
+        \\
+        $$\mprset{flushleft}
+        \inferrule* [right=] {
+          [[|P4| = |P5|]]  \\\\ [[v1:T4 |-TC P4]] \\\\ [[v2:T5 |-TC P5]] \\ [[y:T2 |-TC P2, t1 : T4 + T5]]
+        }{[[y:T2 |-TC P2, case t1 of v1.P4, v2.P5]]}
+        \\
+        $$\mprset{flushleft}
+        \inferrule* [right=] {
+          [[|P4| = |P5|]]  \\\\ [[v1:T4 |-TC P4]] \\\\ [[v2:T5 |-TC P5]] \\ [[z:T3 |-TC P3, t2: T4 + T5]]
+        }{[[z:T3 |-TC P3, case t2 of v1.P4, v2.P5]]}
+      }{[[x:S |-TC P1,  case t of y.(P2,case t1 of v1.P4, v2.P5), z.(P3,case t2 of v1.P4, v2.P5)]]}
+    \end{math}
+  \end{center}   
+  \begin{remark}If $[[t1]] = [[inl s1]]$ and $[[u2]] = [[inr s2]]$
+    then after commutation 
+    \[
+      [[y:T2 |-TC P2, case inl s1 of v1.P4, v2.P5]] \rightsquigarrow_{\beta} [[y:T2 |-TC P2, [s1/v1]P4]] 
+      \]
+      \[
+        [[y:T3 |-TC P3, case inr s2 of v1.P4, v2.P5]] \rightsquigarrow_{\beta} [[y:T2 |-TC P3, [s1/v2]P5]]
+        \]
+  \end{remark}
+  % \end{enumerate}
 \item Subtraction introduction TC$_{-_I}$ commutes upwards  with inferences in both branches with any inference $\mathcal{I}$:
-\begin{center}
-\begin{tabular}{ccc}
-\AxiomC{$[[x:S |-TC t'1 : T1, P'1]]$}
-\RightLabel{$\mathcal{I}$}
-\UnaryInfC{$[[x:S |-TC t1: T1, P1]]$}
-\AxiomC{$[[y:T2 |-TC  P2]]$}
-\RightLabel{TC$_{-_I}$}
-\BinaryInfC{$[[x:S |-TC P1, mkc(t,y) : T1 - T2,  [y(t)/y]P2]]$}
-\DisplayProof 
-&\quad 
-&
-\AxiomC{$[[x:S |-TC t1 : T1, P1]]$}
-\AxiomC{$[[y:T2 |-TC P'2]]$}
-\RightLabel{$\mathcal{I}$}
-\UnaryInfC{$[[y:T2 |-TC P2]]$}
-\RightLabel{TC$_{-_I}$}
-\BinaryInfC{$[[x:S |-TC P1, mkc(t_1,y) : T1 - T2, [y(t)/y]P2]]$}
-\DisplayProof \\
-\\
-commutes to & & commutes to \\
-\\
-\AxiomC{$[[x:S |-TC t1 : T1, P'1]]$}
-\AxiomC{$[[y:T2 |-TC P2]]$}
-\RightLabel{TC$_{-_I}$}
-\BinaryInfC{$[[x:S |-TC P'1, mkc(t1,y) : T1 - T2, [y(t')/y]P2]]$}
-\RightLabel{$\mathcal{I}$}
-\UnaryInfC{$[[x:S |-TC P1, mkc(t1,y) : T1 - T2,  [y(t)/y]P2]]$}
-\DisplayProof& &
-\AxiomC{$[[x:S |-TC t1 : T1, P1]]$}
-\AxiomC{$[[y:T2 |-TC P'2]]$}
-\RightLabel{TC$_{-_I}$}
-\BinaryInfC{$[[x:S |-TC P1, mkc(t1,y) : T1 - T2, P'2]]$}
-\RightLabel{TC$_{-_I}$}
-\RightLabel{$\mathcal{I}$}
-\UnaryInfC{$[[x:S |-TC P1, mkc(t_1,y) : T1 - T2, P2]]$}
-\DisplayProof
-\end{tabular}
-\end{center}
+  \begin{center} \footnotesize
+    \begin{tabular}{ccc}
+      \AxiomC{$[[x:S |-TC t'1 : T1, P'1]]$}
+      \RightLabel{$\mathcal{I}$}
+      \UnaryInfC{$[[x:S |-TC t1: T1, P1]]$}
+      \AxiomC{$[[y:T2 |-TC  P2]]$}
+      \RightLabel{TC$_{-_I}$}
+      \BinaryInfC{$[[x:S |-TC P1, mkc(t,y) : T1 - T2,  [y(t)/y]P2]]$}
+      \DisplayProof 
+      &\quad 
+      &
+      \AxiomC{$[[x:S |-TC t1 : T1, P1]]$}
+      \AxiomC{$[[y:T2 |-TC P'2]]$}
+      \RightLabel{$\mathcal{I}$}
+      \UnaryInfC{$[[y:T2 |-TC P2]]$}
+      \RightLabel{TC$_{-_I}$}
+      \BinaryInfC{$[[x:S |-TC P1, mkc(t_1,y) : T1 - T2, [y(t)/y]P2]]$}
+      \DisplayProof \\
+      \\
+      {\normalsize commutes to} & & {\normalsize commutes to} \\
+      \\
+      \AxiomC{$[[x:S |-TC t1 : T1, P'1]]$}
+      \AxiomC{$[[y:T2 |-TC P2]]$}
+      \RightLabel{TC$_{-_I}$}
+      \BinaryInfC{$[[x:S |-TC P'1, mkc(t1,y) : T1 - T2, [y(t')/y]P2]]$}
+      \RightLabel{$\mathcal{I}$}
+      \UnaryInfC{$[[x:S |-TC P1, mkc(t1,y) : T1 - T2,  [y(t)/y]P2]]$}
+      \DisplayProof& &
+      \AxiomC{$[[x:S |-TC t1 : T1, P1]]$}
+      \AxiomC{$[[y:T2 |-TC P'2]]$}
+      \RightLabel{TC$_{-_I}$}
+      \BinaryInfC{$[[x:S |-TC P1, mkc(t1,y) : T1 - T2, P'2]]$}
+      \RightLabel{TC$_{-_I}$}
+      \RightLabel{$\mathcal{I}$}
+      \UnaryInfC{$[[x:S |-TC P1, mkc(t_1,y) : T1 - T2, P2]]$}
+      \DisplayProof
+    \end{tabular}
+  \end{center}
 \item Subtraction elimination TC$_{-_E}$ commutes upwards. For instance, 
-\begin{center}
-\begin{tabular}{c}
-\AxiomC{$[[x:S |-TC w:S1, P1]] \qquad [[z:S2 |-TC P2, t1:T1 - T2]]$}
-\UnaryInfC{$[[x:S |-TC P1, mkc(w,z):S1 - S2, [z(w)/z]P2,[z(w)/z]t1: T1 - T2]]$}
-\AxiomC{$[[y:T1 |-TC t:T2, P3]]$}
-\BinaryInfC{$[[x:S |-TC P1, mkc(w,z):S1 - S2, [z(w)/z]P2, {postp(y -> t,[z(w)/z]t1)}, [y([z(w)/z]t1)/y]P3]]$}
-\DisplayProof\\
-\\
-commutes to \\
-\\
-\AxiomC{$[[x:S |-TC w:S1, P1]]$}
-\AxiomC{$[[z:S2 |-TC P2, t1:T1 - T2]] \qquad [[y:T1 |-TC t:T2, P3]]$}
-\UnaryInfC{$[[z:S2 |-TC P2, {postp(y -> t, t1)}, [y(t1)/y]P3]]$}
-\BinaryInfC{$[[x:S |-TC  P1, mkc(w,z):S1 - S2, [z(w)/z]P2, {postp(y -> t, [z(w)/z]t1)}, [z(w)/z][y(t1)/y]P3]]$}
-\DisplayProof\\
-\end{tabular}
-\end{center}
-where 
-\begin{equation}
-[[ [z(w)/z][y(t1)/y]P3]] =  [[ [y([z(w)/z]t1)/y]P3]]
-\end{equation}
-since $[[z]] \notin [[P2]]$.
+  \begin{center}
+    \begin{tabular}{c}
+      \AxiomC{$[[x:S |-TC w:S1, P1]] \qquad [[z:S2 |-TC P2, t1:T1 - T2]]$}
+      \UnaryInfC{$[[x:S |-TC P1, mkc(w,z):S1 - S2, [z(w)/z]P2,[z(w)/z]t1: T1 - T2]]$}
+      \AxiomC{$[[y:T1 |-TC t:T2, P3]]$}
+      \BinaryInfC{$[[x:S |-TC P1, mkc(w,z):S1 - S2, [z(w)/z]P2, {postp(y -> t,[z(w)/z]t1)}, [y([z(w)/z]t1)/y]P3]]$}
+      \DisplayProof\\
+      \\
+      commutes to \\
+      \\
+      \AxiomC{$[[x:S |-TC w:S1, P1]]$}
+      \AxiomC{$[[z:S2 |-TC P2, t1:T1 - T2]] \qquad [[y:T1 |-TC t:T2, P3]]$}
+      \UnaryInfC{$[[z:S2 |-TC P2, {postp(y -> t, t1)}, [y(t1)/y]P3]]$}
+      \BinaryInfC{$[[x:S |-TC  P1, mkc(w,z):S1 - S2, [z(w)/z]P2, {postp(y -> t, [z(w)/z]t1)}, [z(w)/z][y(t1)/y]P3]]$}
+      \DisplayProof\\
+    \end{tabular}
+  \end{center}
+  where 
+  \begin{equation}
+    [[ [z(w)/z][y(t1)/y]P3]] =  [[ [y([z(w)/z]t1)/y]P3]]
+  \end{equation}
+  since $[[z]] \notin [[P2]]$.
 \item[] {\bf Linear rules.}
 \item The $\bot$ introduction rule TILL$_{\bot I}$ rule commutes with any inference, as $\mathtt{connect}_{\bot}
-\mathtt{to} e$ can be ``rewired'' to any term in the context. 
+  \mathtt{to} e$ can be ``rewired'' to any term in the context. 
 \item The commutations of the rules for linear subtraction TILL$_{\lsub I}$ and TILL$_{\lsub E}$ are similar to those for non-linear subtraction. 
 \item Linear disjunction (\emph{par}) introduction (TLL$_{\oplus I}$) commutes with any inference. 
-Linear disjunction elimination  (TLL$_{\oplus E}$) also commutes upwards. For example (writing a proof without 
-non-linear parts for simplicity) we have the following:
-{\small
-\begin{center}
-\begin{tabular}{c}
-\AxiomC{$[[x:A |-TL D, e:(B1 (+) B2)]]$}
-\AxiomC{$[[y:B1 |-TL D1, e1:C1 (+) C2]] \qquad [[v:C1 |-TL D3]]\qquad [[w:C2 |-TL D4]]$}
-\RightLabel{$\oplus$ E}
-\UnaryInfC{$[[y:B1 |-TL D1, [casel e1/v]D3, [caser e1/w]D4]]$}
-\noLine
-\UnaryInfC{$[[z:B2 |-TL D2]] \hskip1.7in$}
-\RightLabel{$\oplus$ E}
-\BinaryInfC{$[[x:A |-TL D, [casel e/y]D1,  [casel e/y][casel e1/v]D3, [casel e/y][caser e1/w]D4, [caser e/z]D2]] $}
-\DisplayProof\\
-\\
-commutes to\\
-\\
-\AxiomC{$[[x:A |-TL D, e:(B1 (+) B2)]] \qquad [[y:B1 |-TL D1, e1:C1 (+) C2]] \quad [[z:B2 |-TL D2]]$}
-\RightLabel{$\oplus$ E}
-\UnaryInfC{$[[x:A |-TL D, [casel e/y]D1, [casel e/y]e1:C1 (+) C2, [caser e/z]D2]]$}
-\noLine
-\UnaryInfC{$\hskip3in  [[v:C1 |-TL D3]] \qquad [[w:C2 |-TL D4]]$}
-\RightLabel{$\oplus$ E}
-\UnaryInfC{$[[x:A |-TL D,[casel e/y]D1,[casel [casel e/y]e1/v]D3,[caser [casel e/y]e1/w]D4,[caser e/z]D2]]$}
-\DisplayProof
-\end{tabular}
-\end{center} }
-% 
-Now 
-\begin{equation}
- [[ [casel e/y][casel e1/v]D3]] \quad = \quad  [[ [casel [casel e/y]e1/v]D3]]
-\end{equation}
-because $y$ does not occur in $[[D3]]$, only in $[[e1]]$ and 
-\[
-[[ [casel e/y][casel e1/w]D4]] \quad = \quad [[ [caser [casel e/y]e1/w]D4]]
-\]
-because $y$ does not occur in $[[D4]]$, only in $[[e1]]$.
+  Linear disjunction elimination  (TLL$_{\oplus E}$) also commutes upwards. For example (writing a proof without 
+  non-linear parts for simplicity) we have the following:
+  {\small
+    \begin{center}
+      \begin{tabular}{c}
+        \AxiomC{$[[x:A |-TL D, e:(B1 (+) B2)]]$}
+        \AxiomC{$[[y:B1 |-TL D1, e1:C1 (+) C2]] \qquad [[v:C1 |-TL D3]]\qquad [[w:C2 |-TL D4]]$}
+        \RightLabel{$\oplus$ E}
+        \UnaryInfC{$[[y:B1 |-TL D1, [casel e1/v]D3, [caser e1/w]D4]]$}
+        \noLine
+        \UnaryInfC{$[[z:B2 |-TL D2]] \hskip1.7in$}
+        \RightLabel{$\oplus$ E}
+        \BinaryInfC{$[[x:A |-TL D, [casel e/y]D1,  [casel e/y][casel e1/v]D3, [casel e/y][caser e1/w]D4, [caser e/z]D2]] $}
+        \DisplayProof\\
+        \\
+        commutes to\\
+        \\
+        \AxiomC{$[[x:A |-TL D, e:(B1 (+) B2)]] \qquad [[y:B1 |-TL D1, e1:C1 (+) C2]] \quad [[z:B2 |-TL D2]]$}
+        \RightLabel{$\oplus$ E}
+        \UnaryInfC{$[[x:A |-TL D, [casel e/y]D1, [casel e/y]e1:C1 (+) C2, [caser e/z]D2]]$}
+        \noLine
+        \UnaryInfC{$\hskip3in  [[v:C1 |-TL D3]] \qquad [[w:C2 |-TL D4]]$}
+        \RightLabel{$\oplus$ E}
+        \UnaryInfC{$[[x:A |-TL D,[casel e/y]D1,[casel [casel e/y]e1/v]D3,[caser [casel e/y]e1/w]D4,[caser e/z]D2]]$}
+        \DisplayProof
+      \end{tabular}
+  \end{center} }
+  % 
+  Now 
+  \begin{equation}
+    [[ [casel e/y][casel e1/v]D3]] \quad = \quad  [[ [casel [casel e/y]e1/v]D3]]
+  \end{equation}
+  because $y$ does not occur in $[[D3]]$, only in $[[e1]]$ and 
+  \[
+    [[ [casel e/y][casel e1/w]D4]] \quad = \quad [[ [caser [casel e/y]e1/w]D4]]
+    \]
+    because $y$ does not occur in $[[D4]]$, only in $[[e1]]$.
 
 \end{enumerate}
