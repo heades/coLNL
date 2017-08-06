@@ -206,14 +206,7 @@ The resulting derivation $\Pi$ has cut rank $c(\Pi) = max(|B_1|+1, c(\pi_1), c(\
   By induction on $c(\Pi)$ using the previous lemma. 
 \end{proof}
 
-\begin{remark}
-  \label{rem:additive-contexts}
-  In DLNL logic contexts are treated multiplicatively. Some cases of
-  the previous proof would be best treated with additive contexts, for
-  instance non-linear disjunction elimination to match the categorical
-  interpretation of disjunction as coproduct.  Of course additive
-  contexts can be simulated using weakening and contraction.
-\end{remark}
+
 % subsection sequent_calculus (end)
 
 \subsection{Sequent-style Natural Deduction}
@@ -222,9 +215,33 @@ The resulting derivation $\Pi$ has cut rank $c(\Pi) = max(|B_1|+1, c(\pi_1), c(\
 The inference rules for the non-linear and linear fragments of the
 sequent-style natural deduction formalization of DLNL (DND) can be
 found in Figure~\ref{fig:non-linear-nd} and Figure~\ref{fig:linear-nd}
-respectively.  Some of the inference rules are formulated
-\emph{additively} instead of multiplicatively as we explained in the
-previous section; see Remark~\ref{rem:additive-contexts}.
+respectively. 
+\begin{remark}
+  \label{rem:additive-contexts}
+  In DLNL logic contexts are treated multiplicatively and so are in DND. 
+  Non-linear context could also be treated additively. In the case of 
+  the minor premises of non-linear disjunction elimination (rule 
+  $\mathrm{NLL}_{\_ +_ E}$  of  Figure \ref{fig:non-linear-nd} an additive 
+  interpretation is required, namely, both minor premises must have the same 
+  right context, to match the categorical interpretation of disjunction as 
+  coproduct.  The same holds for the term assignment in the rule 
+  $TC_{\_+E} of Figure \ref{fig:non-linear-ta}.
+  Of course additive contexts can be simulated using weakening and 
+  contraction. This is what we do in the case of disjuncrion eliminiation.
+\end{remark}
+
+% \begin{remark}
+ %  \label{rem:additive-contexts}
+ %  In DLNL logic contexts are treated multiplicatively. Some cases of
+ %  the previous proof would be best treated with additive contexts, for
+ %  instance non-linear disjunction elimination to match the categorical
+ %  interpretation of disjunction as coproduct.  Of course additive
+ %  contexts can be simulated using weakening and contraction.
+% \end{remark}
+
+ % Some of the inference rules are formulated
+ % \emph{additively} instead of multiplicatively as we explained in the
+ % previous section; see Remark~\ref{rem:additive-contexts}.
 \begin{figure}
   \begin{mdframed}
     \begin{mathpar}
@@ -266,8 +283,8 @@ previous section; see Remark~\ref{rem:additive-contexts}.
   \label{fig:linear-nd}
 \end{figure}
 
-We now give a correspondence between DND and DLNL logic.  First, we
-have several admissible rules.
+We now recall a correspondence between DND and DLNL logic.  First, we 
+need the admissible rule of cut, i.e., substitution.
 \begin{lemma}[Admissible Rules in DND]
   \label{lemma:admissible_rules_in_dnd}
   The following rules are admissible in DND: 
@@ -520,7 +537,7 @@ Similarly to DND logic we have the following admissible rules.
   \end{mathpar}
 \end{lemma}
 \noindent
-We generalize the admissible rule of contraction on the non-linear
+We generalize the rule of contraction on the non-linear
 side to contexts. Let $m_1$ and $m_2$ be multisets of terms, then we
 denote by $m_1 \cdot m_2$ the sum of multisets; if multisets are
 represented as lists, then the sum is representable as the appending
@@ -801,10 +818,24 @@ for reduction by $[[x : S |-TC P1]] \rightsquigarrow [[x : S |-TC
 derivations, but it should be noted that it is assumed that every term
 mentioned in a reduction rule is typable with the expected type given
 where it occurs in the judgment.  Furthermore, the reduction relation
-depends on a few standard definitions.
+depends on a few standard definitions and non-standard binding operations.
 
-Capture-avoiding substitution, denoted by $[[ [t1/x]t2]]$, $[[
-    [e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, is defined in the
+The non-standard binding operations concern the variable $y$ in $\mathtt{mkc}(t,y)$ and in
+$\mathtt{postp}(y\mapsto t, s)$ and the related expressions $y(t)$ and $y(s)$, respectively, 
+occurring in the non-linear context; similar operations occur in the linear case.
+Consider term assignment to the rule subtraction introduction  $\mathrm{TC}\_-_I$
+in Figure \ref{fig:non-linear-ta}. The variable $y$ is the unique free variable occurring in the 
+sequent $x:T_2 \vdash_C \Psi_2$, the minor premise of the rule. In the conclusion 
+$X:S \vdash_\Psi_1, \mathtt(t,y): T_1 - T_2, [y(t)/y]\Psi_2]$ the variable $y$ is bound 
+in $\mathtt{mkc}(t,y)$; moreoverr, the occurrences of the free variable $y$ have been
+substituted simultaneously in the context $\Psi$ by the expression $y(t)$ which denotes 
+a bound varianble, indexed with $t$. Similar explanations apply to the term assignment 
+for subtraction elimination, and to the corresponding linear rules in Figure \ref{fig:linear-ta}. 
+A notion of $\alpha$ conversion has been proposed for this notion of binding in untyped 
+linear contexts in  \cite{Bellin:2012}. In the term assignment.   
+
+In the term assignment 
+  substitution, denoted by $[[ [t1/x]t2]]$, $[[[e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, is defined in the
 usual way.  We extend capture-avoiding substitution to multisets in
 the following way:
 \begin{itemize}
