@@ -832,28 +832,29 @@ substituted simultaneously in the context $\Psi$ by the expression $y(t)$ which 
 a bound varianble, indexed with $t$. Similar explanations apply to the term assignment 
 for subtraction elimination, and to the corresponding linear rules in Figure \ref{fig:linear-ta}. 
 
-An analogue of the capture of a free variable by a binder in the $\lambda$-calculus, 
-is an occurrence of a bound variable $y(t)$ whose binder is ambiguous, for instance 
-a context $\mathtt{mkc}(t,y) \| \mathtt{mkc}(t,y) \| y(t) \| y(t)$. In the term assignment, 
-such a context may occur in the conclusion of the following derivation, where $t = \mathtt{false}\; x$:
-{\small
-\[
-\AxiomC{$z:0 \vdash_C z:0$}
-\AxiomC{$x:S \vdash_C x:S$}
-\AxiomC{$y:T \vdash_C y:T$}
-\BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y): S - T, y(x): T$}
-\AxiomC{$x:A \vdash_C x:A$}
-\AxiomC{$y:B \vdash_C y:B$}
-\BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y): S - T, y(x): T$}
-\TrinaryInfC{$x:0 \vdash_C, \mathtt{mkc}(t,y): S - T, \mathtt{mkc}(t,y): S - T, y(t): T, y(t): T$}
-\]
-}
-The cure for this inconvenience is clear. A formal notion of $\alpha$ conversion has been proposed 
-for our nottion of binding in untyped linear contexts in  \cite{Bellin:2012}. 
+% An analogue of the capture of a free variable by a binder in the $\lambda$-calculus, 
+% is an occurrence of a bound variable $y(t)$ whose binder is ambiguous, for instance 
+% a context $\mathtt{mkc}(t,y) \| \mathtt{mkc}(t,y) \| y(t) \| y(t)$. In the term assignment, 
+% such a context may occur in the conclusion of the following derivation, where $t = \mathtt{false}\; x$:
+% {\small
+% \[
+% \AxiomC{$z:0 \vdash_C z:0$}
+% \AxiomC{$x:S \vdash_C x:S$}
+% \AxiomC{$y:T \vdash_C y:T$}
+% \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y): S - T, y(x): T$}
+% \AxiomC{$x:A \vdash_C x:A$}
+% \AxiomC{$y:B \vdash_C y:B$}
+% \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y): S - T, y(x): T$}
+% \TrinaryInfC{$x:0 \vdash_C, \mathtt{mkc}(t,y): S - T, \mathtt{mkc}(t,y): S - T, y(t): T, y(t): T$}
+% \]
+% }
+% The cure for this inconvenience is clear. 
 
+A formal notion of $\alpha$ conversion has been proposed 
+ for this nottion of binding in untyped linear contexts in  \cite{Bellin:2012}. 
 Here (capture-avoiding)  substitution 
-% is denoted by 
-% $[[ [t1/x]t2]]$, $[[[e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, 
+is denoted by 
+$[[ [t1/x]t2]]$, $[[[e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, 
 is defined in the usual way.  We extend capture-avoiding substitution to multisets in
 the following way:
 \begin{itemize}
