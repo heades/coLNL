@@ -825,8 +825,8 @@ $\mathtt{postp}(y\mapsto t, s)$ and the related expressions $y(t)$ and $y(s)$, r
 occurring in the non-linear context; similar operations occur in the linear case.
 Consider term assignment to the rule subtraction introduction  $\mathrm{TC}\_-_I$
 in Figure \ref{fig:non-linear-ta}. The variable $y$ is the unique free variable occurring in the 
-sequent $x:T_2 \vdash_C \Psi_2$, the minor premise of the inference. In the conclusion 
-$X:S \vdash_{\Psi_1}, \mathtt(t,y): T_1 - T_2, [y(t)/y]\Psi_2]$ the variable $y$ is bound 
+sequent $y:T_2 \vdash_C \Psi_2$, the minor premise of the inference. In the conclusion 
+$x:S \vdash_{\Psi_1}, \mathtt(t,y): T_1 - T_2, [y(t)/y]\Psi_2$ the variable $y$ is bound 
 in $\mathtt{mkc}(t,y)$; moreoverr, the occurrences of the free variable $y$ have been
 substituted simultaneously in the context $\Psi$ by the expression $y(t)$ which denotes 
 a bound varianble, indexed with $t$. Similar explanations apply to the term assignment 
@@ -847,6 +847,7 @@ the following derivation, if $y_1 = y_2$; here $t = \mathtt{false}\; x$:
 \AxiomC{$y_2:B \vdash_C y_2:B$}
  \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y_2): S - T, y_2(x): T$}
 \TrinaryInfC{$z:0 \vdash_C, \mathtt{mkc}(t,y_1): S - T, \mathtt{mkc}(t,y_2): S - T, y_1(t): T, y_2(t): T$}
+\DisplayProof
 \]
 }
 
