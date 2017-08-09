@@ -225,7 +225,7 @@ respectively.
   interpretation is required, namely, both minor premises must have the same 
   right context, to match the categorical interpretation of disjunction as 
   coproduct.  The same holds for the term assignment in the rule 
-  $TC_{\_+E} of Figure \ref{fig:non-linear-ta}.
+  $TC_{\_+E}$ of Figure \ref{fig:non-linear-ta}.
   Of course additive contexts can be simulated using weakening and 
   contraction. This is what we do in the case of disjuncrion eliminiation.
 \end{remark}
@@ -826,35 +826,34 @@ occurring in the non-linear context; similar operations occur in the linear case
 Consider term assignment to the rule subtraction introduction  $\mathrm{TC}\_-_I$
 in Figure \ref{fig:non-linear-ta}. The variable $y$ is the unique free variable occurring in the 
 sequent $x:T_2 \vdash_C \Psi_2$, the minor premise of the inference. In the conclusion 
-$X:S \vdash_\Psi_1, \mathtt(t,y): T_1 - T_2, [y(t)/y]\Psi_2]$ the variable $y$ is bound 
+$X:S \vdash_{\Psi_1}, \mathtt(t,y): T_1 - T_2, [y(t)/y]\Psi_2]$ the variable $y$ is bound 
 in $\mathtt{mkc}(t,y)$; moreoverr, the occurrences of the free variable $y$ have been
 substituted simultaneously in the context $\Psi$ by the expression $y(t)$ which denotes 
 a bound varianble, indexed with $t$. Similar explanations apply to the term assignment 
 for subtraction elimination, and to the corresponding linear rules in Figure \ref{fig:linear-ta}. 
 
-% An analogue of the capture of a free variable by a binder in the $\lambda$-calculus, 
-% is an occurrence of a bound variable $y(t)$ whose binder is ambiguous, for instance 
-% a context $\mathtt{mkc}(t,y) \| \mathtt{mkc}(t,y) \| y(t) \| y(t)$. In the term assignment, 
-% such a context may occur in the conclusion of the following derivation, where $t = \mathtt{false}\; x$:
-% {\small
-% \[
-% \AxiomC{$z:0 \vdash_C z:0$}
-% \AxiomC{$x:S \vdash_C x:S$}
-% \AxiomC{$y:T \vdash_C y:T$}
-% \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y): S - T, y(x): T$}
-% \AxiomC{$x:A \vdash_C x:A$}
-% \AxiomC{$y:B \vdash_C y:B$}
-% \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y): S - T, y(x): T$}
-% \TrinaryInfC{$x:0 \vdash_C, \mathtt{mkc}(t,y): S - T, \mathtt{mkc}(t,y): S - T, y(t): T, y(t): T$}
-% \]
-% }
-% The cure for this inconvenience is clear. 
+An analogue of the capture of a free variable by a binder in the $\lambda$-calculus, 
+is an occurrence of a bound variable $y(t)$ whose binder is ambiguous, for instance 
+in a context where there were two occurrences of $\mathtt{mkc}(t,y)$, as a result of 
+a contraction/cur reduction in a derivation. Such a context may be the conclusion of 
+the following derivation, if $y_1 = y_2$; here $t = \mathtt{false}\; x$:
+{\small
+ \[
+ \AxiomC{$z:0 \vdash_C z:0$}
+ \AxiomC{$x:S \vdash_C x:S$}
+ \AxiomC{$y_1:T \vdash_C y_1:T$}
+ \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y_1): S - T, y_1(x): T$}
+\AxiomC{$x:A \vdash_C x:A$}
+\AxiomC{$y_2:B \vdash_C y_2:B$}
+ \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y_2): S - T, y_2(x): T$}
+\TrinaryInfC{$z:0 \vdash_C, \mathtt{mkc}(t,y_1): S - T, \mathtt{mkc}(t,y_2): S - T, y_1(t): T, y_2(t): T$}
+\]
+}
 
 A formal notion of $\alpha$ conversion has been proposed 
  for this nottion of binding in untyped linear contexts in  \cite{Bellin:2012}. 
-Here (capture-avoiding)  substitution 
-is denoted by 
-$[[ [t1/x]t2]]$, $[[[e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, 
+Here (capture-avoiding)  substitution,  denoted by 
+$[[ [t1/x]t2]]$, $[[ [e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, 
 is defined in the usual way.  We extend capture-avoiding substitution to multisets in
 the following way:
 \begin{itemize}
