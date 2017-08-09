@@ -835,24 +835,25 @@ for subtraction elimination, and to the corresponding linear rules in Figure \re
 An analogue of the capture of a free variable by a binder in the $\lambda$-calculus, 
 is an occurrence of a bound variable $y(t)$ whose binder is ambiguous, for instance 
 in a context where there were two occurrences of $\mathtt{mkc}(t,y)$, as a result of 
-a contraction/cur reduction in a derivation. Such a context may be the conclusion of 
-the following derivation, if $y_1 = y_2$; here $t = \mathtt{false}\; x$:
+a contraction/cut reduction in a derivation. Such a context may be the conclusion of 
+the following derivation, if $x_1 = x_2$m $y_1 = y_2$; here $t_1 = \mathtt{false}\; x_1$, 
+$t_2 = \mathtt{false}\; x_2$:
 {\small
  \[
  \AxiomC{$z:0 \vdash_C z:0$}
- \AxiomC{$x:S \vdash_C x:S$}
+ \AxiomC{$x_1:S \vdash_C x_1:S$}
  \AxiomC{$y_1:T \vdash_C y_1:T$}
- \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y_1): S - T, y_1(x): T$}
-\AxiomC{$x:A \vdash_C x:A$}
+ \BinaryInfC{$x_1:S \vdash_C \mathtt{mkc}(x_1,y_1): S - T, y_1(x_1): T$}
+\AxiomC{$x_2:A \vdash_C x_2:A$}
 \AxiomC{$y_2:B \vdash_C y_2:B$}
- \BinaryInfC{$x:S \vdash_C \mathtt{mkc}(x,y_2): S - T, y_2(x): T$}
-\TrinaryInfC{$z:0 \vdash_C, \mathtt{mkc}(t,y_1): S - T, \mathtt{mkc}(t,y_2): S - T, y_1(t): T, y_2(t): T$}
+ \BinaryInfC{$x_2:S \vdash_C \mathtt{mkc}(x_2,y_2): S - T, y_2(x_2): T$}
+\TrinaryInfC{$z:0 \vdash_C, \mathtt{mkc}(t_1,y_1): S - T, \mathtt{mkc}(t_2,y_2): S - T, y_1(t): T, y_2(t): T$}
 \DisplayProof
 \]
 }
 
 A formal notion of $\alpha$ conversion has been proposed 
- for this nottion of binding in untyped linear contexts in  \cite{Bellin:2012}. 
+ for this notion of binding in untyped linear contexts in  \cite{Bellin:2012}. 
 Here (capture-avoiding)  substitution,  denoted by 
 $[[ [t1/x]t2]]$, $[[ [e/x]t]]$, $[[ [t/x]e]]$, and $[[ [e1/x]e2]]$, 
 is defined in the usual way.  We extend capture-avoiding substitution to multisets in
