@@ -1461,7 +1461,7 @@ in the models and for the operators that represent them in the language.
 \ref{functors}.1 {\em rules for $J: \mathcal{C} \rightarrow \mathcal{L}$.} 
 \begin{equation}
 \framebox{
-\AxiomC{\it $J$ introduction}
+\AxiomC{\it $TL\_\func{J}_I$}
 \noLine
 \UnaryInfC{$x:A \vdash_{\mathsf{L}} ,\Delta; t:T, \Psi$}
 \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta, Jt: JT; \Psi$}
@@ -1479,7 +1479,7 @@ an application of $\alpha^{-1}$:
 
 \begin{equation}
 \framebox{
-\AxiomC{\it $J$ elimination}
+\AxiomC{\it $TL\_\func{J}_E$ elimination}
 \noLine
 \UnaryInfC{$x:A \vdash_{\mathsf{L}} \Delta, e: JT;\Psi_1\qquad  y:T \vdash_{\mathsf{C}} \Psi_2\ \hbox{where}\ |\Psi_1|=|\Psi_2|$}
 \UnaryInfC{$x:A\vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot \mathtt{let}\ Jy = e\  \mathtt{in}\ \Psi_2$}
@@ -1513,7 +1513,7 @@ given by the following compositions
 \ref{functors}.2 {\em rules for $H: \mathcal{L} \rightarrow \mathcal{C}$.} 
 \begin{equation}
 \framebox{
-\AxiomC{\it $H$ intro}
+\AxiomC{\it $TC\_\func{H}_I$}
 \noLine
 \UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta, e: B; \Psi$}
 \UnaryInfC{$x:A\vdash_{\mathsf{L}} \overline{R}: \Delta;He:HB, \Psi$}
@@ -1534,24 +1534,24 @@ Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then
  
 \begin{equation}
 \framebox{
-\AxiomC{\it $H$ elim$_1$}
+\AxiomC{\it $TC\_\func{H}_{E}$}
 \noLine
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1, \mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2$}
 \DisplayProof
 }
 \end{equation}
 
-\begin{equation}
-\framebox{
-\AxiomC{\it $H$ elim$_2$}
-\noLine
-\UnaryInfC{$x:S \vdash_{\mathsf{C}} t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
-\UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
-\DisplayProof
-}
-\end{equation}
-The categorical interpretation of $H$ elim$_2$ is as follows:
+%% \begin{equation}
+%% \framebox{
+%% \AxiomC{\it $H$ elim$_2$}
+%% \noLine
+%% \UnaryInfC{$x:S \vdash_{\mathsf{C}} t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2 \quad \hbox{where}\ |\Psi_1|=|\Psi_2|$}
+%% \UnaryInfC{$x:S \vdash_{\mathsf{C}} \Psi_1 \cdot (\mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2)$}
+%% \DisplayProof
+%% }
+%% \end{equation}
+The categorical interpretation of $H$ elim$_1$ is as follows:
 Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we have the following compositions: 
 \begin{center}
 \AxiomC{$\strut\quad$}
