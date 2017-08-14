@@ -1,15 +1,16 @@
 Bi-intuitionistic logic (BINT) is a conservative extension of
-intuitionistic logic with a duality.  That is, BINT contains the
-usual intuitionistic logical connectives such as true, conjunction,
-and implication, but also their duals false, disjunction, and
-coimplication.  One leading question with respect to BINT is, what does
-BINT look like across the three arcs -- logic, typed
-$\lambda$-calculi, and category theory -- of the Curry-Howard-Lambek
-correspondence?  A non-trivial (does not degenerate to a poset)
-categorical model of BINT is currently an open problem.  This paper
-directly contributes to the solution of this open problem by giving a
-new categorical model based on adjunctions for cointuitionistic logic,
-and then proposing a new categorical model for BINT.  
+intuitionistic logic to include the duals of each logical connective.
+That is, BINT contains the usual intuitionistic logical connectives
+such as true, conjunction, and implication, but also their duals
+false, disjunction, and coimplication.  One leading question with
+respect to BINT is, what does BINT look like across the three arcs --
+logic, typed $\lambda$-calculi, and category theory -- of the
+Curry-Howard-Lambek correspondence?  A non-trivial (does not
+degenerate to a poset) categorical model of BINT is currently an open
+problem.  This paper directly contributes to the solution of this open
+problem by giving a new categorical model based on adjunctions for
+cointuitionistic logic, and then proposing a new categorical model for
+BINT.
 
 BINT can be seen as a mixing of two worlds: the first being
 intuitionistic logic (IL), which is modeled categorically by a
@@ -23,14 +24,15 @@ result in
 Section~\ref{subsec:cartesian_closed_and_cocartesian_coclosed_categories}.
 However, this degeneration does not occur when both logics are linear.
 
-Notice that atoms are not dualized, at least  in the main stream tradition of BINT
-started by C.Rauszer \cite{Rauszer:1974, Rauszer:1980}. For this reason
-T.Crolard \cite{Crolard:2001} p. 160, describes the relation between IL and coIL
-within BINT as ``pseudo duality''. A duality on atoms could be added 
-and this has been attempted with linguistic motivations \cite{Bellin:2014} 
-(see the section on Related Work).
-This avoids the collapse but yields a different framework.
-Here we are concerned mainly with the main stream tradition.
+Notice that atoms are not dualized, at least in the main stream
+tradition of BINT started by C. Rauszer \cite{Rauszer:1974,
+  Rauszer:1980}. For this reason T. Crolard \cite{Crolard:2001}
+p. 160, describes the relation between IL and coIL within BINT as
+``pseudo duality''. A duality on atoms could be added and this has
+been attempted with linguistic motivations \cite{Bellin:2014} (see the
+section on Related Work).  This avoids the collapse but yields a
+different framework.  Here we are concerned mainly with the main
+stream tradition.
 
 We propose that IL and coIL need to be separated, and then mixed in a
 controlled way using the modalities from linear logic.  This
@@ -41,7 +43,7 @@ linear bi-intuitionistic (Bi-ILL), and the third is cointuitionistic
 logic.  They are then related via two adjunctions as depicted by the
 following diagram:
 \begin{center}
-  \begin{tikzpicture}
+  \begin{tikzpicture} 
     \node (img) {\includegraphics[scale=0.4]{introDiag}};
     \node (dv) at (-2.3, 0.0) {\huge $\dashv$};
     \node (IL) at (-3.58, -0.1) {IL};
@@ -51,8 +53,7 @@ following diagram:
     \node (ILL) at (-0.67, 0.0) {ILL};
     \node (coILL) at (0.71, 0.0) {coILL};
     \node (BiILL) at (0, 1.0) {Bi-ILL};
-  \end{tikzpicture}
-    
+  \end{tikzpicture}    
 \end{center}
 The adjunction between IL and ILL is known as a Linear/Non-linear model
 (LNL model) of ILL, and is due to Benton \cite{Benton:1994}.  However,
