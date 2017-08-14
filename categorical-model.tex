@@ -1,4 +1,9 @@
-****short section intro*****
+In this section we define dual LNL models (Definition~\ref{def:dual
+  LNL-model}) and then relate them to Bellin's dual linear categories
+(Definition~\ref{def:dual-linear-cat}), but first we introduce the
+basic categorical machinery needed for the later sections and
+summarize Crolard's result showing that the combination of cartesian
+closed categories with cocartesian coclosed categories are degenerate.
 
 \subsection{Symmetric (co)Monoidal Categories}
 \label{subsec:symmetric_monoidal_categories}
@@ -1200,7 +1205,7 @@ actually two subcategories of $\cat{L}^{\wn}$ that are coclosed.
   \label{def:subtractable}
   We call an object, $A$, of a category, $\cat{L}$,
   \textbf{subtractable} if for any object $B$ of $\cat{L}$, the
-  internal cohom $[[A *- B]]$ exists.
+  internal cohom $A \colimp B$ exists.
 \end{definition}
 \noindent
 We now have the following results:
@@ -1212,24 +1217,23 @@ We now have the following results:
 \begin{proof}
   The internal cohom is defined as follows:
   \[
-  (\wn A, \delta_A) [[*-]] (B, h_B) := (\wn ([[A *- B]]), \delta_{[[A *- B]]})
+  (\wn A, \delta_A) \colimp (B, h_B) := (\wn (A \colimp B), \delta_{A \colimp B})
   \]
   We can capitalize on the adjunctions involving $F$ and $U$ from
   above to lift the internal cohom of $\cat{L}$ into $\cat{L}^{\wn}$:
   \[
   \begin{array}{lll}
-    \mathsf{Hom}_{\cat{L}^{\wn}}((\wn ([[A *- B]]), \delta_{[[A *- B]]}), (C, h_C))
-    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}([[A *- B]]), (C, h_C))\\
-    & \cong  & \mathsf{Hom}_{\cat{L}}([[A *- B]], \func{U}(C, h_C))\\
-    & =  & \mathsf{Hom}_{\cat{L}}([[A *- B]], C)\\
-    & \cong  & \mathsf{Hom}_{\cat{L}}([[A]], [[C (+) B]])\\
-    & =  & \mathsf{Hom}_{\cat{L}}([[A]], \func{U}([[C (+) B]],h_{[[C (+) B]]}))\\
-    & \cong  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}[[A]], ([[C (+) B]],h_{[[C (+) B]]}))\\
-    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), ([[C (+) B]],h_{[[C (+) B]]}))\\    
+    \mathsf{Hom}_{\cat{L}^{\wn}}((\wn (A \colimp B), \delta_{A \colimp B}), (C, h_C))
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}(A \colimp B), (C, h_C))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}(A \colimp B, \func{U}(C, h_C))\\
+    & =  & \mathsf{Hom}_{\cat{L}}(A \colimp B, C)\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}(A, C \oplus B)\\
+    & =  & \mathsf{Hom}_{\cat{L}}(A, \func{U}(C \oplus B,h_{C \oplus B}))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}A, (C \oplus B,h_{C \oplus B}))\\
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), (C \oplus B,h_{C \oplus B}))\\    
   \end{array}
   \]
-  The previous equation holds for any $h_{[[C (+) B]]}$ making $[[C
-      (+) B]]$ a $\wn$-algebra, in particular, the co-product in
+  The previous equation holds for any $h_{C \oplus B}$ making $C \oplus B$ a $\wn$-algebra, in particular, the co-product in
   $\cat{L}^{\wn}$ (Lemma~\ref{lemma:EM-has-coproducts}), and hence, we
   may instantiate the final line of the previous equation with the following:
   \[
