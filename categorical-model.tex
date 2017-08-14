@@ -3,7 +3,11 @@ In this section we define dual LNL models (Definition~\ref{def:dual
 (Definition~\ref{def:dual-linear-cat}), but first we introduce the
 basic categorical machinery needed for the later sections and
 summarize Crolard's result showing that the combination of cartesian
-closed categories with cocartesian coclosed categories are degenerate.
+closed categories with cocartesian coclosed categories is degenerate.
+Following these we conclude this section by introducing a categorical
+model for full BINT called a mixed bilinear/non-linear model that
+combines LNL models with dual LNL models
+(Definition~\ref{subsec:a_mixed_bi-linear_non-linear_model}).
 
 \subsection{Symmetric (co)Monoidal Categories}
 \label{subsec:symmetric_monoidal_categories}
@@ -124,9 +128,9 @@ which can be seen as an internalization of the notion of a morphism.
 \end{definition}
 
 Symmetric monoidal closed categories can be seen as a model of
-intuitionistic linear logic with a tensor product and implication.
-What happens when we take the dual?  First, we have the following
-result:
+intuitionistic linear logic with a tensor product and implication
+\cite{Bierman:1994}.  What happens when we take the dual?  First, we
+have the following result:
 \begin{lemma}[Dual of Symmetric Monoidal Categories]
   \label{lemma:dual_of_symmetric_monoidal_categories}
   If $(\cat{M},\top,\otimes)$ is a symmetric monoidal category, then
@@ -850,9 +854,9 @@ closed categories with initial objects.
     hence, there is only one arrow between $0 \times A$ and $B$.
 \end{proof}
 \noindent
-The following lemma is due to Joyal \cite{?}, and is key to the next
-theorem.
-\begin{lemma}[Joyal's]
+The following lemma is due to Joyal \cite{Lambek:1988}, and is key to
+the next theorem.
+\begin{lemma}[Joyal]
   \label{lemma:joyals}
   In any cartesian closed category $\cat{C}$, if $0$ is an initial
   object in $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A$ is an
@@ -893,7 +897,7 @@ with preorders, but do want to work with all of the structure, then we
 must separate the two worlds.  Thus, this result can be seen as the
 motivation for the current work.  We enforce the separation using
 linear logic, but through the power of linear logic this separation is
-not far.
+not over a large distance.
 % subsection cartesian_closed_and_cocartesian_coclosed_categories (end)
 
 
@@ -1116,7 +1120,7 @@ Finally, we may now conclude the following corollary.
 \subsubsection{Dual Linear Category implies Dual LNL Model}
 \label{subsec:dual_category_implies_dual_lnl_model}
 This section shows essentially the inverse to the result from the
-previous section.  That is, that from any dual linear category we may
+previous section.  That is, from any dual linear category we may
 construct a dual LNL model.  By exploiting the duality between LNL
 models and dual LNL models this result follows straightforwardly from
 Benton's result. The proof of this result must first find a symmetric
@@ -1299,7 +1303,7 @@ and a bi-cartesian bi-closed category, but this results in a few
 problems.  First, should the adjunction be monoidal or comonoidal?
 Furthermore, we know bi-cartesian bi-closed categories are trivial
 (Theorem~\ref{thm:dengerate-to-preorder}), and hence, this model is
-not very interesting nor incorrect.  We must separate the two
+not very interesting nor correct.  We must separate the two
 worlds using two dual adjunctions, and hence, we arrive at the
 following definition.
 \begin{definition}
