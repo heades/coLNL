@@ -1,4 +1,13 @@
-****short section intro*****
+In this section we define dual LNL models (Definition~\ref{def:dual
+  LNL-model}) and then relate them to Bellin's dual linear categories
+(Definition~\ref{def:dual-linear-cat}), but first we introduce the
+basic categorical machinery needed for the later sections and
+summarize Crolard's result showing that the combination of cartesian
+closed categories with cocartesian coclosed categories is degenerate.
+Following these we conclude this section by introducing a categorical
+model for full BINT called a mixed bilinear/non-linear model that
+combines LNL models with dual LNL models
+(Definition~\ref{subsec:a_mixed_bi-linear_non-linear_model}).
 
 \subsection{Symmetric (co)Monoidal Categories}
 \label{subsec:symmetric_monoidal_categories}
@@ -119,9 +128,9 @@ which can be seen as an internalization of the notion of a morphism.
 \end{definition}
 
 Symmetric monoidal closed categories can be seen as a model of
-intuitionistic linear logic with a tensor product and implication.
-What happens when we take the dual?  First, we have the following
-result:
+intuitionistic linear logic with a tensor product and implication
+\cite{Bierman:1994}.  What happens when we take the dual?  First, we
+have the following result:
 \begin{lemma}[Dual of Symmetric Monoidal Categories]
   \label{lemma:dual_of_symmetric_monoidal_categories}
   If $(\cat{M},\top,\otimes)$ is a symmetric monoidal category, then
@@ -845,9 +854,9 @@ closed categories with initial objects.
     hence, there is only one arrow between $0 \times A$ and $B$.
 \end{proof}
 \noindent
-The following lemma is due to Joyal \cite{?}, and is key to the next
-theorem.
-\begin{lemma}[Joyal's]
+The following lemma is due to Joyal \cite{Lambek:1988}, and is key to
+the next theorem.
+\begin{lemma}[Joyal]
   \label{lemma:joyals}
   In any cartesian closed category $\cat{C}$, if $0$ is an initial
   object in $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A$ is an
@@ -888,7 +897,7 @@ with preorders, but do want to work with all of the structure, then we
 must separate the two worlds.  Thus, this result can be seen as the
 motivation for the current work.  We enforce the separation using
 linear logic, but through the power of linear logic this separation is
-not far.
+not over a large distance.
 % subsection cartesian_closed_and_cocartesian_coclosed_categories (end)
 
 
@@ -1111,7 +1120,7 @@ Finally, we may now conclude the following corollary.
 \subsubsection{Dual Linear Category implies Dual LNL Model}
 \label{subsec:dual_category_implies_dual_lnl_model}
 This section shows essentially the inverse to the result from the
-previous section.  That is, that from any dual linear category we may
+previous section.  That is, from any dual linear category we may
 construct a dual LNL model.  By exploiting the duality between LNL
 models and dual LNL models this result follows straightforwardly from
 Benton's result. The proof of this result must first find a symmetric
@@ -1200,7 +1209,7 @@ actually two subcategories of $\cat{L}^{\wn}$ that are coclosed.
   \label{def:subtractable}
   We call an object, $A$, of a category, $\cat{L}$,
   \textbf{subtractable} if for any object $B$ of $\cat{L}$, the
-  internal cohom $[[A *- B]]$ exists.
+  internal cohom $A \colimp B$ exists.
 \end{definition}
 \noindent
 We now have the following results:
@@ -1212,24 +1221,23 @@ We now have the following results:
 \begin{proof}
   The internal cohom is defined as follows:
   \[
-  (\wn A, \delta_A) [[*-]] (B, h_B) := (\wn ([[A *- B]]), \delta_{[[A *- B]]})
+  (\wn A, \delta_A) \colimp (B, h_B) := (\wn (A \colimp B), \delta_{A \colimp B})
   \]
   We can capitalize on the adjunctions involving $F$ and $U$ from
   above to lift the internal cohom of $\cat{L}$ into $\cat{L}^{\wn}$:
   \[
   \begin{array}{lll}
-    \mathsf{Hom}_{\cat{L}^{\wn}}((\wn ([[A *- B]]), \delta_{[[A *- B]]}), (C, h_C))
-    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}([[A *- B]]), (C, h_C))\\
-    & \cong  & \mathsf{Hom}_{\cat{L}}([[A *- B]], \func{U}(C, h_C))\\
-    & =  & \mathsf{Hom}_{\cat{L}}([[A *- B]], C)\\
-    & \cong  & \mathsf{Hom}_{\cat{L}}([[A]], [[C (+) B]])\\
-    & =  & \mathsf{Hom}_{\cat{L}}([[A]], \func{U}([[C (+) B]],h_{[[C (+) B]]}))\\
-    & \cong  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}[[A]], ([[C (+) B]],h_{[[C (+) B]]}))\\
-    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), ([[C (+) B]],h_{[[C (+) B]]}))\\    
+    \mathsf{Hom}_{\cat{L}^{\wn}}((\wn (A \colimp B), \delta_{A \colimp B}), (C, h_C))
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}(A \colimp B), (C, h_C))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}(A \colimp B, \func{U}(C, h_C))\\
+    & =  & \mathsf{Hom}_{\cat{L}}(A \colimp B, C)\\
+    & \cong  & \mathsf{Hom}_{\cat{L}}(A, C \oplus B)\\
+    & =  & \mathsf{Hom}_{\cat{L}}(A, \func{U}(C \oplus B,h_{C \oplus B}))\\
+    & \cong  & \mathsf{Hom}_{\cat{L}^{\wn}}(\func{F}A, (C \oplus B,h_{C \oplus B}))\\
+    & =  & \mathsf{Hom}_{\cat{L}^{\wn}}((\wn A, \delta_A), (C \oplus B,h_{C \oplus B}))\\    
   \end{array}
   \]
-  The previous equation holds for any $h_{[[C (+) B]]}$ making $[[C
-      (+) B]]$ a $\wn$-algebra, in particular, the co-product in
+  The previous equation holds for any $h_{C \oplus B}$ making $C \oplus B$ a $\wn$-algebra, in particular, the co-product in
   $\cat{L}^{\wn}$ (Lemma~\ref{lemma:EM-has-coproducts}), and hence, we
   may instantiate the final line of the previous equation with the following:
   \[
@@ -1295,7 +1303,7 @@ and a bi-cartesian bi-closed category, but this results in a few
 problems.  First, should the adjunction be monoidal or comonoidal?
 Furthermore, we know bi-cartesian bi-closed categories are trivial
 (Theorem~\ref{thm:dengerate-to-preorder}), and hence, this model is
-not very interesting nor incorrect.  We must separate the two
+not very interesting nor correct.  We must separate the two
 worlds using two dual adjunctions, and hence, we arrive at the
 following definition.
 \begin{definition}
