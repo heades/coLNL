@@ -90,14 +90,14 @@ where $S^n = S, \ldots, S$ $n$-times. We call $\DLNLP$ the system DLNL with $n$-
 ordinary 1-cuts. Such cuts are admissible in DLNL and cut-elimination for $\DLNLP$ implies 
 cut-elimination for DLNL.
 
-We begin with the a few standard definitions. The \emph{rank} of a
+We begin with a few standard definitions. The \emph{rank} of a
 formula, denoted by $|A|$ or $|S|$, is the number of the logical
 symbols in the given formula.  The \emph{cut-rank} of a derivation
 $\Pi$, denoted by $c(\Pi)$, is the maximum of the ranks of the cut
 formulas in $\Pi$ plus one; if $\Pi$ is cut-free its cut rank is 0.
 Finally, the \emph{depth} of a derivation $\Pi$, denoted by $d(\Pi)$,
 is the length of the longest path in $\Pi$.  The following three
-results establishes cut elimination.
+results establish cut elimination.
 
 \begin{lemma}[Cut Reduction]
   \label{lemma:cut_reduction}
@@ -342,18 +342,15 @@ and it is this result we pull inspiration from.
 % In fact, this result shows that the reduction of a term in the context may impact
 % other terms in the context.
 
-TND pushes beyond Crolard's paper \emph{A formulae-as-types
-  interpretation of subtractive logic} JLC 2004, where he gives a term
-assignment to bi-intuitionisitc logic within a variant of
-Parigot's~\cite{Parigot:1992} classical $\lambda\mu$-calculus and
-interprets the term assigned to subtraction in terms of coroutines. He
-then restricts the calculus to provide a constructive version of
-subtraction called \emph{safe coroutines}. The second author used a
-variant of his constructive calculus as a term assignment to
-co-intuitionistic logic and to linear co-intuitionistic logic
-\cite{Bellin:2012} without using the $\lambda\mu$-calculus. In this
-formulation, distinct terms are assigned to distinct formulas in the context and 
-the reduction of a term in context may impact other terms n the context.
+TND pushes beyond Crolard's work on subtractive logic. He restricts a
+classical calculus to provide a constructive version of subtraction
+called \emph{safe coroutines}. TND is based on the work of the second
+author where he used a variant of Crolard's constructive calculus as a
+term assignment to co-intuitionistic logic and to linear
+co-intuitionistic logic \cite{Bellin:2012} without using the
+$\lambda\mu$-calculus. In this formulation, distinct terms are
+assigned to distinct formulas in the context and the reduction of a
+term in context may impact other terms in the context.
 
 The syntax of TND terms is defined by the following definition.
 \begin{definition}
@@ -495,7 +492,7 @@ $\mathtt{resume}\ t_2\ \mathtt{with}\ x\mapsto t_1$, always goes with a
 contraction binary operator $[[t1 * t2]]$.
 
 However when within a non-$p$-normal term an expression of the form 
-$[[postp(x -> t1,t2)]]$ is eliminated as a $\beta$ redex, there is a choice
+$[[postp(x -> t1,t2)]]$ is eliminated as a $\beta$-redex, there is a choice
 of the syntax for the contextual reduction. In absence of a more detailed 
 analysis of the matter, we prefer to leave the typing of $p$ terms implicit 
 in the syntax, to enforce the requirement of $p$-normality and to use the 
