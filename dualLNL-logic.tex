@@ -90,14 +90,14 @@ where $S^n = S, \ldots, S$ $n$-times. We call $\DLNLP$ the system DLNL with $n$-
 ordinary 1-cuts. Such cuts are admissible in DLNL and cut-elimination for $\DLNLP$ implies 
 cut-elimination for DLNL.
 
-We begin with the a few standard definitions. The \emph{rank} of a
+We begin with a few standard definitions. The \emph{rank} of a
 formula, denoted by $|A|$ or $|S|$, is the number of the logical
 symbols in the given formula.  The \emph{cut-rank} of a derivation
 $\Pi$, denoted by $c(\Pi)$, is the maximum of the ranks of the cut
 formulas in $\Pi$ plus one; if $\Pi$ is cut-free its cut rank is 0.
 Finally, the \emph{depth} of a derivation $\Pi$, denoted by $d(\Pi)$,
 is the length of the longest path in $\Pi$.  The following three
-results establishes cut elimination.
+results establish cut elimination.
 
 \begin{lemma}[Cut Reduction]
   \label{lemma:cut_reduction}
@@ -227,7 +227,7 @@ respectively.
   coproduct.  The same holds for the term assignment in the rule 
   $TC_{\_+E}$ of Figure \ref{fig:non-linear-ta}.
   Of course additive contexts can be simulated using weakening and 
-  contraction. This is what we do in the case of disjuncrion eliminiation.
+  contraction. This is what we do in the case of disjunction elimination.
 \end{remark}
 
 % \begin{remark}
@@ -342,18 +342,15 @@ and it is this result we pull inspiration from.
 % In fact, this result shows that the reduction of a term in the context may impact
 % other terms in the context.
 
-TND pushes beyond Crolard's paper \emph{A formulae-as-types
-  interpretation of subtractive logic} JLC 2004, where he gives a term
-assignment to bi-intuitionisitc logic within a variant of
-Parigot's~\cite{Parigot:1992} classical $\lambda\mu$-calculus and
-interprets the term assigned to subtraction in terms of coroutines. He
-then restricts the calculus to provide a constructive version of
-subtraction called \emph{safe coroutines}. The second author used a
-variant of his constructive calculus as a term assignment to
-co-intuitionistic logic and to linear co-intuitionistic logic
-\cite{Bellin:2012} without using the $\lambda\mu$-calculus. In this
-formulation, distinct terms are assigned to distinct formulas in the context and 
-the reduction of a term in context may impact other terms n the context.
+TND pushes beyond Crolard's work on subtractive logic. He restricts a
+classical calculus to provide a constructive version of subtraction
+called \emph{safe coroutines}. TND is based on the work of the second
+author where he used a variant of Crolard's constructive calculus as a
+term assignment to co-intuitionistic logic and to linear
+co-intuitionistic logic \cite{Bellin:2012} without using the
+$\lambda\mu$-calculus. In this formulation, distinct terms are
+assigned to distinct formulas in the context and the reduction of a
+term in context may impact other terms in the context.
 
 The syntax of TND terms is defined by the following definition.
 \begin{definition}
@@ -494,12 +491,13 @@ $\mathtt{resume}\ t_2\ \mathtt{with}\ x\mapsto t_1$, always goes with a
 \emph{weakening} operation. The term $[[id]]$ is the identity of the
 contraction binary operator $[[t1 * t2]]$.
 
+\noindent
 However when within a non-$p$-normal term an expression of the form 
-$[[postp(x -> t1,t2)]]$ is eliminated as a $\beta$ redex, there is a choice
+$[[postp(x -> t1,t2)]]$ is eliminated as a $\beta$-redex, there is a choice
 of the syntax for the contextual reduction. In absence of a more detailed 
 analysis of the matter, we prefer to leave the typing of $p$ terms implicit 
 in the syntax, to enforce the requirement of $p$-normality and to use the 
-admissible rule of weakening in place of the  $\DualLNLLogicdruleTCXXzIName$ 
+rule of weakening in place of the  $\DualLNLLogicdruleTCXXzIName$ 
 rule in this context. 
 \end{remark}
 
@@ -552,7 +550,8 @@ $(t_1: S)\cdot (t_2:S)$ &\ =\ & $t_1\cdot t_2 : S$\\
 \end{tabular}
 \end{center}
 \noindent
-where $|\Psi_1|=|\Psi_3|$ and $|\Psi_2|=|\Psi_4|$.
+where $|\Psi_1|=|\Psi_3|$ and $|\Psi_2|=|\Psi_4|$. Whenever we write $\Psi_1 \cdot \Psi_2$ 
+we assume that  $|\Psi_1|=|\Psi_2|$.
 
 At this point we are now ready to turn to computing in TND by
 specifying the reduction relation.  This definition is perhaps the
@@ -826,8 +825,8 @@ occurring in the non-linear context; similar operations occur in the linear case
 Consider term assignment to the rule subtraction introduction  $\mathrm{TC}\_-_I$
 in Figure \ref{fig:non-linear-ta}. The variable $y$ is the unique free variable occurring in the 
 sequent $y:T_2 \vdash_C \Psi_2$, the minor premise of the inference. In the conclusion 
-$x:S \vdash_{\Psi_1}, \mathtt(t,y): T_1 - T_2, [y(t)/y]\Psi_2$ the variable $y$ is bound 
-in $\mathtt{mkc}(t,y)$; moreoverr, the occurrences of the free variable $y$ have been
+$x:S \vdash_{\Psi_1}, \mathtt{mkc}(t,y): T_1 - T_2, [y(t)/y]\Psi_2$ the variable $y$ is bound 
+in $\mathtt{mkc}(t,y)$; moreover, the occurrences of the free variable $y$ have been
 substituted simultaneously in the context $\Psi$ by the expression $y(t)$ which denotes 
 a bound varianble, indexed with $t$. Similar explanations apply to the term assignment 
 for subtraction elimination, and to the corresponding linear rules in Figure \ref{fig:linear-ta}. 
@@ -836,7 +835,7 @@ An analogue of the capture of a free variable by a binder in the $\lambda$-calcu
 is an occurrence of a bound variable $y(t)$ whose binder is ambiguous, for instance 
 in a context where there were two occurrences of $\mathtt{mkc}(t,y)$, as a result of 
 a contraction/cut reduction in a derivation. Such a context may be the conclusion of 
-the following derivation, if $x_1 = x_2$m $y_1 = y_2$; here $t_1 = \mathtt{false}\; x_1$, 
+the following derivation, if $x_1 = x_2$, $y_1 = y_2$; here $t_1 = \mathtt{false}\; x_1$, 
 $t_2 = \mathtt{false}\; x_2$:
 {\small
  \[
@@ -939,15 +938,15 @@ $(\ldots ([\![\sigma_1]\!]\bullet[\![\sigma_2]\!])\ldots ) \bullet [\![\sigma_n]
 intended for concatenations of type sequences $\Gamma, \Delta$. Thus, we need the ``book-keeping'' functions 
 $\mathtt{Split}(\Gamma, \Delta): [\![\Gamma, \Delta]\!] \rightarrow [\![\Gamma]\!]\bullet [\![\Delta]\!]$ and 
 $\mathtt{Join}(\Gamma, \Delta): [\![\Gamma]\!] \bullet  [\![\Delta]\!] \rightarrow [\![\Gamma, \Delta]\!]$ inductively defined 
-using the associativity laws $\alpha$ and its inverse $\alpha^{-1}$ (cfr Bierman 1994, Bellin 2015).  
+using the associativity laws $\alpha$ and its inverse $\alpha^{-1}$ (cfr Bierman 1994, given also in Bellin 2015).  
 
 The semantics of terms in context is then specified by induction on terms: 
 \begin{center}
   \begin{tabular}{c}
-    $[\![x: A\vdash_{\mathsf{L}} x: A]\!] =_{df} id_{[\![\sigma]\!]}$\\
+    $[\![x: A\vdash_{\mathsf{L}} x: A]\!] =_{df} id_{[\![A\!]}$\\
     \\
-    $[\![x: A\vdash_{\mathsf{L}}  f(e_1,\ldots, e_n): B]\!] =_{df} [\![x: A\vdash e_1: A_1]\!]\bullet
-    \ldots\bullet [\![x:\sigma\triangleright e_n: A_n]\!]; [\![ f ]\!]$
+    $[\![x: A\vdash_{\mathsf{L}}  f(e_1,\ldots, e_n): B]\!] =_{df} [\![x: A\vdash_{\mathsf{L}} e_1: A_1]\!]\bullet
+    \ldots\bullet [\![x:\sigma\vdash_{\mathsf{L}} e_n: A_n]\!]; [\![ f ]\!]$
   \end{tabular}
 \end{center}   
 and similarly with non-linear types. 
@@ -1000,7 +999,13 @@ The introduction rule for Par is of the form
   [[x : A |-TL D,e1 : B,e2 : C;P]]
 }{[[x : A |-TL D,e1 (+) e2 : B (+) C;P]]}
 \]
-This suggests an operation on Hom-sets of the form:
+This suggests an operation on Hom-sets of the form:%
+\footnote{Notice that given a sequent $x: A \vdash_{\mathsf{L}} \Delta; \Psi$ 
+where $\Delta = e_1: A_1, \ldots,e_n:A_n$ and $\Psi = t_1: T_1, \ldots, t_m: T_m$ 
+we write $\mathcal{L}(A, \Delta\bullet J\Psi)$ for the Hom-set 
+\[
+\mathcal{L}([\![A]\!], [\![A_1]\!]\bullet\ldots\bullet[\![A_n]\!]\bullet J[\![T_1]\!]\bullet\ldots\bullet J[\![T_m]\!]).
+\]}
 $$
 \Phi_{A, \Delta J\Psi}: \mathcal{L}(A, \Delta \bullet (B \bullet C) \bullet J\Psi) \rightarrow 
 \mathcal{L}(A, \Delta\bullet B\oplus C \bullet J\Psi)
@@ -1468,7 +1473,7 @@ in the models and for the operators that represent them in the language.
 \DisplayProof
 }
 \end{equation}
-If $\Delta = \overline{R}: \Delta$ and $\Psi = \overline{S}: \Psi$, then the categorical interpetation of the rule is 
+If $\Delta = \overline{R}: |\Delta|$ and $\Psi = \overline{S}: |\Psi|$, then the categorical interpetation of the rule is 
 an application of $\alpha^{-1}$: 
 \begin{center}
 \AxiomC{$\xymatrix@R=.4in{A\ar[rr]^{\overline{R} \bullet Jt \bullet J\overline{S}} & &\Delta\bullet JT \bullet J\Psi}$}
@@ -1486,7 +1491,7 @@ an application of $\alpha^{-1}$:
 \DisplayProof
 }
 \end{equation}
-If $\Delta = \overline{R}: \Delta$,  $\Psi_1 = \overline{R'}: \Psi_1$, $\Psi_2 = \overline{S}:\Psi_2$, 
+If $\Delta = \overline{R}: |\Delta|$,  $\Psi_1 = \overline{R'}: |\Psi_1|$, $\Psi_2 = \overline{S}:|\Psi_2|$, 
 then the categorical interpretation of the rule is given by an operation of the form 
 \[
 \mathcal{L}(A, \Delta\bullet JT\bullet J\Psi_1) \times \mathcal{C}(T, \Psi_2)\rightarrow 
@@ -1520,7 +1525,7 @@ given by the following compositions
 \DisplayProof
 }
 \end{equation}
-Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then 
+Let $\Delta = \overline{R}: |\Delta|$ and  $\Psi = \overline{S}:|\Psi|$: then 
 \begin{center}
 \AxiomC{$\xymatrix@R=.1in@C.5cm{A \ar[rr]^{\overline{R}\oplus e\oplus J(\overline{S})\quad}&&
 \Delta \bullet B \bullet  J(\Psi)}$}
@@ -1536,7 +1541,8 @@ Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then
 \framebox{
 \AxiomC{\it $TC\_\func{H}_{E}$}
 \noLine
-\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2$}
+\UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta ;  t:HA, \Psi_1\qquad y:A\vdash_{\mathsf{L}} ·; \Psi_2\qquad 
+\mathrm{where}\ |\Psi_1| = |\Psi_2|$}
 \UnaryInfC{$x:B \vdash_{\mathsf{L}} \Delta; \Psi_1, \mathtt{let}\ Hy=t\ \mathtt{in}\ \Psi_2$}
 \DisplayProof
 }
@@ -1552,7 +1558,7 @@ Let $\Delta = \overline{R}: \Delta$ and  $\Psi = \overline{S}:\Psi$: then
 %% }
 %% \end{equation}
 The categorical interpretation of $H$ elim$_1$ is as follows:
-Let $\Psi_1 = \overline{R}: \Psi_1$ and $\Psi_2 = \overline{S}: \Psi_2$. Then we have the following compositions: 
+Let $\Psi_1 = \overline{R}: |\Psi_1|$ and $\Psi_2 = \overline{S}: |\Psi_2|$. Then we have the following compositions: 
 \begin{center}
 \AxiomC{$\strut\quad$}
 \noLine
