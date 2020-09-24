@@ -831,15 +831,6 @@ one morphism.  We recall this proof here, which is due to Crolard
 \cite{Crolard:2001}. We need a couple basic facts about cartesian
 closed categories with initial objects.
 \begin{lemma}
-  \label{lemma:iso-prod-initial}
-  In any cartesian category $\cat{C}$, if $0$ is an initial object in
-  $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A \cong A \times 0$.
-\end{lemma}
-\begin{proof}
-  This follows easily from the universial mapping property for products.
-\end{proof}
-
-\begin{lemma}
   \label{lemma:products-of-initial-gives-initial}
   In any cartesian closed category $C$, if $0$ is an initial
   object in $\cat{C}$, then so is $0 \times A$ for any object $A$
@@ -852,6 +843,25 @@ closed categories with initial objects.
     using the right adjoint to the product functor we know that
     $\Hom{C}{0}{A \Rightarrow B} \cong \Hom{C}{0 \times A}{B}$, and
     hence, there is only one arrow between $0 \times A$ and $B$.
+\end{proof}
+\begin{lemma}
+  \label{lemma:iso-prod-initial}
+  In any cartesian closed category $\cat{C}$, if $0$ is an initial
+  object in $\cat{C}$ and $\Hom{C}{A}{0}$ is non-empty, then $A \cong
+  0 \times A$.
+\end{lemma}
+\begin{proof}
+  Suppose $f \in \Hom{C}{A}{0}$.  We can define two maps using products:
+  \[
+  \begin{array}{lll}
+    A \mto^{\langle f , \id_{A} \rangle} 0 \times A\\
+    A \times 0 \mto^{\pi_1} A
+  \end{array}
+  \]
+  By the universal mapping property for products $\langle f , \id_{A}
+  \rangle;\pi_1 = \id_{A}$ and by the previous lemma $\pi_1;\langle f
+  , \id_{A} \rangle = \id_{A \times 0}$, because $A \times 0$ is
+  initial.  This then implies that because
 \end{proof}
 \noindent
 The following lemma is due to Joyal \cite{Lambek:1988}, and is key to

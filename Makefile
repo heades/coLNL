@@ -1,4 +1,4 @@
-PDFLATEX = pdflatex
+PDFLATEX = xelatex
 BIBTEX = bibtex
 OTT = ott
 OTT_FLAGS := -tex_wrap false -tex_show_meta true -picky_multiple_parses false
